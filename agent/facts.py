@@ -16,7 +16,8 @@ def extract(
 ) -> tuple[list[Fact], list[str]]:
     """返回 (事实点, 资料内部冲突说明)。摘录不在原文中的条目会被丢弃。"""
     user = prompts.render("facts", {"型号": model, "资料标题": title, "资料全文": content})
-    data = llm.chat_json(prompts.system, user)
+    # 事实提取是逐字摘录任务,不使用软文写作的系统提示词(system.md)
+    data = llm.chat_json(None, user)
     source = squash(content)
     facts: list[Fact] = []
     seen: set[str] = set()

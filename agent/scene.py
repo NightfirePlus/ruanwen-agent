@@ -24,7 +24,8 @@ def parse(llm, prompts: Prompts, task: Task) -> dict:
             "场景参考": ref,
         },
     )
-    return llm.chat_json(prompts.system, user)
+    # 场景解析是分析任务,不使用软文写作的系统提示词(system.md)
+    return llm.chat_json(None, user)
 
 
 def build_strategy(task: Task, judgement: dict) -> dict:

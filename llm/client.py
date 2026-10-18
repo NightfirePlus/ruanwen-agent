@@ -106,12 +106,10 @@ class LLMClient:
         assert last is not None
         raise last
 
-    def chat_json(self, system: str, user: str, temperature: float = 0.2) -> Any:
-        """要求返回 JSON 并解析;解析失败时带着纠正提示重试一次。"""
-        messages = [
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ]
+    def chat_json(self, system: str | None, user: str, temperature: float = 0.2) -> Any:
+        """要求返回 JSON 并解析;解析失败时带着纠正提示重试一次。system 为 None 时不发系统消息。"""
+        messages = [{"role": "system", "content": system}] if system else []
+        messages.append({"role": "user", "content": user})
         text = self.chat(messages, temperature=temperature, json_mode=True)
         try:
             return extract_json(text)

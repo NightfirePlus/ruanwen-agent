@@ -37,13 +37,17 @@ class FakeLLM:
     def __init__(self, drafts):
         self.drafts = list(drafts)
         self.calls = 0
+        self.systems: dict[str, object] = {}  # 环节 -> 该次调用收到的 system
 
     def chat_json(self, system, user, temperature=0.2):
         self.calls += 1
         if user.startswith("你要为华为PC营销内容做场景判断"):
+            self.systems["scene"] = system
             return {"audience": "学生", "usage_scene": "课堂", "stage": "对比选购", "main_problem": "携带", "goal": "种草", "angle": "轻便"}
         if user.startswith("从下面的产品资料中摘录"):
+            self.systems["facts"] = system
             return {"facts": [{"text": "重量约1.36kg"}, {"text": "内存16GB"}, {"text": "不在原文中的编造内容"}], "conflicts": []}
+        self.systems["compose"] = system
         return self.drafts.pop(0) if len(self.drafts) > 1 else self.drafts[0]
 
 
@@ -174,6 +178,13 @@ class PipelineTest(unittest.TestCase):
         bad["body"] = [{"text": "续航长达20小时", "fact_ids": ["F1"]}]
         r = pipe(FakeLLM([bad])).run(task())
         self.assertEqual(r.status, "blocked")
+
+    def test_system_prompt_only_used_for_writing(self):
+        llm = FakeLLM([good_draft()])
+        pipe(llm).run(task())
+        self.assertIsNone(llm.systems["scene"])      # 场景解析不带写作人设
+        self.assertIsNone(llm.systems["facts"])      # 事实提取不带写作人设
+        self.assertEqual(llm.systems["compose"], "你是华为PC营销软文智能体。")
 
     def test_export_has_four_sections(self):
         r = pipe(FakeLLM([good_draft()])).run(task())
