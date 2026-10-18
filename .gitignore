@@ -1,0 +1,8 @@
+# 密钥与本地配置,禁止提交
+.env
+*.key
+secrets/
+__pycache__/
+*.pyc
+# 赛题手册不随代码发布
+*.pdf
