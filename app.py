@@ -2,7 +2,8 @@
 
   python app.py            # 本地启动,访问 http://localhost:7860
 
-界面与命令行 main.py 使用同一套 Pipeline:
+界面与命令行 main.py 使用同一套 Pipeline 与同一个数据源(本地知识库目录):
+  - 知识库:KB_LOCAL_DIR 指定的目录,默认项目内 华为PC全板块深度知识库_v7
   - 需求未完整 → pipe.talk 追问
   - 稿件已生成(处于 review)→ pipe.feedback 判断修改意图
   - 确认后 → done
@@ -18,18 +19,29 @@ import gradio as gr
 
 from agent import export
 from agent.envfile import load_dotenv
-from agent.evidence import KnowledgeStore
-from agent.ima import ImaClient, ImaError
 from agent.llm import LLMClient, LLMError
+from agent.localkb import LocalKBError, LocalStore
 from agent.models import Session
 from agent.pipeline import Outcome, Pipeline
 from agent.prompts import PromptError, Prompts
 
 load_dotenv()
 
-# ---- Pipeline 全局单例(多用户共享,提示词只加载一次) ----
+DEFAULT_LOCAL_KB = Path(__file__).resolve().parent / "华为PC全板块深度知识库_v7"
+
+# ---- Pipeline 全局单例(多用户共享,提示词与知识库索引只加载一次) ----
 _pipe: Pipeline | None = None
 _pipe_lock = threading.Lock()
+
+
+def make_store() -> LocalStore:
+    """只读本地知识库,与 main.py 一致;不初始化、不访问 ima 接口。"""
+    configured = os.environ.get("KB_LOCAL_DIR", "").strip()
+    local = Path(configured).expanduser() if configured else DEFAULT_LOCAL_KB
+    store = LocalStore(local)
+    if not store.connect()["connected"]:
+        raise LocalKBError(f"本地知识库目录无效(找不到 P1-产品参数库):{local}")
+    return store
 
 
 def get_pipeline() -> Pipeline:
@@ -40,16 +52,18 @@ def get_pipeline() -> Pipeline:
         if _pipe is None:
             custom = os.environ.get("PROMPTS_DIR")
             prompts = Prompts.load(Path(custom) if custom else None, strict=False)
-            _pipe = Pipeline(LLMClient(), KnowledgeStore(ImaClient()), prompts)
+            _pipe = Pipeline(LLMClient(), make_store(), prompts)
     return _pipe
 
 
 def pipeline_status() -> str:
-    """首页状态条:凭证是否齐全。"""
+    """首页状态条:知识库与大模型是否就绪。"""
     try:
-        get_pipeline()
-        return "✅ 服务就绪 · ima 凭证与大模型接口已配置"
-    except (ImaError, LLMError, PromptError) as e:
+        pipe = get_pipeline()
+        return f"✅ 服务就绪 · 本地知识库「{pipe.store.root.name}」· 大模型接口已配置"
+    except LocalKBError as e:
+        return f"⚠️ 服务未就绪 · {e}。请在环境变量或 .env 中设置 KB_LOCAL_DIR"
+    except (LLMError, PromptError) as e:
         return f"⚠️ 服务未就绪 · {e}"
 
 
@@ -112,7 +126,7 @@ def user_send(message: str, history: list, state: dict | None):
             except OSError:
                 pass
 
-    except (ImaError, LLMError, PromptError) as e:
+    except (LLMError, PromptError, LocalKBError) as e:
         answer = f"❌ {e}"
     except Exception as e:  # 兜底,避免界面崩溃
         answer = f"❌ 系统错误:{type(e).__name__}: {e}"
@@ -149,7 +163,7 @@ _BLOCKS_PARAMS = set(inspect.signature(gr.Blocks.__init__).parameters)
 HERO = """
 <div id="hero">
   <h1>华为 PC 营销软文智能体</h1>
-  <p>事实来自 ima 共享知识库 · 场景与平台策略驱动 · 事实核验 + 合规检查,一条闭环</p>
+  <p>事实来自本地知识库 · 场景与平台策略驱动 · 事实核验 + 合规检查,一条闭环</p>
   <div>
     <span class="chip">开学季</span><span class="chip">职场办公</span><span class="chip">内容创作</span>
     <span class="chip">家庭换新</span><span class="chip">企业采购</span><span class="chip">门店到访</span>
