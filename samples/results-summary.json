@@ -1,0 +1,41 @@
+[
+  {
+    "name": "01-school-xiaohongshu",
+    "scene": "开学季",
+    "platform": "小红书",
+    "product": "HUAWEI MateBook 14",
+    "status": "review",
+    "elapsed_seconds": 84.3,
+    "body_characters": 310,
+    "article_characters": 444,
+    "images": 3,
+    "warnings": 6,
+    "errors": 0
+  },
+  {
+    "name": "02-office-wechat",
+    "scene": "职场办公",
+    "platform": "公众号",
+    "product": "HUAWEI MateBook Pro",
+    "status": "review",
+    "elapsed_seconds": 181.6,
+    "body_characters": 1147,
+    "article_characters": 1358,
+    "images": 2,
+    "warnings": 10,
+    "errors": 0
+  },
+  {
+    "name": "03-store-moments",
+    "scene": "门店到访",
+    "platform": "朋友圈",
+    "product": "MateBook D 14",
+    "status": "review",
+    "elapsed_seconds": 171.3,
+    "body_characters": 116,
+    "article_characters": 161,
+    "images": 1,
+    "warnings": 2,
+    "errors": 0
+  }
+]
