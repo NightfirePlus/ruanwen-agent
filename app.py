@@ -118,13 +118,11 @@ def user_send(message: str, history: list, state: dict | None):
         pipe = get_pipeline()
         s = state["session"] or Session()
 
-        # 与 main.py 一致:上一步在 review 状态时,用户输入按“修改意见”处理
-        if state["last"] == "review":
+        # 已出稿、已确认和修改意图追问后，都继续围绕当前稿件对话。
+        if (state["last"] in ("review", "done", "need_more_info")
+                and s.draft is not None and s.review is not None and s.review.passed):
             out = pipe.feedback(s, message)
         else:
-            if state["last"] in ("done", "blocked"):
-                # 已定稿/已停止后继续输入,视为开始新任务
-                s = Session()
             out = pipe.talk(s, message)
 
         answer = render(out)

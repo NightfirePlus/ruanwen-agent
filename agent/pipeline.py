@@ -20,6 +20,7 @@ from pathlib import Path
 from . import compliance, compose, evidence, export, fact_check, intake, prune, revise, strategy
 from .ima import ImaQuotaError
 from .models import Brief, Draft, Issue, Review, Session
+from .norm import norm_model
 from .prompts import Prompts
 
 MAX_REWRITES = 2
@@ -54,7 +55,22 @@ class Pipeline:
     def talk(self, s: Session, user_text: str) -> Outcome:
         """处理一轮用户输入。信息不完整返回 need_more_info;完整后自动进入后续阶段。"""
         s.history.append({"role": "用户", "content": user_text})
-        s.brief, questions = intake.next_step(self.llm, self.prompts, s.brief, s.history)
+        # 用户直接回复库内型号时，这是明确选择，不能再被旧需求覆盖。
+        selected = None
+        if intake.MODEL_HINT.search(user_text):
+            try:
+                selected = next((name for name in self.store.models()
+                                 if norm_model(name) == norm_model(user_text.strip())), None)
+            except ImaQuotaError:
+                pass  # 由资料匹配阶段给出额度耗尽提示
+        if selected:
+            s.brief.product = selected
+            s.brief.product_type = ""
+            s.evidence = s.strategy = s.draft = s.review = None
+            s.brief = intake.normalize(s.brief)
+            questions = intake.validate(s.brief)
+        else:
+            s.brief, questions = intake.next_step(self.llm, self.prompts, s.brief, s.history)
         self._trace(s, "1 结构化需求", brief=s.brief.__dict__, questions=questions)
         if questions:
             s.history.append({"role": "助手", "content": "\n".join(questions)})
@@ -83,6 +99,7 @@ class Pipeline:
         except evidence.ModelNotResolved as e:
             self._trace(s, "2 资料匹配", result="型号未确认", candidates=e.candidates)
             hint = f"知识库里没有型号“{e.model}”。" + (f"你是想推广其中之一吗?{'、'.join(e.candidates)}" if e.candidates else "请确认型号。")
+            s.history.append({"role": "助手", "content": hint})
             return Outcome("need_choice", s, questions=[hint], candidates=e.candidates)
         ev = s.evidence
         self._trace(
@@ -142,6 +159,7 @@ class Pipeline:
 
     # ---- 阶段7:确认与修改 ----
     def feedback(self, s: Session, user_text: str) -> Outcome:
+        s.history.append({"role": "用户", "content": user_text})
         intent = revise.classify(self.llm, self.prompts, s.brief, s.draft, user_text)
         self._trace(s, "7 修改意图", **intent)
         new_brief, step = revise.apply(s.brief, intent, user_text)
@@ -160,7 +178,11 @@ class Pipeline:
             return self.generate(s)
         # 换产品:资料、策略、稿件全部作废,从结构化需求重来
         s.evidence = s.strategy = s.draft = s.review = None
-        s.brief, questions = intake.next_step(self.llm, self.prompts, s.brief, s.history)
+        # 可以重抽其他需求，但明确的最新型号不能被历史抽取结果覆盖。
+        chosen_product = s.brief.product
+        s.brief, _ = intake.next_step(self.llm, self.prompts, s.brief, s.history)
+        s.brief.product = chosen_product
+        questions = intake.validate(s.brief)
         self._trace(s, "1 结构化需求(重来)", brief=s.brief.__dict__, questions=questions)
         if questions:
             return Outcome("need_more_info", s, questions=questions)
