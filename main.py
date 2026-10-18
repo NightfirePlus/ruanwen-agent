@@ -15,12 +15,25 @@ from pathlib import Path
 
 from agent import export
 from agent.envfile import load_dotenv
-from agent.evidence import KnowledgeStore
-from agent.ima import ImaClient, ImaError
 from agent.llm import LLMClient, LLMError
+from agent.localkb import LocalKBError, LocalStore
 from agent.models import Session
 from agent.pipeline import Outcome, Pipeline
 from agent.prompts import PromptError, Prompts
+
+
+DEFAULT_LOCAL_KB = Path(__file__).resolve().parent / "华为PC全板块深度知识库_v7"
+
+
+def make_store() -> LocalStore:
+    """只读本地知识库；当前入口不会初始化或访问 ima 接口。"""
+    configured = os.environ.get("KB_LOCAL_DIR", "").strip()
+    local = Path(configured).expanduser() if configured else DEFAULT_LOCAL_KB
+    store = LocalStore(local)
+    if not store.connect()["connected"]:
+        raise LocalKBError(f"本地知识库目录无效(找不到 P1-产品参数库):{local}")
+    print(f"知识库:本地目录 {store.root}", file=sys.stderr)
+    return store
 
 
 def build(strict: bool) -> Pipeline:
@@ -29,7 +42,7 @@ def build(strict: bool) -> Pipeline:
     prompts = Prompts.load(Path(custom) if custom else None, strict=strict)
     if prompts.problems:
         print(prompts.report(), file=sys.stderr)
-    return Pipeline(LLMClient(), KnowledgeStore(ImaClient()), prompts)
+    return Pipeline(LLMClient(), make_store(), prompts)
 
 
 def show(pipe: Pipeline, out: Outcome, save: bool) -> None:
@@ -79,7 +92,7 @@ def main() -> int:
     try:
         pipe = build(strict=not args.allow_unfinished_prompts)
         chat(pipe, args.request, not args.no_save)
-    except (ImaError, LLMError, PromptError) as e:
+    except (LLMError, PromptError, LocalKBError) as e:
         print(f"运行失败:{e}", file=sys.stderr)
         return 1
     except (KeyboardInterrupt, EOFError):

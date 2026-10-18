@@ -73,6 +73,28 @@ def similar(model: str, names: list[str], cutoff: float = 0.6) -> list[str]:
     return out
 
 
+def official_name(fact_text: str, fallback: str) -> str:
+    """型号的官方全名:取 产品事实.md 的一级标题,去掉末尾的“ - 产品事实”。
+    目录名常是简称(“MateBook D 14”),资料里的正式名称是“HUAWEI MateBook D 14 2024”,
+    图片索引登记的是后者,所以图片归属要和官方全名比,而不是和目录名比。"""
+    for line in (fact_text or "").splitlines():
+        line = line.strip()
+        if line.startswith("# "):
+            name = re.sub(r"\s*[-－—]\s*产品事实\s*$", "", line[2:].strip())
+            return name or fallback
+    return fallback
+
+
+def same_product(listed: str, *names: str) -> bool:
+    """索引里的型号是否就是这个产品。去品牌前缀、空格、连字符、全半角括号后做精确比较,
+    不做子串匹配:这样 “MateBook 14” 与 “MateBook 14 酷睿 Ultra” 不会互相认成同一款。"""
+    def key(s: str) -> str:
+        s = (s or "").replace("（", "(").replace("）", ")")
+        return norm(s.replace("HUAWEI", ""))
+    k = key(listed)
+    return bool(k) and any(k == key(n) for n in names if n)
+
+
 def parse_image_index(text: str) -> dict[str, dict]:
     """图片索引.csv -> {文件名: 行}。表头固定含:文件名,产品型号,来源页面,原始图片URL,官网图片说明,建议用途。"""
     rows = csv.DictReader(io.StringIO(text.lstrip(chr(0xFEFF))))
@@ -123,6 +145,14 @@ class KnowledgeStore:
         if match:
             self.kb_id = match["kb_id"]
         return status
+
+    def official(self, model_name: str) -> str:
+        """读取该型号 产品事实.md 的标题作为官方全名(结果缓存在型号表里)。"""
+        info = self.models()[model_name]
+        if "official" not in info:
+            fact = info["children"].get(FACT_FILES[0])
+            info["official"] = official_name(self.read(fact["media_id"]) if fact else "", model_name)
+        return info["official"]
 
     def _children(self, folder_id: str) -> list[dict]:
         return self.ima.list_dir(self.kb_id, folder_id)
@@ -226,7 +256,7 @@ class KnowledgeStore:
                 belongs, note = False, "图片索引中未登记"
             else:
                 listed = row.get("产品型号", "")
-                belongs = self._same_product(listed, model_name)
+                belongs = self._same_product(listed, model_name, self.official(model_name))
                 note = "" if belongs else f"索引登记的型号为“{listed}”"
             refs.append(
                 ImageRef(
@@ -244,21 +274,30 @@ class KnowledgeStore:
         return refs
 
     @staticmethod
-    def _same_product(listed: str, model_name: str) -> bool:
-        """索引里的型号常带“HUAWEI ”前缀,归一化后比较。"""
-        a, b = norm(listed.replace("HUAWEI", "")), norm(model_name.replace("HUAWEI", ""))
-        return bool(a) and a == b
+    def _same_product(listed: str, model_name: str, official: str = "") -> bool:
+        return same_product(listed, model_name, official)
 
 
 def detect_conflicts(facts: list[Fact]) -> list[str]:
-    """规则检查:同一型号下,同一参数名对应多个不同取值视为冲突。"""
+    """高精度规则检查:相同句式中的单一规格值不一致才视为冲突。
+
+    不能只按“参数名+单位”归组:同一产品常同时列出多种色域模式、频段或供电档位,
+    它们有多个合法数值。这里把整条分句去掉数值后作为语义签名；包含多个规格值的
+    分句交给 LLM 判断，宁可少报也不因多档规格阻断整条流水线。
+    """
     groups: dict[tuple[str, str, str], set[str]] = {}
     for f in facts:
-        for m in NUM_UNIT.findall(f.text):
-            before = f.text.split(m)[0]
-            label = re.sub(r"[约共达为:：,,\s]", "", re.split(r"[。;;,,]", before)[-1])[-4:]
-            unit = re.sub(r"[\d.\s]", "", m).lower()
-            groups.setdefault((norm(f.model), label, unit), set()).add(squash(m).lower())
+        for clause in re.split(r"[。；;，,\n]", f.text):
+            matches = list(NUM_UNIT.finditer(clause))
+            if len(matches) != 1:
+                continue
+            m = matches[0]
+            value = squash(m.group(0)).lower()
+            unit = re.sub(r"[\d.\s]", "", m.group(0)).lower()
+            signature = squash(clause[:m.start()] + "<值>" + clause[m.end():]).lower()
+            if not signature or signature == "<值>":
+                continue
+            groups.setdefault((norm(f.model), signature, unit), set()).add(value)
     return [f"型号 {k[0]} 的“{k[1]}”出现多个取值:{'、'.join(sorted(v))}" for k, v in groups.items() if len(v) > 1]
 
 

@@ -87,7 +87,24 @@ def generate(llm, prompts: Prompts, brief: Brief, ev: Evidence, strategy: Strate
     return parse_draft(llm.json(user, system=prompts.writer_system, temperature=0.7))
 
 
-def rewrite(llm, prompts: Prompts, draft: Draft, issues_text: str) -> tuple[Draft, list[str]]:
+def rewrite(
+    llm,
+    prompts: Prompts,
+    draft: Draft,
+    issues_text: str,
+    brief: Brief,
+    ev: Evidence,
+    strategy: Strategy,
+) -> tuple[Draft, list[str]]:
     """按核验与合规发现的问题改写:只动有问题的部分。"""
-    user = prompts.render("rewrite", {"稿件": draft_to_json(draft), "问题": issues_text})
+    user = prompts.render(
+        "rewrite",
+        {
+            "稿件": draft_to_json(draft),
+            "问题": issues_text,
+            "策略": json.dumps({"scene": strategy.scene, "platform": strategy.platform}, ensure_ascii=False),
+            "事实点清单": facts_block(ev),
+            "可用图片": images_block(ev, brief.product),
+        },
+    )
     return parse_draft(llm.json(user, system=prompts.writer_system, temperature=0.4))

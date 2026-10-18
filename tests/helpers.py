@@ -67,11 +67,13 @@ class FakeLLM:
         self.comp_issues = comp_issues or []
         self.calls: list[str] = []
         self.systems: dict[str, object] = {}
+        self.users: dict[str, str] = {}
 
     def json(self, user, system=None, temperature=0.2):
         stage = user.split("】")[0].lstrip("【")
         self.calls.append(stage)
         self.systems[stage] = system
+        self.users[stage] = user
         if stage == "intake":
             return self.brief
         if stage == "evidence":

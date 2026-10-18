@@ -4,7 +4,10 @@ from __future__ import annotations
 from . import config
 from .models import Brief, Strategy
 
-PLATFORM_KEYS = ("form", "title", "length", "structure", "tone", "images", "cta", "tags", "field_mapping")
+PLATFORM_KEYS = (
+    "form", "title", "length", "structure", "tone", "images", "cta", "tags", "field_mapping",
+    "first_person_experience",
+)
 
 
 def match(brief: Brief) -> Strategy:

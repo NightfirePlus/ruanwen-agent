@@ -37,7 +37,7 @@ class Outcome:
 
 
 class Pipeline:
-    def __init__(self, llm, store: evidence.KnowledgeStore, prompts: Prompts):
+    def __init__(self, llm, store, prompts: Prompts):
         self.llm = llm
         self.store = store
         self.prompts = prompts
@@ -107,7 +107,9 @@ class Pipeline:
             if review.passed or round_no == MAX_REWRITES:
                 break
             text = "\n".join(f"- {i.where}:{i.detail}(要求:{i.suggestion})" for i in review.errors)
-            draft, more = compose.rewrite(self.llm, self.prompts, draft, text)
+            draft, more = compose.rewrite(
+                self.llm, self.prompts, draft, text, s.brief, s.evidence, s.strategy
+            )
             draft = compose.fill_captions(draft, s.evidence)
             refusals = list(dict.fromkeys(refusals + more))
 

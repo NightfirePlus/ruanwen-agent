@@ -22,7 +22,7 @@ SPECS: dict[str, tuple[str, ...]] = {
     "fact_review": ("稿件", "事实点清单"),
     "compliance_review": ("稿件", "事实点清单"),
     "revise_intent": ("需求", "稿件摘要", "用户修改意见"),
-    "rewrite": ("稿件", "问题"),
+    "rewrite": ("稿件", "问题", "策略", "事实点清单", "可用图片"),
 }
 
 PLACEHOLDER = re.compile(r"\{\{\s*([^{}\s]+)\s*\}\}")

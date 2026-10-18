@@ -86,6 +86,16 @@ class EvidenceTest(unittest.TestCase):
         fs = [Fact("F1", "MateBook 14", "重量约1.36kg", "t"), Fact("F2", "MateBook 14", "机身重量约1.36kg", "t")]
         self.assertFalse(evidence.detect_conflicts(fs))
 
+    def test_multi_mode_specs_are_not_conflicts(self):
+        fs = [
+            Fact("F1", "MateBook 14", "支持100%sRGB色域", "t"),
+            Fact("F2", "MateBook 14", "支持45%NTSC色域", "t"),
+            Fact("F3", "MateBook 14", "支持10W有线反向供电", "t"),
+            Fact("F4", "MateBook 14", "支持7.5W无线反向供电", "t"),
+            Fact("F5", "MateBook 14", "支持2.4GHz和5GHz双频连接", "t"),
+        ]
+        self.assertFalse(evidence.detect_conflicts(fs))
+
     def test_model_matching_ignores_spacing_and_case(self):
         ev = self.build("matebook14")
         self.assertEqual(ev.facts[0].model, "MateBook 14")
@@ -103,6 +113,10 @@ class StrategyTest(unittest.TestCase):
     def test_custom_scene_flagged(self):
         s = strategy.match(Brief(scene="直播答疑", platform="公众号"))
         self.assertFalse(s.scene["in_table"])
+
+    def test_first_person_rule_is_injected_from_platform_config(self):
+        s = strategy.match(Brief(scene="开学季", platform="小红书"))
+        self.assertIs(s.platform["first_person_experience"], False)
 
 
 def ev_with(*texts):
@@ -262,6 +276,8 @@ class PipelineTest(unittest.TestCase):
         self.assertEqual(out.status, "review")
         self.assertIn("rewrite", llm.calls)
         self.assertNotIn("国补", s.draft.body[0].text)
+        self.assertIn("重量约1.36kg", llm.users["rewrite"])
+        self.assertIn("first_person_experience", llm.users["rewrite"])
 
     def test_unfixable_draft_blocked(self):
         bad = good_draft()
@@ -353,17 +369,43 @@ class PromptsTest(unittest.TestCase):
     def full(self):
         return {n: "任务 " + " ".join("{{%s}}" % v for v in req) for n, req in SPECS.items()}
 
-    def test_repo_skeleton_reported_unfinished(self):
+    def skeleton(self):
+        """构造一份“只有标题和待补充标记”的骨架,代表尚未写完的提示词。"""
+        return {n: "# 标题\n\n【待补充】由负责同学填写\n" for n in SPECS}
+
+    def test_repo_prompts_are_complete(self):
+        # 队友已写完全部提示词:仓库里的 8 个文件必须通过变量校验,可以严格加载
         p = Prompts.load(strict=False)
-        # 仓库里的提示词都还是骨架,每个环节都应被识别为未完成
+        self.assertEqual(p.problems, {})
+        self.assertEqual(Prompts.load().writer_system, p.writer_system)
+
+    def test_repo_prompts_inject_each_runtime_value_once(self):
+        p = Prompts.load()
+        for name, variables in SPECS.items():
+            text = p.text(name)
+            for variable in variables:
+                self.assertEqual(text.count("{{%s}}" % variable), 1, f"{name}:{variable}")
+
+    def test_repo_prompts_do_not_contradict_json_only_output(self):
+        p = Prompts.load()
+        for name in SPECS:
+            self.assertNotIn("```", p.text(name), name)
+
+    def test_llm_review_prompts_have_no_severity_contract(self):
+        p = Prompts.load()
+        for name in ("fact_review", "compliance_review"):
+            self.assertNotIn('"severity"', p.text(name), name)
+
+    def test_skeleton_reported_unfinished(self):
+        p = Prompts(self.skeleton(), strict=False)
         self.assertEqual(set(p.problems), set(SPECS))
 
     def test_strict_load_rejects_skeleton(self):
         with self.assertRaises(PromptError):
-            Prompts.load()
+            Prompts(self.skeleton())
 
     def test_lenient_load_fails_only_when_stage_used(self):
-        p = Prompts.load(strict=False)
+        p = Prompts(self.skeleton(), strict=False)
         with self.assertRaises(PromptError):
             p.render("intake", {"已有信息": "", "对话记录": "", "场景选项": "", "平台选项": ""})
 
