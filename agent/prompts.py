@@ -15,7 +15,7 @@ PROMPTS_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
 # 环节 -> 该提示词必须包含的变量
 SPECS: dict[str, tuple[str, ...]] = {
-    "system": (),
+    "writer_system": (),
     "scene": ("产品", "人群", "场景", "平台", "临时要求", "场景参考"),
     "facts": ("型号", "资料标题", "资料全文"),
     "compose": ("任务", "场景判断", "内容策略", "平台规则", "事实点清单", "可用图片"),
@@ -74,8 +74,9 @@ class Prompts:
         return cls(texts)
 
     @property
-    def system(self) -> str:
-        return self._t["system"]
+    def writer_system(self) -> str:
+        """软文写作的系统提示词,只用于图文生成与修订。"""
+        return self._t["writer_system"]
 
     def render(self, name: str, values: dict[str, str]) -> str:
         """一次性替换模板中的变量;值里即使出现 {{ }} 也不会被再次展开。"""

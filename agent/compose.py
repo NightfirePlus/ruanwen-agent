@@ -68,7 +68,7 @@ def parse_draft(data: dict) -> tuple[Draft, list[str]]:
 
 def generate(llm, prompts: Prompts, task: Task, judgement: dict, strategy: dict, facts, images) -> tuple[Draft, list[str]]:
     user = _compose_user(prompts, task, judgement, strategy, facts, images)
-    return parse_draft(llm.chat_json(prompts.system, user, temperature=0.7))
+    return parse_draft(llm.chat_json(prompts.writer_system, user, temperature=0.7))
 
 
 def revise(
@@ -91,4 +91,4 @@ def revise(
         + "\n\n"
         + prompts.render("revise", {"当前稿件": current, "核验问题": issues_text})
     )
-    return parse_draft(llm.chat_json(prompts.system, user, temperature=0.4))
+    return parse_draft(llm.chat_json(prompts.writer_system, user, temperature=0.4))

@@ -64,9 +64,9 @@ def good_draft():
 
 
 def test_prompts() -> Prompts:
-    """用仓库里真实的环节提示词,只给 system 补一句话(system.md 由别人填写,目前为空)。"""
-    texts = {n: (PROMPTS_DIR / f"{n}.md").read_text(encoding="utf-8") for n in SPECS if n != "system"}
-    texts["system"] = "你是华为PC营销软文智能体。"
+    """用仓库里真实的环节提示词,只给 writer_system 补一句话(writer_system.md 由别人填写,目前为空)。"""
+    texts = {n: (PROMPTS_DIR / f"{n}.md").read_text(encoding="utf-8") for n in SPECS if n != "writer_system"}
+    texts["writer_system"] = "你是华为PC营销软文智能体。"
     return Prompts(texts)
 
 
@@ -196,14 +196,14 @@ class PipelineTest(unittest.TestCase):
 
 class PromptsTest(unittest.TestCase):
     def full(self):
-        return {n: "任务说明 " + " ".join("{{%s}}" % v for v in req) + " 正文" for n, req in SPECS.items() if n != "system"} | {"system": "角色说明"}
+        return {n: "任务说明 " + " ".join("{{%s}}" % v for v in req) + " 正文" for n, req in SPECS.items() if n != "writer_system"} | {"writer_system": "角色说明"}
 
     def test_repo_prompts_reject_blank_system(self):
-        # system.md 目前只有标题,必须被识别为未填写,并且不影响其他文件被检查
+        # writer_system.md 目前只有标题,必须被识别为未填写,并且不影响其他文件被检查
         with self.assertRaises(PromptError) as ctx:
             Prompts.load()
         msg = str(ctx.exception)
-        self.assertIn("system.md 还没有填写内容", msg)
+        self.assertIn("writer_system.md 还没有填写内容", msg)
         self.assertNotIn("scene.md", msg)
 
     def test_missing_file_reported(self):
@@ -232,8 +232,8 @@ class PromptsTest(unittest.TestCase):
         self.assertIn("未定义的变量", str(ctx.exception))
 
     def test_comments_stripped(self):
-        t = self.full(); t["system"] = "<!-- 给编写者看的 -->\n你是Agent"
-        self.assertEqual(Prompts(t).system, "你是Agent")
+        t = self.full(); t["writer_system"] = "<!-- 给编写者看的 -->\n你是Agent"
+        self.assertEqual(Prompts(t).writer_system, "你是Agent")
 
     def test_render_does_not_expand_values(self):
         out = Prompts(self.full()).render("facts", {"型号": "{{资料标题}}", "资料标题": "T", "资料全文": "x"})
