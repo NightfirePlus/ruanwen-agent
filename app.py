@@ -16,6 +16,8 @@ import os
 import tempfile
 import threading
 from uuid import uuid4
+from functools import lru_cache
+from urllib.parse import quote
 from pathlib import Path
 
 import gradio as gr
@@ -71,6 +73,32 @@ def pipeline_status() -> str:
         return f"⚠️ 服务未就绪 · {e}"
 
 
+@lru_cache(maxsize=1)
+def allowed_image_files() -> tuple[str, ...]:
+    """只开放图片索引确认归属的实际产品图，不开放整个知识库。"""
+    try:
+        store = make_store()
+        files = []
+        for model in store.models():
+            for im in store.images(model):
+                if not im.model:
+                    continue
+                path = Path(im.media_id).resolve()
+                if path.is_relative_to(store.root) and path.is_file():
+                    files.append(str(path))
+        return tuple(sorted(set(files)))
+    except (LocalKBError, OSError):
+        return ()
+
+
+def web_image_url(im) -> str:
+    path = str(Path(im.media_id).resolve())
+    if path not in allowed_image_files():
+        return ""
+    prefix = getattr(gr.routes, "API_PREFIX", "")
+    return f"{prefix}/file=" + quote(path.replace("\\", "/"), safe="/:")
+
+
 # ---- 渲染 Outcome ----
 def render(out: Outcome) -> str:
     if out.status == "need_more_info":
@@ -94,7 +122,7 @@ def render(out: Outcome) -> str:
         return f"⚠️ **已停止输出**\n\n{out.reason}{details}"
 
     if out.status in ("review", "done"):
-        md = export.to_markdown(out.session)
+        md = export.to_markdown(out.session, image_url=web_image_url)
         if out.status == "done":
             return "✅ **已确认定稿**\n\n" + md
         tail = "\n---\n满意请回复「确认」;想改请直接说(例如:换成朋友圈、标题短一点、改推 MateBook X Pro)。"
@@ -283,6 +311,7 @@ html, body { background: var(--app-bg) !important; }
 
 #chat-box { border: 1px solid #e5ebf3; border-radius: 16px; background: var(--surface-soft); overflow: hidden; }
 #chat-box .message-wrap .message { border-radius: 15px !important; }
+#chat-box .message img { display: block; max-width: 100%; max-height: 360px; object-fit: contain; margin: 14px auto; border-radius: 12px; background: #fff; }
 #msg-input textarea { border-radius: 13px !important; background: #fff !important; }
 #msg-input { border-color: #dbe4ef !important; border-radius: 13px !important; }
 
@@ -328,7 +357,7 @@ def _ui_kwargs() -> dict:
 
 
 def _launch_kwargs() -> dict:
-    kw: dict = {}
+    kw: dict = {"allowed_paths": list(allowed_image_files())}
     if "theme" not in _BLOCKS_PARAMS:
         kw["theme"] = gr.themes.Soft(primary_hue="red", neutral_hue="slate")
     if "css" not in _BLOCKS_PARAMS:

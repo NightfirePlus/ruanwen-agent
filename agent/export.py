@@ -16,7 +16,7 @@ def to_text(s: Session) -> str:
     return "\n\n".join(p for p in parts if p.strip()) + "\n"
 
 
-def to_markdown(s: Session) -> str:
+def to_markdown(s: Session, image_url=None) -> str:
     b, ev, d = s.brief, s.evidence, s.draft
     lines = [
         "# 一、场景判断",
@@ -39,17 +39,22 @@ def to_markdown(s: Session) -> str:
         lines.append(f"## {d.title}")
         if d.intro:
             lines += ["", d.intro]
-        imgs = {i.id: i for i in ev.images} if ev else {}
+        imgs = {i.id: i for i in usable_images(ev, b.product)} if ev else {}
         placed: dict[int, list] = {}
         for pl in d.images:
             placed.setdefault(pl.after_paragraph, []).append(pl)
 
         def pics(pos: int) -> list[str]:
-            return [
-                f"> 【配图 {imgs[pl.image_id].id}】{imgs[pl.image_id].name}｜来源:{imgs[pl.image_id].source_path}｜说明:{pl.caption}"
-                for pl in placed.get(pos, [])
-                if pl.image_id in imgs
-            ]
+            output = []
+            for pl in placed.get(pos, []):
+                im = imgs.get(pl.image_id)
+                if im is None:
+                    continue
+                url = image_url(im) if image_url else im.origin_url
+                if url and (image_url or url.startswith(("https://", "http://"))):
+                    output += ["", f"![配图 {im.id}](<{url}>)", ""]
+                output += [f"> 【配图 {im.id}】{im.name}｜来源:{im.source_path}｜说明:{pl.caption}", ""]
+            return output
 
         lines += pics(0)
         for i, p in enumerate(d.body, 1):
