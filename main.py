@@ -12,6 +12,7 @@ import argparse
 import sys
 
 from agent import export
+from agent.envfile import load_dotenv
 from agent.evidence import KnowledgeStore
 from agent.ima import ImaClient, ImaError
 from agent.llm import LLMClient, LLMError
@@ -70,6 +71,7 @@ def main() -> int:
     ap.add_argument("--no-save", action="store_true", help="不保存运行记录")
     ap.add_argument("--allow-unfinished-prompts", action="store_true", help="提示词未写完也允许启动")
     args = ap.parse_args()
+    load_dotenv()      # 系统环境变量优先;.env 只补充没设置的
     try:
         pipe = build(strict=not args.allow_unfinished_prompts)
         chat(pipe, args.request, not args.no_save)

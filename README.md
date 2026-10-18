@@ -29,16 +29,21 @@
 
 ## 安装与运行
 
-需要 Python 3.10+,无第三方依赖。凭证只通过环境变量提供,不要写入代码或提交:
+需要 Python 3.10+,无第三方依赖。
 
-```powershell
-# ima(在 https://ima.qq.com/agent-interface 获取,须与加入知识库的账号一致)
-$env:IMA_OPENAPI_CLIENTID="<Client ID>"
-$env:IMA_OPENAPI_APIKEY="<API Key>"
-# 大模型(阿里云百炼 OpenAI 兼容接口)
-$env:LLM_API_KEY="<百炼 API Key>"
-$env:LLM_MODEL="qwen-plus"        # 可选,也可用 deepseek 系列
-```
+凭证有两种提供方式,任选其一或混用:
+
+1. **`.env` 文件**(推荐):复制 `.env.example` 为 `.env`,填入真实值。`.env` 已被 `.gitignore` 排除。
+2. **系统环境变量**:直接设置同名变量。两者都有时,**系统环境变量优先**,方便临时覆盖。
+
+| 变量 | 说明 |
+|---|---|
+| `IMA_OPENAPI_CLIENTID` / `IMA_OPENAPI_APIKEY` | ima 接口凭证,在 https://ima.qq.com/agent-interface 获取,须与加入知识库的账号一致 |
+| `LLM_API_KEY` | 大模型 Key(OpenAI 兼容接口) |
+| `LLM_BASE_URL` | 大模型接口地址,默认阿里云百炼公共端点 |
+| `LLM_MODEL` | 模型名,默认 `qwen-plus` |
+
+不要把任何凭证写入代码、README、截图或演示视频。
 
 ```bash
 python main.py                                  # 多轮对话
