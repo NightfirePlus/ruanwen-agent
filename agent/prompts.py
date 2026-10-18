@@ -1,10 +1,10 @@
-"""提示词管理:所有环节的提示词都放在 prompts/*.md,代码里不写任何提示词文字。
+"""提示词管理:所有提示词放在 prompts/*.md,代码里不写任何提示词文字。
 
-约定:
-- 每个环节一个文件,文件名见 SPECS。
-- 模板用 {{变量名}} 引用程序提供的内容;每个文件必须包含它声明的全部变量,也不能出现未声明的变量。
-- <!-- ... --> 是给编写者看的注释,发给模型前会被剥离。
-- 只有标题没有正文,或文件缺失,都视为"未填写",启动时一次性报出全部问题。
+- 每个环节一个文件,名称与变量见 SPECS。
+- 模板用 {{变量名}} 引用程序提供的内容;<!-- ... --> 是给编写者看的注释,发给模型前剥离。
+- 只有标题没有正文,或文件缺失,都视为"未填写"。
+- 加载分两级:Prompts.load() 严格,任何问题都报错;Prompts.load(strict=False) 把问题记在 .problems,
+  调用到未就绪的环节时才报错,方便在提示词还没写完时先跑通链路的其他部分。
 """
 from __future__ import annotations
 
@@ -13,13 +13,16 @@ from pathlib import Path
 
 PROMPTS_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
-# 环节 -> 该提示词必须包含的变量
+# 环节 -> 该提示词必须包含的变量。writer_system 只用于软文生成与修订。
 SPECS: dict[str, tuple[str, ...]] = {
     "writer_system": (),
-    "scene": ("产品", "人群", "场景", "平台", "临时要求", "场景参考"),
-    "facts": ("型号", "资料标题", "资料全文"),
-    "compose": ("任务", "场景判断", "内容策略", "平台规则", "事实点清单", "可用图片"),
-    "revise": ("当前稿件", "核验问题"),
+    "intake": ("已有信息", "对话记录", "场景选项", "平台选项"),
+    "evidence": ("型号", "资料标题", "资料全文"),
+    "compose": ("需求", "策略", "事实点清单", "可用图片"),
+    "fact_review": ("稿件", "事实点清单"),
+    "compliance_review": ("稿件", "事实点清单"),
+    "revise_intent": ("需求", "稿件摘要", "用户修改意见"),
+    "rewrite": ("稿件", "问题"),
 }
 
 PLACEHOLDER = re.compile(r"\{\{\s*([^{}\s]+)\s*\}\}")
@@ -34,54 +37,71 @@ def clean(text: str) -> str:
     return COMMENT.sub("", text).strip()
 
 
+TODO_MARK = "待补充"
+
+
 def is_blank(text: str) -> bool:
-    """去掉注释后只剩标题和空行,视为未填写。"""
+    """去掉注释后只剩标题和空行,或含有"待补充"标记,都视为未填写。"""
+    if TODO_MARK in text:
+        return True
     return all(not ln.strip() or ln.lstrip().startswith("#") for ln in text.splitlines())
 
 
 class Prompts:
-    def __init__(self, texts: dict[str, str]):
-        problems: list[str] = []
+    def __init__(self, texts: dict[str, str], strict: bool = True):
+        self.problems: dict[str, list[str]] = {}
         self._t: dict[str, str] = {}
         for name, required in SPECS.items():
             raw = texts.get(name)
             if raw is None:
-                problems.append(f"prompts/{name}.md 不存在")
+                self.problems.setdefault(name, []).append(f"prompts/{name}.md 不存在")
                 continue
             text = clean(raw)
             if is_blank(text):
-                problems.append(f"prompts/{name}.md 还没有填写内容")
+                self.problems.setdefault(name, []).append(f"prompts/{name}.md 还没有填写内容")
                 continue
             found = set(PLACEHOLDER.findall(text))
-            missing = [v for v in required if v not in found]
-            unknown = sorted(found - set(required))
-            if missing:
-                problems.append(f"prompts/{name}.md 缺少变量:" + "、".join("{{%s}}" % v for v in missing))
-            if unknown:
-                problems.append(f"prompts/{name}.md 含有未定义的变量:" + "、".join("{{%s}}" % v for v in unknown))
+            for v in required:
+                if v not in found:
+                    self.problems.setdefault(name, []).append(f"prompts/{name}.md 缺少变量 {{{{{v}}}}}")
+            for v in sorted(found - set(required)):
+                self.problems.setdefault(name, []).append(f"prompts/{name}.md 含有未定义的变量 {{{{{v}}}}}")
             self._t[name] = text
-        if problems:
-            raise PromptError("提示词未就绪:\n  - " + "\n  - ".join(problems))
+        if strict and self.problems:
+            raise PromptError(self.report())
+
+    def report(self) -> str:
+        lines = [m for ms in self.problems.values() for m in ms]
+        return "提示词未就绪:\n  - " + "\n  - ".join(lines)
 
     @classmethod
-    def load(cls, directory: Path | None = None) -> "Prompts":
+    def load(cls, directory: Path | None = None, strict: bool = True) -> "Prompts":
         base = directory or PROMPTS_DIR
-        texts: dict[str, str] = {}
-        for name in SPECS:
-            path = base / f"{name}.md"
-            if path.is_file():
-                texts[name] = path.read_text(encoding="utf-8")
-        return cls(texts)
+        texts = {
+            name: (base / f"{name}.md").read_text(encoding="utf-8")
+            for name in SPECS
+            if (base / f"{name}.md").is_file()
+        }
+        return cls(texts, strict=strict)
+
+    def ready(self, name: str) -> bool:
+        return name not in self.problems
+
+    def text(self, name: str) -> str:
+        """取原文(已去注释)。环节未就绪时报错,指出具体问题。"""
+        if name in self.problems:
+            raise PromptError("; ".join(self.problems[name]))
+        return self._t[name]
 
     @property
     def writer_system(self) -> str:
-        """软文写作的系统提示词,只用于图文生成与修订。"""
-        return self._t["writer_system"]
+        """软文写作的系统提示词,只用于图文生成与重写。"""
+        return self.text("writer_system")
 
     def render(self, name: str, values: dict[str, str]) -> str:
         """一次性替换模板中的变量;值里即使出现 {{ }} 也不会被再次展开。"""
-        required = SPECS[name]
-        lacking = [v for v in required if v not in values]
+        text = self.text(name)
+        lacking = [v for v in SPECS[name] if v not in values]
         if lacking:
             raise PromptError(f"渲染 {name} 时缺少变量值:{'、'.join(lacking)}")
-        return PLACEHOLDER.sub(lambda m: str(values[m.group(1)]), self._t[name])
+        return PLACEHOLDER.sub(lambda m: str(values[m.group(1)]), text)

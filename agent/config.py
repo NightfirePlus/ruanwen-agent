@@ -1,4 +1,4 @@
-"""配置与提示词加载。策略规则全部来自 config/*.json,不写死在代码里。"""
+"""策略表加载。场景、平台、合规规则全部来自 config/*.json,不写在代码里。"""
 from __future__ import annotations
 
 import json
@@ -9,24 +9,24 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 @lru_cache(maxsize=None)
-def load_json(name: str) -> dict:
+def _load(name: str) -> dict:
     return json.loads((ROOT / "config" / name).read_text(encoding="utf-8"))
 
 
 def scenes() -> dict:
-    return load_json("scenes.json")
+    return _load("scenes.json")
 
 
 def platforms() -> dict:
-    return load_json("platforms.json")
+    return _load("platforms.json")
 
 
 def compliance_rules() -> dict:
-    return load_json("compliance_rules.json")
+    return _load("compliance_rules.json")
 
 
 def match_alias(text: str, table: dict) -> str | None:
-    """在配置表中按名称/别名匹配,返回规范名;匹配不到返回 None。"""
+    """在策略表中按名称或别名匹配,返回规范名;匹配不到返回 None。"""
     text = (text or "").strip()
     if not text:
         return None

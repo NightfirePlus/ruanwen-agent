@@ -1,8 +1,10 @@
-"""命令行入口。
+"""命令行入口:多轮对话。
 
-示例:
-  python main.py --product "MateBook 14" --audience "大学新生" --scene 开学季 --platform 小红书
-  python main.py --interactive
+  python main.py                      # 交互式,从自然语言需求开始
+  python main.py "给大学新生写一篇 MateBook 14 的小红书"   # 首轮需求直接给出
+
+提示词(prompts/*.md)未写完时,默认拒绝启动并列出缺哪些;加 --allow-unfinished-prompts 可先跑通链路,
+调用到未就绪环节时再报错。
 """
 from __future__ import annotations
 
@@ -10,74 +12,72 @@ import argparse
 import sys
 
 from agent import export
-from agent.models import Task
-from agent.pipeline import Pipeline
+from agent.evidence import KnowledgeStore
+from agent.ima import ImaClient, ImaError
+from agent.llm import LLMClient, LLMError
+from agent.models import Session
+from agent.pipeline import Outcome, Pipeline
 from agent.prompts import PromptError, Prompts
-from agent.retrieve import Retriever
-from ima import ImaClient, ImaError
-from llm.client import LLMClient, LLMError
 
 
-def build_pipeline() -> Pipeline:
-    # 先加载提示词:缺失或未填写时在这里一次性报出,不会等到调用大模型才失败
-    prompts = Prompts.load()
-    return Pipeline(LLMClient(), Retriever(ImaClient()), prompts)
+def build(strict: bool) -> Pipeline:
+    prompts = Prompts.load(strict=strict)
+    if prompts.problems:
+        print(prompts.report(), file=sys.stderr)
+    return Pipeline(LLMClient(), KnowledgeStore(ImaClient()), prompts)
 
 
-def show(result, pipe: Pipeline, save: bool) -> None:
-    if result.status == "need_more_info":
-        print("信息还不够,请补充:")
-        for q in result.questions:
+def show(pipe: Pipeline, out: Outcome, save: bool) -> None:
+    if out.status in ("need_more_info", "need_choice"):
+        print("还需要确认:")
+        for q in out.questions:
             print(f"  - {q}")
         return
-    if result.status == "blocked":
-        print(f"已停止输出:{result.reason}")
-    if result.draft:
-        print(export.to_markdown(result))
-    if save:
-        print(f"\n运行记录已保存:{pipe.save_sample(result)}.*")
+    if out.status == "blocked":
+        print(f"已停止输出:{out.reason}")
+    if out.session.draft:
+        print(export.to_markdown(out.session))
+    for r in out.refusals:
+        print(f"已拒绝写入:{r}")
+    if save and out.session.draft:
+        print(f"\n运行记录已保存:{pipe.save(out.session)}.*")
 
 
-def ask(prompt: str, default: str = "") -> str:
-    v = input(f"{prompt}{f'[{default}]' if default else ''}:").strip()
-    return v or default
-
-
-def interactive(pipe: Pipeline, save: bool) -> None:
-    print("华为PC营销软文智能体(输入 q 退出)")
+def chat(pipe: Pipeline, first: str, save: bool) -> None:
+    s = Session()
+    text, out = first, None
     while True:
-        product = ask("产品型号")
-        if product.lower() == "q":
+        text = text or input("你:").strip()
+        if text.lower() in ("q", "quit", "exit"):
             return
-        task = Task(product, ask("目标人群"), ask("业务场景"), ask("发布平台"), ask("临时要求(可空)"))
-        show(pipe.run(task), pipe, save)
-        print()
+        if not text:
+            continue
+        out = pipe.feedback(s, text) if out and out.status in ("review",) else pipe.talk(s, text)
+        show(pipe, out, save)
+        if out.status == "review":
+            print("\n满意请回复“确认”;想改请直接说(例如:换成朋友圈、文案太啰嗦、改推 MateBook X Pro)。")
+        elif out.status == "done":
+            print("已确认定稿。")
+            return
+        elif out.status == "blocked":
+            return
+        text = ""
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="华为PC营销软文智能体")
-    ap.add_argument("--product", default="")
-    ap.add_argument("--audience", default="")
-    ap.add_argument("--scene", default="")
-    ap.add_argument("--platform", default="")
-    ap.add_argument("--extra", default="", help="临时要求")
-    ap.add_argument("--interactive", action="store_true")
+    ap.add_argument("request", nargs="?", default="", help="首轮需求(可省略,进入后再说)")
     ap.add_argument("--no-save", action="store_true", help="不保存运行记录")
+    ap.add_argument("--allow-unfinished-prompts", action="store_true", help="提示词未写完也允许启动")
     args = ap.parse_args()
     try:
-        pipe = build_pipeline()
+        pipe = build(strict=not args.allow_unfinished_prompts)
+        chat(pipe, args.request, not args.no_save)
     except (ImaError, LLMError, PromptError) as e:
-        print(f"初始化失败:{e}", file=sys.stderr)
-        return 2
-    try:
-        if args.interactive:
-            interactive(pipe, not args.no_save)
-        else:
-            task = Task(args.product, args.audience, args.scene, args.platform, args.extra)
-            show(pipe.run(task), pipe, not args.no_save)
-    except (ImaError, LLMError) as e:
         print(f"运行失败:{e}", file=sys.stderr)
         return 1
+    except (KeyboardInterrupt, EOFError):
+        print()
     return 0
 
 

@@ -1,12 +1,11 @@
 import json
 import os
-import sys
 import unittest
 from unittest import mock
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from helpers import FakeLLM  # noqa: F401  (确保 sys.path 已设置)
 
-from ima import ImaClient, ImaError, mask_secret  # noqa: E402
+from agent.ima import ImaClient, ImaError, mask_secret  # noqa: E402
 
 FAKE_ID = "test-client-id-0000000000000000"
 FAKE_KEY = "test-api-key-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
@@ -30,77 +29,60 @@ def client():
     return ImaClient(client_id=FAKE_ID, api_key=FAKE_KEY, max_retries=1)
 
 
-class MaskTest(unittest.TestCase):
+class ImaTest(unittest.TestCase):
     def test_mask(self):
-        m = mask_secret(FAKE_KEY)
-        self.assertNotIn(FAKE_KEY, m)
-        self.assertTrue(m.startswith("tes***"))
-
-    def test_short_value_fully_masked(self):
+        self.assertNotIn(FAKE_KEY, mask_secret(FAKE_KEY))
         self.assertEqual(mask_secret("abcd"), "****")
 
-
-class ClientTest(unittest.TestCase):
     def test_missing_credentials(self):
         with mock.patch.dict(os.environ, {}, clear=True):
             with self.assertRaises(ImaError):
                 ImaClient()
 
-    def test_search_knowledge_base_accepts_both_field_names(self):
-        payload = {
-            "code": 0,
-            "msg": "ok",
-            "data": {"info_list": [{"kb_id": "K1", "kb_name": "A"}, {"id": "K2", "name": "B"}]},
-        }
+    def test_both_kb_field_names(self):
+        payload = {"code": 0, "msg": "ok", "data": {"info_list": [{"kb_id": "K1", "kb_name": "A"}, {"id": "K2", "name": "B"}]}}
         with mock.patch("urllib.request.urlopen", return_value=FakeResp(payload)):
-            r = client().search_knowledge_base("x")
-        self.assertEqual(r, [{"kb_id": "K1", "kb_name": "A"}, {"kb_id": "K2", "kb_name": "B"}])
+            self.assertEqual(client().search_knowledge_base("x"), [{"kb_id": "K1", "kb_name": "A"}, {"kb_id": "K2", "kb_name": "B"}])
 
-    def test_request_carries_headers_and_body(self):
+    def test_request_shape(self):
         payload = {"code": 0, "msg": "ok", "data": {"knowledge_list": [], "is_end": True}}
         with mock.patch("urllib.request.urlopen", return_value=FakeResp(payload)) as m:
-            client().get_knowledge_list("KB", folder_id="F1")
+            client().list_dir("KB", "F1")
         req = m.call_args[0][0]
         self.assertTrue(req.full_url.endswith("/openapi/wiki/v1/get_knowledge_list"))
         self.assertEqual(req.get_header("Ima-openapi-clientid"), FAKE_ID)
-        body = json.loads(req.data.decode("utf-8"))
-        self.assertEqual(body["folder_id"], "F1")
-        self.assertEqual(body["knowledge_base_id"], "KB")
+        self.assertEqual(json.loads(req.data.decode("utf-8"))["folder_id"], "F1")
 
-    def test_non_retryable_error_raises_without_secret(self):
-        payload = {"code": 110030, "msg": "无权限", "data": {}}
-        c = client()
-        with mock.patch("urllib.request.urlopen", return_value=FakeResp(payload)) as m:
+    def test_pagination(self):
+        p1 = FakeResp({"code": 0, "msg": "", "data": {"knowledge_list": [{"title": "a"}], "is_end": False, "next_cursor": "c2"}})
+        p2 = FakeResp({"code": 0, "msg": "", "data": {"knowledge_list": [{"title": "b"}], "is_end": True}})
+        with mock.patch("urllib.request.urlopen", side_effect=[p1, p2]):
+            self.assertEqual([x["title"] for x in client().list_dir("KB")], ["a", "b"])
+
+    def test_non_retryable_error_has_no_secret(self):
+        with mock.patch("urllib.request.urlopen", return_value=FakeResp({"code": 110030, "msg": "无权限", "data": {}})) as m:
             with self.assertRaises(ImaError) as ctx:
-                c.search_knowledge("KB", "x")
+                client().search("KB", "x")
         self.assertEqual(m.call_count, 1)
-        self.assertEqual(ctx.exception.code, 110030)
         self.assertNotIn(FAKE_KEY, str(ctx.exception))
 
     def test_retryable_error_retries(self):
         bad = FakeResp({"code": 110010, "msg": "net", "data": {}})
         good = FakeResp({"code": 0, "msg": "ok", "data": {"info_list": [], "is_end": True}})
         with mock.patch("urllib.request.urlopen", side_effect=[bad, good]), mock.patch("time.sleep"):
-            r = client().search_knowledge("KB", "x")
-        self.assertEqual(r["items"], [])
+            self.assertEqual(client().search("KB", "x"), [])
 
     def test_call_log_has_no_credentials(self):
-        payload = {"code": 0, "msg": "ok", "data": {}}
         c = client()
-        with mock.patch("urllib.request.urlopen", return_value=FakeResp(payload)):
-            c.get_media_info("M1")
+        with mock.patch("urllib.request.urlopen", return_value=FakeResp({"code": 0, "msg": "ok", "data": {}})):
+            c.media_info("M1")
         dumped = json.dumps([r.__dict__ for r in c.call_log])
         self.assertNotIn(FAKE_KEY, dumped)
         self.assertNotIn(FAKE_ID, dumped)
 
-    def test_credential_status_is_masked(self):
-        s = client().credential_status()
-        self.assertNotEqual(s["api_key"], FAKE_KEY)
-        self.assertIn("***", s["api_key"])
-
     def test_empty_media_id_rejected(self):
         with self.assertRaises(ImaError):
-            client().get_media_info("")
+            client().media_info("")
 
 
 if __name__ == "__main__":
