@@ -12,6 +12,8 @@ __pycache__/
 
 # 本地联调用的临时提示词与素材,不提交
 .local/
+samples/web-*
+samples/local-generation-check.*
 
 # 本地知识库(体积大、属于举办方资料,不提交)
 华为PC全板块深度知识库_v7/

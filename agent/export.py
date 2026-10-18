@@ -5,6 +5,17 @@ from .models import Session
 from .norm import usable_images
 
 
+def to_text(s: Session) -> str:
+    """仅导出可发布文案，不包含检索依据和运行记录。"""
+    d = s.draft
+    if not d:
+        return ""
+    parts = [d.title, d.intro, *(p.text for p in d.body), d.cta]
+    if d.tags:
+        parts.append(" ".join(f"#{t.lstrip('#')}" for t in d.tags))
+    return "\n\n".join(p for p in parts if p.strip()) + "\n"
+
+
 def to_markdown(s: Session) -> str:
     b, ev, d = s.brief, s.evidence, s.draft
     lines = [
@@ -51,7 +62,10 @@ def to_markdown(s: Session) -> str:
     lines += ["", "# 四、核验结果"]
     r = s.review
     if r:
-        lines.append(f"- 产品事实 / 图片型号 / 合规:{'全部通过' if r.passed else f'存在 {len(r.errors)} 项未解决问题'}")
+        result = "阻断项已通过，仍有提示待确认" if r.passed and r.issues else "全部通过"
+        if not r.passed:
+            result = f"存在 {len(r.errors)} 项未解决问题"
+        lines.append(f"- 产品事实 / 图片型号 / 合规:{result}")
         for i in r.issues:
             lines.append(f"  - [{_label(i)}] {i.where}:{i.detail}")
         if r.removed:
@@ -60,7 +74,7 @@ def to_markdown(s: Session) -> str:
                 text = f"“{x['text'][:40]}…”" if x["text"] else ""
                 lines.append(f"  - {x['where']} {text} 原因:{x['reason']}")
         warns = [i for i in r.issues if i.severity == "warn"]
-        lines.append(f"- 待确认信息:{'共 %d 项提示,见上方 warn 条目' % len(warns) if warns else '无'}")
+        lines.append(f"- 待确认信息:{'共 %d 项提示,见上方提示条目' % len(warns) if warns else '无'}")
     if ev and ev.dropped:
         lines.append(f"- 已丢弃的无依据摘录:{len(ev.dropped)} 条")
     return "\n".join(lines) + "\n"

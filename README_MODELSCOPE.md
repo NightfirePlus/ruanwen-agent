@@ -24,7 +24,14 @@ KB_LOCAL_DIR=/path/to/华为PC全板块深度知识库_v7
 
 # 提示词目录(可选;默认使用项目内 prompts/)
 PROMPTS_DIR=./prompts
+
+# 网页默认宽松核验：规则错误仍修正，模型意见作为提示展示
+# 需要原先严格模式时改为 strict
+REVIEW_MODE=relaxed
 ```
+
+网页生成成功后，可下载纯文案 TXT 或包含资料依据、核验提示的完整 Markdown 报告。
+被阻断的请求会展示具体问题，并在服务器 `samples/web-*.json` 留存诊断记录。
 
 ### 3. 启动命令
 ```bash

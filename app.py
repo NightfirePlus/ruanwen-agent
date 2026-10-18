@@ -11,8 +11,11 @@
 from __future__ import annotations
 
 import inspect
+import logging
 import os
+import tempfile
 import threading
+from uuid import uuid4
 from pathlib import Path
 
 import gradio as gr
@@ -52,7 +55,8 @@ def get_pipeline() -> Pipeline:
         if _pipe is None:
             custom = os.environ.get("PROMPTS_DIR")
             prompts = Prompts.load(Path(custom) if custom else None, strict=False)
-            _pipe = Pipeline(LLMClient(), make_store(), prompts)
+            mode = os.environ.get("REVIEW_MODE", "relaxed").strip().lower()
+            _pipe = Pipeline(LLMClient(), make_store(), prompts, review_mode=mode)
     return _pipe
 
 
@@ -82,7 +86,12 @@ def render(out: Outcome) -> str:
         return "\n".join(lines)
 
     if out.status == "blocked":
-        return f"⚠️ **已停止输出**\n\n{out.reason}"
+        details = ""
+        if out.session.review:
+            details = "\n\n需要处理的问题：\n" + "\n".join(
+                f"- {i.where}：{i.detail}" for i in out.session.review.errors
+            )
+        return f"⚠️ **已停止输出**\n\n{out.reason}{details}"
 
     if out.status in ("review", "done"):
         md = export.to_markdown(out.session)
@@ -103,6 +112,8 @@ def user_send(message: str, history: list, state: dict | None):
         return "", history, state
 
     state = state or {"session": None, "last": ""}
+    s = None
+    pipe = None
     try:
         pipe = get_pipeline()
         s = state["session"] or Session()
@@ -119,17 +130,19 @@ def user_send(message: str, history: list, state: dict | None):
         answer = render(out)
         state = {"session": s, "last": out.status}
 
-        # 运行记录留存
-        if out.status in ("review", "done"):
-            try:
-                pipe.save(s)
-            except OSError:
-                pass
-
     except (LLMError, PromptError, LocalKBError) as e:
         answer = f"❌ {e}"
+        state = {"session": s, "last": "error"}
     except Exception as e:  # 兜底,避免界面崩溃
         answer = f"❌ 系统错误:{type(e).__name__}: {e}"
+        state = {"session": s, "last": "error"}
+    finally:
+        if pipe is not None and s is not None:
+            try:
+                pipe._trace(s, "页面结果", status=state["last"])
+                pipe.save(s, f"web-{uuid4().hex}")
+            except OSError:
+                logging.getLogger(__name__).warning("运行记录保存失败")
 
     history = history + [
         {"role": "user", "content": message},
@@ -140,6 +153,19 @@ def user_send(message: str, history: list, state: dict | None):
 
 def reset_chat(state: dict | None):
     return [], {"session": None, "last": ""}, ""
+
+
+def prepare_downloads(state: dict | None):
+    """每次生成独立文件，避免多用户串稿；失败和重置时清空下载。"""
+    s = (state or {}).get("session")
+    if ((state or {}).get("last") not in ("review", "done")
+            or not s or not s.draft or not s.review or not s.review.passed):
+        return gr.update(value=None, visible=False), gr.update(value=None, visible=False)
+    folder = Path(tempfile.mkdtemp(prefix="ruanwen-export-"))
+    txt, md = folder / "营销文案.txt", folder / "完整报告.md"
+    txt.write_text(export.to_text(s), encoding="utf-8-sig")
+    md.write_text(export.to_markdown(s), encoding="utf-8")
+    return gr.update(value=str(txt), visible=True), gr.update(value=str(md), visible=True)
 
 
 # ---- 表单快捷生成 ----
@@ -354,6 +380,10 @@ def build_ui() -> gr.Blocks:
                     q3 = gr.Button("创作人群 · 朋友圈", size="sm")
                     reset = gr.Button("重新开始", size="sm", variant="secondary")
 
+                with gr.Row():
+                    txt_download = gr.DownloadButton("下载文案 TXT", visible=False)
+                    md_download = gr.DownloadButton("下载完整报告 Markdown", visible=False)
+
             # 右:表单
             with gr.Column(scale=3):
                 with gr.Column(elem_id="form-card"):
@@ -391,12 +421,14 @@ def build_ui() -> gr.Blocks:
                         "**使用提示**\n"
                         "- 生成后可继续说「标题短一点」或「换成公众号」\n"
                         "- 满意后回复「确认」即可定稿\n"
-                        "- 无知识库依据的内容会被自动拦截"
+                        "- 生成后可下载文案 TXT 和完整报告 Markdown\n"
+                        "- 明确规则问题会修正；模型核验提示请在发布前确认"
                     )
 
         msg.submit(user_send, [msg, chatbot, session_state], [msg, chatbot, session_state])
         send.click(user_send, [msg, chatbot, session_state], [msg, chatbot, session_state])
         reset.click(reset_chat, [session_state], [chatbot, session_state, msg])
+        session_state.change(prepare_downloads, [session_state], [txt_download, md_download])
         form_btn.click(
             from_form,
             [product, audience, scene, platform, goal, extra, chatbot, session_state],

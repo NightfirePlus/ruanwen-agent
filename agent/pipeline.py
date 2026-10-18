@@ -37,10 +37,13 @@ class Outcome:
 
 
 class Pipeline:
-    def __init__(self, llm, store, prompts: Prompts):
+    def __init__(self, llm, store, prompts: Prompts, review_mode: str = "strict"):
+        if review_mode not in ("strict", "relaxed"):
+            raise ValueError("review_mode 必须为 strict 或 relaxed")
         self.llm = llm
         self.store = store
         self.prompts = prompts
+        self.review_mode = review_mode
 
     # ---- 记录 ----
     @staticmethod
@@ -96,6 +99,10 @@ class Pipeline:
     def _review(self, s: Session, draft: Draft) -> Review:
         issues = fact_check.check(self.llm, self.prompts, draft, s.evidence, s.brief, s.strategy)
         issues += compliance.check(self.llm, self.prompts, draft, s.evidence)
+        if self.review_mode == "relaxed":
+            for issue in issues:
+                if issue.source == "llm":
+                    issue.severity = "warn"
         return Review(issues)
 
     def generate(self, s: Session) -> Outcome:
