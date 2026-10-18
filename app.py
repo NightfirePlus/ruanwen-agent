@@ -159,52 +159,137 @@ def from_form(product, audience, scene, platform, goal, extra, history, state):
 # ---- 外观 ----
 # Gradio 6 把 theme/css 从 Blocks 构造器移到了 launch();按签名自动适配,4/5/6 都能跑
 _BLOCKS_PARAMS = set(inspect.signature(gr.Blocks.__init__).parameters)
+_CHATBOT_PARAMS = set(inspect.signature(gr.Chatbot.__init__).parameters)
 
 HERO = """
 <div id="hero">
-  <h1>华为 PC 营销软文智能体</h1>
-  <p>事实来自本地知识库 · 场景与平台策略驱动 · 事实核验 + 合规检查,一条闭环</p>
-  <div>
-    <span class="chip">开学季</span><span class="chip">职场办公</span><span class="chip">内容创作</span>
-    <span class="chip">家庭换新</span><span class="chip">企业采购</span><span class="chip">门店到访</span>
-    <span class="chip">新品首发</span><span class="chip">节日营销</span>
+  <div class="hero-copy">
+    <div class="eyebrow"><span></span> 本地知识库驱动</div>
+    <h1>华为 PC 营销软文智能体</h1>
+    <p>从真实产品资料出发，自动匹配场景与平台，生成可核验、可修改、可直接使用的营销内容。</p>
+    <div class="hero-tags">
+      <span class="chip">公众号</span><span class="chip">小红书</span>
+      <span class="chip">朋友圈</span><span class="chip">门店海报</span>
+    </div>
   </div>
-  <div style="margin-top:10px">
-    <span class="chip platform">公众号</span><span class="chip platform">小红书</span>
-    <span class="chip platform">朋友圈</span><span class="chip platform">门店海报</span>
+  <div class="hero-features">
+    <div><strong>01</strong><span>事实有据<br><small>本地资料溯源</small></span></div>
+    <div><strong>02</strong><span>自动适配<br><small>8 场景 · 4 平台</small></span></div>
+    <div><strong>03</strong><span>双重检查<br><small>事实 + 合规</small></span></div>
   </div>
 </div>
 """
 
 CUSTOM_CSS = """
-.gradio-container { max-width: 1240px !important; margin: 0 auto !important; }
+:root {
+  --app-bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-soft: #f8faff;
+  --ink: #182230;
+  --muted: #667085;
+  --line: #dfe7f2;
+  --brand: #d9162f;
+  --brand-dark: #b90f26;
+  --blue: #3478f6;
+}
+
+html, body { background: var(--app-bg) !important; }
+.gradio-container {
+  max-width: 1280px !important; margin: 0 auto !important; padding: 24px 24px 36px !important;
+  background: transparent !important; color: var(--ink) !important;
+}
+.gradio-container .prose, .gradio-container p, .gradio-container label { color: var(--ink); }
 
 #hero {
-  background: linear-gradient(120deg, #1c1c21 0%, #3a0d10 55%, #8a0d15 100%);
-  border-radius: 18px; padding: 30px 34px 26px;
-  color: #fff; box-shadow: 0 10px 30px rgba(122, 11, 18, .28);
+  position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; min-height: 210px; padding: 34px 40px;
+  background:
+    radial-gradient(circle at 92% 6%, rgba(231, 52, 74, .12), transparent 30%),
+    radial-gradient(circle at 62% 100%, rgba(52, 120, 246, .11), transparent 32%),
+    linear-gradient(135deg, #ffffff 0%, #f7faff 58%, #fff7f8 100%);
+  border: 1px solid #e4eaf3; border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(36, 59, 92, .08);
 }
-#hero h1 { color: #fff !important; font-size: 1.7rem; margin: 0 0 10px 0; letter-spacing: .5px; }
-#hero p { color: rgba(255,255,255,.85); margin: 0 0 12px 0; font-size: .95rem; }
+#hero::after {
+  content: ""; position: absolute; width: 170px; height: 170px; right: -54px; top: -72px;
+  border: 30px solid rgba(217, 22, 47, .055); border-radius: 50%; pointer-events: none;
+}
+#hero .hero-copy { position: relative; z-index: 1; max-width: 650px; }
+#hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 13px;
+  color: #55657a; font-size: .78rem; font-weight: 650; letter-spacing: .08em;
+}
+#hero .eyebrow span {
+  width: 8px; height: 8px; border-radius: 50%; background: #22b573;
+  box-shadow: 0 0 0 5px rgba(34, 181, 115, .12);
+}
+#hero h1 { color: var(--ink) !important; font-size: 2rem; line-height: 1.2; margin: 0 0 12px; letter-spacing: -.02em; }
+#hero p { color: var(--muted) !important; margin: 0 0 19px; max-width: 620px; font-size: .96rem; line-height: 1.75; }
+#hero .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 #hero .chip {
-  display: inline-block; padding: 4px 12px; margin: 5px 8px 0 0;
-  border: 1px solid rgba(255,255,255,.28); border-radius: 999px;
-  font-size: .78rem; color: rgba(255,255,255,.92);
+  display: inline-block; padding: 5px 12px; border: 1px solid #dce5f1; border-radius: 999px;
+  background: rgba(255,255,255,.78); color: #506176; font-size: .76rem; font-weight: 550;
 }
-#hero .chip.platform { border-color: rgba(255,170,170,.5); background: rgba(199,0,11,.25); }
+#hero .hero-features {
+  position: relative; z-index: 1; flex: 0 0 350px; display: grid; gap: 10px;
+}
+#hero .hero-features > div {
+  display: flex; align-items: center; gap: 14px; padding: 12px 15px;
+  background: rgba(255,255,255,.8); border: 1px solid rgba(218, 226, 238, .9); border-radius: 14px;
+  box-shadow: 0 5px 18px rgba(46, 70, 104, .045);
+}
+#hero .hero-features strong { color: var(--brand); font-size: .74rem; letter-spacing: .06em; }
+#hero .hero-features span { color: #344054; font-size: .83rem; font-weight: 650; line-height: 1.35; }
+#hero .hero-features small { color: #8491a3; font-size: .72rem; font-weight: 450; }
 
-#status-pill { background: #f5f6f8; border-radius: 10px; padding: 6px 16px; margin: 10px 0 2px; }
-#status-pill p { margin: 0; font-size: .85rem; color: #555; }
+#status-pill {
+  background: #eefbf5; border: 1px solid #caefdd; border-radius: 12px;
+  padding: 8px 14px; margin: 12px 2px 5px;
+}
+#status-pill p { margin: 0; font-size: .82rem; color: #267151 !important; }
 
-#chat-box { border: 1px solid #e9e9ef; border-radius: 14px; }
-#msg-input textarea { border-radius: 12px; }
+#chat-card, #form-card, #tips-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(36, 59, 92, .06);
+}
+#chat-card { padding: 20px; }
+#chat-card .section-kicker, #form-card .section-kicker { color: var(--brand); font-size: .73rem; font-weight: 700; letter-spacing: .08em; }
+#chat-card h3, #form-card h3 { color: var(--ink); margin-top: 2px; margin-bottom: 2px; }
+#chat-card .section-desc, #form-card .section-desc { color: var(--muted); font-size: .82rem; margin-bottom: 10px; }
+
+#chat-box { border: 1px solid #e5ebf3; border-radius: 16px; background: var(--surface-soft); overflow: hidden; }
+#chat-box .message-wrap .message { border-radius: 15px !important; }
+#msg-input textarea { border-radius: 13px !important; background: #fff !important; }
+#msg-input { border-color: #dbe4ef !important; border-radius: 13px !important; }
 
 #form-card {
-  background: #fff; border: 1px solid #ececf1; border-radius: 16px;
-  padding: 18px 18px 10px; box-shadow: 0 2px 14px rgba(0,0,0,.05);
+  padding: 20px 20px 14px;
+}
+#form-card input, #form-card textarea { background: #fbfcff !important; }
+#form-card .wrap, #form-card .secondary-wrap { border-radius: 11px !important; }
+
+#tips-card { margin-top: 12px; padding: 14px 18px; background: #f9fbff; box-shadow: none; }
+#tips-card p, #tips-card li { color: #66758a !important; font-size: .8rem; }
+
+.primary {
+  background: linear-gradient(135deg, var(--brand), #ef4055) !important;
+  border-color: var(--brand) !important; color: #fff !important;
+  box-shadow: 0 6px 16px rgba(217, 22, 47, .18) !important;
+}
+.primary:hover { background: linear-gradient(135deg, var(--brand-dark), var(--brand)) !important; }
+.quick-row button {
+  font-size: .78rem !important; border-color: #dfe6f0 !important; background: #fff !important;
+  color: #526174 !important; border-radius: 10px !important;
+}
+.quick-row button:hover { border-color: #aebed3 !important; background: #f7faff !important; }
+
+@media (max-width: 900px) {
+  .gradio-container { padding: 14px !important; }
+  #hero { padding: 26px 24px; min-height: auto; }
+  #hero .hero-features { display: none; }
+  #hero h1 { font-size: 1.55rem; }
 }
 
-.quick-row button { font-size: .8rem !important; }
 footer { display: none !important; }
 """
 
@@ -212,7 +297,7 @@ footer { display: none !important; }
 def _ui_kwargs() -> dict:
     kw: dict = {}
     if "theme" in _BLOCKS_PARAMS:
-        kw["theme"] = gr.themes.Soft(primary_hue="red")
+        kw["theme"] = gr.themes.Soft(primary_hue="red", neutral_hue="slate")
     if "css" in _BLOCKS_PARAMS:
         kw["css"] = CUSTOM_CSS
     return kw
@@ -221,7 +306,7 @@ def _ui_kwargs() -> dict:
 def _launch_kwargs() -> dict:
     kw: dict = {}
     if "theme" not in _BLOCKS_PARAMS:
-        kw["theme"] = gr.themes.Soft(primary_hue="red")
+        kw["theme"] = gr.themes.Soft(primary_hue="red", neutral_hue="slate")
     if "css" not in _BLOCKS_PARAMS:
         kw["css"] = CUSTOM_CSS
     return kw
@@ -237,18 +322,31 @@ def build_ui() -> gr.Blocks:
 
         with gr.Row(equal_height=False):
             # 左:对话
-            with gr.Column(scale=5):
-                chatbot = gr.Chatbot(label="对话", height=520, elem_id="chat-box")
+            with gr.Column(scale=5, elem_id="chat-card"):
+                gr.HTML(
+                    '<div class="section-kicker">AI 对话创作</div>'
+                    '<h3>描述你的内容需求</h3>'
+                    '<div class="section-desc">可以直接说产品、受众、场景和平台，我会在信息不足时继续追问。</div>'
+                )
+                chatbot_kw = {
+                    "label": "对话",
+                    "show_label": False,
+                    "height": 480,
+                    "elem_id": "chat-box",
+                }
+                if "type" in _CHATBOT_PARAMS:  # Gradio 4/5 需要显式启用 messages；6.x 已移除此参数
+                    chatbot_kw["type"] = "messages"
+                chatbot = gr.Chatbot(**chatbot_kw)
 
                 with gr.Row():
                     msg = gr.Textbox(
-                        placeholder="例如:给大学新生写一篇 MateBook 14 的小红书",
+                        placeholder="例如：给大学新生写一篇 MateBook 14 的小红书种草文案……",
                         show_label=False,
                         lines=2,
                         scale=5,
                         elem_id="msg-input",
                     )
-                    send = gr.Button("发送", variant="primary", scale=0, min_width=92)
+                    send = gr.Button("发送 →", variant="primary", scale=0, min_width=96)
 
                 with gr.Row(elem_classes="quick-row"):
                     q1 = gr.Button("开学季 · 小红书", size="sm")
@@ -259,7 +357,11 @@ def build_ui() -> gr.Blocks:
             # 右:表单
             with gr.Column(scale=3):
                 with gr.Column(elem_id="form-card"):
-                    gr.Markdown("### 表单快捷生成")
+                    gr.HTML(
+                        '<div class="section-kicker">快捷模式</div>'
+                        '<h3>结构化生成</h3>'
+                        '<div class="section-desc">填写核心信息，一键拼成完整需求并开始创作。</div>'
+                    )
                     product = gr.Textbox(label="产品型号 *", placeholder="MateBook X Pro")
                     audience = gr.Dropdown(
                         label="目标人群",
@@ -282,14 +384,15 @@ def build_ui() -> gr.Blocks:
                         value="种草",
                     )
                     extra = gr.Textbox(label="补充要求", placeholder="如:突出多屏协同;500字以内", lines=2)
-                    form_btn = gr.Button("生成软文", variant="primary")
+                    form_btn = gr.Button("开始生成 →", variant="primary")
 
-                gr.Markdown(
-                    "**使用提示**\n"
-                    "- 生成后可说「标题短一点」「换成公众号」「改推 MateBook D 14」\n"
-                    "- 满意后回复「确认」定稿\n"
-                    "- 无知识库依据的内容会被拦截或自动删除"
-                )
+                with gr.Column(elem_id="tips-card"):
+                    gr.Markdown(
+                        "**使用提示**\n"
+                        "- 生成后可继续说「标题短一点」或「换成公众号」\n"
+                        "- 满意后回复「确认」即可定稿\n"
+                        "- 无知识库依据的内容会被自动拦截"
+                    )
 
         msg.submit(user_send, [msg, chatbot, session_state], [msg, chatbot, session_state])
         send.click(user_send, [msg, chatbot, session_state], [msg, chatbot, session_state])
