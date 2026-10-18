@@ -3,7 +3,7 @@
 规则:数值是否出现在所引事实中、引用的事实编号是否存在、型号是否与主推一致、
       图片是否在可用清单内且型号一致、图片数量是否符合平台。
 LLM:判断规则看不出来的语义问题(把参数用在不适用的场景、夸大功能、把"支持"写成"标配"等)。
-LLM 的结论只能新增问题,不能撤销规则发现的问题。
+LLM 的结论只能新增问题,不能撤销规则发现的问题;它报出的问题一律按 error 处理(不采信它自己标的轻重)。
 """
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import re
 
 from .compose import draft_to_json, facts_block
 from .models import Brief, Draft, Evidence, Issue, Strategy
-from .norm import mentioned_models, norm_model, usable_images
+from .norm import llm_issues, mentioned_models, norm_model, spec_versions, usable_images
 from .prompts import Prompts, PromptError
 
 NUM_UNIT = re.compile(
@@ -35,8 +35,8 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
     all_text = _c("".join(f.text for f in ev.facts))
     main = norm_model(brief.product)
 
-    def add(sev, where, detail, sug=""):
-        issues.append(Issue("fact", "rule", sev, where, detail, sug))
+    def add(sev, where, detail, sug="", ref=""):
+        issues.append(Issue("fact", "rule", sev, where, detail, sug, ref))
 
     for i, p in enumerate(draft.body, 1):
         where = f"正文第{i}段"
@@ -62,6 +62,12 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
             if n not in all_text:
                 add("error", where, f"数值“{n}”不在知识库事实中", "删除或改写")
 
+    # 规格版本号(HDMI 2.1、USB 3.2、蓝牙 5.1……):稿中出现的写法必须能在知识库事实原文里找到
+    known_versions = spec_versions("".join(f.text for f in ev.facts))
+    for where, text in draft.segments():
+        for v in sorted(spec_versions(text) - known_versions):
+            add("error", where, f"规格版本“{v}”不在知识库事实中(资料没有写明该版本)", "删除版本号,只写资料中有的内容")
+
     # 文中出现的其他型号:相近型号必须不混入(先按知识库里的相近型号名查,再用通用写法兜底)
     for where, text in draft.segments():
         for other in mentioned_models(text, ev.candidates):
@@ -75,10 +81,10 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
     known = {i.id: i for i in ev.images}
     for pl in draft.images:
         if pl.image_id not in known:
-            add("error", "配图方案", f"图片 {pl.image_id} 不在知识库图片清单中", "移除该图片")
+            add("error", "配图方案", f"图片 {pl.image_id} 不在知识库图片清单中", "移除该图片", pl.image_id)
         elif pl.image_id not in images:
             im = known[pl.image_id]
-            add("error", "配图方案", f"图片 {im.id}《{im.name}》无法确认属于主推型号“{brief.product}”", "移除该图片")
+            add("error", "配图方案", f"图片 {im.id}《{im.name}》无法确认属于主推型号“{brief.product}”", "移除该图片", im.id)
         if not (0 <= pl.after_paragraph <= len(draft.body)):
             add("warn", "配图方案", f"图片 {pl.image_id} 的插入位置超出正文范围", "调整位置")
         if not pl.caption.strip():
@@ -87,7 +93,7 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
     limits = strategy.platform.get("images", {})
     n, lo, hi = len(draft.images), limits.get("min", 0), limits.get("max", 99)
     if n > hi:
-        add("error", "配图方案", f"图片数量 {n} 超过平台上限 {hi}", "删减图片")
+        add("error", "配图方案", f"图片数量 {n} 超过平台上限 {hi}", "删减图片", "count")
     elif n < lo:
         add("warn", "配图方案", f"图片数量 {n} 少于平台建议的 {lo} 张(可能是知识库可用图片不足)")
     return issues
@@ -95,12 +101,7 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
 
 def llm_check(llm, prompts: Prompts, draft: Draft, ev: Evidence) -> list[Issue]:
     data = llm.json(prompts.render("fact_review", {"稿件": draft_to_json(draft), "事实点清单": facts_block(ev)}))
-    out = []
-    for it in data.get("issues", []):
-        if isinstance(it, dict) and it.get("detail"):
-            sev = "error" if it.get("severity") == "error" else "warn"
-            out.append(Issue("fact", "llm", sev, str(it.get("where", "")), str(it["detail"]), str(it.get("suggestion", ""))))
-    return out
+    return llm_issues(data, "fact")
 
 
 def check(llm, prompts: Prompts, draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> list[Issue]:

@@ -11,6 +11,7 @@ import re
 from . import config
 from .compose import draft_to_json, facts_block
 from .models import Draft, Evidence, Issue
+from .norm import llm_issues
 from .prompts import Prompts, PromptError
 
 
@@ -42,12 +43,7 @@ def rule_check(draft: Draft, ev: Evidence) -> list[Issue]:
 
 def llm_check(llm, prompts: Prompts, draft: Draft, ev: Evidence) -> list[Issue]:
     data = llm.json(prompts.render("compliance_review", {"稿件": draft_to_json(draft), "事实点清单": facts_block(ev)}))
-    out = []
-    for it in data.get("issues", []):
-        if isinstance(it, dict) and it.get("detail"):
-            sev = "error" if it.get("severity") == "error" else "warn"
-            out.append(Issue("compliance", "llm", sev, str(it.get("where", "")), str(it["detail"]), str(it.get("suggestion", ""))))
-    return out
+    return llm_issues(data, "compliance")
 
 
 def check(llm, prompts: Prompts, draft: Draft, ev: Evidence) -> list[Issue]:

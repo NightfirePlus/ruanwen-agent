@@ -213,6 +213,18 @@ class ComplianceTest(unittest.TestCase):
 
 
 class PipelineTest(unittest.TestCase):
+    def test_quota_exhausted_gives_clear_reason(self):
+        from agent.ima import ImaQuotaError
+
+        class Exhausted(FakeStore):
+            def models(self):
+                raise ImaQuotaError("额度已用完", code=220021)
+
+        out = new_pipe(store=Exhausted()).talk(Session(), "go")
+        self.assertEqual(out.status, "blocked")
+        self.assertIn("额度", out.reason)
+        self.assertIn("缓存", out.reason)
+
     def test_happy_path(self):
         pipe, s = new_pipe(), Session()
         out = pipe.talk(s, "go")
@@ -263,7 +275,7 @@ class PipelineTest(unittest.TestCase):
         md = export.to_markdown(s)
         for h in ("# 一、场景判断", "# 二、知识库依据", "# 三、图文软文", "# 四、核验结果"):
             self.assertIn(h, md)
-        self.assertIn("产品参数/MateBook 14/article.md", md)       # 来源标注
+        self.assertIn("P1-产品参数库/MateBook 14/产品事实.md", md)   # 来源标注
         self.assertNotIn("F1]", md.split("# 三")[1].split("# 四")[0])  # 事实编号不进软文
 
 

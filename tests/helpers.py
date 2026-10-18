@@ -31,9 +31,9 @@ class FakeStore(KnowledgeStore):
         self.kb_name, self.kb_id = "测试库", "KB"
         self._docs = docs if docs is not None else {"MateBook 14": DOC}
         self._images = images if images is not None else [
-            ImageRef("I1", "MateBook 14", "mb14-主图.png", "P1", "产品图/MateBook 14/mb14-主图.png"),
-            ImageRef("I2", "MateBook X Pro", "xpro-主图.png", "P2", "产品图/MateBook X Pro/xpro-主图.png"),
-            ImageRef("I3", "", "未知.png", "P3", "杂项/未知.png"),
+            ImageRef("I1", "MateBook 14", "mb14-主图.png", "P1", "P1-产品参数库/MateBook 14/images/mb14-主图.png", caption="主视觉"),
+            ImageRef("I2", "MateBook X Pro", "xpro-主图.png", "P2", "P1-产品参数库/MateBook X Pro/images/xpro-主图.png"),
+            ImageRef("I3", "", "未知.png", "P3", "P1-产品参数库/MateBook 14/images/未知.png", note="图片索引中未登记"),
         ]
         self._m = models if models is not None else dict(MODELS)
 
@@ -46,7 +46,7 @@ class FakeStore(KnowledgeStore):
     def docs(self, model_name):
         if model_name not in self._docs:
             return []
-        return [{"media_id": f"M-{model_name}", "title": f"{model_name} 参数", "path": f"产品参数/{model_name}/article.md"}]
+        return [{"media_id": f"M-{model_name}", "title": "产品事实.md", "path": f"P1-产品参数库/{model_name}/产品事实.md"}]
 
     def read(self, media_id):
         return self._docs.get(media_id.removeprefix("M-"), "")

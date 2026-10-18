@@ -53,9 +53,21 @@ def to_markdown(s: Session) -> str:
     if r:
         lines.append(f"- 产品事实 / 图片型号 / 合规:{'全部通过' if r.passed else f'存在 {len(r.errors)} 项未解决问题'}")
         for i in r.issues:
-            lines.append(f"  - [{i.stage}/{i.source}/{i.severity}] {i.where}:{i.detail}")
-        warns = [i.detail for i in r.issues if i.severity == "warn"]
-        lines.append(f"- 待确认信息:{'、'.join(warns) or '无'}")
+            lines.append(f"  - [{_label(i)}] {i.where}:{i.detail}")
+        if r.removed:
+            lines.append("- 已自动删除的内容(无依据或不合规,已从稿件中移除):")
+            for x in r.removed:
+                text = f"“{x['text'][:40]}…”" if x["text"] else ""
+                lines.append(f"  - {x['where']} {text} 原因:{x['reason']}")
+        warns = [i for i in r.issues if i.severity == "warn"]
+        lines.append(f"- 待确认信息:{'共 %d 项提示,见上方 warn 条目' % len(warns) if warns else '无'}")
     if ev and ev.dropped:
         lines.append(f"- 已丢弃的无依据摘录:{len(ev.dropped)} 条")
     return "\n".join(lines) + "\n"
+
+
+def _label(i) -> str:
+    kind = "事实" if i.stage == "fact" else "合规"
+    src = "规则" if i.source == "rule" else "LLM"
+    sev = "必须处理" if i.severity == "error" else "提示"
+    return f"{kind}/{src}/{sev}"

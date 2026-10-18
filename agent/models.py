@@ -43,6 +43,10 @@ class ImageRef:
     name: str
     media_id: str
     source_path: str = ""
+    caption: str = ""              # 官网图片说明(来自图片索引)
+    usage: str = ""                # 建议用途
+    origin_url: str = ""           # 原始图片 URL
+    note: str = ""                 # 型号未确认的原因
 
 
 @dataclass
@@ -104,6 +108,7 @@ class Issue:
     where: str
     detail: str
     suggestion: str = ""
+    ref: str = ""                  # 指向的具体对象,如图片编号;"count" 表示图片数量超限
 
 
 @dataclass
@@ -111,6 +116,7 @@ class Review:
     """阶段5、6的合并结果。"""
 
     issues: list[Issue] = field(default_factory=list)
+    removed: list[dict] = field(default_factory=list)   # 被自动删除的内容:{where, text, reason}
 
     @property
     def errors(self) -> list[Issue]:

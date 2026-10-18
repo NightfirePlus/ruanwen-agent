@@ -65,6 +65,15 @@ def parse_draft(data: dict) -> tuple[Draft, list[str]]:
     return draft, [str(r) for r in data.get("refusals", []) if r]
 
 
+def fill_captions(draft: Draft, ev: Evidence) -> Draft:
+    """模型没写图片说明时,回退用图片索引里登记的官网图片说明。"""
+    registered = {i.id: i.caption for i in ev.images if i.caption}
+    for pl in draft.images:
+        if not pl.caption.strip() and pl.image_id in registered:
+            pl.caption = registered[pl.image_id]
+    return draft
+
+
 def generate(llm, prompts: Prompts, brief: Brief, ev: Evidence, strategy: Strategy) -> tuple[Draft, list[str]]:
     user = prompts.render(
         "compose",

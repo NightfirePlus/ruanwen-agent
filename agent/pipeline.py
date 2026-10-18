@@ -17,7 +17,8 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from . import compliance, compose, evidence, export, fact_check, intake, revise, strategy
+from . import compliance, compose, evidence, export, fact_check, intake, prune, revise, strategy
+from .ima import ImaQuotaError
 from .models import Brief, Draft, Issue, Review, Session
 from .prompts import Prompts
 
@@ -74,6 +75,8 @@ class Pipeline:
             return self._block(s, f"未找到知识库“{self.store.kb_name}”,请确认已用同一账号加入共享知识库")
         try:
             s.evidence = evidence.build(self.llm, self.prompts, self.store, b.product)   # 阶段2
+        except ImaQuotaError:
+            return self._block(s, "ima 知识库的目录浏览额度已用完,且本地没有缓存可用。请稍后(额度恢复后)重试;已缓存过的型号不受影响")
         except evidence.ModelNotResolved as e:
             self._trace(s, "2 资料匹配", result="型号未确认", candidates=e.candidates)
             hint = f"知识库里没有型号“{e.model}”。" + (f"你是想推广其中之一吗?{'、'.join(e.candidates)}" if e.candidates else "请确认型号。")
@@ -89,22 +92,43 @@ class Pipeline:
             return self._block(s, "未能从知识库资料中提取到可用的事实点,无法生成有依据的内容")
         return None
 
-    # ---- 阶段4-6:生成 → 核验 → 合规 → 改写 ----
+    # ---- 阶段4-6:生成 → 核验 → 合规 → 改写 → 自动删除 ----
+    def _review(self, s: Session, draft: Draft) -> Review:
+        issues = fact_check.check(self.llm, self.prompts, draft, s.evidence, s.brief, s.strategy)
+        issues += compliance.check(self.llm, self.prompts, draft, s.evidence)
+        return Review(issues)
+
     def generate(self, s: Session) -> Outcome:
         draft, refusals = compose.generate(self.llm, self.prompts, s.brief, s.evidence, s.strategy)
+        draft = compose.fill_captions(draft, s.evidence)
         for round_no in range(MAX_REWRITES + 1):
-            issues = fact_check.check(self.llm, self.prompts, draft, s.evidence, s.brief, s.strategy)
-            issues += compliance.check(self.llm, self.prompts, draft, s.evidence)
-            review = Review(issues)
-            self._trace(s, f"5-6 核验与合规(第{round_no + 1}轮)", errors=len(review.errors), warns=len(issues) - len(review.errors))
+            review = self._review(s, draft)
+            self._trace(s, f"5-6 核验与合规(第{round_no + 1}轮)", errors=len(review.errors), warns=len(review.issues) - len(review.errors))
             if review.passed or round_no == MAX_REWRITES:
                 break
             text = "\n".join(f"- {i.where}:{i.detail}(要求:{i.suggestion})" for i in review.errors)
             draft, more = compose.rewrite(self.llm, self.prompts, draft, text)
+            draft = compose.fill_captions(draft, s.evidence)
             refusals = list(dict.fromkeys(refusals + more))
-        s.draft, s.review = draft, review
+
+        removed: list[dict] = []
         if not review.passed:
-            return Outcome("blocked", s, reason="多轮改写后仍有未解决的核验或合规问题,已停止输出,请人工处理", refusals=refusals)
+            # 改写用尽仍有 error:按位置删掉有问题的内容并留痕,再复检一次
+            max_images = s.strategy.platform.get("images", {}).get("max", 99)
+            pruned, removed, unresolved = prune.apply(draft, review.errors, max_images)
+            if unresolved:
+                self._trace(s, "自动删除", result="有无法定位的问题,不删除", unresolved=[u.detail for u in unresolved])
+            else:
+                draft = pruned
+                review = self._review(s, draft)
+                self._trace(s, "自动删除", removed=removed, errors_after=len(review.errors))
+        review.removed = removed
+        s.draft, s.review = draft, review
+
+        if not draft.body:
+            return Outcome("blocked", s, reason="删除有问题的内容后正文已为空,无法输出,请人工处理", refusals=refusals)
+        if not review.passed:
+            return Outcome("blocked", s, reason="仍有无法自动处理的核验或合规问题,已停止输出,请人工处理", refusals=refusals)
         return Outcome("review", s, refusals=refusals)
 
     # ---- 阶段7:确认与修改 ----

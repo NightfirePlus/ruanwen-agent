@@ -29,6 +29,13 @@ class ImaError(Exception):
         self.code = code
 
 
+QUOTA_CODE = 220021            # “资料获取次数已达上限”,按接口计数,不应重试
+
+
+class ImaQuotaError(ImaError):
+    """接口调用额度用完。重试没有意义,调用方应改用本地缓存或提示稍后再试。"""
+
+
 def mask_secret(value: str, head: int = 3, tail: int = 2) -> str:
     if not value:
         return ""
@@ -88,6 +95,8 @@ class ImaClient:
                 self._record(endpoint, body, code, msg, started)
                 if code == 0:
                     return payload.get("data") or {}
+                if code == QUOTA_CODE:
+                    raise ImaQuotaError(f"{endpoint} 额度已用完: {msg}", code=code)
                 last = ImaError(f"{endpoint} 失败: {msg}", code=code)
                 if code not in RETRYABLE:
                     raise last

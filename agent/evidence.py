@@ -6,23 +6,36 @@
 - 混淆:摘录中出现其他相近型号名称的,丢弃(规则);资料内部自相矛盾的由 LLM 与规则一起报冲突。
 - 来源:每条事实点、每张图片都带资料标题与知识库路径。
 
-真实知识库的目录结构尚未实测,KnowledgeStore 按手册描述实现,联调后可能需要调整。
+目录结构已用真实知识库探查(见 KnowledgeStore 说明)。
+ima 的“浏览目录”接口有调用额度(用尽返回 220021),因此型号表与资料正文落到本地 .cache/,
+命中缓存时不再访问接口;额度用尽且没有缓存时,抛出 ImaQuotaError 并给出明确提示。
 """
 from __future__ import annotations
 
+import csv
 import difflib
+import io
+import json
 import re
+from pathlib import Path
 
-from .ima import ImaClient
+from .ima import ImaClient, ImaQuotaError
 from .models import Evidence, Fact, ImageRef
 from .norm import mentioned_models
 from .norm import norm_model as norm
 from .prompts import Prompts
 
 KB_NAME = "任德耀新建华为PC知识库"
-IMAGE_EXT = (".png", ".jpg", ".jpeg", ".webp")
-PARAM_FOLDER_HINT = "产品参数"
+PARAM_ROOT = "P1-产品参数库"           # 事实层只认这个目录
+FACT_FILES = ("产品事实.md", "卖点与限制.md")   # 一个型号目录里读取的两份资料
+IMAGE_INDEX = "图片索引.csv"
+IMAGE_DIR = "images"
+FOLDER = 99                            # ima 里文件夹的 media_type
+IMAGE_TYPE = 9
+MAX_SERIES_DEPTH = 3
 MAX_DOCS = 4
+CACHE_DIR = Path(__file__).resolve().parent.parent / ".cache"
+INDEX_VERSION = 1
 
 NUM_UNIT = re.compile(
     r"\d+(?:\.\d+)?\s*(?:kg|g|GB|TB|MB|Hz|W|Wh|mAh|mm|cm|英寸|寸|小时|h|分钟|nm|核|线程|万|K|%|倍|代|瓦|克|毫米)",
@@ -43,8 +56,8 @@ def squash(s: str) -> str:
     return re.sub(r"\s+", "", s or "")
 
 
-def is_image(title: str) -> bool:
-    return (title or "").lower().endswith(IMAGE_EXT)
+def is_folder(item: dict) -> bool:
+    return item.get("media_type") == FOLDER
 
 
 def similar(model: str, names: list[str], cutoff: float = 0.6) -> list[str]:
@@ -60,15 +73,47 @@ def similar(model: str, names: list[str], cutoff: float = 0.6) -> list[str]:
     return out
 
 
-class KnowledgeStore:
-    """对 ima 共享知识库的读取视图:型号列表、型号资料、图片。"""
+def parse_image_index(text: str) -> dict[str, dict]:
+    """图片索引.csv -> {文件名: 行}。表头固定含:文件名,产品型号,来源页面,原始图片URL,官网图片说明,建议用途。"""
+    rows = csv.DictReader(io.StringIO(text.lstrip(chr(0xFEFF))))
+    return {r["文件名"].strip(): r for r in rows if r.get("文件名")}
 
-    def __init__(self, ima: ImaClient, kb_name: str = KB_NAME):
+
+class KnowledgeStore:
+    """对 ima 共享知识库的只读视图。
+
+    事实层:P1-产品参数库 下,含 产品事实.md 的目录就是一个型号(不假设层级深度)。
+    其余目录(P2~P8、竞品、价格、待审核、历史归档)不在这里读取。
+    """
+
+    def __init__(self, ima: ImaClient, kb_name: str = KB_NAME, cache_dir: Path | None = CACHE_DIR):
         self.ima = ima
         self.kb_name = kb_name
         self.kb_id = ""
-        self._models: dict[str, dict] = {}       # 型号名 -> {"folder_id","path"}
-        self._folder_names: dict[str, str] = {}  # folder_id -> 路径名
+        self.cache_dir = cache_dir           # 为 None 时不使用缓存
+        self.cache_hits = {"index": False, "docs": 0}
+        self._models: dict[str, dict] = {}   # 型号名 -> {"folder_id","path","children": {标题: 条目}}
+
+    # ---- 本地缓存 ----
+    def _cache_file(self, name: str) -> Path | None:
+        return (self.cache_dir / name) if self.cache_dir else None
+
+    def _cache_read(self, name: str) -> str | None:
+        f = self._cache_file(name)
+        return f.read_text(encoding="utf-8") if f and f.is_file() else None
+
+    def _cache_write(self, name: str, text: str) -> None:
+        f = self._cache_file(name)
+        if f:
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(text, encoding="utf-8")
+
+    def refresh(self) -> None:
+        """丢弃本地型号表,下次使用时重新浏览目录(会消耗浏览额度)。"""
+        self._models = {}
+        f = self._cache_file("kb_index.json")
+        if f and f.is_file():
+            f.unlink()
 
     def connect(self) -> dict:
         """识别账号并找到共享知识库;返回可展示的连接状态(密钥已脱敏)。"""
@@ -79,37 +124,77 @@ class KnowledgeStore:
             self.kb_id = match["kb_id"]
         return status
 
-    @staticmethod
-    def _is_folder(item: dict) -> bool:
-        return bool(item.get("folder_id")) and not item.get("media_id")
+    def _children(self, folder_id: str) -> list[dict]:
+        return self.ima.list_dir(self.kb_id, folder_id)
+
+    def _root_folder(self) -> str:
+        """知识库根在列表里表现为一个与库同名的文件夹条目。"""
+        top = self._children(None)
+        named = next((i for i in top if is_folder(i) and i.get("title") == self.kb_name), None)
+        return (named or (top[0] if top else {})).get("media_id", "")
 
     def models(self) -> dict[str, dict]:
-        """知识库里的型号列表:产品参数目录下的各子文件夹。"""
+        """扫描 P1:凡含 产品事实.md 的目录即为一个型号。"""
         if self._models:
             return self._models
-        root = next(
-            (it for it in self.ima.list_dir(self.kb_id) if self._is_folder(it) and PARAM_FOLDER_HINT in (it.get("name") or "")),
-            None,
-        )
-        if root:
-            self._folder_names[root["folder_id"]] = root["name"]
-            for it in self.ima.list_dir(self.kb_id, root["folder_id"]):
-                if self._is_folder(it):
-                    name = it.get("name") or ""
-                    self._models[name] = {"folder_id": it["folder_id"], "path": f"{root['name']}/{name}"}
-                    self._folder_names[it["folder_id"]] = name
+        cached = self._cache_read("kb_index.json")
+        if cached:
+            data = json.loads(cached)
+            if data.get("version") == INDEX_VERSION and data.get("kb_name") == self.kb_name:
+                self._models = data["models"]
+                self.cache_hits["index"] = True
+                return self._models
+        self._scan()
+        if self._models:
+            self._cache_write(
+                "kb_index.json",
+                json.dumps({"version": INDEX_VERSION, "kb_name": self.kb_name, "models": self._models}, ensure_ascii=False),
+            )
         return self._models
 
+    def _scan(self) -> None:
+        root = self._root_folder()
+        p1 = next((i for i in self._children(root) if is_folder(i) and i.get("title") == PARAM_ROOT), None)
+        if not p1:
+            return
+
+        def walk(folder_id: str, trail: list[str], depth: int) -> None:
+            items = self._children(folder_id)
+            by_title = {i.get("title", ""): i for i in items}
+            if FACT_FILES[0] in by_title and trail:
+                name = trail[-1]
+                self._models[name] = {"folder_id": folder_id, "path": "/".join([PARAM_ROOT] + trail), "children": by_title}
+                return
+            if depth >= MAX_SERIES_DEPTH:
+                return
+            for it in items:
+                if is_folder(it):
+                    walk(it["media_id"], trail + [it["title"]], depth + 1)
+
+        walk(p1["media_id"], [], 0)
+
     def docs(self, model_name: str) -> list[dict]:
+        """一个型号的资料:产品事实 + 卖点与限制。"""
         info = self.models()[model_name]
         out = []
-        for it in self.ima.list_dir(self.kb_id, info["folder_id"]):
-            title = it.get("title") or it.get("name") or ""
-            if it.get("media_id") and not is_image(title):
-                out.append({"media_id": it["media_id"], "title": title, "path": f"{info['path']}/{title}"})
+        for fname in FACT_FILES:
+            it = info["children"].get(fname)
+            if it:
+                out.append({"media_id": it["media_id"], "title": fname, "path": f"{info['path']}/{fname}"})
         return out
 
     def read(self, media_id: str) -> str:
+        safe = re.sub(r"[^\w.-]", "_", media_id)[:120]
+        cached = self._cache_read(f"docs/{safe}.txt")
+        if cached is not None:
+            self.cache_hits["docs"] += 1
+            return cached
+        text = self._download(media_id)
+        if text:
+            self._cache_write(f"docs/{safe}.txt", text)
+        return text
+
+    def _download(self, media_id: str) -> str:
         raw = self.ima.fetch(media_id)
         if raw is None:
             return ""
@@ -121,29 +206,48 @@ class KnowledgeStore:
         return raw.decode("utf-8", errors="replace")
 
     def images(self, model_name: str, limit: int = 30) -> list[ImageRef]:
-        """图片所属型号由所在目录判定,不由模型猜测。目录外搜到的图片只有标题含型号时才认。"""
-        key = norm(model_name)
-        info = self.models().get(model_name, {})
+        """图片取自型号目录的 images/。所属型号以 图片索引.csv 的“产品型号”为准,索引缺失时才按目录归属;
+        索引里写的型号与目录型号对不上的图片,型号置空(视为未确认)。"""
+        info = self.models()[model_name]
+        folder = info["children"].get(IMAGE_DIR)
+        if not folder:
+            return []
+        index: dict[str, dict] = {}
+        idx_item = info["children"].get(IMAGE_INDEX)
+        if idx_item:
+            index = parse_image_index(self.read(idx_item["media_id"]))
         refs: list[ImageRef] = []
-        seen: set[str] = set()
-
-        def add(media_id: str, title: str, path: str, belongs: bool) -> None:
-            if media_id in seen or len(refs) >= limit:
-                return
-            seen.add(media_id)
-            refs.append(ImageRef(f"I{len(refs) + 1}", model_name if belongs else "", title, media_id, path))
-
-        if info:
-            for it in self.ima.list_dir(self.kb_id, info["folder_id"]):
-                title = it.get("title") or it.get("name") or ""
-                if it.get("media_id") and is_image(title):
-                    add(it["media_id"], title, f"{info['path']}/{title}", True)
-        for it in self.ima.search(self.kb_id, model_name):
+        for it in self._children(folder["media_id"]):
+            if it.get("media_type") != IMAGE_TYPE or len(refs) >= limit:
+                continue
             title = it.get("title", "")
-            if it.get("media_id") and is_image(title):
-                parent = self._folder_names.get(it.get("parent_folder_id", ""), "")
-                add(it["media_id"], title, f"{parent}/{title}" if parent else title, key in norm(title))
+            row = index.get(title)
+            if row is None:
+                belongs, note = False, "图片索引中未登记"
+            else:
+                listed = row.get("产品型号", "")
+                belongs = self._same_product(listed, model_name)
+                note = "" if belongs else f"索引登记的型号为“{listed}”"
+            refs.append(
+                ImageRef(
+                    f"I{len(refs) + 1}",
+                    model_name if belongs else "",
+                    title,
+                    it["media_id"],
+                    f"{info['path']}/{IMAGE_DIR}/{title}",
+                    caption=(row or {}).get("官网图片说明", ""),
+                    usage=(row or {}).get("建议用途", ""),
+                    origin_url=(row or {}).get("原始图片URL", ""),
+                    note=note,
+                )
+            )
         return refs
+
+    @staticmethod
+    def _same_product(listed: str, model_name: str) -> bool:
+        """索引里的型号常带“HUAWEI ”前缀,归一化后比较。"""
+        a, b = norm(listed.replace("HUAWEI", "")), norm(model_name.replace("HUAWEI", ""))
+        return bool(a) and a == b
 
 
 def detect_conflicts(facts: list[Fact]) -> list[str]:

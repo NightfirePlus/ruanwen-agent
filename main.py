@@ -9,7 +9,9 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
+from pathlib import Path
 
 from agent import export
 from agent.envfile import load_dotenv
@@ -22,7 +24,9 @@ from agent.prompts import PromptError, Prompts
 
 
 def build(strict: bool) -> Pipeline:
-    prompts = Prompts.load(strict=strict)
+    # PROMPTS_DIR 可指向另一套提示词目录(例如本地联调用的临时版本);不设置则用仓库的 prompts/
+    custom = os.environ.get("PROMPTS_DIR")
+    prompts = Prompts.load(Path(custom) if custom else None, strict=strict)
     if prompts.problems:
         print(prompts.report(), file=sys.stderr)
     return Pipeline(LLMClient(), KnowledgeStore(ImaClient()), prompts)
