@@ -12,13 +12,16 @@ import sys
 from agent import export
 from agent.models import Task
 from agent.pipeline import Pipeline
+from agent.prompts import PromptError, Prompts
 from agent.retrieve import Retriever
 from ima import ImaClient, ImaError
 from llm.client import LLMClient, LLMError
 
 
 def build_pipeline() -> Pipeline:
-    return Pipeline(LLMClient(), Retriever(ImaClient()))
+    # 先加载提示词:缺失或未填写时在这里一次性报出,不会等到调用大模型才失败
+    prompts = Prompts.load()
+    return Pipeline(LLMClient(), Retriever(ImaClient()), prompts)
 
 
 def show(result, pipe: Pipeline, save: bool) -> None:
@@ -63,7 +66,7 @@ def main() -> int:
     args = ap.parse_args()
     try:
         pipe = build_pipeline()
-    except (ImaError, LLMError) as e:
+    except (ImaError, LLMError, PromptError) as e:
         print(f"初始化失败:{e}", file=sys.stderr)
         return 2
     try:

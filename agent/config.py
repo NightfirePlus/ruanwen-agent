@@ -25,10 +25,6 @@ def compliance_rules() -> dict:
     return load_json("compliance_rules.json")
 
 
-def system_prompt() -> str:
-    return (ROOT / "prompts" / "system.md").read_text(encoding="utf-8")
-
-
 def match_alias(text: str, table: dict) -> str | None:
     """在配置表中按名称/别名匹配,返回规范名;匹配不到返回 None。"""
     text = (text or "").strip()

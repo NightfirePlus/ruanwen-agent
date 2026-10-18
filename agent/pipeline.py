@@ -7,6 +7,7 @@ from pathlib import Path
 
 from . import compliance, compose, config, export, facts as facts_mod, intake, scene, verify
 from .models import Fact, Issue, Result, Task
+from .prompts import Prompts
 from .retrieve import Retriever, norm
 
 MAX_REVISIONS = 2
@@ -14,9 +15,10 @@ SAMPLES_DIR = Path(__file__).resolve().parent.parent / "samples"
 
 
 class Pipeline:
-    def __init__(self, llm, retriever: Retriever):
+    def __init__(self, llm, retriever: Retriever, prompts: Prompts):
         self.llm = llm
         self.retriever = retriever
+        self.prompts = prompts
 
     def _trace(self, r: Result, step: str, **info) -> None:
         r.trace.append({"step": step, "at": time.strftime("%H:%M:%S"), **info})
@@ -33,7 +35,7 @@ class Pipeline:
         self._trace(r, "任务接收", result="信息齐全", task=task.__dict__)
 
         # 2 场景解析
-        r.scene_judgement = scene.parse(self.llm, task)
+        r.scene_judgement = scene.parse(self.llm, self.prompts, task)
         self._trace(r, "场景解析", result=r.scene_judgement)
 
         # 3 策略匹配
@@ -56,7 +58,7 @@ class Pipeline:
             content = self.retriever.read_doc(d["media_id"])
             if not content.strip():
                 continue
-            fs, cf = facts_mod.extract(self.llm, task.product, d["title"], d["media_id"], content, len(r.facts) + 1)
+            fs, cf = facts_mod.extract(self.llm, self.prompts, task.product, d["title"], d["media_id"], content, len(r.facts) + 1)
             r.facts += fs
             conflicts += cf
         if not r.facts:
@@ -71,7 +73,7 @@ class Pipeline:
         self._trace(r, "检索图片", total=len(r.images), matched=len(usable))
 
         # 6 图文生成 → 7 核验 → 8 合规,发现问题则修订
-        draft, refusals = compose.generate(self.llm, task, r.scene_judgement, r.strategy, r.facts, usable)
+        draft, refusals = compose.generate(self.llm, self.prompts, task, r.scene_judgement, r.strategy, r.facts, usable)
         r.refusals = refusals
         limits = r.strategy["platform_rules"]["images"]
         for round_no in range(MAX_REVISIONS + 1):
@@ -82,7 +84,7 @@ class Pipeline:
                 r.issues = issues
                 break
             text = "\n".join(f"- {i.where}:{i.detail}(要求:{i.action})" for i in errors)
-            draft, more = compose.revise(self.llm, task, r.scene_judgement, r.strategy, r.facts, usable, draft, text)
+            draft, more = compose.revise(self.llm, self.prompts, task, r.scene_judgement, r.strategy, r.facts, usable, draft, text)
             r.refusals = list(dict.fromkeys(r.refusals + more))
         r.draft = draft
 
