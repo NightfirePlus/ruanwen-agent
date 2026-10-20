@@ -47,6 +47,7 @@ class ImageRef:
     usage: str = ""                # 建议用途
     origin_url: str = ""           # 原始图片 URL
     note: str = ""                 # 型号未确认的原因
+    review: dict = field(default_factory=dict)  # 首次使用的视觉审阅结果及限制
 
 
 @dataclass
@@ -59,6 +60,9 @@ class Evidence:
     conflicts: list[str] = field(default_factory=list)    # 资料冲突说明
     dropped: list[str] = field(default_factory=list)      # 被丢弃的无依据摘录
     sources: list[str] = field(default_factory=list)      # 资料来源清单
+    context: list[dict] = field(default_factory=list)  # 已审阅表达参考，不作为产品参数证据
+    originals: list[dict] = field(default_factory=list)  # 核验所需原始材料及条件
+    review_stats: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -97,6 +101,7 @@ class Draft:
         segs = [("标题", self.title), ("导语", self.intro)]
         segs += [(f"正文第{i}段", p.text) for i, p in enumerate(self.body, 1)]
         segs += [("行动引导", self.cta), ("标签", " ".join(self.tags))]
+        segs += [(f"图注 {im.image_id}", im.caption) for im in self.images]
         return [(w, t) for w, t in segs if t]
 
 

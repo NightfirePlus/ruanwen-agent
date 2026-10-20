@@ -98,6 +98,18 @@ class LocalStoreTest(unittest.TestCase):
 
 
 class SameProductTest(unittest.TestCase):
+    def test_duplicate_image_rows_are_not_silently_overwritten(self):
+        from agent.knowledge import KnowledgeError
+
+        with self.assertRaises(KnowledgeError):
+            evidence.parse_image_index("文件名,产品型号\na.png,A\na.png,B\n")
+
+    def test_incomplete_image_index_is_rejected(self):
+        from agent.knowledge import KnowledgeError
+
+        with self.assertRaises(KnowledgeError):
+            evidence.parse_image_index("文件名,用途\na.png,配图\n")
+
     def test_pairs_that_must_not_be_confused(self):
         sp = evidence.same_product
         self.assertFalse(sp("HUAWEI MateBook 14 酷睿 Ultra", "HUAWEI MateBook 14", "HUAWEI MateBook 14（鸿蒙版）"))
@@ -144,7 +156,7 @@ class BuildWithLocalStoreTest(unittest.TestCase):
 
 
 class MainStoreTest(unittest.TestCase):
-    def test_main_uses_local_store_without_ima(self):
+    def test_main_uses_local_store(self):
         import main
 
         with tempfile.TemporaryDirectory() as d:

@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Callable
 
 from . import compliance, compose, evidence, export, fact_check, intake, prune, revise, strategy
-from .ima import ImaQuotaError
+from .knowledge import KnowledgeError
 from .models import Brief, Draft, Issue, Review, Session
 from .norm import norm_model
 from .prompts import Prompts
@@ -46,7 +46,11 @@ class Pipeline:
         self.llm = llm
         self.store = store
         self.prompts = prompts
-        self.review_mode = review_mode
+        self.review_mode = "strict" if getattr(store, "requires_strict_review", False) else review_mode
+
+    def _llm(self, stage: str):
+        resolve = getattr(self.llm, "for_stage", None)
+        return resolve(stage) if resolve else self.llm
 
     # ---- 记录 ----
     @staticmethod
@@ -70,8 +74,8 @@ class Pipeline:
             try:
                 selected = next((name for name in self.store.models()
                                  if norm_model(name) == norm_model(user_text.strip())), None)
-            except ImaQuotaError:
-                pass  # 由资料匹配阶段给出额度耗尽提示
+            except (KnowledgeError, OSError) as exc:
+                return self._block(s, f"本地知识库读取失败：{exc}")
         if selected:
             s.brief.product = selected
             s.brief.product_type = ""
@@ -79,7 +83,7 @@ class Pipeline:
             s.brief = intake.normalize(s.brief)
             questions = intake.validate(s.brief)
         else:
-            s.brief, questions = intake.next_step(self.llm, self.prompts, s.brief, s.history)
+            s.brief, questions = intake.next_step(self._llm("intake"), self.prompts, s.brief, s.history)
         self._trace(s, "1 结构化需求", brief=s.brief.__dict__, questions=questions)
         if questions:
             self._progress(progress, "需求需要补充", f"还有 {len(questions)} 项关键信息需要确认")
@@ -111,12 +115,14 @@ class Pipeline:
     def _match_evidence(self, s: Session, progress: ProgressCallback | None = None) -> Outcome | None:
         b = s.brief
         self._progress(progress, "正在匹配知识库", f"只检索与“{b.product}”明确对应的资料和图片")
-        if not self.store.kb_id and not self.store.connect()["connected"]:
-            return self._block(s, f"未找到知识库“{self.store.kb_name}”,请确认已用同一账号加入共享知识库")
         try:
-            s.evidence = evidence.build(self.llm, self.prompts, self.store, b.product)   # 阶段2
-        except ImaQuotaError:
-            return self._block(s, "ima 知识库的目录浏览额度已用完,且本地没有缓存可用。请稍后(额度恢复后)重试;已缓存过的型号不受影响")
+            if not self.store.connect()["connected"]:
+                return self._block(s, f"本地知识库“{self.store.kb_name}”不可用，请检查 KB_LOCAL_DIR 和产品事实目录")
+            collect = getattr(self.store, "collect", None)
+            s.evidence = (collect(self._llm("evidence"), self._llm("image_review"), self.prompts, b, progress)
+                          if collect else evidence.build(self._llm("evidence"), self.prompts, self.store, b.product))
+        except (KnowledgeError, OSError) as exc:
+            return self._block(s, f"本地知识库读取失败：{exc}")
         except evidence.ModelNotResolved as e:
             self._trace(s, "2 资料匹配", result="型号未确认", candidates=e.candidates)
             hint = f"知识库里没有型号“{e.model}”。" + (f"你是想推广其中之一吗?{'、'.join(e.candidates)}" if e.candidates else "请确认型号。")
@@ -126,6 +132,7 @@ class Pipeline:
         self._trace(
             s, "2 资料匹配", facts=len(ev.facts), images=len(ev.images), sources=ev.sources,
             dropped=ev.dropped, conflicts=ev.conflicts, similar_models=ev.candidates,
+            usage_review=ev.review_stats,
         )
         self._progress(
             progress, "资料匹配完成",
@@ -139,8 +146,8 @@ class Pipeline:
 
     # ---- 阶段4-6:生成 → 核验 → 合规 → 改写 → 自动删除 ----
     def _review(self, s: Session, draft: Draft) -> Review:
-        issues = fact_check.check(self.llm, self.prompts, draft, s.evidence, s.brief, s.strategy)
-        issues += compliance.check(self.llm, self.prompts, draft, s.evidence)
+        issues = fact_check.check(self._llm("fact_review"), self.prompts, draft, s.evidence, s.brief, s.strategy)
+        issues += compliance.check(self._llm("compliance_review"), self.prompts, draft, s.evidence)
         if self.review_mode == "relaxed":
             for issue in issues:
                 if issue.source == "llm":
@@ -148,8 +155,13 @@ class Pipeline:
         return Review(issues)
 
     def generate(self, s: Session, progress: ProgressCallback | None = None) -> Outcome:
+        valid = getattr(self.store, "still_valid", None)
+        if valid and s.evidence and not valid(s.evidence):
+            out = self._match_evidence(s, progress)
+            if out:
+                return out
         self._progress(progress, "正在生成图文", "根据场景、平台规则和已确认事实组织内容")
-        draft, refusals = compose.generate(self.llm, self.prompts, s.brief, s.evidence, s.strategy)
+        draft, refusals = compose.generate(self._llm("compose"), self.prompts, s.brief, s.evidence, s.strategy)
         draft = compose.fill_captions(draft, s.evidence)
         self._progress(
             progress, "初稿已生成",
@@ -164,7 +176,7 @@ class Pipeline:
             self._progress(progress, "正在修正问题", f"发现 {len(review.errors)} 项必须处理的问题，正在局部改写")
             text = "\n".join(f"- {i.where}:{i.detail}(要求:{i.suggestion})" for i in review.errors)
             draft, more = compose.rewrite(
-                self.llm, self.prompts, draft, text, s.brief, s.evidence, s.strategy
+                self._llm("rewrite"), self.prompts, draft, text, s.brief, s.evidence, s.strategy
             )
             draft = compose.fill_captions(draft, s.evidence)
             refusals = list(dict.fromkeys(refusals + more))
@@ -195,7 +207,7 @@ class Pipeline:
     def feedback(self, s: Session, user_text: str, progress: ProgressCallback | None = None) -> Outcome:
         s.history.append({"role": "用户", "content": user_text})
         self._progress(progress, "正在理解修改要求", "判断需要调整文案、平台、场景还是产品")
-        intent = revise.classify(self.llm, self.prompts, s.brief, s.draft, user_text)
+        intent = revise.classify(self._llm("revise_intent"), self.prompts, s.brief, s.draft, user_text)
         self._trace(s, "7 修改意图", **intent)
         new_brief, step = revise.apply(s.brief, intent, user_text)
         if new_brief is None:
@@ -218,7 +230,7 @@ class Pipeline:
         s.evidence = s.strategy = s.draft = s.review = None
         # 可以重抽其他需求，但明确的最新型号不能被历史抽取结果覆盖。
         chosen_product = s.brief.product
-        s.brief, _ = intake.next_step(self.llm, self.prompts, s.brief, s.history)
+        s.brief, _ = intake.next_step(self._llm("intake"), self.prompts, s.brief, s.history)
         s.brief.product = chosen_product
         questions = intake.validate(s.brief)
         self._trace(s, "1 结构化需求(重来)", brief=s.brief.__dict__, questions=questions)

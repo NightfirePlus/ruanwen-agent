@@ -1,0 +1,15 @@
+{
+  "contract_version": 1,
+  "rules_version": "usage-review-1",
+  "runtime_enabled": true,
+  "strategy": "首次使用复核，按文件/元数据/来源/依赖/模型/提示词版本缓存",
+  "snapshot_fact_verification_completed": false,
+  "historical_prices_allowed": false,
+  "unassigned_images_allowed": false,
+  "reference_material_is_product_evidence": false,
+  "review_max_calls": 5,
+  "reference_limit": 2,
+  "image_limit": 2,
+  "mutable_review_index": "usage-review.sqlite3",
+  "failure_policy": "failed/in_progress不放行、不自动重试；uncertain/rejected复用为排除结果"
+}

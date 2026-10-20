@@ -15,23 +15,21 @@ from pathlib import Path
 
 from agent import export
 from agent.envfile import load_dotenv
-from agent.llm import LLMClient, LLMError
-from agent.localkb import LocalKBError, LocalStore
+from agent.llm import LLMError
+from agent.model_routing import make_llm
+from agent.localkb import LocalKBError
+from agent.catalogkb import DEFAULT_RUNTIME_KB, make_store as open_store
 from agent.models import Session
 from agent.pipeline import Outcome, Pipeline
 from agent.prompts import PromptError, Prompts
 
 
-DEFAULT_LOCAL_KB = Path(__file__).resolve().parent / "华为PC全板块深度知识库_v7"
+DEFAULT_LOCAL_KB = DEFAULT_RUNTIME_KB
 
 
-def make_store() -> LocalStore:
-    """只读本地知识库；当前入口不会初始化或访问 ima 接口。"""
-    configured = os.environ.get("KB_LOCAL_DIR", "").strip()
-    local = Path(configured).expanduser() if configured else DEFAULT_LOCAL_KB
-    store = LocalStore(local)
-    if not store.connect()["connected"]:
-        raise LocalKBError(f"本地知识库目录无效(找不到 P1-产品参数库):{local}")
+def make_store():
+    """默认新库；旧格式目录仍可显式指定。"""
+    store = open_store()
     print(f"知识库:本地目录 {store.root}", file=sys.stderr)
     return store
 
@@ -42,7 +40,7 @@ def build(strict: bool) -> Pipeline:
     prompts = Prompts.load(Path(custom) if custom else None, strict=strict)
     if prompts.problems:
         print(prompts.report(), file=sys.stderr)
-    return Pipeline(LLMClient(), make_store(), prompts)
+    return Pipeline(make_llm(), make_store(), prompts)
 
 
 def show(pipe: Pipeline, out: Outcome, save: bool) -> None:

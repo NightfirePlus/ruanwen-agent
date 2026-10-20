@@ -17,3 +17,9 @@ samples/local-generation-check.*
 
 # 本地知识库(体积大、属于举办方资料,不提交)
 华为PC全板块深度知识库_v7/
+
+# 只发布当前知识库；历史快照与运行时审核数据库不提交
+knowledge_base/*
+!knowledge_base/current/
+knowledge_base/current/**/*.sqlite3
+knowledge_base/current/**/*.sqlite3-*

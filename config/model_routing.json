@@ -1,0 +1,21 @@
+{
+  "profile": "modelscope-v1",
+  "availability_checked_on": "2026-10-20",
+  "availability_source": "https://api-inference.modelscope.cn/v1/models",
+  "base_url": "https://api-inference.modelscope.cn/v1",
+  "models": {
+    "understand": {"model": "Qwen/Qwen3.5-35B-A3B", "max_tokens": 2048, "enable_thinking": false},
+    "write": {"model": "Qwen/Qwen3.5-397B-A17B", "max_tokens": 6144, "enable_thinking": false},
+    "analyze": {"model": "ZhipuAI/GLM-5.2", "max_tokens": 6144, "enable_thinking": false}
+  },
+  "stages": {
+    "intake": "understand",
+    "revise_intent": "understand",
+    "evidence": "analyze",
+    "image_review": "understand",
+    "compose": "write",
+    "rewrite": "write",
+    "fact_review": "analyze",
+    "compliance_review": "analyze"
+  }
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "source": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/来源清单.csv",
+    "path": "00-规范与索引/来源登记/695868b178-来源清单.csv",
+    "sha256": "086ca7725a9a4707cc9920b1dd46ac6ad4e5d965b6543404c40c7f8e49caa38e"
+  },
+  {
+    "source": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook Fold 非凡大师/来源清单.csv",
+    "path": "00-规范与索引/来源登记/c4682507bc-来源清单.csv",
+    "sha256": "42408cab3df0bb900c3cf1c7fc0aa8b30cef0bc4dabf2fbecaddf2f3b8e855e5"
+  },
+  {
+    "source": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook Pro/来源清单.csv",
+    "path": "00-规范与索引/来源登记/7642f7eaa8-来源清单.csv",
+    "sha256": "203b10020d86af0cf318117811c8cf784dd9673e8f581c3e00e392495788abf2"
+  },
+  {
+    "source": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook Pro S/来源清单.csv",
+    "path": "00-规范与索引/来源登记/05326e07e2-来源清单.csv",
+    "sha256": "6483cab2b0b1426829f285ae7cbcf12f646f511d0fc89f20214bf05ed2928a95"
+  },
+  {
+    "source": "P1-产品参数库/02-MateBook-Windows/MateBook 14 酷睿 Ultra/来源清单.csv",
+    "path": "00-规范与索引/来源登记/2d57231562-来源清单.csv",
+    "sha256": "41cc4539526ef134b8aae74ae00cf15a3338a252fec0c946f9f7809afcacefd9"
+  },
+  {
+    "source": "P1-产品参数库/02-MateBook-Windows/MateBook D 14/来源清单.csv",
+    "path": "00-规范与索引/来源登记/aa69815190-来源清单.csv",
+    "sha256": "d1134b7c8e6c6def6b35f2b5cbd78c4993ed9a0cb23d14a1b3744495f7e41a77"
+  },
+  {
+    "source": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/来源清单.csv",
+    "path": "00-规范与索引/来源登记/97b4f074f0-来源清单.csv",
+    "sha256": "b1cc2a80d53255b002bcf3635b52f352f4004acae23ed8330404c32c1d63b394"
+  },
+  {
+    "source": "P1-产品参数库/02-MateBook-Windows/MateBook D 16 SE 版/来源清单.csv",
+    "path": "00-规范与索引/来源登记/f2c8504bf3-来源清单.csv",
+    "sha256": "c2b938c35d173e4d8a1c8ce4bc6382e8fe252b985e6f1a0ad98ece6503dd0f56"
+  },
+  {
+    "source": "P1-产品参数库/02-MateBook-Windows/MateBook GT 系列/来源清单.csv",
+    "path": "00-规范与索引/来源登记/434e0164e2-来源清单.csv",
+    "sha256": "33dbb8a59a7bdabb2cc1e79f8954ac850da32944cea8b6404c14d3e9fb9fd811"
+  },
+  {
+    "source": "P1-产品参数库/02-MateBook-Windows/MateBook X系列/来源清单.csv",
+    "path": "00-规范与索引/来源登记/eb8baf3f5e-来源清单.csv",
+    "sha256": "50b1beb483bff29154e1613ba0a90766341ee54b5ddd275510fa04209d38e8c6"
+  }
+]

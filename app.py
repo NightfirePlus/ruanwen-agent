@@ -3,7 +3,7 @@
   python app.py            # 本地启动,访问 http://localhost:7860
 
 界面与命令行 main.py 使用同一套 Pipeline 与同一个数据源(本地知识库目录):
-  - 知识库:KB_LOCAL_DIR 指定的目录,默认项目内 华为PC全板块深度知识库_v7
+  - 知识库:KB_LOCAL_DIR 指定的目录,默认项目内 knowledge_base/current
   - 需求未完整 → pipe.talk 追问
   - 稿件已生成(处于 review)→ pipe.feedback 判断修改意图
   - 确认后 → done
@@ -26,29 +26,26 @@ import gradio as gr
 
 from agent import artifacts, export
 from agent.envfile import load_dotenv
-from agent.llm import LLMClient, LLMError
-from agent.localkb import LocalKBError, LocalStore
+from agent.llm import LLMError
+from agent.model_routing import ModelRouter, make_llm
+from agent.localkb import LocalKBError
+from agent.catalogkb import DEFAULT_RUNTIME_KB, make_store as open_store
 from agent.models import Session
 from agent.pipeline import Outcome, Pipeline
 from agent.prompts import PromptError, Prompts
 
 load_dotenv()
 
-DEFAULT_LOCAL_KB = Path(__file__).resolve().parent / "华为PC全板块深度知识库_v7"
+DEFAULT_LOCAL_KB = DEFAULT_RUNTIME_KB
 
 # ---- Pipeline 全局单例(多用户共享,提示词与知识库索引只加载一次) ----
 _pipe: Pipeline | None = None
 _pipe_lock = threading.Lock()
 
 
-def make_store() -> LocalStore:
-    """只读本地知识库,与 main.py 一致;不初始化、不访问 ima 接口。"""
-    configured = os.environ.get("KB_LOCAL_DIR", "").strip()
-    local = Path(configured).expanduser() if configured else DEFAULT_LOCAL_KB
-    store = LocalStore(local)
-    if not store.connect()["connected"]:
-        raise LocalKBError(f"本地知识库目录无效(找不到 P1-产品参数库):{local}")
-    return store
+def make_store():
+    """与命令行共用新库读取与首次使用复核协议。"""
+    return open_store()
 
 
 def get_pipeline() -> Pipeline:
@@ -59,8 +56,10 @@ def get_pipeline() -> Pipeline:
         if _pipe is None:
             custom = os.environ.get("PROMPTS_DIR")
             prompts = Prompts.load(Path(custom) if custom else None, strict=False)
-            mode = os.environ.get("REVIEW_MODE", "relaxed").strip().lower()
-            _pipe = Pipeline(LLMClient(), make_store(), prompts, review_mode=mode)
+            llm = make_llm()
+            default_mode = "strict" if isinstance(llm, ModelRouter) else "relaxed"
+            mode = os.environ.get("REVIEW_MODE", default_mode).strip().lower()
+            _pipe = Pipeline(llm, make_store(), prompts, review_mode=mode)
     return _pipe
 
 

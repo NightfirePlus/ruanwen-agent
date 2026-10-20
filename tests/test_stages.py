@@ -172,6 +172,24 @@ class FactCheckTest(unittest.TestCase):
         d = Draft(body=[Paragraph("x")], images=[ImagePlacement("I1", 0, "a")] * 4)   # 朋友圈上限是 3
         self.assertTrue(any("超过平台上限" in i.detail for i in self.rules(d)))
 
+    def test_repeated_image_is_an_error_even_below_quantity_limit(self):
+        d = Draft(body=[Paragraph("外观展示")], images=[ImagePlacement("I1", 0, "图"), ImagePlacement("I1", 1, "图")])
+        self.assertTrue(any(i.severity == "error" and "重复" in i.detail for i in self.rules(d)))
+
+    def test_out_of_range_image_position_requires_correction(self):
+        d = Draft(body=[Paragraph("外观展示")], images=[ImagePlacement("I1", -1, "图")])
+        self.assertTrue(any(i.severity == "error" and "插入位置" in i.detail for i in self.rules(d)))
+
+    def test_caption_parameters_and_promises_are_checked_and_can_be_removed(self):
+        from agent import prune
+        d = Draft(body=[Paragraph("外观展示")], images=[ImagePlacement("I1", 1, "仅重0.1kg，保证好用")])
+        issues = self.rules(d) + compliance.rule_check(d, ev_with("重量约1.36kg"))
+        self.assertTrue(any(i.where == "图注 I1" and i.severity == "error" for i in issues))
+        out, removed, unresolved = prune.apply(d, [i for i in issues if i.severity == "error"], 3)
+        self.assertFalse(unresolved)
+        self.assertFalse(out.images)
+        self.assertTrue(removed)
+
     def test_llm_issues_added_but_cannot_clear_rule_errors(self):
         llm = FakeLLM(fact_issues=[{"where": "正文第1段", "severity": "warn", "detail": "语义夸大"}])
         d = Draft(body=[Paragraph("续航长达20小时", ["F1"])])
@@ -227,17 +245,17 @@ class ComplianceTest(unittest.TestCase):
 
 
 class PipelineTest(unittest.TestCase):
-    def test_quota_exhausted_gives_clear_reason(self):
-        from agent.ima import ImaQuotaError
+    def test_local_read_failure_gives_clear_reason(self):
+        from agent.knowledge import KnowledgeError
 
         class Exhausted(FakeStore):
             def models(self):
-                raise ImaQuotaError("额度已用完", code=220021)
+                raise KnowledgeError("本地目录不可读")
 
         out = new_pipe(store=Exhausted()).talk(Session(), "go")
         self.assertEqual(out.status, "blocked")
-        self.assertIn("额度", out.reason)
-        self.assertIn("缓存", out.reason)
+        self.assertIn("本地知识库读取失败", out.reason)
+        self.assertIn("目录不可读", out.reason)
 
     def test_happy_path(self):
         pipe, s = new_pipe(), Session()

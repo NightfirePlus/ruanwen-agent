@@ -32,6 +32,12 @@ def apply(draft: Draft, errors: list[Issue], max_images: int) -> tuple[Draft, li
 
     for e in errors:
         w = e.where or ""
+        if w.startswith("图注 "):
+            image_id = w.split(" ", 1)[1]
+            if any(im.image_id == image_id for im in d.images):
+                drop_images.add(image_id)
+                reasons.setdefault(f"配图 {image_id}", []).append(e.detail)
+                continue
         m = BODY.match(w)
         if m and 1 <= int(m.group(1)) <= len(d.body):
             reasons.setdefault(w, []).append(e.detail)

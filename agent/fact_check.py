@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import re
 
-from .compose import draft_to_json, facts_block
+from .compose import draft_to_json, facts_block, images_block, originals_block
 from .models import Brief, Draft, Evidence, Issue, Strategy
 from .norm import llm_issues, mentioned_models, norm_model, spec_versions, usable_images
 from .prompts import Prompts, PromptError
@@ -58,7 +58,7 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
             if f and norm_model(f.model) != main:
                 add("error", where, f"引用了型号“{f.model}”的事实,但主推型号是“{brief.product}”", "改用主推型号的事实")
 
-    for where, text in (("标题", draft.title), ("导语", draft.intro), ("行动引导", draft.cta)):
+    for where, text in [("标题", draft.title), ("导语", draft.intro), ("行动引导", draft.cta)] + [(f"图注 {im.image_id}", im.caption) for im in draft.images]:
         for n in _nums(text):
             if n not in all_text:
                 add("error", where, f"数值“{n}”不在知识库事实中", "删除或改写")
@@ -80,16 +80,23 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
 
     images = {i.id: i for i in usable_images(ev, brief.product)}
     known = {i.id: i for i in ev.images}
+    seen_images = set()
     for pl in draft.images:
+        if pl.image_id in seen_images:
+            add("error", "配图方案", f"重复使用图片 {pl.image_id}", "删除重复图片或换图", pl.image_id)
+        seen_images.add(pl.image_id)
         if pl.image_id not in known:
             add("error", "配图方案", f"图片 {pl.image_id} 不在知识库图片清单中", "移除该图片", pl.image_id)
         elif pl.image_id not in images:
             im = known[pl.image_id]
             add("error", "配图方案", f"图片 {im.id}《{im.name}》无法确认属于主推型号“{brief.product}”", "移除该图片", im.id)
         if not (0 <= pl.after_paragraph <= len(draft.body)):
-            add("warn", "配图方案", f"图片 {pl.image_id} 的插入位置超出正文范围", "调整位置")
+            add("error", "配图方案", f"图片 {pl.image_id} 的插入位置超出正文范围", "调整位置", pl.image_id)
         if not pl.caption.strip():
             add("warn", "配图方案", f"图片 {pl.image_id} 缺少图片说明", "补充说明")
+        im = known.get(pl.image_id)
+        if im and im.review and (im.review.get("status") != "passed" or im.review.get("asset_type") in ("composition_required", "unknown")):
+            add("error", "配图方案", f"图片 {pl.image_id} 未通过独立使用审核", "移除图片", pl.image_id)
 
     limits = strategy.platform.get("images", {})
     n, lo, hi = len(draft.images), limits.get("min", 0), limits.get("max", 99)
@@ -101,7 +108,9 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
 
 
 def llm_check(llm, prompts: Prompts, draft: Draft, ev: Evidence) -> list[Issue]:
-    data = llm.json(prompts.render("fact_review", {"稿件": draft_to_json(draft), "事实点清单": facts_block(ev)}))
+    model = ev.facts[0].model if ev.facts else ""
+    data = llm.json(prompts.render("fact_review", {"稿件": draft_to_json(draft), "事实点清单": facts_block(ev),
+        "原始资料": originals_block(ev), "图片审阅": images_block(ev, model)}))
     return llm_issues(data, "fact")
 
 

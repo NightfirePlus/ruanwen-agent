@@ -6,7 +6,6 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from agent.evidence import KnowledgeStore  # noqa: E402
 from agent.models import ImageRef  # noqa: E402
 from agent.prompts import SPECS, Prompts  # noqa: E402
 
@@ -24,11 +23,11 @@ def make_prompts(skip: tuple[str, ...] = ()) -> Prompts:
     return Prompts(texts, strict=False)
 
 
-class FakeStore(KnowledgeStore):
-    """不访问 ima,直接提供型号、资料和图片。"""
+class FakeStore:
+    """直接提供型号、资料和图片，不访问外部服务。"""
 
     def __init__(self, docs: dict[str, str] | None = None, images=None, models=None):
-        self.kb_name, self.kb_id = "测试库", "KB"
+        self.kb_name = "测试库"
         self._docs = docs if docs is not None else {"MateBook 14": DOC}
         self._images = images if images is not None else [
             ImageRef("I1", "MateBook 14", "mb14-主图.png", "P1", "P1-产品参数库/MateBook 14/images/mb14-主图.png", caption="主视觉"),

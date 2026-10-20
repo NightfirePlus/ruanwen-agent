@@ -1,7 +1,7 @@
-"""本地知识库:直接读磁盘上的知识库目录,不访问 ima。
+"""本地知识库：只读磁盘上的知识库目录。
 
-和 evidence.KnowledgeStore 提供同一组方法(connect / models / docs / read / images),流水线不需要区分。
-读取范围与 ima 版本一致:只认 P1-产品参数库 下含 产品事实.md 的目录是一个型号,
+提供 connect / models / docs / read / images 方法。
+只认 P1-产品参数库 下含 产品事实.md 的目录是一个型号，
 读取其中的 产品事实.md 与 卖点与限制.md;图片取自该型号目录的 images/,所属型号以 图片索引.csv 为准。
 P2~P8、竞品、价格(机密)、待审核、历史归档都不读。
 
@@ -22,11 +22,12 @@ from .evidence import (
     same_product,
 )
 from .models import ImageRef
+from .knowledge import KnowledgeError
 
 IMAGE_EXT = (".png", ".jpg", ".jpeg", ".webp")
 
 
-class LocalKBError(Exception):
+class LocalKBError(KnowledgeError):
     pass
 
 
@@ -34,8 +35,6 @@ class LocalStore:
     def __init__(self, root: Path | str):
         self.root = Path(root).resolve()
         self.kb_name = self.root.name
-        self.kb_id = str(self.root)          # 流水线用它判断“是否已连接”
-        self.cache_hits = {"index": False, "docs": 0}
         self._models: dict[str, dict] = {}
 
     # ---- 路径安全 ----
@@ -45,26 +44,31 @@ class LocalStore:
             raise LocalKBError(f"路径越出知识库目录:{p}")
         return r
 
-    # ---- 与 KnowledgeStore 同名的接口 ----
+    # ---- 本地资料接口 ----
     def connect(self) -> dict:
-        ok = (self.root / PARAM_ROOT).is_dir()
-        return {"connected": ok, "kb_name": self.kb_name, "client_id": "(本地)", "api_key": "(本地)"}
+        ok = self._safe(self.root / PARAM_ROOT).is_dir()
+        return {"connected": ok, "kb_name": self.kb_name}
 
     def models(self) -> dict[str, dict]:
         if self._models:
             return self._models
-        p1 = self.root / PARAM_ROOT
+        p1 = self._safe(self.root / PARAM_ROOT)
         if not p1.is_dir():
             return self._models
+        discovered = {}
 
         def walk(folder: Path, trail: list[str], depth: int) -> None:
+            folder = self._safe(folder)
             try:
                 entries = sorted(folder.iterdir(), key=lambda x: x.name)
-            except OSError:
-                return
+            except OSError as exc:
+                raise LocalKBError(f"本地知识库目录不可读：{folder}") from exc
             names = {e.name for e in entries}
             if FACT_FILES[0] in names and trail:
-                self._models[trail[-1]] = {
+                if trail[-1] in discovered:
+                    raise LocalKBError(f"本地知识库存在同名型号目录，需人工消歧：{trail[-1]}")
+                self._safe(folder / FACT_FILES[0])
+                discovered[trail[-1]] = {
                     "folder_id": str(folder),
                     "path": "/".join([PARAM_ROOT] + trail),
                     "children": {e.name: {"media_id": str(e), "title": e.name} for e in entries},
@@ -77,6 +81,7 @@ class LocalStore:
                     walk(e, trail + [e.name], depth + 1)
 
         walk(p1, [], 0)
+        self._models = discovered
         return self._models
 
     def docs(self, model_name: str) -> list[dict]:
@@ -110,7 +115,7 @@ class LocalStore:
     def images(self, model_name: str, limit: int = 30) -> list[ImageRef]:
         info = self.models()[model_name]
         official = self.official(model_name)
-        folder = Path(info["folder_id"]) / IMAGE_DIR
+        folder = self._safe(Path(info["folder_id"]) / IMAGE_DIR)
         if not folder.is_dir():
             return []
         index = {}
@@ -119,6 +124,7 @@ class LocalStore:
             index = parse_image_index(self.read(idx["media_id"]))
         refs: list[ImageRef] = []
         for f in sorted(folder.iterdir(), key=lambda x: x.name):
+            f = self._safe(f)
             if not f.is_file() or f.suffix.lower() not in IMAGE_EXT or len(refs) >= limit:
                 continue
             row = index.get(f.name)

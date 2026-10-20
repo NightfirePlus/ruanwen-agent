@@ -28,6 +28,9 @@ def mentioned_models(text: str, names: list[str]) -> set[str]:
 def normalize_where(where: str) -> str:
     """把 LLM 写的位置统一成程序认得的写法:body[0].text -> 正文第1段,title -> 标题 等。"""
     w = (where or "").strip()
+    image = re.match(r"图注\s*(\S+)", w)
+    if image:
+        return f"图注 {image[1]}"
     m = re.search(r"body\[(\d+)\]", w)
     if m:
         return f"正文第{int(m.group(1)) + 1}段"

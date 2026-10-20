@@ -15,7 +15,17 @@ def facts_block(ev: Evidence) -> str:
 
 def images_block(ev: Evidence, model: str) -> str:
     imgs = usable_images(ev, model)
-    return "\n".join(f"[{i.id}] 型号:{i.model} 名称:{i.name} 来源:{i.source_path}" for i in imgs) or "(无)"
+    return "\n".join(json.dumps({"id": i.id, "model": i.model, "name": i.name,
+        "source": i.source_path, "registered_caption": i.caption, "usage": i.usage,
+        "visual_review": i.review, "note": i.note}, ensure_ascii=False) for i in imgs) or "(无)"
+
+
+def context_block(ev: Evidence) -> str:
+    return json.dumps(ev.context, ensure_ascii=False)
+
+
+def originals_block(ev: Evidence) -> str:
+    return json.dumps(ev.originals, ensure_ascii=False)
 
 
 def brief_block(b: Brief) -> str:
@@ -82,6 +92,7 @@ def generate(llm, prompts: Prompts, brief: Brief, ev: Evidence, strategy: Strate
             "策略": json.dumps({"scene": strategy.scene, "platform": strategy.platform}, ensure_ascii=False),
             "事实点清单": facts_block(ev),
             "可用图片": images_block(ev, brief.product),
+            "表达参考": context_block(ev),
         },
     )
     return parse_draft(llm.json(user, system=prompts.writer_system, temperature=0.7))
@@ -105,6 +116,7 @@ def rewrite(
             "策略": json.dumps({"scene": strategy.scene, "platform": strategy.platform}, ensure_ascii=False),
             "事实点清单": facts_block(ev),
             "可用图片": images_block(ev, brief.product),
+            "表达参考": context_block(ev),
         },
     )
     return parse_draft(llm.json(user, system=prompts.writer_system, temperature=0.4))

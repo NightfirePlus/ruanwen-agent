@@ -9,7 +9,7 @@ from __future__ import annotations
 import re
 
 from . import config
-from .compose import draft_to_json, facts_block
+from .compose import draft_to_json, facts_block, images_block
 from .models import Draft, Evidence, Issue
 from .norm import llm_issues
 from .prompts import Prompts, PromptError
@@ -42,7 +42,9 @@ def rule_check(draft: Draft, ev: Evidence) -> list[Issue]:
 
 
 def llm_check(llm, prompts: Prompts, draft: Draft, ev: Evidence) -> list[Issue]:
-    data = llm.json(prompts.render("compliance_review", {"稿件": draft_to_json(draft), "事实点清单": facts_block(ev)}))
+    model = ev.facts[0].model if ev.facts else ""
+    data = llm.json(prompts.render("compliance_review", {"稿件": draft_to_json(draft), "事实点清单": facts_block(ev),
+        "图片审阅": images_block(ev, model)}))
     return llm_issues(data, "compliance")
 
 

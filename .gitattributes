@@ -1,0 +1,2 @@
+# Knowledge records contain byte-level content hashes; preserve source bytes on every OS.
+knowledge_base/current/** -text
