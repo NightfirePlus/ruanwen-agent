@@ -16,6 +16,7 @@ import json
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Callable
 
 from . import compliance, compose, evidence, export, fact_check, intake, prune, revise, strategy
 from .ima import ImaQuotaError
@@ -25,6 +26,7 @@ from .prompts import Prompts
 
 MAX_REWRITES = 2
 SAMPLES_DIR = Path(__file__).resolve().parent.parent / "samples"
+ProgressCallback = Callable[[str, str], None]
 
 
 @dataclass
@@ -51,10 +53,17 @@ class Pipeline:
     def _trace(s: Session, stage: str, **info) -> None:
         s.trace.append({"stage": stage, "at": time.strftime("%H:%M:%S"), **info})
 
+    @staticmethod
+    def _progress(callback: ProgressCallback | None, title: str, detail: str) -> None:
+        """向界面报告可核验的阶段摘要，不暴露模型内部推理。"""
+        if callback:
+            callback(title, detail)
+
     # ---- 阶段1:多轮追问 ----
-    def talk(self, s: Session, user_text: str) -> Outcome:
+    def talk(self, s: Session, user_text: str, progress: ProgressCallback | None = None) -> Outcome:
         """处理一轮用户输入。信息不完整返回 need_more_info;完整后自动进入后续阶段。"""
         s.history.append({"role": "用户", "content": user_text})
+        self._progress(progress, "正在理解需求", "识别产品、受众、场景、平台和内容目标")
         # 用户直接回复库内型号时，这是明确选择，不能再被旧需求覆盖。
         selected = None
         if intake.MODEL_HINT.search(user_text):
@@ -73,23 +82,35 @@ class Pipeline:
             s.brief, questions = intake.next_step(self.llm, self.prompts, s.brief, s.history)
         self._trace(s, "1 结构化需求", brief=s.brief.__dict__, questions=questions)
         if questions:
+            self._progress(progress, "需求需要补充", f"还有 {len(questions)} 项关键信息需要确认")
             s.history.append({"role": "助手", "content": "\n".join(questions)})
             return Outcome("need_more_info", s, questions=questions)
-        return self.produce(s)
+        self._progress(
+            progress, "需求已确认",
+            f"{s.brief.product} · {s.brief.audience} · {s.brief.scene} · {s.brief.platform}",
+        )
+        return self.produce(s, progress=progress)
 
     # ---- 阶段2-6:从需求到通过核验的稿件 ----
-    def produce(self, s: Session, reuse_evidence: bool = False) -> Outcome:
+    def produce(
+        self, s: Session, reuse_evidence: bool = False, progress: ProgressCallback | None = None
+    ) -> Outcome:
         b = s.brief
         if not (reuse_evidence and s.evidence):
-            out = self._match_evidence(s)
+            out = self._match_evidence(s, progress)
             if out:
                 return out
         s.strategy = strategy.match(b)                                         # 阶段3
         self._trace(s, "3 策略匹配", scene=s.strategy.scene.get("name"), platform=s.strategy.platform["name"])
-        return self.generate(s)
+        self._progress(
+            progress, "策略已匹配",
+            f"按{s.strategy.scene.get('name')}场景和{s.strategy.platform['name']}规则组织内容",
+        )
+        return self.generate(s, progress=progress)
 
-    def _match_evidence(self, s: Session) -> Outcome | None:
+    def _match_evidence(self, s: Session, progress: ProgressCallback | None = None) -> Outcome | None:
         b = s.brief
+        self._progress(progress, "正在匹配知识库", f"只检索与“{b.product}”明确对应的资料和图片")
         if not self.store.kb_id and not self.store.connect()["connected"]:
             return self._block(s, f"未找到知识库“{self.store.kb_name}”,请确认已用同一账号加入共享知识库")
         try:
@@ -105,6 +126,10 @@ class Pipeline:
         self._trace(
             s, "2 资料匹配", facts=len(ev.facts), images=len(ev.images), sources=ev.sources,
             dropped=ev.dropped, conflicts=ev.conflicts, similar_models=ev.candidates,
+        )
+        self._progress(
+            progress, "资料匹配完成",
+            f"找到 {len(ev.facts)} 条可用事实、{len([i for i in ev.images if i.model])} 张已确认图片",
         )
         if ev.conflicts:
             return self._block(s, "知识库资料存在冲突,请人工确认后再生成:" + ";".join(ev.conflicts))
@@ -122,14 +147,21 @@ class Pipeline:
                     issue.severity = "warn"
         return Review(issues)
 
-    def generate(self, s: Session) -> Outcome:
+    def generate(self, s: Session, progress: ProgressCallback | None = None) -> Outcome:
+        self._progress(progress, "正在生成图文", "根据场景、平台规则和已确认事实组织内容")
         draft, refusals = compose.generate(self.llm, self.prompts, s.brief, s.evidence, s.strategy)
         draft = compose.fill_captions(draft, s.evidence)
+        self._progress(
+            progress, "初稿已生成",
+            f"标题“{draft.title}”，正文 {len(draft.body)} 段，配图 {len(draft.images)} 张",
+        )
         for round_no in range(MAX_REWRITES + 1):
+            self._progress(progress, "正在核验内容", f"第 {round_no + 1} 轮检查产品事实、图片归属和营销合规")
             review = self._review(s, draft)
             self._trace(s, f"5-6 核验与合规(第{round_no + 1}轮)", errors=len(review.errors), warns=len(review.issues) - len(review.errors))
             if review.passed or round_no == MAX_REWRITES:
                 break
+            self._progress(progress, "正在修正问题", f"发现 {len(review.errors)} 项必须处理的问题，正在局部改写")
             text = "\n".join(f"- {i.where}:{i.detail}(要求:{i.suggestion})" for i in review.errors)
             draft, more = compose.rewrite(
                 self.llm, self.prompts, draft, text, s.brief, s.evidence, s.strategy
@@ -155,11 +187,14 @@ class Pipeline:
             return Outcome("blocked", s, reason="删除有问题的内容后正文已为空,无法输出,请人工处理", refusals=refusals)
         if not review.passed:
             return Outcome("blocked", s, reason="仍有无法自动处理的核验或合规问题,已停止输出,请人工处理", refusals=refusals)
+        warn_count = len(review.issues) - len(review.errors)
+        self._progress(progress, "生成完成", f"阻断项已通过；{warn_count} 项提示可在右侧核验卡查看")
         return Outcome("review", s, refusals=refusals)
 
     # ---- 阶段7:确认与修改 ----
-    def feedback(self, s: Session, user_text: str) -> Outcome:
+    def feedback(self, s: Session, user_text: str, progress: ProgressCallback | None = None) -> Outcome:
         s.history.append({"role": "用户", "content": user_text})
+        self._progress(progress, "正在理解修改要求", "判断需要调整文案、平台、场景还是产品")
         intent = revise.classify(self.llm, self.prompts, s.brief, s.draft, user_text)
         self._trace(s, "7 修改意图", **intent)
         new_brief, step = revise.apply(s.brief, intent, user_text)
@@ -169,13 +204,16 @@ class Pipeline:
             return Outcome("need_more_info", s, questions=[q])
         s.brief = new_brief
         if step == "done":
+            self._progress(progress, "定稿完成", "当前版本已确认，可下载发布成品或完整报告")
             return Outcome("done", s)
         if step == "generate":                  # 只重写文案:需求、资料、策略都复用
-            return self.generate(s)
+            self._progress(progress, "修改范围已确认", "复用已核验资料，只重新生成文案")
+            return self.generate(s, progress=progress)
         if step == "strategy":                  # 换场景/平台:资料复用,重配策略表
             s.strategy = strategy.match(new_brief)
             self._trace(s, "3 策略匹配(重配)", scene=s.strategy.scene.get("name"), platform=s.strategy.platform["name"])
-            return self.generate(s)
+            self._progress(progress, "发布策略已更新", f"重新适配{new_brief.scene}场景与{new_brief.platform}平台")
+            return self.generate(s, progress=progress)
         # 换产品:资料、策略、稿件全部作废,从结构化需求重来
         s.evidence = s.strategy = s.draft = s.review = None
         # 可以重抽其他需求，但明确的最新型号不能被历史抽取结果覆盖。
@@ -186,7 +224,7 @@ class Pipeline:
         self._trace(s, "1 结构化需求(重来)", brief=s.brief.__dict__, questions=questions)
         if questions:
             return Outcome("need_more_info", s, questions=questions)
-        return self.produce(s)
+        return self.produce(s, progress=progress)
 
     def _block(self, s: Session, reason: str) -> Outcome:
         self._trace(s, "停止", reason=reason)

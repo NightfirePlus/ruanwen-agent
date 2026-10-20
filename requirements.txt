@@ -1,3 +1,5 @@
 # Python 3.10+
 # Web 界面(魔搭创空间入口 app.py);type="messages" 需要 4.44+
 gradio>=4.44
+python-docx>=1.1
+reportlab>=4.2

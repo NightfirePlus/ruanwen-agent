@@ -16,6 +16,45 @@ def to_text(s: Session) -> str:
     return "\n\n".join(p for p in parts if p.strip()) + "\n"
 
 
+def to_article_markdown(
+    s: Session, image_url=None, include_heading: bool = False, include_image_source: bool = False
+) -> str:
+    """只渲染可发布的第三部分，供中心预览与发布稿下载复用。"""
+    b, ev, d = s.brief, s.evidence, s.draft
+    if not d:
+        return ""
+    lines = ["# 三、图文软文"] if include_heading else []
+    lines.append(f"## {d.title}")
+    if d.intro:
+        lines += ["", d.intro]
+    imgs = {i.id: i for i in usable_images(ev, b.product)} if ev else {}
+    placed: dict[int, list] = {}
+    for placement in d.images:
+        placed.setdefault(placement.after_paragraph, []).append(placement)
+
+    def pics(position: int) -> list[str]:
+        output = []
+        for placement in placed.get(position, []):
+            image = imgs.get(placement.image_id)
+            if image is None:
+                continue
+            url = image_url(image) if image_url else image.origin_url
+            if url and (image_url or url.startswith(("https://", "http://"))):
+                output += ["", f"![配图 {image.id}](<{url}>)", ""]
+            source = f"｜来源:{image.source_path}" if include_image_source else ""
+            output += [f"> 【配图 {image.id}】{image.name}{source}｜说明:{placement.caption}", ""]
+        return output
+
+    lines += pics(0)
+    for index, paragraph in enumerate(d.body, 1):
+        lines += ["", paragraph.text] + pics(index)
+    if d.cta:
+        lines += ["", d.cta]
+    if d.tags:
+        lines += ["", " ".join(f"#{tag.lstrip('#')}" for tag in d.tags)]
+    return "\n".join(lines).strip() + "\n"
+
+
 def to_markdown(s: Session, image_url=None) -> str:
     b, ev, d = s.brief, s.evidence, s.draft
     lines = [
@@ -34,35 +73,9 @@ def to_markdown(s: Session, image_url=None) -> str:
                 lines.append(f"- {b.product} | {f.text} | 资料:{f.source_title}({f.source_path})")
         lines.append(f"- 相近型号(已防混淆):{'、'.join(ev.candidates) or '无'}")
 
-    lines += ["", "# 三、图文软文"]
-    if d:
-        lines.append(f"## {d.title}")
-        if d.intro:
-            lines += ["", d.intro]
-        imgs = {i.id: i for i in usable_images(ev, b.product)} if ev else {}
-        placed: dict[int, list] = {}
-        for pl in d.images:
-            placed.setdefault(pl.after_paragraph, []).append(pl)
-
-        def pics(pos: int) -> list[str]:
-            output = []
-            for pl in placed.get(pos, []):
-                im = imgs.get(pl.image_id)
-                if im is None:
-                    continue
-                url = image_url(im) if image_url else im.origin_url
-                if url and (image_url or url.startswith(("https://", "http://"))):
-                    output += ["", f"![配图 {im.id}](<{url}>)", ""]
-                output += [f"> 【配图 {im.id}】{im.name}｜来源:{im.source_path}｜说明:{pl.caption}", ""]
-            return output
-
-        lines += pics(0)
-        for i, p in enumerate(d.body, 1):
-            lines += ["", p.text] + pics(i)
-        if d.cta:
-            lines += ["", d.cta]
-        if d.tags:
-            lines += ["", " ".join(f"#{t.lstrip('#')}" for t in d.tags)]
+    lines += ["", to_article_markdown(
+        s, image_url=image_url, include_heading=True, include_image_source=True
+    ).rstrip()]
 
     lines += ["", "# 四、核验结果"]
     r = s.review
