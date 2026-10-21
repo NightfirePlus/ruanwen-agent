@@ -32,17 +32,35 @@ def modelscope_router(*, budget: RequestBudget | None = None) -> ModelRouter:
     if not key:
         raise LLMError("请设置 MODELSCOPE_API_TOKEN，或将魔搭访问令牌填入 LLM_API_KEY")
     clients = {
-        role: LLMClient(api_key=key, base_url=config["base_url"], timeout=120, max_retries=0,
+        # 魔搭推理接口会对连续请求做突发限流(429 limit_burst_rate)，窗口只有几秒；
+        # 保留少量重试平滑请求节奏，避免第一次撞上限流就中断整轮生成。
+        role: LLMClient(api_key=key, base_url=config["base_url"], timeout=120, max_retries=2,
                         repair_json=False, budget=budget, **spec)
         for role, spec in config["models"].items()
     }
     return ModelRouter(clients, config["stages"])
 
 
+def _optional_bool(name: str) -> bool | None:
+    value = os.environ.get(name, "").strip().lower()
+    if value in ("1", "true", "yes", "on"):
+        return True
+    if value in ("0", "false", "no", "off"):
+        return False
+    return None
+
+
 def make_llm():
     profile = os.environ.get("LLM_PROFILE", "modelscope-v1").strip() or "modelscope-v1"
     if profile == "single":
-        return LLMClient()
+        options = {}
+        thinking = _optional_bool("LLM_ENABLE_THINKING")
+        if thinking is not None:
+            options["enable_thinking"] = thinking
+        timeout = os.environ.get("LLM_TIMEOUT", "").strip()
+        if timeout:
+            options["timeout"] = float(timeout)
+        return LLMClient(**options)
     if profile == "modelscope-v1":
         return modelscope_router()
     raise LLMError("LLM_PROFILE 必须为 single 或 modelscope-v1")

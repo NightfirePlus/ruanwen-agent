@@ -47,13 +47,30 @@ class BudgetTest(unittest.TestCase):
                 client.json("test")
         self.assertEqual(send.call_count, 1)
 
-    def test_profile_does_not_retry_or_repair_json(self):
+    def test_profile_does_not_repair_json(self):
         with patch.dict(os.environ, {"MODELSCOPE_API_TOKEN": "fake"}):
             client = modelscope_router().for_stage("intake")
         with patch("agent.llm.urllib.request.urlopen", return_value=response("invalid")) as send:
             with self.assertRaisesRegex(LLMError, "合法 JSON"):
                 client.json("test")
         self.assertEqual(send.call_count, 1)
+
+    def test_burst_429_is_retried_and_eventually_succeeds(self):
+        error = urllib.error.HTTPError("https://example.test", 429, "limited", {}, None)
+        with patch.dict(os.environ, {"MODELSCOPE_API_TOKEN": "fake"}):
+            client = modelscope_router().for_stage("evidence")
+        with patch("agent.llm.urllib.request.urlopen", side_effect=[error, response()]) as send, \
+                patch("agent.llm.time.sleep") as sleep:
+            self.assertEqual(client.json("test"), {"ok": True})
+        self.assertEqual(send.call_count, 2)
+        sleep.assert_called_once_with(2.0)
+
+    def test_429_error_explains_throttling(self):
+        client = LLMClient(api_key="fake", max_retries=0)
+        error = urllib.error.HTTPError("https://example.test", 429, "limited", {}, None)
+        with patch("agent.llm.urllib.request.urlopen", side_effect=error):
+            with self.assertRaisesRegex(LLMError, "请求过于频繁"):
+                client.json("test")
 
     def test_token_cap_thinking_switch_usage_and_truncation(self):
         client = LLMClient(api_key="private-test-key", max_tokens=128, enable_thinking=False, max_retries=0)
@@ -91,6 +108,20 @@ class RoutingTest(unittest.TestCase):
         check = tasks[0][3]
         self.assertTrue(check({**FULL_BRIEF, "product": "华为 MateBook 14"}))
         self.assertFalse(check({**FULL_BRIEF, "product": "MateBook 14s"}))
+
+    def test_single_profile_reads_thinking_and_timeout_options(self):
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake", "LLM_PROFILE": "single",
+                                     "LLM_ENABLE_THINKING": "false", "LLM_TIMEOUT": "300"}):
+            llm = make_llm()
+        self.assertIsInstance(llm, LLMClient)
+        self.assertIs(llm._enable_thinking, False)
+        self.assertEqual(llm._timeout, 300.0)
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake", "LLM_PROFILE": "single",
+                                     "LLM_ENABLE_THINKING": "on"}):
+            self.assertIs(make_llm()._enable_thinking, True)
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake", "LLM_PROFILE": "single",
+                                     "LLM_ENABLE_THINKING": ""}):
+            self.assertIsNone(make_llm()._enable_thinking)
 
     def test_default_stays_single_and_explicit_profile_uses_own_endpoint(self):
         with patch.dict(os.environ, {"LLM_API_KEY": "fake", "LLM_PROFILE": "single"}):

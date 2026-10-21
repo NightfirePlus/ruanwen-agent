@@ -116,7 +116,7 @@ class LLMClient:
                 record["success"] = True
                 return content
             except urllib.error.HTTPError as e:
-                last = LLMError(f"大模型接口 HTTP {e.code}")
+                last = LLMError(f"大模型接口 HTTP {e.code}" + ("（请求过于频繁，请稍后重试）" if e.code == 429 else ""))
                 if e.code not in (429, 500, 502, 503, 504):
                     raise last
             except (urllib.error.URLError, TimeoutError, KeyError, IndexError, TypeError, json.JSONDecodeError) as e:
@@ -126,7 +126,8 @@ class LLMClient:
                 with self._records_lock:
                     self.requests.append(record)
             if attempt < self._max_retries:
-                time.sleep(1.5 * (attempt + 1))
+                # 指数退避:限流窗口通常只有几秒,2s→4s→8s 足够平滑重试;封顶避免等待过久
+                time.sleep(min(10.0, 2.0 * (2 ** attempt)))
         assert last is not None
         raise last
 
