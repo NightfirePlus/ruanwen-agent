@@ -77,10 +77,15 @@ def parse_draft(data: dict) -> tuple[Draft, list[str]]:
 
 
 def fill_captions(draft: Draft, ev: Evidence) -> Draft:
-    """模型没写图片说明时,回退用图片索引里登记的官网图片说明。"""
-    registered = {i.id: i.caption for i in ev.images if i.caption}
+    """图注以知识库登记说明为准:登记过说明的图片一律使用登记原文。
+
+    模型改写图注会引入措辞漂移(例如把“原野绿多彩配色”写成“原野绿配色”),
+    核验环节会判定为改变原意,最终整张图被自动删除。登记说明本身是已核验文案,
+    直接采用既安全又能保留图片;只有没有登记说明时才保留模型写的图注。
+    """
+    registered = {i.id: i.caption for i in ev.images if i.caption and i.caption.strip()}
     for pl in draft.images:
-        if not pl.caption.strip() and pl.image_id in registered:
+        if pl.image_id in registered:
             pl.caption = registered[pl.image_id]
     return draft
 

@@ -82,17 +82,17 @@ class PruneTest(unittest.TestCase):
 
 
 class CaptionFallbackTest(unittest.TestCase):
-    def test_uses_registered_caption_only_when_empty(self):
+    def test_registered_caption_overrides_model_wording(self):
         ev = Evidence(images=[ImageRef("I1", "m", "a", "x", "p", caption="官方说明"), ImageRef("I2", "m", "b", "y", "p", caption="另一说明")])
         d = Draft(images=[ImagePlacement("I1", 0, ""), ImagePlacement("I2", 0, "模型自己写的")])
         compose.fill_captions(d, ev)
-        self.assertEqual([i.caption for i in d.images], ["官方说明", "模型自己写的"])
+        self.assertEqual([i.caption for i in d.images], ["官方说明", "另一说明"])
 
-    def test_no_registered_caption_stays_empty(self):
+    def test_no_registered_caption_keeps_model_caption(self):
         ev = Evidence(images=[ImageRef("I1", "m", "a", "x", "p")])
-        d = Draft(images=[ImagePlacement("I1", 0, "")])
+        d = Draft(images=[ImagePlacement("I1", 0, "模型写的")])
         compose.fill_captions(d, ev)
-        self.assertEqual(d.images[0].caption, "")
+        self.assertEqual(d.images[0].caption, "模型写的")
 
 
 class PipelinePruneTest(unittest.TestCase):
