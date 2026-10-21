@@ -17,7 +17,8 @@ def images_block(ev: Evidence, model: str) -> str:
     imgs = usable_images(ev, model)
     return "\n".join(json.dumps({"id": i.id, "model": i.model, "name": i.name,
         "source": i.source_path, "registered_caption": i.caption, "usage": i.usage,
-        "visual_review": i.review, "note": i.note}, ensure_ascii=False) for i in imgs) or "(无)"
+        "note": i.note, "basis": "知识库已登记并绑定型号；未执行视觉模型审图"},
+        ensure_ascii=False) for i in imgs) or "(无)"
 
 
 def context_block(ev: Evidence) -> str:

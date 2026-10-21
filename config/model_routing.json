@@ -12,7 +12,6 @@
     "intake": "understand",
     "revise_intent": "understand",
     "evidence": "analyze",
-    "image_review": "understand",
     "compose": "write",
     "rewrite": "write",
     "fact_review": "analyze",

@@ -119,7 +119,7 @@ class Pipeline:
             if not self.store.connect()["connected"]:
                 return self._block(s, f"本地知识库“{self.store.kb_name}”不可用，请检查 KB_LOCAL_DIR 和产品事实目录")
             collect = getattr(self.store, "collect", None)
-            s.evidence = (collect(self._llm("evidence"), self._llm("image_review"), self.prompts, b, progress)
+            s.evidence = (collect(self._llm("evidence"), self.prompts, b, progress)
                           if collect else evidence.build(self._llm("evidence"), self.prompts, self.store, b.product))
         except (KnowledgeError, OSError) as exc:
             return self._block(s, f"本地知识库读取失败：{exc}")

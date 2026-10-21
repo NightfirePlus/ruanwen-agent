@@ -47,7 +47,7 @@ class ImageRef:
     usage: str = ""                # 建议用途
     origin_url: str = ""           # 原始图片 URL
     note: str = ""                 # 型号未确认的原因
-    review: dict = field(default_factory=dict)  # 首次使用的视觉审阅结果及限制
+    review: dict = field(default_factory=dict)  # 兼容旧运行记录；当前不执行视觉模型审图
 
 
 @dataclass

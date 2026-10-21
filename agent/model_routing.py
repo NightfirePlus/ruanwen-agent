@@ -8,7 +8,7 @@ from pathlib import Path
 from .llm import LLMClient, LLMError, RequestBudget
 
 CONFIG = Path(__file__).resolve().parents[1] / "config/model_routing.json"
-STAGES = frozenset(("intake", "revise_intent", "evidence", "image_review", "compose", "rewrite", "fact_review", "compliance_review"))
+STAGES = frozenset(("intake", "revise_intent", "evidence", "compose", "rewrite", "fact_review", "compliance_review"))
 
 
 class ModelRouter:

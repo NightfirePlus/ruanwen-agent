@@ -69,10 +69,15 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
         for v in sorted(spec_versions(text) - known_versions):
             add("error", where, f"规格版本“{v}”不在知识库事实中(资料没有写明该版本)", "删除版本号,只写资料中有的内容")
 
-    # 文中出现的其他型号:相近型号必须不混入(先按知识库里的相近型号名查,再用通用写法兜底)
+    # 文中出现的其他型号:相近型号必须不混入(先按知识库里的相近型号名查,再用通用写法兜底)。
+    # 主推型号也必须参与“长型号优先”匹配:主推型号比相近型号更长时(例如主推
+    # “MateBook D 16 SE 版”、相近型号里有“MateBook D 16”),只传相近型号会让完整的
+    # 主推型号写法命中它的前缀,误报为混入相近型号。一起匹配后再排除主推型号本身。
+    model_names = [brief.product, *ev.candidates]
     for where, text in draft.segments():
-        for other in mentioned_models(text, ev.candidates):
-            add("error", where, f"出现了相近型号“{other}”,主推型号是“{brief.product}”", "核对型号,删除相近型号的内容")
+        for other in mentioned_models(text, model_names):
+            if norm_model(other) != main:
+                add("error", where, f"出现了相近型号“{other}”,主推型号是“{brief.product}”", "核对型号,删除相近型号的内容")
         for tok in MODEL_TOKEN.findall(text):
             t = norm_model(tok)
             if len(t) > 4 and t not in main and main not in t:
@@ -94,10 +99,6 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
             add("error", "配图方案", f"图片 {pl.image_id} 的插入位置超出正文范围", "调整位置", pl.image_id)
         if not pl.caption.strip():
             add("warn", "配图方案", f"图片 {pl.image_id} 缺少图片说明", "补充说明")
-        im = known.get(pl.image_id)
-        if im and im.review and (im.review.get("status") != "passed" or im.review.get("asset_type") in ("composition_required", "unknown")):
-            add("error", "配图方案", f"图片 {pl.image_id} 未通过独立使用审核", "移除图片", pl.image_id)
-
     limits = strategy.platform.get("images", {})
     n, lo, hi = len(draft.images), limits.get("min", 0), limits.get("max", 99)
     if n > hi:
@@ -110,7 +111,7 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
 def llm_check(llm, prompts: Prompts, draft: Draft, ev: Evidence) -> list[Issue]:
     model = ev.facts[0].model if ev.facts else ""
     data = llm.json(prompts.render("fact_review", {"稿件": draft_to_json(draft), "事实点清单": facts_block(ev),
-        "原始资料": originals_block(ev), "图片审阅": images_block(ev, model)}))
+        "原始资料": originals_block(ev), "图片登记": images_block(ev, model)}))
     return llm_issues(data, "fact")
 
 

@@ -1,6 +1,7 @@
 """独立校验当前知识库；不需要旧库，不调用模型，不另存历史报告。"""
 import argparse
 import json
+import re
 import sqlite3
 import sys
 from pathlib import Path
@@ -10,7 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from PIL import Image
 from agent.catalogkb import CatalogStore, DEFAULT_RUNTIME_KB, INDEX, sha
-from agent.kb_migration import LINK
+
+LINK = re.compile(r"(!?\[[^\]\n]*\])\((<[^>\n]+>|[^)\n]+)\)")
 
 
 def inspect_library(root):
@@ -53,6 +55,23 @@ def inspect_library(root):
             for row in json.loads(source_index.read_text(encoding="utf-8")):
                 if sha(store._safe(row["path"]).read_bytes()) != row["sha256"]:
                     errors.append("来源登记表哈希不一致：" + row["path"])
+        if store._load().get("schema_version", 1) >= 2:
+            governance = store._safe(f"{INDEX}/治理与使用规范.md")
+            if not governance.is_file():
+                errors.append("缺少当前治理与使用规范")
+            comparison_view = store._safe(f"{INDEX}/派生视图/产品横向检索.json")
+            if not comparison_view.is_file():
+                errors.append("缺少产品横向检索派生视图")
+            else:
+                view = json.loads(comparison_view.read_text(encoding="utf-8"))
+                fact_records = {r["id"]: r for r in records if r["kind"] == "product_facts"}
+                for row in view.get("products", []):
+                    record = fact_records.get(row.get("record_id"))
+                    if not record or row.get("source_path") != record["path"]:
+                        errors.append("派生视图引用未知产品事实：" + str(row.get("record_id")))
+                        continue
+                    if row.get("source_sha256") != sha(store._safe(record["path"]).read_bytes()):
+                        errors.append("派生视图未随产品事实更新：" + record["path"])
         cache = store._safe(f"{INDEX}/usage-review.sqlite3")
         if cache.exists():
             with sqlite3.connect(cache.as_uri() + "?mode=ro", uri=True) as db:

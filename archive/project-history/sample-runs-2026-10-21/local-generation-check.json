@@ -1,0 +1,827 @@
+{
+  "brief": {
+    "product": "HUAWEI MateBook 14",
+    "product_type": "轻薄本",
+    "audience": "大学新生",
+    "scene": "开学季",
+    "platform": "小红书",
+    "goal": "种草",
+    "stage": "",
+    "main_problem": "",
+    "extra": "",
+    "llm_notes": "product_type根据MateBook 14主流定位推断为轻薄本；其余字段均直接来自用户明确表述，无歧义或需推测项"
+  },
+  "evidence": {
+    "facts": [
+      {
+        "id": "F1",
+        "model": "HUAWEI MateBook 14",
+        "text": "HarmonyOS 6",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F2",
+        "model": "HUAWEI MateBook 14",
+        "text": "长度\n312.6 mm",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F3",
+        "model": "HUAWEI MateBook 14",
+        "text": "宽度\n226.8 mm",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F4",
+        "model": "HUAWEI MateBook 14",
+        "text": "厚度\n14.5 mm",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F5",
+        "model": "HUAWEI MateBook 14",
+        "text": "重量\n约 1.33 kg（圆键盘含电池）\n约 1.32 kg（方键盘含电池）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F6",
+        "model": "HUAWEI MateBook 14",
+        "text": "*实际机身重量根据配置、制造工艺、测量方法的不同可能有所差异。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F7",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸\n14.2 英寸",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F8",
+        "model": "HUAWEI MateBook 14",
+        "text": "*显示屏采用圆角设计，按照标准矩形测量时，屏幕的对角线长度是 14.2 英寸（实际可视区域略小）。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F9",
+        "model": "HUAWEI MateBook 14",
+        "text": "类型\nOLED（抗反射屏）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F10",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏占比\n91%",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F11",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕比例\n3:2",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F12",
+        "model": "HUAWEI MateBook 14",
+        "text": "分辨率\n2880 × 1920，243 PPI",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F13",
+        "model": "HUAWEI MateBook 14",
+        "text": "刷新率\n静态刷新率：60 Hz / 120 Hz\n动态刷新率：智能动态调节（默认）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F14",
+        "model": "HUAWEI MateBook 14",
+        "text": "亮度\n标准版：\n典型亮度：450 nits\n峰值亮度：500 nits\n柔光版：\n典型亮度：500 nits\n峰值亮度：600 nits",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F15",
+        "model": "HUAWEI MateBook 14",
+        "text": "色域\n100% sRGB（典型值）、P3 广色域（典型值）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F16",
+        "model": "HUAWEI MateBook 14",
+        "text": "色准\n平均 DeltaE < 1，支持多屏同色显示",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F17",
+        "model": "HUAWEI MateBook 14",
+        "text": "*多屏同色，根据应用软件、屏幕设置、使用习惯、环境等因素不同，可能略有差异，请以实际体验为准。购买时最新支持的设备机型请见官网或咨询华为商用客户服务专线（950803）。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F18",
+        "model": "HUAWEI MateBook 14",
+        "text": "对比度\n1000000:1（典型值）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F19",
+        "model": "HUAWEI MateBook 14",
+        "text": "可视角度\n178°（典型值）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F20",
+        "model": "HUAWEI MateBook 14",
+        "text": "触摸屏\n支持 10 点触控",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F21",
+        "model": "HUAWEI MateBook 14",
+        "text": "CPU\n麒麟 X90",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F22",
+        "model": "HUAWEI MateBook 14",
+        "text": "512 GB / 1 TB",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F23",
+        "model": "HUAWEI MateBook 14",
+        "text": "24 GB / 32 GB",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F24",
+        "model": "HUAWEI MateBook 14",
+        "text": "WLAN\nWi-Fi 7，IEEE 802.11a/b/g/n/ac/ax/be，160 MHz\n2.4 GHz 和 5 GHz 双频\n支持 WPA、WPA2、WPA3",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F25",
+        "model": "HUAWEI MateBook 14",
+        "text": "星闪\n支持，星闪 E1.0",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F26",
+        "model": "HUAWEI MateBook 14",
+        "text": "蓝牙\n蓝牙 6.0",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F27",
+        "model": "HUAWEI MateBook 14",
+        "text": "材料\n锂聚合物",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F28",
+        "model": "HUAWEI MateBook 14",
+        "text": "容量\n70 Wh（额定容量）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F29",
+        "model": "HUAWEI MateBook 14",
+        "text": "左侧：HDMI2.1 TMDS × 1；USB-C × 1*；USB -A × 1**；3.5 mm 耳机和麦克风二合一接口",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F30",
+        "model": "HUAWEI MateBook 14",
+        "text": "右侧：USB-A × 1；",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F31",
+        "model": "HUAWEI MateBook 14",
+        "text": "*左侧 USB-C × 1，支持充电、支持数据（USB3.2 Gen1）和对外供电（开机状态最大 10 W：5V2A，关机状态最大 66 W：20V3.3A），支持 DisplayPort1.2（最大分辨率 4K@60 Hz）；",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F32",
+        "model": "HUAWEI MateBook 14",
+        "text": "**左侧第 2 个、右侧第 2 个，USB 3.2 Gen1 × 2，支持充电、支持数据（USB3.2 Gen1）和支持对外供电 10 W（5V2A）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F33",
+        "model": "HUAWEI MateBook 14",
+        "text": "全尺寸背光键盘",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F34",
+        "model": "HUAWEI MateBook 14",
+        "text": "触控板支持 5 点触控",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F35",
+        "model": "HUAWEI MateBook 14",
+        "text": "电源键\n指纹电源键",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F36",
+        "model": "HUAWEI MateBook 14",
+        "text": "1080P 高清摄像头",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F37",
+        "model": "HUAWEI MateBook 14",
+        "text": "*不同模式的照片和视频像素可能有差异，请以实际为准。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F38",
+        "model": "HUAWEI MateBook 14",
+        "text": "扬声器\n扬声器 × 2",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F39",
+        "model": "HUAWEI MateBook 14",
+        "text": "麦克风\n麦克风 × 2",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F40",
+        "model": "HUAWEI MateBook 14",
+        "text": "PC × 1",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F41",
+        "model": "HUAWEI MateBook 14",
+        "text": "USB-C 电源适配器（适配器和充电线一体式连接）× 1",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F42",
+        "model": "HUAWEI MateBook 14",
+        "text": "快速指南 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F43",
+        "model": "HUAWEI MateBook 14",
+        "text": "贴纸 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F44",
+        "model": "HUAWEI MateBook 14",
+        "text": "抛光布 × 1（仅柔光屏支持）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\产品事实.md"
+      },
+      {
+        "id": "F45",
+        "model": "HUAWEI MateBook 14",
+        "text": "官方完整名称为 HUAWEI MateBook 14（鸿蒙版）。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F46",
+        "model": "HUAWEI MateBook 14",
+        "text": "操作系统为 HarmonyOS 6。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F47",
+        "model": "HUAWEI MateBook 14",
+        "text": "处理器为麒麟 X90。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F48",
+        "model": "HUAWEI MateBook 14",
+        "text": "公开内存组合为 24 GB / 32 GB，存储为 512 GB / 1 TB。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F49",
+        "model": "HUAWEI MateBook 14",
+        "text": "官方分别列出圆键盘约 1.33 kg、方键盘约 1.32 kg。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F50",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕尺寸 14.2 英寸，类型为 OLED（抗反射屏），屏占比 91%。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F51",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕比例 3:2，分辨率 2880 × 1920，243 PPI。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F52",
+        "model": "HUAWEI MateBook 14",
+        "text": "静态刷新率支持 60 Hz / 120 Hz，默认采用智能动态调节。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F53",
+        "model": "HUAWEI MateBook 14",
+        "text": "标准版典型亮度 450 nits、峰值 500 nits；柔光版典型 500 nits、峰值 600 nits。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F54",
+        "model": "HUAWEI MateBook 14",
+        "text": "支持 100% sRGB（典型值）、P3 广色域（典型值）和 10 点触控。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F55",
+        "model": "HUAWEI MateBook 14",
+        "text": "宽 312.6 mm、深 226.8 mm、厚 14.5 mm。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F56",
+        "model": "HUAWEI MateBook 14",
+        "text": "圆键盘版约 1.33 kg，方键盘版约 1.32 kg，均含电池。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F57",
+        "model": "HUAWEI MateBook 14",
+        "text": "电池额定容量 70 Wh。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F58",
+        "model": "HUAWEI MateBook 14",
+        "text": "左侧有 HDMI 2.1 TMDS、USB-C、USB-A 和 3.5 mm 音频口，右侧另有一个 USB-A。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F59",
+        "model": "HUAWEI MateBook 14",
+        "text": "USB-C 支持充电、USB 3.2 Gen 1 数据与 DisplayPort 1.2，官方列明最大 4K@60 Hz。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F60",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接列有 Wi-Fi 7、蓝牙 6.0 和星闪 E1.0。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F61",
+        "model": "HUAWEI MateBook 14",
+        "text": "产品页列有鸿蒙全场景连接与 AI 换脸检测等能力。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F62",
+        "model": "HUAWEI MateBook 14",
+        "text": "碰一碰传送需支持条件中的设备登录同一华为账号。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      },
+      {
+        "id": "F63",
+        "model": "HUAWEI MateBook 14",
+        "text": "AI 换脸检测需手动开启，官方限定为当前支持的畅连、QQ、微信视频通话和钉钉。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\卖点与限制.md"
+      }
+    ],
+    "images": [
+      {
+        "id": "I1",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\images\\hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png",
+        "caption": "原野绿多彩配色",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-color-green.png",
+        "note": ""
+      },
+      {
+        "id": "I2",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\images\\hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png",
+        "caption": "HUAWEI MateBook 14 樱粉金",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-color-pink.png",
+        "note": ""
+      },
+      {
+        "id": "I3",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\images\\hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg",
+        "caption": "手写笔创作场景",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-accessories-m-pen-3.jpg",
+        "note": ""
+      },
+      {
+        "id": "I4",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\01-鸿蒙电脑\\HUAWEI MateBook 14\\images\\hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png",
+        "source_path": "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png",
+        "caption": "深空灰沉稳配色",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-color-grey.png",
+        "note": ""
+      }
+    ],
+    "candidates": [
+      "HUAWEI MateBook Fold 非凡大师",
+      "HUAWEI MateBook Pro",
+      "HUAWEI MateBook Pro S",
+      "MateBook 14 酷睿 Ultra",
+      "MateBook D 14",
+      "MateBook D 16",
+      "MateBook D 16 SE 版",
+      "MateBook GT 系列",
+      "MateBook X系列"
+    ],
+    "conflicts": [],
+    "dropped": [],
+    "sources": [
+      "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+      "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md"
+    ]
+  },
+  "strategy": {
+    "scene": {
+      "name": "开学季",
+      "angle": "围绕学习、携带、续航和多设备协同,不要把所有学生需求归结为单一性能指标",
+      "focus": [
+        "便携与重量",
+        "续航与课堂/图书馆场景",
+        "学习办公软件体验",
+        "多设备协同"
+      ],
+      "avoid": [
+        "只堆性能参数",
+        "编造学生优惠"
+      ],
+      "in_table": true
+    },
+    "platform": {
+      "name": "小红书",
+      "form": "口语化标题、短段落、使用场景、话题标签",
+      "title": "口语化标题,20字以内,带具体场景或人群,可含1个emoji",
+      "length": "正文300-600字,每段不超过3行",
+      "structure": [
+        "开头一句话点出场景或痛点",
+        "按使用场景分短段,每段一个卖点",
+        "结尾给选购建议和互动提问"
+      ],
+      "tone": "亲切、轻松、像朋友分享;不得伪造个人使用经历,以'适合'、'如果你'等表述代替",
+      "images": {
+        "min": 3,
+        "max": 6
+      },
+      "cta": "邀请评论区交流或收藏,可引导到店体验",
+      "tags": {
+        "min": 5,
+        "max": 8
+      },
+      "field_mapping": "title=标题, intro=开头一句, body=短段落, cta=结尾互动, tags=话题标签",
+      "first_person_experience": false
+    }
+  },
+  "draft": {
+    "title": "大学新生开学必备轻薄本✨",
+    "intro": "开学季打包行李，笔记本选轻还是选强？其实可以都要！",
+    "body": [
+      {
+        "text": "每天背着书包穿梭教学楼、图书馆、食堂，重量真的太关键！MateBook 14约1.32–1.33kg，厚度仅14.5mm，放进双肩包几乎没负担～",
+        "fact_ids": [
+          "F4",
+          "F5",
+          "F49",
+          "F56"
+        ]
+      },
+      {
+        "text": "一上午三节课+图书馆自习，电量焦虑退散！70Wh大电池+鸿蒙智能省电，日常学习场景轻松撑过一整天。",
+        "fact_ids": [
+          "F27",
+          "F28",
+          "F57"
+        ]
+      },
+      {
+        "text": "14.2英寸OLED抗反射屏，91%高屏占比+3:2比例，看课件、写论文、查资料更舒展；2880×1920分辨率+100% sRGB，细节清晰不费眼。",
+        "fact_ids": [
+          "F7",
+          "F9",
+          "F10",
+          "F11",
+          "F12",
+          "F15",
+          "F50",
+          "F51",
+          "F54"
+        ]
+      },
+      {
+        "text": "用华为手机/平板的同学注意！HarmonyOS 6系统+星闪E1.0+Wi-Fi 7，碰一碰传文件、多屏协同办公超顺滑，小组作业共享文档秒同步～",
+        "fact_ids": [
+          "F1",
+          "F46",
+          "F25",
+          "F24",
+          "F60",
+          "F62"
+        ]
+      }
+    ],
+    "cta": "你开学准备带哪款本本？评论区聊聊你的需求吧～也欢迎去华为门店上手体验哦！",
+    "tags": [
+      "#开学季数码",
+      "#大学生笔记本",
+      "#华为MateBook14",
+      "#鸿蒙PC",
+      "#轻薄本推荐",
+      "#学生党必备"
+    ],
+    "images": [
+      {
+        "image_id": "I2",
+        "after_paragraph": 0,
+        "caption": "多彩配色，原野绿&深空灰随心选，开学穿搭好搭档",
+        "reason": "展示产品外观与年轻化配色，贴合大学新生审美偏好"
+      },
+      {
+        "image_id": "I1",
+        "after_paragraph": 1,
+        "caption": "轻巧机身实拍，轻松塞进学生双肩包",
+        "reason": "直观呈现便携性，呼应‘约1.32–1.33kg’和‘14.5mm厚’卖点"
+      },
+      {
+        "image_id": "I4",
+        "after_paragraph": 2,
+        "caption": "深空灰沉稳配色，图书馆学习氛围感拉满",
+        "reason": "匹配‘续航+学习场景’段落，强化安静、专注的使用联想"
+      },
+      {
+        "image_id": "I3",
+        "after_paragraph": 3,
+        "caption": "OLED屏幕+触控支持，随手批注课件超方便",
+        "reason": "佐证屏幕素质与10点触控能力（F9/F20/F54），关联学习场景"
+      }
+    ]
+  },
+  "review": {
+    "issues": [
+      {
+        "stage": "fact",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第2段",
+        "detail": "‘70Wh大电池+鸿蒙智能省电，日常学习场景轻松撑过一整天’将续航能力归因于‘鸿蒙智能省电’，但事实点[F27][F28][F57]仅确认电池容量为70Wh及电池类型为锂聚合物，未提供任何关于‘鸿蒙智能省电’功能存在、技术原理、实测效果或官方命名的依据；‘鸿蒙智能省电’在全部事实点中未被定义、未被列为特性（无对应F编号），属于虚构/未验证的功能表述",
+        "suggestion": "删除‘鸿蒙智能省电’这一无事实支撑的归因表述，改为客观陈述：‘70Wh大电池，配合系统优化，日常学习场景续航表现优异’；若需强调软件优化，须引用明确存在的、已编号的事实点（如无，则不可声称）",
+        "ref": ""
+      },
+      {
+        "stage": "fact",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第3段",
+        "detail": "‘14.2英寸OLED抗反射屏，91%高屏占比+3:2比例，看课件、写论文、查资料更舒展’中‘更舒展’属主观效果断言，但所有关联事实点[F7][F9][F10][F11][F12][F15][F50][F51][F54]仅提供参数（尺寸、类型、屏占比、比例、分辨率、色域、触控），未包含任何关于‘舒展感’的用户研究、人因工学验证、对比测试或官方功效声明",
+        "suggestion": "删除‘更舒展’这一无事实支撑的主观体验结论，改为中性描述：‘14.2英寸OLED抗反射屏，91%高屏占比与3:2比例，适配课件浏览、文档编辑与多任务查阅’",
+        "ref": ""
+      },
+      {
+        "stage": "fact",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第4段",
+        "detail": "‘HarmonyOS 6系统+星闪E1.0+Wi-Fi 7，碰一碰传文件、多屏协同办公超顺滑，小组作业共享文档秒同步～’将‘碰一碰传文件’和‘多屏协同办公’直接归因于‘HarmonyOS 6 + 星闪E1.0 + Wi-Fi 7’三者组合，但事实点[F1][F46]仅确认操作系统为HarmonyOS 6，[F25][F60]确认支持星闪E1.0，[F24][F60]确认支持Wi-Fi 7；而‘碰一碰’功能实际依赖[F62]所限定的‘设备登录同一华为账号’前提，且‘多屏协同’未在任何事实点中被明确定义、命名或描述其能力边界（如是否支持文档秒同步、是否覆盖所有小组作业场景）；‘秒同步’为绝对化性能宣称，无实测数据或条件限定（如网络环境、文件大小、应用兼容性）支撑",
+        "suggestion": "修改为：‘搭载HarmonyOS 6，支持星闪E1.0与Wi-Fi 7；在华为手机/平板登录同一华为账号前提下，可实现碰一碰快速传文件；多屏协同支持跨设备文档协作（具体体验受设备型号、系统版本及网络环境影响）’",
+        "ref": ""
+      },
+      {
+        "stage": "compliance",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第2段",
+        "detail": "声称‘日常学习场景轻松撑过一整天’缺乏可验证的量化依据和限定条件，事实点仅提供电池容量（F28）和系统名称（F27/F46），未包含任何实测续航时长、测试标准（如PCMark、网页浏览、视频播放等）、负载条件或环境变量说明；‘电量焦虑退散’属主观情绪承诺，暗示确定性效果，违反不得承诺无法保证使用结果的规定",
+        "suggestion": "删除‘轻松撑过一整天’及‘电量焦虑退散’等绝对化、效果保证性表述；改为‘70Wh电池配合鸿蒙智能省电技术，在典型学习场景下可支持较长时间使用’，并补充说明‘实际续航受使用习惯、亮度、联网状态等因素影响’",
+        "ref": ""
+      },
+      {
+        "stage": "compliance",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第4段",
+        "detail": "‘碰一碰传文件、多屏协同办公超顺滑，小组作业共享文档秒同步’中‘超顺滑’‘秒同步’属于无依据的主观体验强化词，且‘秒同步’暗示确定性、零延迟效果；事实点F62明确要求‘登录同一华为账号’，但文案未作任何前提提示，易使非华为生态用户产生兼容性误解，构成对兼容范围的夸大",
+        "suggestion": "删除‘超顺滑’‘秒同步’等绝对化、无依据的效率承诺；明确限定前提：‘使用华为手机/平板且登录同一华为账号时，支持碰一碰传文件、多屏协同等功能’",
+        "ref": ""
+      },
+      {
+        "stage": "compliance",
+        "source": "llm",
+        "severity": "warn",
+        "where": "配图方案",
+        "detail": "I3配图说明‘OLED屏幕+触控支持，随手批注课件超方便’中‘超方便’属主观效果断言，且‘随手批注课件’隐含功能开箱即用、无需额外软件或设置即可实现，但事实点未提供课件批注功能的具体实现方式（如是否依赖特定应用、鸿蒙原生支持程度、手写笔配套要求等），构成对使用效果的无依据暗示",
+        "suggestion": "修改caption为‘OLED屏幕支持10点触控，配合兼容应用可实现课件批注’，并删除‘超方便’等主观修饰词",
+        "ref": ""
+      }
+    ],
+    "removed": []
+  },
+  "history": [
+    {
+      "role": "用户",
+      "content": "请为大学新生，围绕开学季场景，写一篇发布到小红书的 HUAWEI MateBook 14 营销软文，目标：种草。"
+    }
+  ],
+  "trace": [
+    {
+      "stage": "1 结构化需求",
+      "at": "16:44:33",
+      "brief": {
+        "product": "HUAWEI MateBook 14",
+        "product_type": "轻薄本",
+        "audience": "大学新生",
+        "scene": "开学季",
+        "platform": "小红书",
+        "goal": "种草",
+        "stage": "",
+        "main_problem": "",
+        "extra": "",
+        "llm_notes": "product_type根据MateBook 14主流定位推断为轻薄本；其余字段均直接来自用户明确表述，无歧义或需推测项"
+      },
+      "questions": []
+    },
+    {
+      "stage": "2 资料匹配",
+      "at": "16:45:04",
+      "facts": 63,
+      "images": 4,
+      "sources": [
+        "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md",
+        "P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md"
+      ],
+      "dropped": [],
+      "conflicts": [],
+      "similar_models": [
+        "HUAWEI MateBook Fold 非凡大师",
+        "HUAWEI MateBook Pro",
+        "HUAWEI MateBook Pro S",
+        "MateBook 14 酷睿 Ultra",
+        "MateBook D 14",
+        "MateBook D 16",
+        "MateBook D 16 SE 版",
+        "MateBook GT 系列",
+        "MateBook X系列"
+      ]
+    },
+    {
+      "stage": "3 策略匹配",
+      "at": "16:45:04",
+      "scene": "开学季",
+      "platform": "小红书"
+    },
+    {
+      "stage": "5-6 核验与合规(第1轮)",
+      "at": "16:45:52",
+      "errors": 0,
+      "warns": 6
+    }
+  ]
+}

@@ -1,24 +1,18 @@
-"""新知识库读取与首次使用复核；审核结果写入配套SQLite索引，原始资料只读。"""
+"""新知识库读取与文字资料首次使用复核；图片只使用已登记的型号归属。"""
 from __future__ import annotations
 
-import base64
 import hashlib
-import io
 import json
 import os
 import re
 import sqlite3
 import time
-from dataclasses import asdict
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
-from PIL import Image
-
 from .evidence import similar
-from .knowledge import KnowledgeError
-from .localkb import LocalKBError
+from .knowledge import KnowledgeError, LocalKBError
 from .models import Evidence, Fact, ImageRef
 from .norm import norm_model
 
@@ -47,6 +41,16 @@ def original_excerpt(quote, source):
     if start < 0:
         return None
     return source[positions[start]:positions[start + len(normalized) - 1] + 1]
+
+
+def suspicious_dimensions(text: str) -> list[dict]:
+    """标记明显异常的笔记本尺寸，不猜测字段顺序。"""
+    issues = []
+    for name, low, high in (("厚度", 1, 50), ("长度", 100, 600)):
+        match = re.search(rf"(?m)^{name}\s*\n\s*(\d+(?:\.\d+)?)\s*mm", text)
+        if match and not low <= float(match[1]) <= high:
+            issues.append({"code": "suspected_dimension_order", "detail": f"{name} {match[1]} mm 超出笔记本常见范围，仅提示复核，不认定正确值"})
+    return issues
 
 
 class ReviewCache:
@@ -181,7 +185,8 @@ class CatalogStore:
             self._raw(r)
             row = r["source"]["index_row"]
             refs.append(ImageRef(r["id"], model, Path(r["path"]).name, str(self._safe(r["path"])), r["path"],
-                                 row.get("官网图片说明", ""), row.get("建议用途", ""), row.get("原始图片URL", "")))
+                                 row.get("官网图片说明") or r.get("caption", ""),
+                                 row.get("建议用途") or r.get("usage", ""), row.get("原始图片URL", "")))
         return refs[:limit]
 
     def _key(self, record, prompt, model):
@@ -200,9 +205,20 @@ class CatalogStore:
         aliases = {"大学": "学生 学习", "新生": "学生 学习", "出差": "商务 差旅", "设计": "创作 内容创作者"}
         query += " " + " ".join(v for k, v in aliases.items() if k in query)
         terms = self._terms(query)
+        comparison = any(word in query for word in ("竞品", "对比", "比较", "横评", "相比", "替代", "苹果", "MacBook",
+                                                     "联想", "ThinkPad", "ThinkBook", "戴尔", "Dell", "XPS", "惠普", "HP",
+                                                     "华硕", "小米", "REDMI"))
+        commercial = brief.goal == "促销告知" or any(word in query for word in
+            ("价格", "报价", "优惠", "补贴", "库存", "赠品", "返利", "交付", "分期", "以旧换新"))
         ranked = []
         for r in self.records():
-            if r["category"] in ("dynamic", "images", "products") and r["kind"] != "product_guidance":
+            if r["category"] == "competitor" and not comparison:
+                continue
+            if r["category"] == "dynamic" and not (r["kind"] == "business_rule" and commercial):
+                continue
+            if r["category"] == "images":
+                continue
+            if r["category"] == "products" and r["kind"] != "product_guidance":
                 continue
             if r.get("model_key") and norm_model(r["model_key"]) != norm_model(brief.product):
                 continue
@@ -214,7 +230,7 @@ class CatalogStore:
                 ranked.append((score, r["id"], r))
         return [r for _, _, r in sorted(ranked, key=lambda v: (-v[0], v[1]))[:limit]]
 
-    def collect(self, analysis, vision, prompts, brief, progress=None):
+    def collect(self, analysis, prompts, brief, progress=None):
         from .evidence import ModelNotResolved, mentioned_models
         names = list(self.models())
         model = next((m for m in names if norm_model(m) == norm_model(brief.product)), None)
@@ -253,7 +269,6 @@ class CatalogStore:
 
         def review_text(record):
             text = self._raw(record).decode("utf-8-sig")
-            from .kb_migration import suspicious_dimensions
             problems = suspicious_dimensions(text)
             excluded_values = [i["detail"] for i in problems]
             safe_text = text
@@ -310,63 +325,12 @@ class CatalogStore:
             else:
                 ev.review_stats["excluded"] += 1
 
-        # 只审核本轮有望使用的两张候选，避免第一次生成时扫描整个图片库。
+        # 图片不再调用视觉模型审核。这里只使用目录中已登记、已绑定当前精确型号且哈希一致的图片，
+        # 并按本轮场景关键词排序；图片画面本身不作为产品事实来源。
         terms = self._terms(" ".join((brief.main_problem, brief.scene, brief.extra)))
         images = self.images(model, limit=10000)
         images.sort(key=lambda i: -len(terms & self._terms(i.name + i.caption + i.usage)))
-        new_images = 0
-        for image in images:
-            if len(ev.images) >= image_limit:
-                break
-            record = next(r for r in self.records(model) if r["id"] == image.id)
-            image_key = self._key(record, prompts.text("image_review"), getattr(vision, "model", "injected-test-model"))
-            if not self._cache.contains(image_key) and (new_images >= image_limit or remaining <= 0):
-                ev.dropped.append(f"本轮未审核图片：{image.name}，不加入生成候选")
-                continue
-            def compute_image():
-                raw = self._raw(record)
-                with Image.open(io.BytesIO(raw)) as pic:
-                    pic.load()
-                    file_checks = dict(width=pic.width, height=pic.height)
-                    if "A" in pic.getbands():
-                        file_checks["fully_transparent_fraction"] = pic.getchannel("A").histogram()[0] / (pic.width * pic.height)
-                        file_checks["center_pixel"] = pic.getpixel((pic.width // 2, pic.height // 2))
-                    pic.thumbnail((1280, 1280))
-                    # 保留透明度供模型判断图层，提供紧凑预览，不修改原文件。
-                    preview = io.BytesIO()
-                    pic.convert("RGBA").save(preview, format="PNG")
-                metadata = {"record": record, "caption": image.caption, "usage": image.usage, "file_checks": file_checks}
-                prompt = prompts.render("image_review", {"图片信息": json.dumps(metadata, ensure_ascii=False),
-                    "产品依据": json.dumps([asdict(f) for f in ev.facts], ensure_ascii=False)})
-                uri = "data:image/png;base64," + base64.b64encode(preview.getvalue()).decode("ascii")
-                data = vision.json([{"type": "text", "text": prompt}, {"type": "image_url", "image_url": {"url": uri}}])
-                allowed = ("product", "detail", "scene", "infographic", "composition_required", "unknown")
-                if (not isinstance(data, dict) or data.get("status") not in ("passed", "uncertain", "rejected")
-                        or data.get("asset_type") not in allowed or not isinstance(data.get("description"), str)
-                        or not data["description"].strip() or not isinstance(data.get("topics"), list)
-                        or not isinstance(data.get("restrictions"), list) or not isinstance(data.get("visible_text"), str)):
-                    raise KnowledgeError("图片审阅结构不完整，未放行")
-                if any(not isinstance(value, str) for value in data["topics"] + data["restrictions"]):
-                    raise KnowledgeError("图片审阅的主题或限制格式错误，未放行")
-                if data["asset_type"] in ("composition_required", "unknown") and data["status"] == "passed":
-                    data["status"] = "uncertain"
-                return data
-            before = ev.review_stats["new"]
-            result = audited(record, "image_review", vision, compute_image)
-            new_images += ev.review_stats["new"] - before
-            with Image.open(self._safe(record["path"])) as pic:
-                result["file_checks"] = dict(width=pic.width, height=pic.height)
-                if "A" in pic.getbands():
-                    result["file_checks"]["fully_transparent_fraction"] = pic.getchannel("A").histogram()[0] / (pic.width * pic.height)
-                    if result["file_checks"]["fully_transparent_fraction"] > 0:
-                        result["restrictions"] = list(dict.fromkeys(result["restrictions"] + [
-                            "文件含透明区域，实际背景由发布容器决定；不要将模型背景颜色描述当成产品事实"]))
-            if result["status"] == "passed":
-                image.review = result
-                ev.images.append(image)
-            else:
-                ev.review_stats["excluded"] += 1
-                ev.dropped.append(f"图片未采用：{image.name}；{result.get('reason', '待核实')}")
+        ev.images.extend(images[:image_limit])
         ev.review_stats["catalog_signature"] = self._catalog_hash
         ev.review_stats["source_hashes"] = {r["path"]: sha(self._raw(r)) for r in self.records()
             if r["path"] in ev.sources or any(c["path"] == r["path"] for c in ev.context) or any(i.id == r["id"] for i in ev.images)}
@@ -384,9 +348,10 @@ DEFAULT_RUNTIME_KB = Path(__file__).resolve().parents[1] / "knowledge_base/curre
 
 
 def make_store():
-    from .localkb import LocalStore
     root = Path(os.environ.get("KB_LOCAL_DIR") or DEFAULT_RUNTIME_KB).expanduser()
-    store = CatalogStore(root) if (root / INDEX / "catalog.json").is_file() else LocalStore(root)
+    if not (root / INDEX / "catalog.json").is_file():
+        raise LocalKBError(f"当前知识库缺少 catalog.json：{root}")
+    store = CatalogStore(root)
     if not store.connect()["connected"]:
         raise LocalKBError(f"本地知识库不可用：{root}")
     return store

@@ -17,7 +17,7 @@ from agent import export
 from agent.envfile import load_dotenv
 from agent.llm import LLMError
 from agent.model_routing import make_llm
-from agent.localkb import LocalKBError
+from agent.knowledge import LocalKBError
 from agent.catalogkb import DEFAULT_RUNTIME_KB, make_store as open_store
 from agent.models import Session
 from agent.pipeline import Outcome, Pipeline
@@ -28,7 +28,7 @@ DEFAULT_LOCAL_KB = DEFAULT_RUNTIME_KB
 
 
 def make_store():
-    """默认新库；旧格式目录仍可显式指定。"""
+    """打开唯一受支持的当前知识库。"""
     store = open_store()
     print(f"知识库:本地目录 {store.root}", file=sys.stderr)
     return store

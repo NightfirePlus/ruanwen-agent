@@ -63,7 +63,7 @@ def cases():
         ("compose", captured_compose.user, captured_compose.system, valid_draft),
         ("fact_review", prompts.render("fact_review", {"稿件": compose.draft_to_json(
             Draft(title="所有配置均支持触控", body=[Paragraph("测试机型A全系标配触控。", ["F2"])])),
-            "事实点清单": compose.facts_block(ev), "原始资料": "[]", "图片审阅": "(无)"}), None, valid_review),
+            "事实点清单": compose.facts_block(ev), "原始资料": "[]", "图片登记": "(无)"}), None, valid_review),
     ]
 
 

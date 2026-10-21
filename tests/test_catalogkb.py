@@ -1,4 +1,4 @@
-"""新库、首次使用缓存、视觉输入和失败处理的离线测试。"""
+"""新库、文字资料首次使用缓存、登记图片和失败处理的离线测试。"""
 import copy
 import json
 import tempfile
@@ -71,35 +71,46 @@ class CatalogTest(unittest.TestCase):
             models=[dict(model_key="MateBook 14", official_product="MateBook 14")], records=self.records), ensure_ascii=False), encoding="utf-8")
 
     def collect(self, prompts=None):
-        return self.store.collect(self.analysis, self.vision, prompts or self.prompts, self.brief)
+        return self.store.collect(self.analysis, prompts or self.prompts, self.brief)
 
     def test_first_use_reviews_then_persistent_cache_reuses_without_calls(self):
         before = {r["path"]: (self.root / r["path"]).read_bytes() for r in self.records}
         first = self.collect()
-        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 2))
-        self.assertEqual(first.review_stats["new"], 4)
+        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 0))
+        self.assertEqual(first.review_stats["new"], 2)
         self.assertEqual(len(first.facts), 1)
         self.assertEqual(len(first.context), 1)
         self.assertEqual(len(first.images), 2)
         self.store = CatalogStore(self.root)  # 模拟应用重启
         second = self.collect()
-        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 2))
-        self.assertEqual(second.review_stats["cached"], 4)
+        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 0))
+        self.assertEqual(second.review_stats["cached"], 2)
         self.assertEqual(before, {p: (self.root / p).read_bytes() for p in before})
 
-    def test_real_image_content_is_sent_as_multimodal_message(self):
-        self.collect()
-        message = self.vision.inputs[0]
-        self.assertEqual(message[0]["type"], "text")
-        self.assertTrue(message[1]["image_url"]["url"].startswith("data:image/png;base64,"))
+    def test_registered_images_are_available_without_visual_model_call(self):
+        ev = self.collect()
+        self.assertEqual(len(ev.images), 2)
+        self.assertTrue(all(not image.review for image in ev.images))
+        self.assertEqual(self.vision.calls, 0)
 
-    def test_changed_caption_invalidates_only_affected_image(self):
+    def test_changed_caption_updates_registered_image_without_model_call(self):
         self.collect()
         self.records[-1]["source"]["index_row"]["官网图片说明"] = "改为接口细节说明"
         self.write_catalog()
         ev = self.collect()
-        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 3))
-        self.assertEqual(ev.review_stats["new"], 1)
+        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 0))
+        self.assertEqual(ev.review_stats["new"], 0)
+        self.assertEqual(ev.images[-1].caption, "改为接口细节说明")
+
+    def test_catalog_caption_fills_missing_legacy_index_caption(self):
+        self.records[-1]["source"]["index_row"]["官网图片说明"] = ""
+        self.records[-1]["source"]["index_row"]["建议用途"] = ""
+        self.records[-1]["caption"] = "人工复核后的产品外观"
+        self.records[-1]["usage"] = "产品介绍"
+        self.write_catalog()
+        images = self.store.images("MateBook 14")
+        self.assertEqual(images[-1].caption, "人工复核后的产品外观")
+        self.assertEqual(images[-1].usage, "产品介绍")
 
     def test_changed_file_requires_updated_source_metadata_then_rechecks(self):
         self.collect()
@@ -109,16 +120,17 @@ class CatalogTest(unittest.TestCase):
             self.collect()
         self.records[-1]["sha256"] = sha(path.read_bytes())
         self.write_catalog()
-        self.collect()
-        self.assertEqual(self.vision.calls, 3)
+        ev = self.collect()
+        self.assertEqual(len(ev.images), 2)
+        self.assertEqual(self.vision.calls, 0)
 
     def test_changed_prompt_or_model_invalidates_corresponding_cache(self):
         self.collect()
         texts = dict(self.prompts._t)
-        texts["image_review"] += "\n增加新的审阅规则。"
+        texts["material_review"] += "\n增加新的审阅规则。"
         self.collect(Prompts(texts))
-        self.assertEqual(self.vision.calls, 4)
-        self.assertEqual(self.analysis.calls, 2)
+        self.assertEqual(self.vision.calls, 0)
+        self.assertEqual(self.analysis.calls, 4)
 
     def test_cached_session_checks_file_and_catalog_versions(self):
         ev = self.collect()
@@ -158,17 +170,18 @@ class CatalogTest(unittest.TestCase):
         draft = dict(title="开学了解新装备", intro="", body=[dict(text="内存16GB。", fact_ids=["F1"])],
                      cta="欢迎到店了解。", tags=[], images=[dict(image_id="I0", after_paragraph=1, caption="产品外观")], refusals=[])
         clients = {s: Fixed({"issues": []}) for s in STAGES}
-        clients.update(intake=Fixed(FULL_BRIEF), evidence=self.analysis, image_review=self.vision,
+        clients.update(intake=Fixed(FULL_BRIEF), evidence=self.analysis,
                        compose=Fixed(draft), rewrite=Fixed(draft), revise_intent=Fixed({"action": "confirm"}))
         router = ModelRouter(clients, {s: s for s in STAGES})
         pipe = Pipeline(router, self.store, self.prompts)
         out = pipe.talk(Session(), "给新生写软文")
         self.assertEqual(out.status, "review", out.reason)
-        self.assertIn("完整产品展示", clients["compose"].inputs[0])
+        self.assertIn("产品外观", clients["compose"].inputs[0])
+        self.assertIn("未执行视觉模型审图", clients["compose"].inputs[0])
         self.assertIn("内存16GB", clients["fact_review"].inputs[0])
         self.assertEqual(pipe.feedback(out.session, "确认").status, "done")
         pipe.talk(Session(), "再写一篇")
-        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 2))
+        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 0))
 
     def test_new_store_cannot_downgrade_necessary_reviews(self):
         from agent.pipeline import Pipeline
@@ -196,13 +209,13 @@ class CatalogTest(unittest.TestCase):
         self.assertFalse(result["passed"])
         self.assertTrue(any("链接" in error for error in result["errors"]))
 
-    def test_uncertain_composition_layers_are_not_offered_for_writing(self):
+    def test_visual_model_result_does_not_control_registered_images(self):
         self.vision.asset = "composition_required"
         ev = self.collect()
-        self.assertEqual(ev.images, [])
-        self.assertEqual(ev.review_stats["excluded"], 2)
+        self.assertEqual(len(ev.images), 2)
+        self.assertEqual(ev.review_stats["excluded"], 0)
         self.collect()
-        self.assertEqual(self.vision.calls, 2)
+        self.assertEqual(self.vision.calls, 0)
 
     def test_hallucinated_quote_never_becomes_passed_or_retried_automatically(self):
         self.analysis.bad = True
@@ -223,8 +236,8 @@ class CatalogTest(unittest.TestCase):
         self.collect()
         self.assertEqual(self.analysis.calls, 2)
 
-    def test_unassigned_discovery_and_historical_records_are_not_product_facts(self):
-        for kind, cat in (("product_discovery", "products"), ("historical_price_snapshot", "dynamic"), ("unassigned_image", "images")):
+    def test_discovery_and_historical_records_are_not_product_facts(self):
+        for kind, cat in (("product_discovery", "products"), ("historical_price_snapshot", "dynamic")):
             row = copy.deepcopy(self.records[1])
             row.update(id=kind, kind=kind, category=cat, model_key=None)
             self.records.append(row)
@@ -233,6 +246,26 @@ class CatalogTest(unittest.TestCase):
         self.assertEqual(len(ev.facts), 1)
         self.assertEqual(len(ev.context), 1)
         self.assertEqual(len(ev.images), 2)
+
+    def test_competitor_and_business_rules_require_matching_intent(self):
+        competitor = copy.deepcopy(self.records[1])
+        competitor.update(id="C1", path="竞品对比.md", kind="competitor_method", category="competitor", model_key=None)
+        (self.root / competitor["path"]).write_text("竞品对比应统一口径。", encoding="utf-8")
+        competitor["sha256"] = sha((self.root / competitor["path"]).read_bytes())
+        business = copy.deepcopy(self.records[1])
+        business.update(id="B1", path="价格规则.md", kind="business_rule", category="dynamic", model_key=None)
+        (self.root / business["path"]).write_text("价格需记录核验时间。", encoding="utf-8")
+        business["sha256"] = sha((self.root / business["path"]).read_bytes())
+        self.records.extend((competitor, business))
+        self.write_catalog()
+        self.assertNotIn("C1", {r["id"] for r in self.store.references(self.brief, 10)})
+        self.assertNotIn("B1", {r["id"] for r in self.store.references(self.brief, 10)})
+        comparing = copy.deepcopy(self.brief)
+        comparing.main_problem = "与竞品对比"
+        self.assertIn("C1", {r["id"] for r in self.store.references(comparing, 10)})
+        commercial = copy.deepcopy(self.brief)
+        commercial.main_problem = "价格优惠"
+        self.assertIn("B1", {r["id"] for r in self.store.references(commercial, 10)})
 
 
 class ConcurrentCacheTest(unittest.TestCase):

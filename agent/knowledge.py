@@ -8,6 +8,10 @@ class KnowledgeError(Exception):
     """本地资料不可读、路径非法或索引不完整。"""
 
 
+class LocalKBError(KnowledgeError):
+    """当前本地知识库不可用或索引不完整。"""
+
+
 class KnowledgeSource(Protocol):
     kb_name: str
 

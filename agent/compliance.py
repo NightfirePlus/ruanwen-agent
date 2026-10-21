@@ -44,7 +44,7 @@ def rule_check(draft: Draft, ev: Evidence) -> list[Issue]:
 def llm_check(llm, prompts: Prompts, draft: Draft, ev: Evidence) -> list[Issue]:
     model = ev.facts[0].model if ev.facts else ""
     data = llm.json(prompts.render("compliance_review", {"稿件": draft_to_json(draft), "事实点清单": facts_block(ev),
-        "图片审阅": images_block(ev, model)}))
+        "图片登记": images_block(ev, model)}))
     return llm_issues(data, "compliance")
 
 

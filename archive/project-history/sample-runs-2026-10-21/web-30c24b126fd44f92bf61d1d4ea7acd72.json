@@ -1,0 +1,1023 @@
+{
+  "brief": {
+    "product": "MateBook D 16",
+    "product_type": "轻薄本",
+    "audience": "职场人士",
+    "scene": "职场办公",
+    "platform": "小红书",
+    "goal": "种草",
+    "stage": "",
+    "main_problem": "",
+    "extra": "",
+    "llm_notes": "platform根据用户最新回复明确为‘小红书’，已覆盖原空值；其余字段均与已确定信息一致且未被修改"
+  },
+  "evidence": {
+    "facts": [
+      {
+        "id": "F1",
+        "model": "MateBook D 16",
+        "text": "Windows 11 家庭版",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F2",
+        "model": "MateBook D 16",
+        "text": "Linux V20 版",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F3",
+        "model": "MateBook D 16",
+        "text": "长度\n18 mm",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F4",
+        "model": "MateBook D 16",
+        "text": "宽度\n356.7 mm",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F5",
+        "model": "MateBook D 16",
+        "text": "厚度\n248.7 mm",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F6",
+        "model": "MateBook D 16",
+        "text": "重量\n约 1.68 kg（56 Wh 电池版本）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F7",
+        "model": "MateBook D 16",
+        "text": "约 1.72 kg（70 Wh 电池版本）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F8",
+        "model": "MateBook D 16",
+        "text": "*实际尺寸和重量依配置、制造工艺、测量方法的不同可能有所差异。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F9",
+        "model": "MateBook D 16",
+        "text": "尺寸\n16 英寸",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F10",
+        "model": "MateBook D 16",
+        "text": "类型\nIPS",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F11",
+        "model": "MateBook D 16",
+        "text": "屏占比\n90%",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F12",
+        "model": "MateBook D 16",
+        "text": "屏幕比例\n16:10",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F13",
+        "model": "MateBook D 16",
+        "text": "分辨率\n1920 × 1200，142 ppi",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F14",
+        "model": "MateBook D 16",
+        "text": "亮度\n300 nits",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F15",
+        "model": "MateBook D 16",
+        "text": "色域\n100% sRGB / 45% NTSC",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F16",
+        "model": "MateBook D 16",
+        "text": "对比度\n1200:1",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F17",
+        "model": "MateBook D 16",
+        "text": "可视角度\n178°",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F18",
+        "model": "MateBook D 16",
+        "text": "*数据来源于华为实验室，测量数据标准以屏幕可视区域尺寸对屏幕尺寸计算屏幕占比，请以实物为准。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F19",
+        "model": "MateBook D 16",
+        "text": "**屏幕色域、对比度、亮度、可视角度等数据为典型值。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F20",
+        "model": "MateBook D 16",
+        "text": "第 13 代英特尔®酷睿™ i9-13900H 标压处理器",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F21",
+        "model": "MateBook D 16",
+        "text": "*仅限 Windows 版本产品搭载。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F22",
+        "model": "MateBook D 16",
+        "text": "第 13 代英特尔®酷睿™ i5-13420H 标压处理器",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F23",
+        "model": "MateBook D 16",
+        "text": "1 TB NVMe PCIe SSD",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F24",
+        "model": "MateBook D 16",
+        "text": "*硬盘格式化之后的实际容量可能较小。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F25",
+        "model": "MateBook D 16",
+        "text": "集成显卡",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F26",
+        "model": "MateBook D 16",
+        "text": "英特尔®锐炬® Xᵉ 显卡",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F27",
+        "model": "MateBook D 16",
+        "text": "*第 13 代英特尔®酷睿™ i5-13420H 处理器配置版本搭载英特尔® UHD 显卡。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F28",
+        "model": "MateBook D 16",
+        "text": "16 GB",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F29",
+        "model": "MateBook D 16",
+        "text": "WLAN\nIEEE 802.11a/b/g/n/ac/ax",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F30",
+        "model": "MateBook D 16",
+        "text": "2.4 GHz 和 5 GHz 双频",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F31",
+        "model": "MateBook D 16",
+        "text": "2 × 2 MIMO",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F32",
+        "model": "MateBook D 16",
+        "text": "支持 WPA/WPA2/WPA3",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F33",
+        "model": "MateBook D 16",
+        "text": "蓝牙\nWindows 版：蓝牙 5.1",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F34",
+        "model": "MateBook D 16",
+        "text": "Linux V20 版：蓝牙 4.2",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F35",
+        "model": "MateBook D 16",
+        "text": "材料\n锂聚合物",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F36",
+        "model": "MateBook D 16",
+        "text": "容量\n56 Wh / 70 Wh（额定容量）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F37",
+        "model": "MateBook D 16",
+        "text": "USB-C 3.2 Gen 1（支持数据、对外供电 10 W（5V/2A）、DisplayPort 1.2）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F38",
+        "model": "MateBook D 16",
+        "text": "USB-A 3.2 Gen 1（左侧第 2 个，支持数据和对外供电 10 W（5V/2A））",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F39",
+        "model": "MateBook D 16",
+        "text": "USB-A 2.0（右侧第 1 个，支持数据和对外供电 7.5 W（5V/1.5A））",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F40",
+        "model": "MateBook D 16",
+        "text": "HDMI × 1",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F41",
+        "model": "MateBook D 16",
+        "text": "3.5 mm 耳机 & 麦克风二合一接口 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F42",
+        "model": "MateBook D 16",
+        "text": "全尺寸键盘，1.5 mm 键程",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F43",
+        "model": "MateBook D 16",
+        "text": "支持独立数字键盘",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F44",
+        "model": "MateBook D 16",
+        "text": "*快捷键功能仅限 Windows 版本产品支持。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F45",
+        "model": "MateBook D 16",
+        "text": "支持 5 点触控（Windows 11 当前仅支持四点手势识别）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F46",
+        "model": "MateBook D 16",
+        "text": "电源键\n指纹电源键",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F47",
+        "model": "MateBook D 16",
+        "text": "*Linux V20 版：仅支持电源键功能，不支持指纹识别。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F48",
+        "model": "MateBook D 16",
+        "text": "100 万像素前置摄像头",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F49",
+        "model": "MateBook D 16",
+        "text": "麦克风 × 2",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F50",
+        "model": "MateBook D 16",
+        "text": "扬声器 × 2",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F51",
+        "model": "MateBook D 16",
+        "text": "华为电脑管家",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F52",
+        "model": "MateBook D 16",
+        "text": "华为分享",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F53",
+        "model": "MateBook D 16",
+        "text": "显示管理（护眼模式）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F54",
+        "model": "MateBook D 16",
+        "text": "华为 F10 一键还原",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F55",
+        "model": "MateBook D 16",
+        "text": "高能模式（热键 Fn + P 切换）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F56",
+        "model": "MateBook D 16",
+        "text": "*以上功能仅限 Windows 版本产品支持。",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F57",
+        "model": "MateBook D 16",
+        "text": "HUAWEI MateBook D 16 2024",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F58",
+        "model": "MateBook D 16",
+        "text": "65 W 多功能充电器（含线缆）",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F59",
+        "model": "MateBook D 16",
+        "text": "快速入门",
+        "source_title": "产品事实.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\产品事实.md"
+      },
+      {
+        "id": "F60",
+        "model": "MateBook D 16",
+        "text": "完整名称为HUAWEI MateBook D 16 2024。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F61",
+        "model": "MateBook D 16",
+        "text": "系统为Windows 11家庭版或Linux V20。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F62",
+        "model": "MateBook D 16",
+        "text": "处理器列i9-13900H（仅Windows）和i5-13420H。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F63",
+        "model": "MateBook D 16",
+        "text": "内存16 GB，SSD 1 TB。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F64",
+        "model": "MateBook D 16",
+        "text": "电池有56 Wh和70 Wh配置。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F65",
+        "model": "MateBook D 16",
+        "text": "16英寸IPS，16:10，1920 × 1200，142 ppi。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F66",
+        "model": "MateBook D 16",
+        "text": "屏占比90%，典型亮度300 nits。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F67",
+        "model": "MateBook D 16",
+        "text": "色域列100%sRGB / 45%NTSC。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F68",
+        "model": "MateBook D 16",
+        "text": "典型对比度1200:1、可视角178°。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F69",
+        "model": "MateBook D 16",
+        "text": "i9-13900H仅限Windows，另有i5-13420H。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F70",
+        "model": "MateBook D 16",
+        "text": "内存16 GB，SSD 1 TB NVMe PCIe。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F71",
+        "model": "MateBook D 16",
+        "text": "显卡列锐炬Xe；i5-13420H版本注明为UHD显卡。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F72",
+        "model": "MateBook D 16",
+        "text": "宽356.7 mm、深248.7 mm、厚18 mm。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F73",
+        "model": "MateBook D 16",
+        "text": "56 Wh版约1.68 kg，70 Wh版约1.72 kg。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F74",
+        "model": "MateBook D 16",
+        "text": "USB-C 3.2 Gen1支持数据、10 W对外供电和DP 1.2。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F75",
+        "model": "MateBook D 16",
+        "text": "另有USB-A 3.2 Gen1、USB-A 2.0、HDMI和3.5 mm。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F76",
+        "model": "MateBook D 16",
+        "text": "支持独立数字键盘。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F77",
+        "model": "MateBook D 16",
+        "text": "Windows蓝牙5.1，Linux V20蓝牙4.2。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F78",
+        "model": "MateBook D 16",
+        "text": "Linux版指纹键仅作电源键。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F79",
+        "model": "MateBook D 16",
+        "text": "电脑管家、华为分享、显示管理、F10还原和高能模式仅Windows支持。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F80",
+        "model": "MateBook D 16",
+        "text": "16英寸16:10屏和数字键盘面向信息密集型办公。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F81",
+        "model": "MateBook D 16",
+        "text": "i5/i9、56/70 Wh和两类色域形成多配置组合。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F82",
+        "model": "MateBook D 16",
+        "text": "1 TB SSD和16 GB内存为规格页公开容量。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      },
+      {
+        "id": "F83",
+        "model": "MateBook D 16",
+        "text": "传统接口齐全但USB-C仅一个。",
+        "source_title": "卖点与限制.md",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\卖点与限制.md"
+      }
+    ],
+    "images": [
+      {
+        "id": "I1",
+        "model": "MateBook D 16",
+        "name": "hwpc_matebook-d-16-2024_强劲处理器性能_02.jpg",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\images\\hwpc_matebook-d-16-2024_强劲处理器性能_02.jpg",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/images/hwpc_matebook-d-16-2024_强劲处理器性能_02.jpg",
+        "caption": "强劲处理器性能",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/laptops/matebook-d-16-2024-new/images/reason/huawei-matebook-d-16-2024-high-processor.jpg",
+        "note": ""
+      },
+      {
+        "id": "I2",
+        "model": "MateBook D 16",
+        "name": "hwpc_matebook-d-16-2024_超级终端协同_08.jpg",
+        "media_id": "D:\\泛\\软文智能体\\华为PC全板块深度知识库_v7\\P1-产品参数库\\02-MateBook-Windows\\MateBook D 16\\images\\hwpc_matebook-d-16-2024_超级终端协同_08.jpg",
+        "source_path": "P1-产品参数库/02-MateBook-Windows/MateBook D 16/images/hwpc_matebook-d-16-2024_超级终端协同_08.jpg",
+        "caption": "超级终端协同",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/laptops/matebook-d-16-2024-new/images/reason/huawei-matebook-d-16-2024-high-device.jpg",
+        "note": ""
+      }
+    ],
+    "candidates": [
+      "HUAWEI MateBook 14",
+      "HUAWEI MateBook Fold 非凡大师",
+      "HUAWEI MateBook Pro",
+      "HUAWEI MateBook Pro S",
+      "MateBook 14 酷睿 Ultra",
+      "MateBook D 14",
+      "MateBook D 16 SE 版",
+      "MateBook GT 系列",
+      "MateBook X系列"
+    ],
+    "conflicts": [],
+    "dropped": [],
+    "sources": [
+      "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+      "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md"
+    ]
+  },
+  "strategy": {
+    "scene": {
+      "name": "职场办公",
+      "angle": "围绕会议、差旅、文档处理、多任务协同和安全需求",
+      "focus": [
+        "会议与协作",
+        "差旅携带与续航",
+        "多任务效率",
+        "数据与办公安全"
+      ],
+      "avoid": [
+        "夸大办公效率提升幅度",
+        "无依据的安全承诺"
+      ],
+      "in_table": true
+    },
+    "platform": {
+      "name": "小红书",
+      "form": "口语化标题、短段落、使用场景、话题标签",
+      "title": "口语化标题,20字以内,带具体场景或人群,可含1个emoji",
+      "length": "正文300-600字,每段不超过3行",
+      "structure": [
+        "开头一句话点出场景或痛点",
+        "按使用场景分短段,每段一个卖点",
+        "结尾给选购建议和互动提问"
+      ],
+      "tone": "亲切、轻松、像朋友分享;不得伪造个人使用经历,以'适合'、'如果你'等表述代替",
+      "images": {
+        "min": 3,
+        "max": 6
+      },
+      "cta": "邀请评论区交流或收藏,可引导到店体验",
+      "tags": {
+        "min": 5,
+        "max": 8
+      },
+      "field_mapping": "title=标题, intro=开头一句, body=短段落, cta=结尾互动, tags=话题标签",
+      "first_person_experience": false
+    }
+  },
+  "draft": {
+    "title": "职场人通勤开会神器💻",
+    "intro": "每天背着电脑赶地铁、开线上会、改PPT到深夜？选对工具真的能减负！",
+    "body": [
+      {
+        "text": "16英寸16:10大屏+90%高屏占比，文档/表格/会议画面一屏全显，不用来回拉滚动条～眼睛也更轻松。",
+        "fact_ids": [
+          "F9",
+          "F12",
+          "F11",
+          "F65",
+          "F66",
+          "F80"
+        ]
+      },
+      {
+        "text": "约1.68kg起，轻过两瓶矿泉水！356.7mm宽度塞进通勤包毫无压力，出差拎一天也不累肩。",
+        "fact_ids": [
+          "F6",
+          "F73",
+          "F72",
+          "F4"
+        ]
+      },
+      {
+        "text": "i9-13900H标压处理器+16GB内存+1TB SSD，多开会议软件+写方案+查资料不卡顿，响应快得很稳。",
+        "fact_ids": [
+          "F20",
+          "F28",
+          "F23",
+          "F63",
+          "F70",
+          "F62"
+        ]
+      },
+      {
+        "text": "指纹电源键二合一，开机即解锁；华为电脑管家+华为分享，手机文件秒传、跨设备协同超顺手。",
+        "fact_ids": [
+          "F46",
+          "F51",
+          "F52",
+          "F79"
+        ]
+      },
+      {
+        "text": "56Wh/70Wh双电池可选，日常办公续航扎实；300nits亮度+100% sRGB色域，会议室投影或户外临时办公都够亮够准。",
+        "fact_ids": [
+          "F36",
+          "F64",
+          "F14",
+          "F15",
+          "F66",
+          "F67"
+        ]
+      }
+    ],
+    "cta": "你最看重轻薄本的哪一点？评论区聊聊～也欢迎去华为门店上手试试真机！",
+    "tags": [
+      "#职场好物",
+      "#笔记本推荐",
+      "#华为MateBook",
+      "#打工人装备",
+      "#轻薄本种草",
+      "#办公效率"
+    ],
+    "images": [
+      {
+        "image_id": "I1",
+        "after_paragraph": 2,
+        "caption": "MateBook D 16搭载第13代英特尔®酷睿™ i9-13900H标压处理器，性能释放更从容",
+        "reason": "匹配‘i9-13900H+多任务不卡顿’卖点，强化性能可信度"
+      },
+      {
+        "image_id": "I2",
+        "after_paragraph": 4,
+        "caption": "通过华为分享与超级终端能力，手机、平板、电脑一键互联协作",
+        "reason": "直观呈现‘华为电脑管家+华为分享’协同场景，呼应职场多设备办公需求"
+      },
+      {
+        "image_id": "I1",
+        "after_paragraph": 0,
+        "caption": "16英寸大屏+高屏占比设计，信息密度高，办公视界更开阔",
+        "reason": "首图需建立产品第一印象，突出16英寸+90%屏占比核心视觉优势"
+      }
+    ]
+  },
+  "review": {
+    "issues": [
+      {
+        "stage": "fact",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第2段",
+        "detail": "‘轻过两瓶矿泉水’属于无依据的类比表述，事实点中无任何关于矿泉水重量的基准数据（如标准瓶装水规格、容量、密度），该比较缺乏客观参照系，易引发歧义或质疑，且未注明矿泉水规格（如500ml×2≈1kg，但实际市售常见为550ml/580ml等），无法验证‘轻过’是否成立",
+        "suggestion": "删除‘轻过两瓶矿泉水’这一无源类比，仅保留可验证的事实描述：‘约1.68kg起，356.7mm宽度塞进通勤包毫无压力，出差拎一天也不累肩’",
+        "ref": ""
+      },
+      {
+        "stage": "fact",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第3段",
+        "detail": "‘多开会议软件+写方案+查资料不卡顿，响应快得很稳’将具体使用场景（会议软件多开、写方案、查资料）的效果归因为硬件配置，但所引事实[F20][F28][F23][F63][F70][F62]仅说明处理器型号、内存容量、硬盘规格，并未提供任何性能测试数据（如多任务响应时间、应用启动延迟、后台进程数阈值等），也未限定测试环境（系统版本、后台服务、网络状态等），属于以配置代替实测效果的过度推断",
+        "suggestion": "弱化绝对化效果断言，改为‘搭载i9-13900H处理器、16GB内存与1TB SSD，支持多任务并行处理’，避免对未验证的具体使用体验做出确定性承诺",
+        "ref": ""
+      },
+      {
+        "stage": "fact",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第5段",
+        "detail": "‘会议室投影或户外临时办公都够亮够准’中‘够亮够准’为主观判断且隐含普适性保证，但事实点[F14][F15][F66][F67]仅提供典型亮度300 nits和色域100% sRGB，未说明在强环境光（如正午户外）下的可视性表现，亦未提供ΔE值、色准（如sRGB覆盖精度）、亮度均匀性等‘准’的量化依据；‘够亮’在户外强光下300nits通常不足，该表述夸大适用场景",
+        "suggestion": "删除主观评价‘够亮够准’，改为客观陈述：‘300 nits典型亮度与100% sRGB色域，满足常规室内办公及会议室投影需求’",
+        "ref": ""
+      },
+      {
+        "stage": "fact",
+        "source": "llm",
+        "severity": "warn",
+        "where": "配图方案",
+        "detail": "图像I1被重复使用两次（after_paragraph: 0 和 after_paragraph: 2），且两次caption侧重点冲突：首图caption强调‘16英寸大屏+高屏占比’，而第二处caption强调‘i9-13900H标压处理器，性能释放更从容’；但事实点中无任何关于‘性能释放’的量化数据（如PL1/PL2功耗、持续性能输出、散热能力等），‘性能释放更从容’属于未证实的工程效果宣称，超出[F20]等基础配置事实的支持范围",
+        "suggestion": "将after_paragraph: 2处的I1替换为真实体现性能场景的图（如多窗口运行界面），或修改其caption为客观描述：‘搭载第13代英特尔®酷睿™ i9-13900H标压处理器’，删除‘性能释放更从容’",
+        "ref": ""
+      },
+      {
+        "stage": "compliance",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第2段",
+        "detail": "‘轻过两瓶矿泉水’属于无依据类比，矿泉水单瓶常见规格为550ml（约0.55kg），两瓶约1.1kg，而产品重量约1.68kg，该类比与事实明显矛盾，构成夸大轻薄程度的误导性表达",
+        "suggestion": "删除‘轻过两瓶矿泉水’，改为‘约1.68kg起，通勤包轻松容纳，长时间携带肩部负担小’等基于事实的客观描述",
+        "ref": ""
+      },
+      {
+        "stage": "compliance",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第3段",
+        "detail": "‘多开会议软件+写方案+查资料不卡顿，响应快得很稳’暗示在所有使用场景、所有配置、所有系统负载下均绝对不卡顿，属于对性能效果的确定性承诺，而事实点仅说明硬件配置，并未验证实际多任务场景下的稳定性表现",
+        "suggestion": "改为‘搭载i9-13900H处理器、16GB内存和1TB SSD，支持多任务并行处理，常见办公场景响应流畅’",
+        "ref": ""
+      },
+      {
+        "stage": "compliance",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第4段",
+        "detail": "‘手机文件秒传、跨设备协同超顺手’中‘秒传’暗示确定性极低延迟（毫秒级），但华为分享实际传输速度受网络环境、文件大小、设备状态等多重因素影响，属无法保证的确定效果；‘超顺手’为主观模糊表述，缺乏事实支撑且易引发体验预期落差",
+        "suggestion": "改为‘支持华为分享，手机与电脑间文件快速传输；通过华为电脑管家实现跨设备协同’",
+        "ref": ""
+      },
+      {
+        "stage": "compliance",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第5段",
+        "detail": "‘日常办公续航扎实’中‘扎实’为无量化标准的主观形容词，易被解读为优于竞品或长期维持高水准续航，但事实点仅提供电池容量（56Wh/70Wh），未提供任何实测续航时长数据，构成无依据的效果暗示",
+        "suggestion": "改为‘配备56Wh或70Wh电池，满足典型办公场景使用需求’",
+        "ref": ""
+      }
+    ],
+    "removed": []
+  },
+  "history": [
+    {
+      "role": "用户",
+      "content": "请按以下设置创作营销图文。\n\n本次创作设置：产品：MateBook D 16；受众：职场人士；场景：职场办公；目标：种草"
+    },
+    {
+      "role": "助手",
+      "content": "发布在哪个平台?公众号、小红书、朋友圈、门店海报。"
+    },
+    {
+      "role": "用户",
+      "content": "请按以下设置创作营销图文。\n\n本次创作设置：平台：小红书"
+    }
+  ],
+  "trace": [
+    {
+      "stage": "1 结构化需求",
+      "at": "17:07:10",
+      "brief": {
+        "product": "MateBook D 16",
+        "product_type": "轻薄本",
+        "audience": "职场人士",
+        "scene": "职场办公",
+        "platform": "",
+        "goal": "种草",
+        "stage": "",
+        "main_problem": "",
+        "extra": "",
+        "llm_notes": "product_type根据MateBook D 16主流定位推断为轻薄本；scene匹配标准场景名‘职场办公’；goal明确为‘种草’；其余字段对话未提供，留空"
+      },
+      "questions": [
+        "发布在哪个平台?公众号、小红书、朋友圈、门店海报。"
+      ]
+    },
+    {
+      "stage": "页面结果",
+      "at": "17:07:10",
+      "status": "need_more_info"
+    },
+    {
+      "stage": "1 结构化需求",
+      "at": "17:07:22",
+      "brief": {
+        "product": "MateBook D 16",
+        "product_type": "轻薄本",
+        "audience": "职场人士",
+        "scene": "职场办公",
+        "platform": "小红书",
+        "goal": "种草",
+        "stage": "",
+        "main_problem": "",
+        "extra": "",
+        "llm_notes": "platform根据用户最新回复明确为‘小红书’，已覆盖原空值；其余字段均与已确定信息一致且未被修改"
+      },
+      "questions": []
+    },
+    {
+      "stage": "2 资料匹配",
+      "at": "17:07:53",
+      "facts": 83,
+      "images": 2,
+      "sources": [
+        "P1-产品参数库/02-MateBook-Windows/MateBook D 16/产品事实.md",
+        "P1-产品参数库/02-MateBook-Windows/MateBook D 16/卖点与限制.md"
+      ],
+      "dropped": [],
+      "conflicts": [],
+      "similar_models": [
+        "HUAWEI MateBook 14",
+        "HUAWEI MateBook Fold 非凡大师",
+        "HUAWEI MateBook Pro",
+        "HUAWEI MateBook Pro S",
+        "MateBook 14 酷睿 Ultra",
+        "MateBook D 14",
+        "MateBook D 16 SE 版",
+        "MateBook GT 系列",
+        "MateBook X系列"
+      ]
+    },
+    {
+      "stage": "3 策略匹配",
+      "at": "17:07:53",
+      "scene": "职场办公",
+      "platform": "小红书"
+    },
+    {
+      "stage": "5-6 核验与合规(第1轮)",
+      "at": "17:08:40",
+      "errors": 0,
+      "warns": 8
+    },
+    {
+      "stage": "页面结果",
+      "at": "17:08:40",
+      "status": "review"
+    }
+  ]
+}

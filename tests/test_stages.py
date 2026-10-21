@@ -151,6 +151,27 @@ class FactCheckTest(unittest.TestCase):
     def test_other_model_in_text(self):
         self.assertTrue(any(i.severity == "error" and "非主推型号" in i.detail for i in self.rules(Draft(body=[Paragraph("MateBook X Pro 更轻", [])]))))
 
+    def longer_main_case(self, text):
+        """主推型号比相近型号更长:相近型号 "MateBook D 16" 是主推型号 "MateBook D 16 SE 版" 的前缀。"""
+        b = Brief(**{**FULL_BRIEF, "product": "MateBook D 16 SE 版"})
+        ev = Evidence(facts=[Fact("F1", "MateBook D 16 SE 版", "主打轻薄", "t", "p")],
+                      candidates=["MateBook D 16"])
+        return fact_check.rule_check(Draft(body=[Paragraph(text, ["F1"])]), ev, b, strategy.match(b))
+
+    def test_full_main_model_not_flagged_as_its_shorter_prefix(self):
+        issues = self.longer_main_case("HUAWEI MateBook D 16 SE 版主打轻薄")
+        self.assertFalse([i for i in issues if i.severity == "error"])
+
+    def test_shorter_prefix_still_flagged_when_used_alone(self):
+        issues = self.longer_main_case("MateBook D 16 主打轻薄")
+        self.assertTrue(any("相近型号“MateBook D 16”" in i.detail for i in issues))
+
+    def test_mixing_reports_only_the_shorter_prefix(self):
+        issues = self.longer_main_case("MateBook D 16 SE 版比 MateBook D 16 更轻薄")
+        mixing = [i for i in issues if "相近型号" in i.detail]
+        self.assertEqual(len(mixing), 1)
+        self.assertIn("相近型号“MateBook D 16”", mixing[0].detail)
+
     def test_wrong_model_fact_cited(self):
         ev = ev_with("重量约1.36kg")
         ev.facts[0].model = "MateBook X Pro"

@@ -28,7 +28,7 @@ from agent import artifacts, export
 from agent.envfile import load_dotenv
 from agent.llm import LLMError
 from agent.model_routing import ModelRouter, make_llm
-from agent.localkb import LocalKBError
+from agent.knowledge import LocalKBError
 from agent.catalogkb import DEFAULT_RUNTIME_KB, make_store as open_store
 from agent.models import Session
 from agent.pipeline import Outcome, Pipeline

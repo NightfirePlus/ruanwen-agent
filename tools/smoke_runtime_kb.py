@@ -1,4 +1,4 @@
-"""新库轻量实测：首次资料复核、单张看图、写作；总计最多3个真实HTTP请求。"""
+"""新库轻量实测：首次文字资料复核与写作；总计最多2个真实HTTP请求。"""
 import json
 import os
 import sys
@@ -17,16 +17,16 @@ from agent.prompts import Prompts
 
 def main():
     if "--run" not in sys.argv:
-        print("--run 才执行。最多3次：资料复核1、图片审阅1、写作1。复用缓存检查不另发请求。")
+        print("--run 才执行。最多2次：文字资料复核1、写作1。图片不调用视觉模型；复用缓存检查不另发请求。")
         return 0
     load_dotenv()
     report_path = ROOT / ".local/knowledge-check.json"
     if report_path.exists() and "--resume" not in sys.argv:
         print("已有测试记录，停止重复调用：" + str(report_path))
         return 1
-    report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else {"max_requests": 3, "requests_started": 0, "completed": False}
-    if report["requests_started"] >= 3:
-        print("本轮已到3次上限，不再调用。")
+    report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else {"max_requests": 2, "requests_started": 0, "completed": False}
+    if report["requests_started"] >= 2:
+        print("本轮已到2次上限，不再调用。")
         return 1
     if report.get("error"):
         report.setdefault("prior_errors", []).append(report.pop("error"))
@@ -38,7 +38,7 @@ def main():
             super().consume()
             report["requests_started"] = self.used
             save()
-    budget = RecordedBudget(3)
+    budget = RecordedBudget(2)
     budget.used = report["requests_started"]
     router = modelscope_router(budget=budget)
     prompts = Prompts.load()
@@ -48,18 +48,18 @@ def main():
     os.environ.update(KB_REFERENCE_LIMIT="0", KB_IMAGE_LIMIT="1", KB_REVIEW_MAX_CALLS="2")
     save()
     try:
-        ev = store.collect(router.for_stage("evidence"), router.for_stage("image_review"), prompts, brief,
+        ev = store.collect(router.for_stage("evidence"), prompts, brief,
                            lambda title, detail: print(title + "：" + detail, flush=True))
         report["first_use"] = {"facts": len(ev.facts), "images": len(ev.images), "stats": ev.review_stats,
-                               "image_reviews": [i.review for i in ev.images], "excluded": ev.dropped}
+                               "image_review_disabled": True, "excluded": ev.dropped}
         before = report["requests_started"]
         os.environ["KB_REVIEW_MAX_CALLS"] = "0"
-        again = store.collect(router.for_stage("evidence"), router.for_stage("image_review"), prompts, brief)
+        again = store.collect(router.for_stage("evidence"), prompts, brief)
         report["cache_reused_without_requests"] = before == report["requests_started"] and bool(again.review_stats["cached"])
         if not report["cache_reused_without_requests"]:
             raise RuntimeError("缓存复用未达到预期")
         if "--skip-compose" in sys.argv:
-            report["scope"] = "资料复核、实际看图与缓存；写作仅离线验证，未调用"
+            report["scope"] = "文字资料复核、登记图片读取与缓存；写作仅离线验证，未调用"
             report["completed"] = bool(ev.facts)
         else:
             plan = strategy.match(brief)
