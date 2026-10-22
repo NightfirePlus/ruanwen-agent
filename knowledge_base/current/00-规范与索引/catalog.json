@@ -46,6 +46,62 @@
     {
       "model_key": "MateBook X系列",
       "official_product": "HUAWEI MateBook X Pro 酷睿 Ultra 微绒典藏版"
+    },
+    {
+      "model_key": "华为擎云 L420",
+      "official_product": "华为擎云 L420"
+    },
+    {
+      "model_key": "华为擎云 L420x",
+      "official_product": "华为擎云 L420x"
+    },
+    {
+      "model_key": "华为擎云 L420z",
+      "official_product": "华为擎云 L420z"
+    },
+    {
+      "model_key": "华为擎云 L540x",
+      "official_product": "华为擎云 L540x"
+    },
+    {
+      "model_key": "华为擎云 L540x 优享版",
+      "official_product": "华为擎云 L540x 优享版"
+    },
+    {
+      "model_key": "华为擎云 L540z",
+      "official_product": "华为擎云 L540z"
+    },
+    {
+      "model_key": "华为擎云 L540z 优享版",
+      "official_product": "华为擎云 L540z 优享版"
+    },
+    {
+      "model_key": "华为擎云 W515y",
+      "official_product": "华为擎云 W515y"
+    },
+    {
+      "model_key": "华为擎云 W585x 优享版",
+      "official_product": "华为擎云 W585x 优享版"
+    },
+    {
+      "model_key": "华为擎云 W585y 行业版",
+      "official_product": "华为擎云 W585y 行业版"
+    },
+    {
+      "model_key": "华为擎云 W585y",
+      "official_product": "华为擎云 W585y"
+    },
+    {
+      "model_key": "HUAWEI MateBook Fold 企业版",
+      "official_product": "HUAWEI MateBook Fold 企业版"
+    },
+    {
+      "model_key": "华为擎云 HM740",
+      "official_product": "华为擎云 HM740"
+    },
+    {
+      "model_key": "华为擎云 HM940",
+      "official_product": "华为擎云 HM940"
     }
   ],
   "governance_sources": [
@@ -103,7 +159,7 @@
         "prefixes": [],
         "sha256": "5101ff448d12cc7c70319845c3f74923656426dce7ab18fb150fda5bd17cab1f"
       },
-      "sha256": "1ea1b9cf2adf24e0810410f4d584a305716a183b23ef1c058b0b98eee716f96f"
+      "sha256": "e8dbcb071d0145372056530ad64015380856f243a5beffc564e18bf8bb86da99"
     },
     {
       "id": "DOC-7e6df87414a4aaeb",
@@ -182,7 +238,7 @@
         "prefixes": [],
         "sha256": "c5e586e1c5e984c7e7b27a76ae8373f355082ccb69b73ed932047cdd3ffad368"
       },
-      "sha256": "c8669af8c84412d4a00355aaacf1af004af778e35021349ac9840235c501278f"
+      "sha256": "26a564330b6cf9cf352f4d740c8d64262d5dab3667f649e780da47835547b880"
     },
     {
       "id": "DOC-2a702e4b072aa602",
@@ -261,7 +317,7 @@
         "prefixes": [],
         "sha256": "963a7651c3684e2ee82aca87c4b8c1f30464ec6bacf54e13a0e3b88ebd16fabb"
       },
-      "sha256": "bb2b9768f5e0ab4579db702fa82082969bf7079e1615d9f8b5611374d7a75740"
+      "sha256": "c39dae2fc94a112e46a9389dcd9f164242af9624f8a71f429c11be0285cc9a09"
     },
     {
       "id": "DOC-7418d1dd97fcbdcf",
@@ -340,7 +396,7 @@
         "prefixes": [],
         "sha256": "b2c07e62dcaa1e4568d58e4c27acc7b346031333c195d6c3f490993625768d06"
       },
-      "sha256": "3516bc1e8748391702bcbd89c78bc65e63a735c6641251a83a4557d86468569d"
+      "sha256": "a3fb47f253555d63f60a22bf5f2620cb874bf45a730a790d573eff388dfaa285"
     },
     {
       "id": "DOC-bd7f591b16818599",
@@ -419,7 +475,7 @@
         "prefixes": [],
         "sha256": "c6aea730841021636b85bfcaaed4e722f277b5d9c03d06d4c92be5b6a91f5f93"
       },
-      "sha256": "535eb34011e153d5ba9b772db4571cd2fa90fd4e77ae5bdc2af8dd40b7e04851"
+      "sha256": "7cbe44d89ea6978af96a1fdf5550e8b938b061ea7add90849fc1643ad30b2b9d"
     },
     {
       "id": "DOC-066fb8b78989671e",
@@ -498,7 +554,7 @@
         "prefixes": [],
         "sha256": "0c30f899e6c94518ead98a1bcfa73e1256632149500be38a7ad8e362b57104ac"
       },
-      "sha256": "495c9690cfa7a93f056cf73e7ef4d64b858f74eda65aae77a1c58a191099c9ba",
+      "sha256": "e9375400bf436452b4ef001f0651f4e49cd850764d5032b707388289b1864037",
       "source_corrections": [
         {
           "code": "official_page_dimension_label_mapping",
@@ -597,7 +653,7 @@
         "prefixes": [],
         "sha256": "9987340e95842652c619d348cf62eb7ef4ba6670f06f80e809f25bd134a1de1d"
       },
-      "sha256": "537c2990e865d0ed0121fd742adf6b72d1e5ec8cee7a4a4a7e643b41d2170f75",
+      "sha256": "e120de90d4d4c6bfd0ffec2043a6dbd770173aa9fcccfe9b8aab9af1643e6114",
       "source_corrections": [
         {
           "code": "official_page_dimension_label_mapping",
@@ -697,7 +753,7 @@
         "prefixes": [],
         "sha256": "af83091cf7c8cda9c4216993057c07b0cc3eaf4bdf36fa8c2efc40f1cc281d51"
       },
-      "sha256": "579f82d24daa91c45fcc80aa35972c3793ff6b694a8c996bb2092de4ad44084d",
+      "sha256": "27e0c0c92be6e0304b6ca69207d1c2cc61ac4757128469684dfee8c527f4e3f6",
       "source_corrections": [
         {
           "code": "official_page_dimension_label_mapping",
@@ -796,7 +852,7 @@
         "prefixes": [],
         "sha256": "5baf0c5ecedeecb48acf4018553b4a895d1e8ba4c6c58fe4d45c7b9b7e5728e1"
       },
-      "sha256": "ab929f7d97081eea4da77b4234641ef99dc38a9149daecf28434dda9958bd7b2"
+      "sha256": "c7ebb7adc852ef87763789b4ec85bb4546ea32a38ec9eb7c29560378597a65fc"
     },
     {
       "id": "DOC-18648644d2707f31",
@@ -875,7 +931,7 @@
         "prefixes": [],
         "sha256": "dd71def57084e1184e6f41d6a1fa4335138c69623639a5d86fe5c083ae2259b9"
       },
-      "sha256": "19a4d231cd72d48fcd37e59143767855c5357fee491e9f021a7e82e5989f2028",
+      "sha256": "553235bc462939cb31c640f3d1ff7f0be46d3042ccc08845af6b665f6772a94f",
       "source_corrections": [
         {
           "code": "official_page_dimension_label_mapping",
@@ -45149,11 +45205,473 @@
         "sha256": "e3c4763ca48d0238c74cab9821e771c196c080987ce2ba984a0bcaf1819c59aa"
       },
       "sha256": "29d989a902dc67a4f38a57f209eeb635b3af9c392a6478546bb9fa0a92330178"
+    },
+    {
+      "id": "DOC-c7fbf07bae7b58ca",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 L420/产品事实.md",
+      "model_key": "华为擎云 L420",
+      "official_product": "华为擎云 L420",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 10 / 统信桌面操作系统 20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/35284c3633-20-华为擎云 L420.md",
+        "sha256": "50fbdd1c2f50db6fcfe4b244f8c6f19a4f6a41288cb2b2343b49045becf864ad",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l420/",
+          "https://qingyun.huawei.com/laptops/qingyun-l420/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "50fbdd1c2f50db6fcfe4b244f8c6f19a4f6a41288cb2b2343b49045becf864ad"
+      },
+      "sha256": "b43cebdcb53f7ecd3ac65bc810c7fe10ae95e3c277bbe8f80ac6259d08f41aa7"
+    },
+    {
+      "id": "DOC-ebad4628d5422a6f",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 L420x/产品事实.md",
+      "model_key": "华为擎云 L420x",
+      "official_product": "华为擎云 L420x",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 V10 / 统信桌面操作系统 V20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/3f44f8e577-17-华为擎云 L420x.md",
+        "sha256": "12dadd72de3ecbe362942b16ca3720348bceeeb3fd55c75c14ad0790ac5cc2be",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l420x/",
+          "https://qingyun.huawei.com/laptops/qingyun-l420x/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "12dadd72de3ecbe362942b16ca3720348bceeeb3fd55c75c14ad0790ac5cc2be"
+      },
+      "sha256": "2517f30e772d039824ef1e710db20b1716f28162c4f51e188ab55a2280f24d54"
+    },
+    {
+      "id": "DOC-af0721f6783979b8",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 L420z/产品事实.md",
+      "model_key": "华为擎云 L420z",
+      "official_product": "华为擎云 L420z",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 V10 / 统信桌面操作系统 V20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/8c6374bcdf-14-华为擎云 L420z.md",
+        "sha256": "5aa4f1173bde50800f82c8773fddf44b09dff2acf725a311d9904a5219b32952",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l420z/",
+          "https://qingyun.huawei.com/laptops/qingyun-l420z/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "5aa4f1173bde50800f82c8773fddf44b09dff2acf725a311d9904a5219b32952"
+      },
+      "sha256": "6fc3f205ec0f802709ebc1c713b088970d32f365677c0c4733e3d10010861864"
+    },
+    {
+      "id": "DOC-bb791f8d055b6be0",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 L540x/产品事实.md",
+      "model_key": "华为擎云 L540x",
+      "official_product": "华为擎云 L540x",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 V10 / 统信桌面操作系统 V20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/eeae4352be-18-华为擎云 L540x.md",
+        "sha256": "14fb25af1907de858334fc1301b47fbbe351ee356f0650d7f85488d9073261af",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l540x/",
+          "https://qingyun.huawei.com/laptops/qingyun-l540x/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "14fb25af1907de858334fc1301b47fbbe351ee356f0650d7f85488d9073261af"
+      },
+      "sha256": "03c6258f730b08922703b2b35aaec9330c8c96f0bbbba95a759992a3e1701276"
+    },
+    {
+      "id": "DOC-be59ec4b444957b6",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 L540x 优享版/产品事实.md",
+      "model_key": "华为擎云 L540x 优享版",
+      "official_product": "华为擎云 L540x 优享版",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 V10 / 统信桌面操作系统 V20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/adcd8a54b1-19-华为擎云 L540x 优享版.md",
+        "sha256": "6be67934ff1148cefe4b684b6de7d411e2bd4148a977b20ce6facb7422ceb8ba",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l540x-youxiangban/",
+          "https://qingyun.huawei.com/laptops/qingyun-l540x-youxiangban/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "6be67934ff1148cefe4b684b6de7d411e2bd4148a977b20ce6facb7422ceb8ba"
+      },
+      "sha256": "4ff3b524a36070010908220b43f6fa2f745a4f825eb6b3444661b2cbf1bc093e"
+    },
+    {
+      "id": "DOC-d614ddbb34d9ad67",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 L540z/产品事实.md",
+      "model_key": "华为擎云 L540z",
+      "official_product": "华为擎云 L540z",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 V10 / 统信桌面操作系统 V20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/c851e5aed8-15-华为擎云 L540z.md",
+        "sha256": "d2b72d370a33f8dae82b2f435e30812fdcfdb935235f090d2505240d559fc9a3",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l540z/",
+          "https://qingyun.huawei.com/laptops/qingyun-l540z/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "d2b72d370a33f8dae82b2f435e30812fdcfdb935235f090d2505240d559fc9a3"
+      },
+      "sha256": "878538ad1058f13edfd90bef73aeaee152e41ad593acbe52d0871665f005c478"
+    },
+    {
+      "id": "DOC-f5032078c5cc1641",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 L540z 优享版/产品事实.md",
+      "model_key": "华为擎云 L540z 优享版",
+      "official_product": "华为擎云 L540z 优享版",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 V10 / 统信桌面操作系统 V20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/e254f66814-16-华为擎云 L540z 优享版.md",
+        "sha256": "cdb8a8033b0d4cfc225cd30c114f5bb87e109ef47567fade19923f1ba3d0bd6a",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l540z-youxiangban/",
+          "https://qingyun.huawei.com/laptops/qingyun-l540z-youxiangban/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "cdb8a8033b0d4cfc225cd30c114f5bb87e109ef47567fade19923f1ba3d0bd6a"
+      },
+      "sha256": "748f1bbd2fa8737b33612f08cfd3637aed81af4f397716cf9a8ff8b7d189579c"
+    },
+    {
+      "id": "DOC-6368a0589ee224ad",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 W515y/产品事实.md",
+      "model_key": "华为擎云 W515y",
+      "official_product": "华为擎云 W515y",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 V10 / 统信桌面操作系统 V20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/56eeff5806-21-华为擎云 W515y.md",
+        "sha256": "b61f27f16be341396aadce8bc50e8938502ce0c446b5e74d2f4b63292f116bc7",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/desktops/qingyun-w515y/",
+          "https://qingyun.huawei.com/desktops/qingyun-w515y/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "b61f27f16be341396aadce8bc50e8938502ce0c446b5e74d2f4b63292f116bc7"
+      },
+      "sha256": "6645708f31404ba68425ae0c7c6de2e1a1166a0fd34ed8f9c532052262abe2dc"
+    },
+    {
+      "id": "DOC-528c2c64ae4e8138",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 W585x 优享版/产品事实.md",
+      "model_key": "华为擎云 W585x 优享版",
+      "official_product": "华为擎云 W585x 优享版",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 / 统信桌面操作系统",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/baba3c2b87-24-华为擎云 W585x 优享版.md",
+        "sha256": "49a18d9063cb17bca69c04a2e9a9f274282cddd2a21212331835dec334d814d2",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/desktops/qingyun-w585x-youxiangban/",
+          "https://qingyun.huawei.com/desktops/qingyun-w585x-youxiangban/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "49a18d9063cb17bca69c04a2e9a9f274282cddd2a21212331835dec334d814d2"
+      },
+      "sha256": "e9f9bf606b59290ff9b55ec2cba3c76850777e7e3bd1a43ffc5f2beb286c3dcb"
+    },
+    {
+      "id": "DOC-fe0f7a8bdb19a826",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 W585y 行业版/产品事实.md",
+      "model_key": "华为擎云 W585y 行业版",
+      "official_product": "华为擎云 W585y 行业版",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 V10 / 统信桌面操作系统 V20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/92319a0ccc-23-华为擎云 W585y 行业版.md",
+        "sha256": "5168c6da35519ebdfbc77c5d6661ac619ee9087e460836e8b634019a310c2596",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/desktops/qingyun-w585y-industry/",
+          "https://qingyun.huawei.com/desktops/qingyun-w585y-industry/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "5168c6da35519ebdfbc77c5d6661ac619ee9087e460836e8b634019a310c2596"
+      },
+      "sha256": "de4ef283ad8315566c6ce79c02caee8bdc239f085beaf5b019511e29e988c532"
+    },
+    {
+      "id": "DOC-2cc9aefe71d94766",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 W585y/产品事实.md",
+      "model_key": "华为擎云 W585y",
+      "official_product": "华为擎云 W585y",
+      "platform": null,
+      "system_scope_raw": "银河麒麟桌面操作系统 V10 / 统信桌面操作系统 V20",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/44cfd42fa5-22-华为擎云 W585y.md",
+        "sha256": "cd0b0e072412047a41fdac4fee44616a2871b0942b7965eaa160e2c7f14f69db",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/desktops/qingyun-w585y/",
+          "https://qingyun.huawei.com/desktops/qingyun-w585y/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "cd0b0e072412047a41fdac4fee44616a2871b0942b7965eaa160e2c7f14f69db"
+      },
+      "sha256": "59b010b6ce45f835e18de69710a1ac3c01b59f1ef9396d4cbd2674a4443b60be"
+    },
+    {
+      "id": "DOC-5e7c9103b6ed803f",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/HUAWEI MateBook Fold 企业版/产品事实.md",
+      "model_key": "HUAWEI MateBook Fold 企业版",
+      "official_product": "HUAWEI MateBook Fold 企业版",
+      "platform": null,
+      "system_scope_raw": "HarmonyOS V1.0",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/5aebf1b2bf-11-HUAWEI MateBook Fold 企业版.md",
+        "sha256": "6f5b27b6003b54ba54ad335fd9e954ed1e64f272ac642b753899e1990632ffde",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/harmonyos-computer/matebook-fold-enterprise/",
+          "https://qingyun.huawei.com/harmonyos-computer/matebook-fold-enterprise/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "6f5b27b6003b54ba54ad335fd9e954ed1e64f272ac642b753899e1990632ffde"
+      },
+      "sha256": "11a7f4b29d7f76e1a18d566cc853b0719aead0a99e310106908ae0d7c411387c"
+    },
+    {
+      "id": "DOC-4dc9d50dd38676f5",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 HM740/产品事实.md",
+      "model_key": "华为擎云 HM740",
+      "official_product": "华为擎云 HM740",
+      "platform": null,
+      "system_scope_raw": "HarmonyOS V1.0 / 鸿蒙电脑专业版、鸿蒙电脑企业版",
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/0e53291d3c-12-华为擎云 HM740.md",
+        "sha256": "dc07ec6152eb818ae7ae2f6a1970779a9a01961b47b08caba8b3ecf7f20ea83b",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/harmonyos-computer/qingyun-hm740/",
+          "https://qingyun.huawei.com/harmonyos-computer/qingyun-hm740/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "dc07ec6152eb818ae7ae2f6a1970779a9a01961b47b08caba8b3ecf7f20ea83b"
+      },
+      "sha256": "8c4561d28633f0a915620b89b1d2e2ad100d4e87c967b80aeaeef1e97e6d4463"
+    },
+    {
+      "id": "DOC-603a6ca798dd7d47",
+      "category": "products",
+      "kind": "product_facts",
+      "path": "01-产品事实/华为擎云 HM940/产品事实.md",
+      "model_key": "华为擎云 HM940",
+      "official_product": "华为擎云 HM940",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "01-产品事实/补充资料/6dd3040d06-13-华为擎云 HM940.md",
+        "sha256": "58a606da0de48fa3070d73a076b6341f2efb693c20b6a8b8045b0d24a509fa28",
+        "line_spans": [],
+        "urls": [
+          "https://qingyun.huawei.com/harmonyos-computer/qingyun-hm940/",
+          "https://qingyun.huawei.com/harmonyos-computer/qingyun-hm940/specs/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "58a606da0de48fa3070d73a076b6341f2efb693c20b6a8b8045b0d24a509fa28"
+      },
+      "sha256": "19a833cf0433e60a29957af5778568e0d6fe7d8491243115165e41cc48f9261d"
     }
   ],
   "usage_policy": "runtime-policy.json；通过标记保存在usage-review.sqlite3，不代表官网或人工复核",
   "schema_version": 2,
-  "updated_at": "2026-10-21T22:04:01+08:00",
+  "updated_at": "2026-10-22T17:46:19+08:00",
   "content_layers": {
     "fact": [
       "product_facts"
