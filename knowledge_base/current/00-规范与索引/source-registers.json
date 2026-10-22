@@ -163,5 +163,105 @@
     "source": "model_fetch/evidence/matepad-se/来源清单.csv",
     "path": "00-规范与索引/来源登记/bad1f600fb-来源清单.csv",
     "sha256": "bad1f600fb21be38e550ce721e32be08c0e55491ca0bb7d29eac30ddff39f589"
+  },
+  {
+    "source": "model_fetch/evidence/mate90-rs/来源清单.csv",
+    "path": "00-规范与索引/来源登记/0ca4be82c0-来源清单.csv",
+    "sha256": "0ca4be82c0c704737bb15d1a6093afd5137e6aa9248e8c79c3d1f076498f60fa"
+  },
+  {
+    "source": "model_fetch/evidence/mate90-pro-max/来源清单.csv",
+    "path": "00-规范与索引/来源登记/86aefe9bea-来源清单.csv",
+    "sha256": "86aefe9bea28252ff61c74e2ba8f77af98d8ec9b8faa07627191f910ccdbffe8"
+  },
+  {
+    "source": "model_fetch/evidence/mate90-pro/来源清单.csv",
+    "path": "00-规范与索引/来源登记/d73abfe01f-来源清单.csv",
+    "sha256": "d73abfe01f7dd55ae506f26f5c5e5996102250acfa4c70eaf2f8b9557276494a"
+  },
+  {
+    "source": "model_fetch/evidence/mate90/来源清单.csv",
+    "path": "00-规范与索引/来源登记/254c05fae9-来源清单.csv",
+    "sha256": "254c05fae9f3328d9cb8996ee60b80f8c688d3e29fc7642269774e5873b7c90e"
+  },
+  {
+    "source": "model_fetch/evidence/nova16-pro/来源清单.csv",
+    "path": "00-规范与索引/来源登记/05c08da09d-来源清单.csv",
+    "sha256": "05c08da09d9663e4f59de49338fd2d12998f982d455cd8a732c3b97c7776573b"
+  },
+  {
+    "source": "model_fetch/evidence/mate-xt-2/来源清单.csv",
+    "path": "00-规范与索引/来源登记/c48f825f28-来源清单.csv",
+    "sha256": "c48f825f285ef435cf83ab928ca8ad92cd441eec79d2860eebc49648236e11dc"
+  },
+  {
+    "source": "model_fetch/evidence/pura-x-view/来源清单.csv",
+    "path": "00-规范与索引/来源登记/c3a776a499-来源清单.csv",
+    "sha256": "c3a776a499df47b1d01100f242e6446a94b8362514647dc217b221f0993b5944"
+  },
+  {
+    "source": "model_fetch/evidence/pura-x-max/来源清单.csv",
+    "path": "00-规范与索引/来源登记/dc9b44a1f2-来源清单.csv",
+    "sha256": "dc9b44a1f2603d34a9063f40fb394ec5b250dbfde938e724dfa58c47c602c4ab"
+  },
+  {
+    "source": "model_fetch/evidence/nova16-se/来源清单.csv",
+    "path": "00-规范与索引/来源登记/601aa54350-来源清单.csv",
+    "sha256": "601aa54350b953ba4ad45d35681ff8527ce934e049e0487e19ddcea067c3ba91"
+  },
+  {
+    "source": "model_fetch/evidence/watch-d3/来源清单.csv",
+    "path": "00-规范与索引/来源登记/c9d3faa37e-来源清单.csv",
+    "sha256": "c9d3faa37e13cfa862706a23028ad0c78e287e2ed311319b6c44691f805f4725"
+  },
+  {
+    "source": "model_fetch/evidence/watch-ultimate-2/来源清单.csv",
+    "path": "00-规范与索引/来源登记/5548a0d2ee-来源清单.csv",
+    "sha256": "5548a0d2ee9a2ee286c4470e644631a9b3b7101ea876ed757ca93e490b3bba08"
+  },
+  {
+    "source": "model_fetch/evidence/watch-6-pro/来源清单.csv",
+    "path": "00-规范与索引/来源登记/ace4f1ea8f-来源清单.csv",
+    "sha256": "ace4f1ea8f34d2479245364117c7290bbde72aadbc6d6eb81833c2ad00553ffc"
+  },
+  {
+    "source": "model_fetch/evidence/watch-6/来源清单.csv",
+    "path": "00-规范与索引/来源登记/f338879851-来源清单.csv",
+    "sha256": "f338879851be3bc27466b2c54f527aee0f5aa264fd9e37a68bde06ea9f154b69"
+  },
+  {
+    "source": "model_fetch/evidence/watch-fit5-pro/来源清单.csv",
+    "path": "00-规范与索引/来源登记/474082b676-来源清单.csv",
+    "sha256": "474082b676329f09403a9f82b7a84ed662910ae2e6d6f85f558e87e291b416a2"
+  },
+  {
+    "source": "model_fetch/evidence/watch-fit5/来源清单.csv",
+    "path": "00-规范与索引/来源登记/adb5aabc7b-来源清单.csv",
+    "sha256": "adb5aabc7bca0831dc01b562b307823e1be3c10481a3b5e6d512d09cc93c8e31"
+  },
+  {
+    "source": "model_fetch/evidence/watch-gt7-pro/来源清单.csv",
+    "path": "00-规范与索引/来源登记/e092049d6d-来源清单.csv",
+    "sha256": "e092049d6d502427730e0a194c67714b4631ab03c34a7dc28c027f8289ab0a7c"
+  },
+  {
+    "source": "model_fetch/evidence/watch-gt7/来源清单.csv",
+    "path": "00-规范与索引/来源登记/1c66d8eed0-来源清单.csv",
+    "sha256": "1c66d8eed07a3cea2eeff1dce45cec3e5e83a2f2137a86b4878bf0e9cf2d083b"
+  },
+  {
+    "source": "model_fetch/evidence/freeclip2/来源清单.csv",
+    "path": "00-规范与索引/来源登记/76a29b9f6e-来源清单.csv",
+    "sha256": "76a29b9f6ec26bfd8a9dd54be48007a78566d233f677681f04b330597474fc03"
+  },
+  {
+    "source": "model_fetch/evidence/freebuds-neo/来源清单.csv",
+    "path": "00-规范与索引/来源登记/93e18dd78d-来源清单.csv",
+    "sha256": "93e18dd78de858751d8a00f2860ca77993caa11a6aef2fb18a461e3f83491df9"
+  },
+  {
+    "source": "model_fetch/evidence/freebuds7/来源清单.csv",
+    "path": "00-规范与索引/来源登记/fb7a5bc2f4-来源清单.csv",
+    "sha256": "fb7a5bc2f44d65d31ec003d688e658ea054be7868d8eecf89f34ec37034e0f70"
   }
 ]
