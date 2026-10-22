@@ -75,6 +75,30 @@ class Strategy:
 
 
 @dataclass
+class ContentBlock:
+    """文章规划中的一个可独立生成、审核和重写的内容块。"""
+
+    id: str
+    kind: str                     # opening / body / closing
+    objective: str
+    fact_ids: list[str] = field(default_factory=list)
+    depends_on: list[str] = field(default_factory=list)
+    status: str = "pending_generate"
+    version: int = 0
+    attempts: int = 0
+    draft: Draft | None = None
+    issues: list[Issue] = field(default_factory=list)
+    removed: list[dict] = field(default_factory=list)
+
+
+@dataclass
+class ContentPlan:
+    """文章分块计划；块顺序同时也是最终合并顺序。"""
+
+    blocks: list[ContentBlock] = field(default_factory=list)
+
+
+@dataclass
 class Paragraph:
     text: str
     fact_ids: list[str] = field(default_factory=list)
@@ -138,8 +162,10 @@ class Session:
     """一次完整对话的状态,多轮追问与确认后的修改都在它上面进行。"""
 
     brief: Brief = field(default_factory=Brief)
+    canonical_brief: str = ""                         # 结构化需求的确定性自然语言表达
     evidence: Evidence | None = None
     strategy: Strategy | None = None
+    content_plan: ContentPlan | None = None
     draft: Draft | None = None
     review: Review | None = None
     history: list[dict] = field(default_factory=list)     # 追问对话

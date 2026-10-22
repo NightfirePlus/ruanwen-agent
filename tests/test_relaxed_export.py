@@ -19,7 +19,7 @@ class RelaxedReviewTest(unittest.TestCase):
     def test_advisory_does_not_block_or_trigger_rewrite(self):
         out, session, llm = self.run_pipeline()
         self.assertEqual(out.status, "review")
-        self.assertNotIn("rewrite", llm.calls)
+        self.assertNotIn("chunk_rewrite", llm.calls)
         self.assertTrue(any(i.source == "llm" and i.severity == "warn" for i in session.review.issues))
         report = export.to_markdown(session)
         self.assertIn("仍有提示待确认", report)
@@ -30,7 +30,7 @@ class RelaxedReviewTest(unittest.TestCase):
         draft["body"].append({"text": "续航长达20小时。", "fact_ids": ["F1"]})
         out, session, llm = self.run_pipeline(draft)
         self.assertEqual(out.status, "review")
-        self.assertIn("rewrite", llm.calls)
+        self.assertIn("chunk_rewrite", llm.calls)
         self.assertNotIn("20小时", export.to_text(session))
         self.assertTrue(session.review.removed)
 

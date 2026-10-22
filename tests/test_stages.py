@@ -304,16 +304,17 @@ class PipelineTest(unittest.TestCase):
         session = Session()
         self.assertEqual(pipe.talk(session, "go").status, "review")
         self.assertEqual(session.strategy.performance, guidance)
-        self.assertIn('"reference_weight": 0.88', llm.users["compose"])
+        self.assertIn('"reference_weight": 0.88', llm.users["content_plan"])
         strategy_trace = next(item for item in session.trace if item["stage"] == "3 策略匹配")
         self.assertEqual(strategy_trace["top_reference_weight"], 0.88)
 
     def test_writer_system_only_for_writing(self):
         llm = FakeLLM(FULL_BRIEF)
         new_pipe(llm).talk(Session(), "go")
-        for stage in ("intake", "evidence", "fact_review", "compliance_review"):
+        for stage in ("intake", "evidence", "content_plan", "chunk_review", "coherence_review", "fact_review", "compliance_review"):
             self.assertIsNone(llm.systems[stage], stage)
-        self.assertEqual(llm.systems["compose"], make_prompts().writer_system)
+        for stage in ("chunk_generate", "coherence"):
+            self.assertEqual(llm.systems[stage], make_prompts().writer_system)
 
     def test_unknown_model_asks_to_choose(self):
         llm = FakeLLM({**FULL_BRIEF, "product": "MateBook 15"})
@@ -336,10 +337,10 @@ class PipelineTest(unittest.TestCase):
         s = Session()
         out = new_pipe(llm).talk(s, "go")
         self.assertEqual(out.status, "review")
-        self.assertIn("rewrite", llm.calls)
+        self.assertIn("chunk_rewrite", llm.calls)
         self.assertNotIn("国补", s.draft.body[0].text)
-        self.assertIn("重量约1.36kg", llm.users["rewrite"])
-        self.assertIn("first_person_experience", llm.users["rewrite"])
+        self.assertIn("重量约1.36kg", llm.users["chunk_rewrite"])
+        self.assertIn("first_person_experience", llm.users["chunk_rewrite"])
 
     def test_unfixable_draft_blocked(self):
         bad = good_draft()
@@ -379,7 +380,8 @@ class FeedbackTest(unittest.TestCase):
         self.assertIs(s.evidence, ev)
         self.assertIs(s.strategy, st)
         self.assertEqual(self.count(llm, "evidence"), 1)           # 资料没有重新抽取
-        self.assertEqual(self.count(llm, "compose"), 2)
+        self.assertEqual(self.count(llm, "content_plan"), 2)
+        self.assertEqual(self.count(llm, "chunk_generate"), 6)
         self.assertIn("语气再轻松一点", s.brief.extra)
 
     def test_change_platform_rematches_strategy_only(self):
@@ -398,6 +400,32 @@ class FeedbackTest(unittest.TestCase):
         self.assertEqual(s.strategy.scene["name"], "职场办公")
         self.assertEqual(self.count(llm, "evidence"), 1)
 
+    def test_rewrite_block_reuses_plan_and_untouched_body(self):
+        pipe, s, llm = self.ready(intent={"action": "rewrite_block", "value": "标题", "note": "标题短一点"})
+        plan = s.content_plan
+        body_block = next(block for block in plan.blocks if block.kind == "body")
+        old_body_draft = body_block.draft
+        old_body_version = body_block.version
+        plan_calls = self.count(llm, "content_plan")
+        generate_calls = self.count(llm, "chunk_generate")
+        out = pipe.feedback(s, "标题短一点")
+        self.assertEqual(out.status, "review", out.reason)
+        self.assertIs(s.content_plan, plan)
+        self.assertIs(body_block.draft, old_body_draft)
+        self.assertEqual(body_block.version, old_body_version)
+        self.assertEqual(self.count(llm, "content_plan"), plan_calls)
+        # opening 与依赖它的 closing 重做，独立 body 保持冻结。
+        self.assertEqual(self.count(llm, "chunk_generate"), generate_calls + 2)
+        trace = next(item for item in reversed(s.trace) if item["stage"] == "局部回退")
+        self.assertEqual(trace["invalidated"], ["B1", "B3"])
+
+    def test_change_audience_and_goal_use_strategy_path(self):
+        b = Brief(**FULL_BRIEF)
+        audience, step = revise.apply(b, {"action": "change_audience", "value": "职场新人", "note": ""}, "")
+        goal, goal_step = revise.apply(b, {"action": "change_goal", "value": "咨询引导", "note": ""}, "")
+        self.assertEqual((audience.audience, step), ("职场新人", "strategy"))
+        self.assertEqual((goal.goal, goal_step), ("咨询引导", "strategy"))
+
     def test_change_product_restarts_from_intake(self):
         pipe, s, llm = self.ready(intent={"action": "change_product", "value": "MateBook 14s"})
         llm.brief = {}                                              # 重新抽取时没有新信息,沿用已有字段
@@ -415,7 +443,8 @@ class FeedbackTest(unittest.TestCase):
         pipe, s, llm = self.ready(intent={"action": "unclear"})
         out = pipe.feedback(s, "嗯……")
         self.assertEqual(out.status, "need_more_info")
-        self.assertEqual(self.count(llm, "compose"), 1)            # 不乱改
+        self.assertEqual(self.count(llm, "content_plan"), 1)      # 不乱改
+        self.assertEqual(self.count(llm, "chunk_generate"), 3)
 
     def test_unsupported_platform_asks_back(self):
         pipe, s, _ = self.ready(intent={"action": "change_platform", "value": "抖音"})
@@ -436,7 +465,7 @@ class PromptsTest(unittest.TestCase):
         return {n: "# 标题\n\n【待补充】由负责同学填写\n" for n in SPECS}
 
     def test_repo_prompts_are_complete(self):
-        # 队友已写完全部提示词:仓库里的 8 个文件必须通过变量校验,可以严格加载
+        # 仓库里的全部运行提示词必须通过变量校验，可以严格加载。
         p = Prompts.load(strict=False)
         self.assertEqual(p.problems, {})
         self.assertEqual(Prompts.load().writer_system, p.writer_system)
@@ -495,6 +524,7 @@ class ReviseApplyTest(unittest.TestCase):
         b = Brief(**FULL_BRIEF)
         self.assertEqual(revise.apply(b, {"action": "confirm", "value": "", "note": ""}, "")[1], "done")
         self.assertEqual(revise.apply(b, {"action": "rewrite", "value": "", "note": "短一点"}, "")[1], "generate")
+        self.assertEqual(revise.apply(b, {"action": "rewrite_block", "value": "标题", "note": "短一点"}, "")[1], "block")
         nb, step = revise.apply(b, {"action": "change_product", "value": "MateBook X Pro", "note": ""}, "")
         self.assertEqual((nb.product, nb.extra, step), ("MateBook X Pro", "", "intake"))
         self.assertEqual(b.product, "MateBook 14")                 # 原对象不被修改

@@ -80,6 +80,20 @@ def create_docx(s: Session, target: Path | str, full_report: bool = False) -> Pa
             p = doc.add_paragraph(style="Normal")
             p.add_run(f"{label}：").bold = True
             p.add_run(value)
+        if s.canonical_brief:
+            p = doc.add_paragraph(style="Normal")
+            p.add_run("规范任务说明：").bold = True
+            p.add_run(s.canonical_brief)
+        if s.content_plan and s.content_plan.blocks:
+            p = doc.add_paragraph(style="Normal")
+            p.add_run("分块流水线：").bold = True
+            for block in s.content_plan.blocks:
+                rewrites = max(0, block.attempts - 1)
+                doc.add_paragraph(
+                    f"{block.id} [{block.kind}] {block.status} · "
+                    f"版本 {block.version} · 重写 {rewrites} 次",
+                    style="Normal",
+                )
         doc.add_heading("二 知识库依据", level=1)
         for fact in _used_facts(s):
             p = doc.add_paragraph(style="Normal")
@@ -201,6 +215,19 @@ def create_pdf(s: Session, target: Path | str, full_report: bool = False) -> Pat
             ("内容目标", s.brief.goal), ("核心问题", s.brief.main_problem or "未单独说明"),
         ):
             story.append(Paragraph(f"<b>{escape(label)}：</b>{escape(value)}", body))
+        if s.canonical_brief:
+            story.append(Paragraph(
+                f"<b>规范任务说明：</b>{escape(s.canonical_brief)}", body
+            ))
+        if s.content_plan and s.content_plan.blocks:
+            story.append(Paragraph("<b>分块流水线：</b>", body))
+            for block in s.content_plan.blocks:
+                rewrites = max(0, block.attempts - 1)
+                summary = (
+                    f"{block.id} [{block.kind}] {block.status} · "
+                    f"版本 {block.version} · 重写 {rewrites} 次"
+                )
+                story.append(Paragraph(escape(summary), body))
         story.append(Paragraph("二 知识库依据", heading))
         for fact in _used_facts(s):
             story.append(Paragraph(f"<b>{escape(fact.id)}</b>  {escape(fact.text)}", body))

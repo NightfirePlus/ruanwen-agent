@@ -1,7 +1,7 @@
 # 软文写作系统提示词
 
 <!--
-只在 compose 和 rewrite 时作为系统消息。
+只在 compose、rewrite、chunk_generate、chunk_rewrite 和 coherence 时作为系统消息。
 平台与场景细则由 config/*.json 注入；本文件只保留不随平台变化的通用规则。
 -->
 

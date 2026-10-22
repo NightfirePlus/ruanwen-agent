@@ -7,7 +7,7 @@ import urllib.error
 from unittest.mock import patch
 
 from agent.llm import LLMClient, LLMError, RequestBudget
-from agent.model_routing import ModelRouter, STAGES, make_llm, modelscope_router
+from agent.model_routing import ModelRouter, STAGES, llm_multi_router, make_llm, modelscope_router
 from agent.models import Session
 from agent.pipeline import Pipeline
 from helpers import FULL_BRIEF, FakeLLM, FakeStore, good_draft, make_prompts
@@ -103,7 +103,7 @@ class RoutingTest(unittest.TestCase):
         from tools.smoke_models import cases
         with patch("agent.llm.urllib.request.urlopen", side_effect=AssertionError("禁止联网")):
             tasks = cases()
-        self.assertEqual([t[0] for t in tasks], ["intake", "evidence", "compose", "fact_review"])
+        self.assertEqual([t[0] for t in tasks], ["intake", "content_plan", "chunk_generate", "chunk_review"])
         self.assertTrue(all("{{" not in user for _, user, _, _ in tasks))
         check = tasks[0][3]
         self.assertTrue(check({**FULL_BRIEF, "product": "华为 MateBook 14"}))
@@ -133,7 +133,54 @@ class RoutingTest(unittest.TestCase):
             self.assertTrue(all(c._base_url == "https://api-inference.modelscope.cn/v1"
                                 for c in router.clients.values()))
             self.assertIs(router.for_stage("compose"), router.for_stage("rewrite"))
+            self.assertIs(router.for_stage("chunk_generate"), router.for_stage("chunk_rewrite"))
+            self.assertIs(router.for_stage("chunk_generate"), router.for_stage("coherence"))
+            self.assertIsNot(router.for_stage("chunk_generate"), router.for_stage("chunk_review"))
+            self.assertIs(router.for_stage("chunk_review"), router.for_stage("coherence_review"))
             self.assertIsNot(router.for_stage("compose"), router.for_stage("fact_review"))
+
+    def test_llm_multi_profile_uses_llm_endpoint_and_five_roles(self):
+        with patch.dict(os.environ, {
+            "LLM_API_KEY": "fake",
+            "LLM_BASE_URL": "https://llm.example.test/v1",
+            "LLM_PROFILE": "llm-multi-v1",
+        }, clear=True):
+            router = make_llm()
+        self.assertEqual(set(router.stages), STAGES)
+        self.assertEqual(set(router.clients), {"understand", "evidence", "plan", "write", "review"})
+        self.assertTrue(all(client._base_url == "https://llm.example.test/v1"
+                            for client in router.clients.values()))
+        self.assertEqual(router.for_stage("intake").model, "qwen3.8-flash")
+        self.assertEqual(router.for_stage("evidence").model, "deepseek-v4.1-flash")
+        self.assertEqual(router.for_stage("content_plan").model, "qwen3.8-flash")
+        self.assertIs(router.for_stage("intake")._enable_thinking, False)
+        self.assertIs(router.for_stage("content_plan")._enable_thinking, False)
+        self.assertEqual(router.for_stage("chunk_generate").model, "deepseek-v4.1-flash")
+        self.assertEqual(router.for_stage("chunk_review").model, "glm-5.2")
+        self.assertIs(router.for_stage("chunk_review")._enable_thinking, False)
+        self.assertIs(router.for_stage("chunk_generate"), router.for_stage("chunk_rewrite"))
+        self.assertIs(router.for_stage("chunk_generate"), router.for_stage("coherence"))
+        self.assertIs(router.for_stage("chunk_review"), router.for_stage("fact_review"))
+        self.assertIsNot(router.for_stage("chunk_generate"), router.for_stage("chunk_review"))
+
+    def test_complete_llm_credentials_select_multi_profile_by_default(self):
+        with patch.dict(os.environ, {
+            "LLM_API_KEY": "fake",
+            "LLM_BASE_URL": "https://llm.example.test/v1",
+        }, clear=True):
+            router = make_llm()
+        self.assertIsInstance(router, ModelRouter)
+        self.assertEqual(router.for_stage("content_plan").model, "qwen3.8-flash")
+        self.assertEqual(router.for_stage("chunk_generate").model, "deepseek-v4.1-flash")
+        self.assertEqual(router.for_stage("chunk_review").model, "glm-5.2")
+
+    def test_llm_multi_profile_requires_key_and_endpoint(self):
+        with patch.dict(os.environ, {"LLM_API_KEY": "", "LLM_BASE_URL": ""}, clear=True):
+            with self.assertRaisesRegex(LLMError, "LLM_API_KEY"):
+                llm_multi_router()
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake", "LLM_BASE_URL": ""}, clear=True):
+            with self.assertRaisesRegex(LLMError, "LLM_BASE_URL"):
+                llm_multi_router()
 
     def test_incomplete_routes_fail_closed(self):
         with self.assertRaises(LLMError):
@@ -145,16 +192,24 @@ class RoutingTest(unittest.TestCase):
         bad = good_draft()
         bad["body"][0]["text"] = "续航长达20小时"
         writer = FakeLLM(drafts=[bad, good_draft()])
+        write_stages = {"compose", "rewrite", "content_plan", "chunk_generate", "chunk_rewrite", "coherence"}
         stages = {s: ("understand" if s in ("intake", "revise_intent") else
-                      "write" if s in ("compose", "rewrite") else "analyze") for s in STAGES}
+                      "write" if s in write_stages else "analyze") for s in STAGES}
         router = ModelRouter({"understand": understand, "write": writer, "analyze": analyze}, stages)
         pipe = Pipeline(router, FakeStore(), make_prompts())
         session = Session()
         out = pipe.talk(session, "go")
         self.assertEqual(out.status, "review", out.reason)
         self.assertEqual(understand.calls, ["intake"])
-        self.assertEqual(writer.calls, ["compose", "rewrite"])
-        self.assertEqual(analyze.calls, ["evidence", "fact_review", "compliance_review", "fact_review", "compliance_review"])
+        self.assertEqual(writer.calls.count("content_plan"), 1)
+        self.assertEqual(writer.calls.count("chunk_generate"), 3)
+        self.assertEqual(writer.calls.count("chunk_rewrite"), 1)
+        self.assertEqual(writer.calls.count("coherence"), 1)
+        self.assertEqual(analyze.calls.count("evidence"), 1)
+        self.assertEqual(analyze.calls.count("chunk_review"), 4)
+        self.assertEqual(analyze.calls.count("coherence_review"), 1)
+        self.assertEqual(analyze.calls.count("fact_review"), 1)
+        self.assertEqual(analyze.calls.count("compliance_review"), 1)
         self.assertEqual(pipe.feedback(session, "确认").status, "done")
         self.assertEqual(understand.calls, ["intake", "revise_intent"])
 

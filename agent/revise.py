@@ -3,7 +3,10 @@
 LLM 只负责理解用户这句话想改什么(判断意图);用哪个动作重跑、哪些结果可以复用,由规则决定:
   confirm      确认定稿
   rewrite      只是认为文案不行/临时要求 → 回到生成(复用需求、资料、策略)
+  rewrite_block  指定标题、导语、某个正文块或收束部分 → 只让该块及依赖它的下游块失效
   change_scene 换场景或人群 → 重新匹配策略表后生成(资料复用)
+  change_audience 换目标人群 → 重新匹配策略并规划
+  change_goal 换创作目标 → 重新匹配策略并规划
   change_platform 换平台 → 重新匹配策略表后生成(资料复用)
   change_product  换产品 → 从结构化需求重来(型号、资料全部作废)
 不明确的修改意见不猜,交回去追问。
@@ -17,7 +20,10 @@ from . import config
 from .models import Brief, Draft
 from .prompts import Prompts
 
-ACTIONS = ("confirm", "rewrite", "change_scene", "change_platform", "change_product", "unclear")
+ACTIONS = (
+    "confirm", "rewrite", "rewrite_block", "change_scene", "change_audience",
+    "change_goal", "change_platform", "change_product", "unclear",
+)
 
 
 def classify(llm, prompts: Prompts, brief: Brief, draft: Draft, user_text: str) -> dict:
@@ -40,7 +46,7 @@ def classify(llm, prompts: Prompts, brief: Brief, draft: Draft, user_text: str) 
 def apply(brief: Brief, intent: dict, user_text: str) -> tuple[Brief | None, str]:
     """把意图落到需求上。返回 (新需求, 下一步)。新需求为 None 表示无法执行,需要追问。
 
-    下一步取值:done / generate / strategy / intake
+    下一步取值:done / generate / block / strategy / intake
     """
     action, value = intent["action"], intent["value"]
     new = Brief(**{f.name: getattr(brief, f.name) for f in fields(Brief)})
@@ -49,6 +55,11 @@ def apply(brief: Brief, intent: dict, user_text: str) -> tuple[Brief | None, str
     if action == "rewrite":
         new.extra = (new.extra + ";" if new.extra else "") + (intent["note"] or user_text)
         return new, "generate"
+    if action == "rewrite_block":
+        if not value:
+            return None, "block"
+        new.extra = (new.extra + ";" if new.extra else "") + (intent["note"] or user_text)
+        return new, "block"
     if action == "change_platform":
         target = config.match_alias(value, config.platforms())
         if not target:
@@ -60,6 +71,16 @@ def apply(brief: Brief, intent: dict, user_text: str) -> tuple[Brief | None, str
         new.scene = target or value
         if not new.scene:
             return None, "intake"
+        return new, "strategy"
+    if action == "change_audience":
+        if not value:
+            return None, "intake"
+        new.audience = value
+        return new, "strategy"
+    if action == "change_goal":
+        if not value:
+            return None, "intake"
+        new.goal = value
         return new, "strategy"
     if action == "change_product":
         if not value:

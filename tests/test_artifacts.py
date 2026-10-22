@@ -4,7 +4,8 @@ from pathlib import Path
 
 from agent import artifacts, export
 from agent.models import (
-    Brief, Draft, Evidence, Fact, ImagePlacement, ImageRef, Issue, Paragraph, Review, Session, Strategy,
+    Brief, ContentBlock, ContentPlan, Draft, Evidence, Fact, ImagePlacement, ImageRef, Issue,
+    Paragraph, Review, Session, Strategy,
 )
 
 
@@ -22,6 +23,10 @@ def sample_session():
             tags=["开学季", "华为电脑"],
         ),
         review=Review([Issue("fact", "llm", "warn", "正文", "发布前确认实际配置")]),
+        canonical_brief="产品：MateBook 14；目标受众：大学新生；发布平台：小红书。",
+        content_plan=ContentPlan([
+            ContentBlock("B1", "body", "说明便携性", ["F1"], status="passed", version=2, attempts=2),
+        ]),
     )
 
 
@@ -31,6 +36,12 @@ class ArtifactExportTest(unittest.TestCase):
         self.assertIn("开学轻装上阵", text)
         self.assertNotIn("知识库依据", text)
         self.assertNotIn("核验结果", text)
+
+    def test_full_markdown_includes_pipeline_observability(self):
+        text = export.to_markdown(sample_session())
+        self.assertIn("规范任务说明", text)
+        self.assertIn("分块流水线", text)
+        self.assertIn("B1 [body] passed · 版本 2 · 重写 1 次", text)
 
     def test_docx_and_pdf_are_created_for_both_scopes(self):
         with tempfile.TemporaryDirectory() as folder:

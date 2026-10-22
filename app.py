@@ -150,12 +150,25 @@ def render_scene_card(s: Session | None) -> str:
             f"\n\n**宣传数据参考**　{len(refs)} 篇历史作品 · "
             f"最高权重 {refs[0]['reference_weight']:.2f}"
         )
+    pipeline_note = ""
+    if s.content_plan and s.content_plan.blocks:
+        blocks = s.content_plan.blocks
+        passed = sum(block.status == "passed" for block in blocks)
+        rewrites = sum(max(0, block.attempts - 1) for block in blocks)
+        pipeline_note = (
+            f"\n\n**分块流水线**　{passed}/{len(blocks)} 块已通过 · "
+            f"重写 {rewrites} 次"
+        )
+    canonical_note = (
+        f"\n\n**规范任务说明**　{s.canonical_brief}"
+        if s.canonical_brief else ""
+    )
     return (
         f"**产品**　{b.product or '待确认'}\n\n"
         f"**受众**　{b.audience or '待确认'}\n\n"
         f"**场景／平台**　{b.scene or '待确认'} ／ {b.platform or '待确认'}\n\n"
         f"**内容目标**　{b.goal or '待确认'}\n\n"
-        f"**内容切入点**　{angle}{performance_note}"
+        f"**内容切入点**　{angle}{performance_note}{pipeline_note}{canonical_note}"
     )
 
 

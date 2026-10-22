@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import re
 
+from . import briefing
 from .compose import draft_to_json, facts_block, images_block, originals_block
 from .models import Brief, Draft, Evidence, Issue, Strategy
 from .norm import llm_issues, mentioned_models, norm_model, spec_versions, usable_images
@@ -108,9 +109,11 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
     return issues
 
 
-def llm_check(llm, prompts: Prompts, draft: Draft, ev: Evidence) -> list[Issue]:
+def llm_check(llm, prompts: Prompts, draft: Draft, ev: Evidence, brief: Brief) -> list[Issue]:
     model = ev.facts[0].model if ev.facts else ""
-    data = llm.json(prompts.render("fact_review", {"稿件": draft_to_json(draft), "事实点清单": facts_block(ev),
+    data = llm.json(prompts.render("fact_review", {
+        "规范需求": briefing.canonicalize(brief),
+        "稿件": draft_to_json(draft), "事实点清单": facts_block(ev),
         "原始资料": originals_block(ev), "图片登记": images_block(ev, model)}))
     return llm_issues(data, "fact")
 
@@ -118,7 +121,7 @@ def llm_check(llm, prompts: Prompts, draft: Draft, ev: Evidence) -> list[Issue]:
 def check(llm, prompts: Prompts, draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> list[Issue]:
     issues = rule_check(draft, ev, brief, strategy)
     try:
-        issues += llm_check(llm, prompts, draft, ev)
+        issues += llm_check(llm, prompts, draft, ev, brief)
     except PromptError as e:      # 提示词还没写好时,规则部分照常工作,并明确提示 LLM 部分被跳过
         issues.append(Issue("fact", "llm", "warn", "事实核验", f"LLM 核验已跳过:{e}"))
     return issues

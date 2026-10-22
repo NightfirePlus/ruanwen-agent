@@ -3,7 +3,7 @@
 <!--
 作为唯一的用户消息发送。
 变量：{{需求}} {{稿件摘要}} {{用户修改意见}}
-输出契约：{"action":"confirm|rewrite|change_scene|change_platform|change_product|unclear","value":"","note":""}
+输出契约：{"action":"confirm|rewrite|rewrite_block|change_scene|change_audience|change_goal|change_platform|change_product|unclear","value":"","note":""}
 -->
 
 请判断用户对当前稿件的主要修改意图。
@@ -19,6 +19,13 @@
 ## 用户修改意见
 
 {{用户修改意见}}
+
+规则：
+
+- 明确只改标题、导语、某一正文内容块、行动引导或标签时，返回 `rewrite_block`；`value` 写块 ID，无法知道 ID 时写 `opening`、`body`、`closing`、`标题`、`导语`、`正文第N段` 或 `行动引导`。
+- 泛泛要求重写、整体换语气或没有可定位部分时返回 `rewrite`。
+- 更换受众、目标、场景、平台或产品时分别返回对应动作，不要归入普通重写。
+- 意图不明确时返回 `unclear`，不要猜测。
 
 动作规则：
 

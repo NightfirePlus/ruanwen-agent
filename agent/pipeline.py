@@ -1,7 +1,7 @@
-"""调度器:7 个阶段的串联与状态流转。
+"""核心调度器。
 
-  1 结构化需求(多轮追问)→ 2 资料匹配 → 3 策略匹配 → 4 图文生成
-  → 5 事实核验 + 6 合规检查(有问题则改写,最多 MAX_REWRITES 轮)→ 7 确认/修改
+  多轮澄清 → 规范任务说明 → 资料与策略 → 文章规划
+  → 生成/重写与审核双队列 → 事实锁定连贯性编辑 → 全文终审 → 确认/修改
 
 每个方法返回 Outcome,status 为:
   need_more_info  需要用户补充(questions)
@@ -13,18 +13,19 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
 
-from . import compliance, compose, evidence, export, fact_check, intake, prune, revise, strategy
+from . import briefing, chunk_pipeline, chunk_review, compliance, compose, evidence, export, fact_check, intake, planning, prune, revise, strategy
 from .knowledge import KnowledgeError
-from .models import Brief, Draft, Issue, Review, Session
+from .llm import LLMError
+from .models import Brief, Draft, Review, Session
 from .norm import norm_model
-from .prompts import Prompts
+from .prompts import PromptError, Prompts
 
-MAX_REWRITES = 2
 SAMPLES_DIR = Path(__file__).resolve().parent.parent / "samples"
 ProgressCallback = Callable[[str, str], None]
 
@@ -86,6 +87,12 @@ class Pipeline:
             top_reference_weight=(refs[0].get("reference_weight") if refs else None),
         )
 
+    def _normalize_brief(self, s: Session) -> None:
+        value = briefing.canonicalize(s.brief)
+        if value != s.canonical_brief:
+            s.canonical_brief = value
+            self._trace(s, "1.5 规范任务说明", canonical_brief=value)
+
     # ---- 阶段1:多轮追问 ----
     def talk(self, s: Session, user_text: str, progress: ProgressCallback | None = None) -> Outcome:
         """处理一轮用户输入。信息不完整返回 need_more_info;完整后自动进入后续阶段。"""
@@ -102,7 +109,8 @@ class Pipeline:
         if selected:
             s.brief.product = selected
             s.brief.product_type = ""
-            s.evidence = s.strategy = s.draft = s.review = None
+            s.evidence = s.strategy = s.content_plan = s.draft = s.review = None
+            s.canonical_brief = ""
             s.brief = intake.normalize(s.brief)
             questions = intake.validate(s.brief)
         else:
@@ -116,6 +124,7 @@ class Pipeline:
             progress, "需求已确认",
             f"{s.brief.product} · {s.brief.audience} · {s.brief.scene} · {s.brief.platform}",
         )
+        self._normalize_brief(s)
         return self.produce(s, progress=progress)
 
     # ---- 阶段2-6:从需求到通过核验的稿件 ----
@@ -123,6 +132,7 @@ class Pipeline:
         self, s: Session, reuse_evidence: bool = False, progress: ProgressCallback | None = None
     ) -> Outcome:
         b = s.brief
+        self._normalize_brief(s)
         if not (reuse_evidence and s.evidence):
             out = self._match_evidence(s, progress)
             if out:
@@ -168,7 +178,7 @@ class Pipeline:
             return self._block(s, "未能从知识库资料中提取到可用的事实点,无法生成有依据的内容")
         return None
 
-    # ---- 阶段4-6:生成 → 核验 → 合规 → 改写 → 自动删除 ----
+    # ---- 分块生产 → 连贯性编辑 → 全文终审 ----
     def _review(self, s: Session, draft: Draft) -> Review:
         issues = fact_check.check(self._llm("fact_review"), self.prompts, draft, s.evidence, s.brief, s.strategy)
         issues += compliance.check(self._llm("compliance_review"), self.prompts, draft, s.evidence)
@@ -178,54 +188,171 @@ class Pipeline:
                     issue.severity = "warn"
         return Review(issues)
 
-    def generate(self, s: Session, progress: ProgressCallback | None = None) -> Outcome:
+    @staticmethod
+    def _reset_target_blocks(s: Session, target: str) -> list[str]:
+        """只使目标块及依赖它的下游块失效；返回被重置的块 ID。"""
+        if not s.content_plan:
+            return []
+        blocks = s.content_plan.blocks
+        text = (target or "").strip().lower()
+        selected = {block.id for block in blocks if block.id.lower() == text}
+        if not selected and any(word in text for word in ("opening", "标题", "导语", "开篇")):
+            selected = {block.id for block in blocks if block.kind == "opening"}
+        if not selected and any(word in text for word in ("closing", "行动引导", "cta", "标签", "结尾", "收束")):
+            selected = {block.id for block in blocks if block.kind == "closing"}
+        paragraph = re.search(r"(?:正文)?第\s*(\d+)\s*段", text)
+        if not selected and paragraph:
+            wanted = int(paragraph.group(1))
+            offset = 0
+            for block in blocks:
+                count = len(block.draft.body) if block.kind == "body" and block.draft else 0
+                if offset < wanted <= offset + count:
+                    selected.add(block.id)
+                    break
+                offset += count
+        if not selected and any(word in text for word in ("body", "正文", "卖点")):
+            selected = {block.id for block in blocks if block.kind == "body"}
+        if not selected:
+            return []
+
+        changed = True
+        while changed:
+            changed = False
+            for block in blocks:
+                if block.id not in selected and any(dep in selected for dep in block.depends_on):
+                    selected.add(block.id)
+                    changed = True
+        for block in blocks:
+            if block.id in selected:
+                block.status = "pending_generate"
+                block.attempts = 0
+                block.draft = None
+                block.issues = []
+                block.removed = []
+        return [block.id for block in blocks if block.id in selected]
+
+    def generate(
+        self, s: Session, progress: ProgressCallback | None = None, reuse_plan: bool = False
+    ) -> Outcome:
         valid = getattr(self.store, "still_valid", None)
         if valid and s.evidence and not valid(s.evidence):
             out = self._match_evidence(s, progress)
             if out:
                 return out
-        self._progress(progress, "正在生成图文", "根据场景、平台规则和已确认事实组织内容")
-        draft, refusals = compose.generate(self._llm("compose"), self.prompts, s.brief, s.evidence, s.strategy)
-        draft = compose.fill_captions(draft, s.evidence)
-        self._progress(
-            progress, "初稿已生成",
-            f"标题“{draft.title}”，正文 {len(draft.body)} 段，配图 {len(draft.images)} 张",
-        )
-        for round_no in range(MAX_REWRITES + 1):
-            self._progress(progress, "正在核验内容", f"第 {round_no + 1} 轮检查产品事实、图片归属和营销合规")
-            review = self._review(s, draft)
-            self._trace(s, f"5-6 核验与合规(第{round_no + 1}轮)", errors=len(review.errors), warns=len(review.issues) - len(review.errors))
-            if review.passed or round_no == MAX_REWRITES:
-                break
-            self._progress(progress, "正在修正问题", f"发现 {len(review.errors)} 项必须处理的问题，正在局部改写")
-            text = "\n".join(f"- {i.where}:{i.detail}(要求:{i.suggestion})" for i in review.errors)
-            draft, more = compose.rewrite(
-                self._llm("rewrite"), self.prompts, draft, text, s.brief, s.evidence, s.strategy
-            )
-            draft = compose.fill_captions(draft, s.evidence)
-            refusals = list(dict.fromkeys(refusals + more))
+        if not (reuse_plan and s.content_plan):
+            s.content_plan = None
+            self._progress(progress, "正在规划文章", "确定内容块、事实白名单和必要依赖")
+            try:
+                s.content_plan = planning.create(
+                    self._llm("content_plan"), self.prompts, s.canonical_brief,
+                    s.evidence, s.strategy,
+                )
+            except (LLMError, PromptError) as exc:
+                return self._block(s, f"文章规划模型调用失败：{exc}")
+            self._trace(s, "4 文章分块规划", blocks=[{
+                "id": block.id, "kind": block.kind, "objective": block.objective,
+                "fact_ids": block.fact_ids, "depends_on": block.depends_on,
+            } for block in s.content_plan.blocks])
+            self._progress(progress, "文章规划完成", f"共 {len(s.content_plan.blocks)} 个内容块，启动生成与审核双队列")
+        else:
+            pending = [block.id for block in s.content_plan.blocks if block.status != "passed"]
+            self._progress(progress, "复用文章规划", f"仅重新处理受影响块：{'、'.join(pending)}")
+        self._progress(progress, "正在核验内容", "审核模型将逐块检查，问题块会返回生成/重写队列")
 
-        removed: list[dict] = []
+        flow = chunk_pipeline.run(
+            self._llm("chunk_generate"), self._llm("chunk_review"), self.prompts,
+            s.canonical_brief, s.brief, s.evidence, s.strategy, s.content_plan,
+            self.review_mode, progress,
+        )
+        self._trace(
+            s, "5 分块队列", events=flow.events, metrics=flow.metrics,
+            result="blocked" if flow.error else "passed",
+        )
+        if flow.error or flow.draft is None:
+            s.draft = flow.draft
+            s.review = None
+            return Outcome("blocked", s, reason=flow.error or "分块流水线未能形成完整稿件", refusals=flow.refusals)
+
+        assembled = flow.draft
+        if not assembled.body:
+            s.draft = assembled
+            return Outcome("blocked", s, reason="所有内容块合并后正文为空，已停止输出", refusals=flow.refusals)
+
+        self._progress(progress, "正在进行整文连贯性编辑", "只调整衔接、指代、语气和重复，不改变事实")
+        try:
+            draft, coherence_violations, coherence_refusals = compose.edit_coherence(
+                self._llm("coherence"), self.prompts, s.canonical_brief, assembled, s.evidence
+            )
+        except (LLMError, PromptError) as exc:
+            draft, coherence_violations, coherence_refusals = (
+                assembled, [f"连贯性编辑调用失败，已保留逐块审核后的原始合并稿：{exc}"], []
+            )
+        coherence_notes = list(coherence_violations) + list(coherence_refusals)
+        if draft is not assembled:
+            try:
+                semantic_changes = chunk_review.check_coherence(
+                    self._llm("coherence_review"), self.prompts, assembled, draft, s.evidence
+                )
+            except (LLMError, PromptError) as exc:
+                semantic_changes = [f"连贯性事实锁审核调用失败，已回退原始合并稿：{exc}"]
+            if semantic_changes:
+                coherence_notes.extend(semantic_changes)
+                draft = assembled
+        self._trace(s, "6 整文连贯性编辑", applied=draft is not assembled, notes=coherence_notes)
+
+        self._progress(progress, "正在进行全文终审", "检查合并后的事实、图片归属和营销合规")
+        try:
+            review = self._review(s, draft)
+        except (LLMError, PromptError) as exc:
+            s.draft, s.review = draft, None
+            self._trace(s, "7 全文终审", result="调用失败", error=str(exc))
+            return Outcome("blocked", s, reason=f"全文终审模型调用失败，稿件未放行：{exc}",
+                           refusals=flow.refusals)
+        # 连贯性编辑即使通过结构锁，也可能产生语义事实问题；此时先回退到全部已审核块的原始合并稿。
+        if not review.passed and draft is not assembled:
+            try:
+                original_review = self._review(s, assembled)
+            except (LLMError, PromptError) as exc:
+                s.draft, s.review = assembled, None
+                self._trace(s, "7 全文终审", result="回退稿审核调用失败", error=str(exc))
+                return Outcome(
+                    "blocked", s,
+                    reason=f"连贯性编辑未通过，原始合并稿终审调用失败，稿件未放行：{exc}",
+                    refusals=flow.refusals,
+                )
+            if original_review.passed:
+                coherence_notes.append("连贯性编辑未通过全文终审，已回退到原始合并稿")
+                draft, review = assembled, original_review
+        removed = list(flow.removed)
         if not review.passed:
-            # 改写用尽仍有 error:按位置删掉有问题的内容并留痕,再复检一次
             max_images = s.strategy.platform.get("images", {}).get("max", 99)
-            pruned, removed, unresolved = prune.apply(draft, review.errors, max_images)
-            if unresolved:
-                self._trace(s, "自动删除", result="有无法定位的问题,不删除", unresolved=[u.detail for u in unresolved])
-            else:
-                draft = pruned
-                review = self._review(s, draft)
-                self._trace(s, "自动删除", removed=removed, errors_after=len(review.errors))
+            pruned_draft, final_removed, unresolved = prune.apply(draft, review.errors, max_images)
+            if final_removed and not unresolved:
+                draft = pruned_draft
+                removed.extend(final_removed)
+                try:
+                    review = self._review(s, draft)
+                except (LLMError, PromptError) as exc:
+                    s.draft, s.review = draft, None
+                    self._trace(s, "7 全文终审", result="安全删除后复审调用失败", error=str(exc))
+                    return Outcome(
+                        "blocked", s,
+                        reason=f"安全删除后的全文终审调用失败，稿件未放行：{exc}",
+                        refusals=flow.refusals,
+                    )
+                coherence_notes.append("全文终审定位到的问题已安全删除并重新审核")
         review.removed = removed
+        self._trace(s, "7 全文终审", errors=len(review.errors),
+                    warns=len(review.issues) - len(review.errors), coherence_notes=coherence_notes)
         s.draft, s.review = draft, review
 
         if not draft.body:
-            return Outcome("blocked", s, reason="删除有问题的内容后正文已为空,无法输出,请人工处理", refusals=refusals)
+            return Outcome("blocked", s, reason="全文终审删除问题内容后正文已为空，已停止输出", refusals=flow.refusals)
         if not review.passed:
-            return Outcome("blocked", s, reason="仍有无法自动处理的核验或合规问题,已停止输出,请人工处理", refusals=refusals)
+            return Outcome("blocked", s, reason="全文终审仍有无法安全处理的问题，已停止输出", refusals=flow.refusals)
         warn_count = len(review.issues) - len(review.errors)
         self._progress(progress, "生成完成", f"阻断项已通过；{warn_count} 项提示可在右侧核验卡查看")
-        return Outcome("review", s, refusals=refusals)
+        return Outcome("review", s, refusals=flow.refusals)
 
     # ---- 阶段7:确认与修改 ----
     def feedback(
@@ -248,19 +375,32 @@ class Pipeline:
             s.history.append({"role": "助手", "content": q})
             return Outcome("need_more_info", s, questions=[q])
         s.brief = new_brief
+        self._normalize_brief(s)
         if step == "done":
             self._progress(progress, "定稿完成", "当前版本已确认，可下载发布成品或完整报告")
             return Outcome("done", s)
         if step == "generate":                  # 只重写文案:需求、资料、策略都复用
             self._progress(progress, "修改范围已确认", "复用已核验资料，只重新生成文案")
+            s.content_plan = None
             return self.generate(s, progress=progress)
+        if step == "block":
+            targets = self._reset_target_blocks(s, intent.get("value", ""))
+            if not targets:
+                q = "没能定位要修改的内容块。请说明要改标题、导语、正文第几段、行动引导，或要求整篇重写。"
+                s.history.append({"role": "助手", "content": q})
+                return Outcome("need_more_info", s, questions=[q])
+            self._trace(s, "局部回退", target=intent.get("value", ""), invalidated=targets)
+            self._progress(progress, "修改范围已确认", f"仅重做 {'、'.join(targets)}，其余已通过块继续复用")
+            return self.generate(s, progress=progress, reuse_plan=True)
         if step == "strategy":                  # 换场景/平台:资料复用,重配策略表
             self._match_strategy(s)
             self._trace(s, "3 策略匹配(重配)", scene=s.strategy.scene.get("name"), platform=s.strategy.platform["name"])
             self._progress(progress, "发布策略已更新", f"重新适配{new_brief.scene}场景与{new_brief.platform}平台")
+            s.content_plan = None
             return self.generate(s, progress=progress)
         # 换产品:资料、策略、稿件全部作废,从结构化需求重来
-        s.evidence = s.strategy = s.draft = s.review = None
+        s.evidence = s.strategy = s.content_plan = s.draft = s.review = None
+        s.canonical_brief = ""
         # 可以重抽其他需求，但明确的最新型号不能被历史抽取结果覆盖。
         chosen_product = s.brief.product
         s.brief, _ = intake.next_step(self._llm("intake"), self.prompts, s.brief, s.history)
@@ -269,6 +409,7 @@ class Pipeline:
         self._trace(s, "1 结构化需求(重来)", brief=s.brief.__dict__, questions=questions)
         if questions:
             return Outcome("need_more_info", s, questions=questions)
+        self._normalize_brief(s)
         return self.produce(s, progress=progress)
 
     def _block(self, s: Session, reason: str) -> Outcome:

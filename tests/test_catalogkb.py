@@ -167,17 +167,35 @@ class CatalogTest(unittest.TestCase):
             def json(self, user, **kwargs):
                 self.inputs.append(user)
                 return copy.deepcopy(self.result)
-        draft = dict(title="开学了解新装备", intro="", body=[dict(text="内存16GB。", fact_ids=["F1"])],
+        class Sequence(Fixed):
+            def __init__(self, results):
+                super().__init__(None)
+                self.results = results
+            def json(self, user, **kwargs):
+                self.inputs.append(user)
+                return copy.deepcopy(self.results[min(len(self.inputs) - 1, len(self.results) - 1)])
+        draft = dict(title="开学了解新装备", intro="从学习场景了解新装备。", body=[dict(text="内存16GB。", fact_ids=["F1"])],
                      cta="欢迎到店了解。", tags=[], images=[dict(image_id="I0", after_paragraph=1, caption="产品外观")], refusals=[])
+        empty = dict(title="", intro="", body=[], cta="", tags=[], images=[], refusals=[])
+        opening = {**empty, "title": draft["title"], "intro": draft["intro"]}
+        body = {**empty, "body": draft["body"], "images": draft["images"]}
+        closing = {**empty, "cta": draft["cta"], "tags": draft["tags"]}
+        plan = {"blocks": [
+            {"id": "B1", "kind": "opening", "objective": "开篇", "fact_ids": [], "depends_on": []},
+            {"id": "B2", "kind": "body", "objective": "卖点", "fact_ids": ["F1"], "depends_on": []},
+            {"id": "B3", "kind": "closing", "objective": "收束", "fact_ids": [], "depends_on": ["B1", "B2"]},
+        ]}
         clients = {s: Fixed({"issues": []}) for s in STAGES}
         clients.update(intake=Fixed(FULL_BRIEF), evidence=self.analysis,
-                       compose=Fixed(draft), rewrite=Fixed(draft), revise_intent=Fixed({"action": "confirm"}))
+                       compose=Fixed(draft), rewrite=Fixed(draft), content_plan=Fixed(plan),
+                       chunk_generate=Sequence([opening, body, closing]), chunk_rewrite=Fixed(body),
+                       coherence=Fixed(draft), revise_intent=Fixed({"action": "confirm"}))
         router = ModelRouter(clients, {s: s for s in STAGES})
         pipe = Pipeline(router, self.store, self.prompts)
         out = pipe.talk(Session(), "给新生写软文")
         self.assertEqual(out.status, "review", out.reason)
-        self.assertIn("产品外观", clients["compose"].inputs[0])
-        self.assertIn("未执行视觉模型审图", clients["compose"].inputs[0])
+        self.assertTrue(any("产品外观" in value for value in clients["chunk_generate"].inputs))
+        self.assertTrue(any("未执行视觉模型审图" in value for value in clients["chunk_generate"].inputs))
         self.assertIn("内存16GB", clients["fact_review"].inputs[0])
         self.assertEqual(pipe.feedback(out.session, "确认").status, "done")
         pipe.talk(Session(), "再写一篇")

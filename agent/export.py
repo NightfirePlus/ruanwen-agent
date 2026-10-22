@@ -81,9 +81,18 @@ def to_markdown(s: Session, image_url=None) -> str:
         f"- 用户问题 / 内容目标 / 平台:{b.main_problem} / {b.goal} / {b.platform}",
         f"- 购买阶段:{b.stage}",
         f"- 内容切入点:{s.strategy.scene.get('angle', '') if s.strategy else ''}",
-        "",
-        "# 二、知识库依据",
     ]
+    if s.canonical_brief:
+        lines.append(f"- 规范任务说明:{s.canonical_brief}")
+    if s.content_plan and s.content_plan.blocks:
+        lines.append("- 分块流水线:")
+        for block in s.content_plan.blocks:
+            rewrites = max(0, block.attempts - 1)
+            lines.append(
+                f"  - {block.id} [{block.kind}] {block.status} · "
+                f"版本 {block.version} · 重写 {rewrites} 次"
+            )
+    lines += ["", "# 二、知识库依据"]
     if ev and d:
         used = {x for p in d.body for x in p.fact_ids}
         for f in ev.facts:

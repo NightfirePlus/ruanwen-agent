@@ -1,0 +1,45 @@
+{
+  "profile": "llm-multi-v1",
+  "availability_checked_on": "2026-10-22",
+  "availability_source": "LLM_BASE_URL/models",
+  "models": {
+    "understand": {
+      "model": "qwen3.8-flash",
+      "max_tokens": 2048,
+      "enable_thinking": false
+    },
+    "evidence": {
+      "model": "deepseek-v4.1-flash",
+      "max_tokens": 6144
+    },
+    "plan": {
+      "model": "qwen3.8-flash",
+      "max_tokens": 4096,
+      "enable_thinking": false
+    },
+    "write": {
+      "model": "deepseek-v4.1-flash",
+      "max_tokens": 6144
+    },
+    "review": {
+      "model": "glm-5.2",
+      "max_tokens": 4096,
+      "enable_thinking": false
+    }
+  },
+  "stages": {
+    "intake": "understand",
+    "revise_intent": "understand",
+    "evidence": "evidence",
+    "compose": "write",
+    "rewrite": "write",
+    "content_plan": "plan",
+    "chunk_generate": "write",
+    "chunk_rewrite": "write",
+    "coherence": "write",
+    "chunk_review": "review",
+    "coherence_review": "review",
+    "fact_review": "review",
+    "compliance_review": "review"
+  }
+}
