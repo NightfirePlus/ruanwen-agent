@@ -11,8 +11,54 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from PIL import Image
 from agent.catalogkb import CatalogStore, DEFAULT_RUNTIME_KB, INDEX, sha
+from agent.knowledge import KnowledgeError
 
 LINK = re.compile(r"(!?\[[^\]\n]*\])\((<[^>\n]+>|[^)\n]+)\)")
+SOURCE_TYPES = {"local", "url", "historical"}
+
+
+def _check_source(store, record, errors):
+    source = record.get("source") or {}
+    locator = source.get("path")
+    digest = source.get("sha256")
+    kind = source.get("locator_type")
+    if not isinstance(locator, str) or not locator:
+        errors.append("缺少来源位置：" + str(record.get("path")))
+        return
+    if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+        errors.append("来源哈希缺失或格式错误：" + str(record.get("path")))
+        return
+    if kind is None:
+        if locator.startswith(("http://", "https://")):
+            kind = "url"
+        else:
+            try:
+                local = store._safe(locator)
+            except (KnowledgeError, OSError, ValueError, KeyError):
+                local = None
+            if local is not None and local.is_file():
+                kind = "local"
+            else:
+                errors.append("来源路径不存在且未标记 historical：" + str(record.get("path")))
+                return
+    if kind not in SOURCE_TYPES:
+        errors.append("未知来源位置类型：" + str(record.get("path")))
+        return
+    if kind == "local":
+        try:
+            local = store._safe(locator)
+            if not local.is_file():
+                errors.append("来源路径不存在：" + str(record.get("path")))
+            elif sha(local.read_bytes()) != digest:
+                errors.append("来源文件哈希不一致：" + str(record.get("path")))
+        except (KnowledgeError, OSError, ValueError, KeyError):
+            errors.append("来源路径无效：" + str(record.get("path")))
+    elif kind == "url":
+        parts = urlsplit(locator)
+        if parts.scheme not in ("http", "https") or not parts.netloc:
+            errors.append("来源 URL 无效：" + str(record.get("path")))
+        elif record.get("category") == "images" and digest != record.get("sha256"):
+            errors.append("图片来源哈希与图片记录不一致：" + str(record.get("path")))
 
 
 def inspect_library(root):
@@ -25,6 +71,7 @@ def inspect_library(root):
         if len(paths) != len(set(paths)):
             errors.append("索引包含重复文件路径")
         for record in records:
+            _check_source(store, record, errors)
             try:
                 raw = store._raw(record)
                 path = store._safe(record["path"])
