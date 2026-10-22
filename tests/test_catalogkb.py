@@ -46,17 +46,21 @@ class CatalogTest(unittest.TestCase):
         def record(id, path, text, kind, category, **extra):
             p = self.root / path
             p.write_text(text, encoding="utf-8")
+            digest = sha(p.read_bytes())
             row = dict(id=id, path=path, model_key="MateBook 14", official_product="MateBook 14",
-                       kind=kind, category=category, sha256=sha(p.read_bytes()), source=dict(path=path), **extra)
+                       kind=kind, category=category, sha256=digest,
+                       source=dict(path=path, sha256=digest, locator_type="local"), **extra)
             self.records.append(row)
         record("D1", "产品事实.md", "# MateBook 14\n内存16GB。", "product_facts", "products")
         record("D2", "学生沟通卡.md", "学生更关心学习。", "role_guidance", "marketing")
         for n in range(2):
             name = f"image{n}.png"
             Image.new("RGBA", (12, 12), (20 + n, 30, 40, 255)).save(self.root / name)
+            digest = sha((self.root / name).read_bytes())
             self.records.append(dict(id=f"I{n}", path=name, model_key="MateBook 14", official_product="MateBook 14",
-                category="images", kind="registered_image", sha256=sha((self.root / name).read_bytes()),
-                source=dict(path=name, index_row={"官网图片说明": "产品外观", "建议用途": "产品展示"})))
+                category="images", kind="registered_image", sha256=digest,
+                source=dict(path=name, sha256=digest, locator_type="local",
+                            index_row={"官网图片说明": "产品外观", "建议用途": "产品展示"})))
         self.write_catalog()
         self.store = CatalogStore(self.root)
         self.analysis, self.vision = Analysis(), Vision()
@@ -226,6 +230,22 @@ class CatalogTest(unittest.TestCase):
         result = inspect_library(self.root)
         self.assertFalse(result["passed"])
         self.assertTrue(any("链接" in error for error in result["errors"]))
+
+    def test_standalone_validation_accepts_explicit_historical_source(self):
+        from tools.validate_knowledge_base import inspect_library
+        self.records[0]["source"] = dict(path="P1-产品参数库/已删除.md", sha256="0" * 64,
+                                         locator_type="historical")
+        self.write_catalog()
+        result = inspect_library(self.root)
+        self.assertTrue(result["passed"], result["errors"])
+
+    def test_standalone_validation_rejects_unmarked_missing_source(self):
+        from tools.validate_knowledge_base import inspect_library
+        self.records[0]["source"] = dict(path="P1-产品参数库/已删除.md", sha256="0" * 64)
+        self.write_catalog()
+        result = inspect_library(self.root)
+        self.assertFalse(result["passed"])
+        self.assertTrue(any("historical" in error for error in result["errors"]))
 
     def test_visual_model_result_does_not_control_registered_images(self):
         self.vision.asset = "composition_required"
