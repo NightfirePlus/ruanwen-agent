@@ -44751,11 +44751,409 @@
       "depends_on": [
         "DOC-69a55d0f499571d8"
       ]
+    },
+    {
+      "id": "DOC-f45a1b984d389292",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-001-无线投屏至华为计算机.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/5cd5805516-28-手机-平板-计算机如何无线投屏至华为计算机.md",
+        "sha256": "963b9adcc7019ee3e775ece7e18e2f3308ec8c4770b4060d49b25467d420bf0e",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn00694653/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn00756514/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "963b9adcc7019ee3e775ece7e18e2f3308ec8c4770b4060d49b25467d420bf0e"
+      },
+      "sha256": "b2160a9a961742f3f1b401ea6e32658a85ec6abd84d9d5899973d6817c7190f9"
+    },
+    {
+      "id": "DOC-91479449e13cd36b",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-002-显示器智慧屏协同.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/671753f4d4-41-华为Windows电脑与显示器-智慧屏如何连接使用多屏协同.md",
+        "sha256": "7abb87687afff6f39696bf096e662dff26df9a60c7d991de0fd7b04a56c3783e",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn15894560/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "7abb87687afff6f39696bf096e662dff26df9a60c7d991de0fd7b04a56c3783e"
+      },
+      "sha256": "85eba895411bc48cbdc0235977132cdcdaf89e456cb61aeb18fd51ce31e13ddb"
+    },
+    {
+      "id": "DOC-17cfa2ffbbebc921",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-003-一碰传多屏协同.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/95d548f7ca-31-华为计算机一碰传或多屏协同文件传输失败.md",
+        "sha256": "9b2c954800ccc589b2b8c1b92c0fdf6cc069cc4ac044789fcca1ab3a043b6ec3",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn00726009/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "9b2c954800ccc589b2b8c1b92c0fdf6cc069cc4ac044789fcca1ab3a043b6ec3"
+      },
+      "sha256": "815104c93250a63c7d9650f9bd7ab11754b76dad5888e87190fcffc99ec36578"
+    },
+    {
+      "id": "DOC-f18765468de0cfb3",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-004-跨设备剪贴板.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/44ff0b9f83-38-华为计算机跨设备剪贴板功能无法使用，复制粘贴失败.md",
+        "sha256": "042fab4c22ae1143a62b26f40ce951025f3d2ea7337d9d8450d39c64551fc14b",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn00752614/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn16046728/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "042fab4c22ae1143a62b26f40ce951025f3d2ea7337d9d8450d39c64551fc14b"
+      },
+      "sha256": "2503d9ce7b23f82fe7676d19e4b5d721bf5bbc0dcd339e0005bf1c46b1362786"
+    },
+    {
+      "id": "DOC-c7a29b0e75bbda55",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-005-华为分享.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/00afb27b1b-58-华为鸿蒙电脑如何使用华为分享功能.md",
+        "sha256": "2776916cb45ca45f1b6d0d3713cc0aaecb5455b0226b58b06e2b0e9a9c5e0df3",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn16046727/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "2776916cb45ca45f1b6d0d3713cc0aaecb5455b0226b58b06e2b0e9a9c5e0df3"
+      },
+      "sha256": "17e42838cfbdfb60ad1f660ac1cc39ab3e2fd00ce36e1ba5d04fd8270ebe0628"
+    },
+    {
+      "id": "DOC-5718c5c2512a2979",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-006-通信共享.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/74317b6555-60-鸿蒙电脑如何进行多设备间通信能力共享.md",
+        "sha256": "aed29e7f72b1c68dcb78387b639fc72b67857006e71eb6cac5edfdae9a926b66",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn16046730/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "aed29e7f72b1c68dcb78387b639fc72b67857006e71eb6cac5edfdae9a926b66"
+      },
+      "sha256": "048cf283a49907f90be947b6a7e2a05abab498ef95b5075ab4c6e8ba40004aec"
+    },
+    {
+      "id": "DOC-663f9e0b6e5853e3",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-007-外接显示器投影电视.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/75612e80c5-40-华为Windows电脑如何连接显示器、投影仪、电视.md",
+        "sha256": "70dda67e084aecbb9de5ecf9e14ed81bc721e7b68c0a92031930b15716b96273",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn15854146/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn16054774/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "70dda67e084aecbb9de5ecf9e14ed81bc721e7b68c0a92031930b15716b96273"
+      },
+      "sha256": "87621964bee6d84dad5c70c48c0de195cbafaa82935267f7ff1c16cb0f1681e4"
+    },
+    {
+      "id": "DOC-7122f940441c4cb5",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-008-蓝牙设备.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/9b049a790e-32-华为Windows电脑连接蓝牙鼠标后，突然连接断开或无法使用.md",
+        "sha256": "a9219b62f3b08bf6d7cc9ba4f580f8fa20c8cc31dd6e1f206d20d6f741dcc792",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn00734699/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn00734700/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn00734702/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn16048112/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn16048118/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "a9219b62f3b08bf6d7cc9ba4f580f8fa20c8cc31dd6e1f206d20d6f741dcc792"
+      },
+      "sha256": "4e7de0b231b34d9db507643cecfde3d069117d4a90834407cc0a41148b0217ec"
+    },
+    {
+      "id": "DOC-953c813e17915ec6",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-009-打印扫描.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/fdccad7472-25-华为计算机如何连接共享打印机.md",
+        "sha256": "0b9c354d16f2ed4918b2bb0c62897f8ae42ca64765983200506f58f8fd301a0e",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn00711025/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn00706726/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn16039714/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn16057990/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "0b9c354d16f2ed4918b2bb0c62897f8ae42ca64765983200506f58f8fd301a0e"
+      },
+      "sha256": "658e7d879631ef7da2794d6e84e73130f2f859a19eb42b49bacd6cbc449eea17"
+    },
+    {
+      "id": "DOC-2034b91106fd1633",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-010-外接存储音频USB.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/57df72dcde-73-华为鸿蒙电脑如何使用外接存储设备.md",
+        "sha256": "5ebcc14b49896b78e53fd58f22982382b6913cca72ba48e980aeca215b0a5b57",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn16054305/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn16053040/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn16056170/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn00699151/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "5ebcc14b49896b78e53fd58f22982382b6913cca72ba48e980aeca215b0a5b57"
+      },
+      "sha256": "193d15df76dd82924b7211f5db98e4d2f206340a3ab1fbede45c907c5b3e170f"
+    },
+    {
+      "id": "DOC-9cf2f1fb2eb7987c",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-011-网络邻居公司网络.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/510c97c854-66-华为鸿蒙电脑如何使用网络邻居访问其他电脑、NAS等设备.md",
+        "sha256": "4f3f2979612f57a1acc8925992b1f43ae71b0c5ba09db6d0e0cf0bfea05d4831",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn16054842/",
+          "https://consumer.huawei.com/cn/support/content/zh-cn16057551/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "4f3f2979612f57a1acc8925992b1f43ae71b0c5ba09db6d0e0cf0bfea05d4831"
+      },
+      "sha256": "6a574be50bf3521a2faf2bec08b9b85d0de13ea32169f344bb521963af725f8e"
+    },
+    {
+      "id": "DOC-de9db07634fd6df0",
+      "category": "ecosystem",
+      "kind": "support_reference_full",
+      "path": "02-生态协同/能力卡/ECO-CAP-012-一键热点.md",
+      "model_key": null,
+      "official_product": null,
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "02-生态协同/补充资料/78e671eaaf-29-华为计算机如何使用华为电脑管家一键热点功能.md",
+        "sha256": "e3c4763ca48d0238c74cab9821e771c196c080987ce2ba984a0bcaf1819c59aa",
+        "line_spans": [],
+        "urls": [
+          "https://consumer.huawei.com/cn/support/content/zh-cn00694757/"
+        ],
+        "dates_in_source": [
+          "2026-10-21"
+        ]
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "e3c4763ca48d0238c74cab9821e771c196c080987ce2ba984a0bcaf1819c59aa"
+      },
+      "sha256": "29d989a902dc67a4f38a57f209eeb635b3af9c392a6478546bb9fa0a92330178"
     }
   ],
   "usage_policy": "runtime-policy.json；通过标记保存在usage-review.sqlite3，不代表官网或人工复核",
   "schema_version": 2,
-  "updated_at": "2026-10-21T20:21:02+08:00",
+  "updated_at": "2026-10-21T22:04:01+08:00",
   "content_layers": {
     "fact": [
       "product_facts"
