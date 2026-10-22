@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 
 from helpers import FULL_BRIEF, FakeLLM, FakeStore, make_prompts
+from agent.models import Draft, Session
 from agent.pipeline import Pipeline
 
 
@@ -48,6 +49,21 @@ class WorkbenchChatTest(unittest.TestCase):
         self.assertEqual(send.call_args.args[0], "换成公众号")
         self.assertEqual(updates[-1][2]["composer_settings"], settings)
 
+    def test_product_dropdown_change_uses_deterministic_change_product_intent(self):
+        import app
+
+        previous = ["MateBook 14", "大学新生", "开学季", "朋友圈", "种草"]
+        state = {
+            "session": Session(draft=Draft(title="旧稿")),
+            "last": "review",
+            "composer_settings": previous,
+        }
+        result = ("", [], state, "", "", "", "")
+        with patch.object(app, "user_send_stream", return_value=iter([result])) as send:
+            list(app.composer_send("", "MateBook X Pro", *previous[1:], [], state))
+        self.assertEqual(send.call_args.kwargs["forced_intent"]["action"], "change_product")
+        self.assertEqual(send.call_args.kwargs["forced_intent"]["value"], "MateBook X Pro")
+
     def test_error_is_presented_in_same_assistant_message(self):
         import app
         from agent.llm import LLMError
@@ -57,3 +73,10 @@ class WorkbenchChatTest(unittest.TestCase):
         self.assertEqual(len(updates[-1][1]), 2)
         self.assertIn("测试连接错误", updates[-1][1][-1]["content"])
         self.assertEqual(updates[-1][2]["last"], "error")
+
+    def test_account_panel_owns_scrolling_instead_of_nested_tabs(self):
+        import app
+
+        self.assertIn("overflow-y: auto !important", app.CUSTOM_CSS)
+        self.assertIn("#account-history-content, #preferences-content", app.CUSTOM_CSS)
+        self.assertIn("height: auto !important", app.CUSTOM_CSS)

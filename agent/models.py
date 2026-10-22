@@ -71,6 +71,7 @@ class Strategy:
 
     scene: dict[str, Any] = field(default_factory=dict)
     platform: dict[str, Any] = field(default_factory=dict)
+    performance: dict[str, Any] = field(default_factory=dict)  # 历史宣传效果的参考权重，不是事实证据
 
 
 @dataclass

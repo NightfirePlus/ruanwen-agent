@@ -118,6 +118,12 @@ class StrategyTest(unittest.TestCase):
         s = strategy.match(Brief(scene="开学季", platform="小红书"))
         self.assertIs(s.platform["first_person_experience"], False)
 
+    def test_performance_reference_is_kept_separate_from_platform_rules(self):
+        performance = {"mode": "advisory_weight", "references": [{"reference_weight": 0.8}]}
+        s = strategy.match(Brief(scene="开学季", platform="小红书"), performance)
+        self.assertEqual(s.performance, performance)
+        self.assertNotIn("references", s.platform)
+
 
 def ev_with(*texts):
     return Evidence(facts=[Fact(f"F{i}", "MateBook 14", t, "t", "p") for i, t in enumerate(texts, 1)],
@@ -284,6 +290,23 @@ class PipelineTest(unittest.TestCase):
         self.assertEqual(out.status, "review", out.reason)
         self.assertTrue(s.review.passed)
         self.assertEqual([f.id for f in s.evidence.facts], ["F1", "F2"])
+
+    def test_performance_provider_adds_weighted_advisory_to_writing_strategy(self):
+        llm = FakeLLM(FULL_BRIEF)
+        guidance = {
+            "mode": "advisory_weight",
+            "rule": "只参考表达，不作为事实",
+            "references": [{"work_id": 7, "reference_weight": 0.88, "content_excerpt": "高表现结构"}],
+        }
+        pipe = Pipeline(
+            llm, FakeStore(), make_prompts(), performance_provider=lambda brief: guidance
+        )
+        session = Session()
+        self.assertEqual(pipe.talk(session, "go").status, "review")
+        self.assertEqual(session.strategy.performance, guidance)
+        self.assertIn('"reference_weight": 0.88', llm.users["compose"])
+        strategy_trace = next(item for item in session.trace if item["stage"] == "3 策略匹配")
+        self.assertEqual(strategy_trace["top_reference_weight"], 0.88)
 
     def test_writer_system_only_for_writing(self):
         llm = FakeLLM(FULL_BRIEF)

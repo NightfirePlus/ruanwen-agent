@@ -10,7 +10,7 @@ PLATFORM_KEYS = (
 )
 
 
-def match(brief: Brief) -> Strategy:
+def match(brief: Brief, performance: dict | None = None) -> Strategy:
     """场景表和平台表合成一份策略。自定义场景(表里没有)只带空的场景策略,由提示词和 LLM 判断兜底。"""
     scene_cfg = config.scenes().get(brief.scene) or {}
     platform_cfg = config.platforms()[brief.platform]
@@ -23,4 +23,5 @@ def match(brief: Brief) -> Strategy:
             "in_table": bool(scene_cfg),
         },
         platform={"name": brief.platform, **{k: platform_cfg[k] for k in PLATFORM_KEYS}},
+        performance=performance or {},
     )

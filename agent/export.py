@@ -5,6 +5,24 @@ from .models import Session
 from .norm import usable_images
 
 
+_CHINESE_NUMERALS = "一二三四五六七八九十"
+
+
+def image_label(index: int) -> str:
+    """返回面向读者的配图序号，不暴露知识库图片 ID。"""
+    if 1 <= index <= len(_CHINESE_NUMERALS):
+        return f"图{_CHINESE_NUMERALS[index - 1]}"
+    return f"图{index}"
+
+
+def numbered_image_placements(draft):
+    """按最终阅读顺序为图片编号。"""
+    ordered = sorted(
+        enumerate(draft.images), key=lambda item: (item[1].after_paragraph, item[0])
+    )
+    return [(placement, image_label(index)) for index, (_, placement) in enumerate(ordered, 1)]
+
+
 def to_text(s: Session) -> str:
     """仅导出可发布文案，不包含检索依据和运行记录。"""
     d = s.draft
@@ -19,7 +37,7 @@ def to_text(s: Session) -> str:
 def to_article_markdown(
     s: Session, image_url=None, include_heading: bool = False, include_image_source: bool = False
 ) -> str:
-    """只渲染可发布的第三部分，供中心预览与发布稿下载复用。"""
+    """只渲染可发布内容；配图下方仅显示序号与必要说明。"""
     b, ev, d = s.brief, s.evidence, s.draft
     if not d:
         return ""
@@ -29,20 +47,20 @@ def to_article_markdown(
         lines += ["", d.intro]
     imgs = {i.id: i for i in usable_images(ev, b.product)} if ev else {}
     placed: dict[int, list] = {}
-    for placement in d.images:
-        placed.setdefault(placement.after_paragraph, []).append(placement)
+    for placement, label in numbered_image_placements(d):
+        placed.setdefault(placement.after_paragraph, []).append((placement, label))
 
     def pics(position: int) -> list[str]:
         output = []
-        for placement in placed.get(position, []):
+        for placement, label in placed.get(position, []):
             image = imgs.get(placement.image_id)
             if image is None:
                 continue
             url = image_url(image) if image_url else image.origin_url
             if url and (image_url or url.startswith(("https://", "http://"))):
-                output += ["", f"![配图 {image.id}](<{url}>)", ""]
-            source = f"｜来源:{image.source_path}" if include_image_source else ""
-            output += [f"> 【配图 {image.id}】{image.name}{source}｜说明:{placement.caption}", ""]
+                output += ["", f"![{label}](<{url}>)", ""]
+            caption = (placement.caption or "").strip()
+            output += [f"> {label}{f'｜{caption}' if caption else ''}", ""]
         return output
 
     lines += pics(0)
@@ -73,9 +91,7 @@ def to_markdown(s: Session, image_url=None) -> str:
                 lines.append(f"- {b.product} | {f.text} | 资料:{f.source_title}({f.source_path})")
         lines.append(f"- 相近型号(已防混淆):{'、'.join(ev.candidates) or '无'}")
 
-    lines += ["", to_article_markdown(
-        s, image_url=image_url, include_heading=True, include_image_source=True
-    ).rstrip()]
+    lines += ["", to_article_markdown(s, image_url=image_url, include_heading=True).rstrip()]
 
     lines += ["", "# 四、核验结果"]
     r = s.review

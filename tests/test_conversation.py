@@ -37,6 +37,24 @@ class ConversationTest(unittest.TestCase):
         self.assertEqual(s.history[-1]["content"], "改推 MateBook 14s")
         self.assertIsNone(s.draft)
 
+    def test_structured_product_change_bypasses_intent_guessing_and_regenerates(self):
+        llm = FakeLLM(FULL_BRIEF)
+        store = FakeStore(docs={
+            "MateBook 14": "MateBook 14 重量约1.36kg。内存16GB。",
+            "MateBook X Pro": "MateBook X Pro 重量约1.36kg。内存16GB。",
+        })
+        pipe = Pipeline(llm, store, make_prompts())
+        s = Session()
+        self.assertEqual(pipe.talk(s, "go").status, "review")
+        out = pipe.feedback(
+            s,
+            "本次创作设置：产品：MateBook X Pro",
+            intent_override={"action": "change_product", "value": "MateBook X Pro", "note": "界面切换"},
+        )
+        self.assertEqual(out.status, "review")
+        self.assertEqual(s.brief.product, "MateBook X Pro")
+        self.assertNotIn("revise_intent", llm.calls)
+
     def test_web_continues_editing_after_confirm_and_clarification(self):
         import app
         llm = FakeLLM(FULL_BRIEF)

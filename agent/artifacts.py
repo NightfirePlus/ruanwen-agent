@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .models import Session
 from .norm import usable_images
+from .export import numbered_image_placements
 
 
 def _image_map(s: Session) -> dict[str, Path]:
@@ -92,17 +93,18 @@ def create_docx(s: Session, target: Path | str, full_report: bool = False) -> Pa
 
     images = _image_map(s)
     placements: dict[int, list] = {}
-    for placement in s.draft.images:
-        placements.setdefault(placement.after_paragraph, []).append(placement)
+    for placement, label in numbered_image_placements(s.draft):
+        placements.setdefault(placement.after_paragraph, []).append((placement, label))
 
     def add_images(position: int) -> None:
-        for placement in placements.get(position, []):
+        for placement, label in placements.get(position, []):
             path = images.get(placement.image_id)
             if not path:
                 continue
             try:
                 doc.add_picture(str(path), width=Cm(14.8))
-                caption = doc.add_paragraph(placement.caption or path.name)
+                detail = (placement.caption or "").strip()
+                caption = doc.add_paragraph(f"{label}{f'｜{detail}' if detail else ''}")
                 caption.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 caption.runs[0].font.size = Pt(8.5)
                 caption.runs[0].font.color.rgb = RGBColor(102, 112, 133)
@@ -207,11 +209,11 @@ def create_pdf(s: Session, target: Path | str, full_report: bool = False) -> Pat
 
     images = _image_map(s)
     placements: dict[int, list] = {}
-    for placement in s.draft.images:
-        placements.setdefault(placement.after_paragraph, []).append(placement)
+    for placement, label in numbered_image_placements(s.draft):
+        placements.setdefault(placement.after_paragraph, []).append((placement, label))
 
     def append_images(position: int) -> None:
-        for placement in placements.get(position, []):
+        for placement, label in placements.get(position, []):
             path = images.get(placement.image_id)
             if not path:
                 continue
@@ -219,7 +221,9 @@ def create_pdf(s: Session, target: Path | str, full_report: bool = False) -> Pat
                 image = Image(str(path))
                 image._restrictSize(155 * mm, 92 * mm)
                 image.hAlign = "CENTER"
-                story.extend([image, Paragraph(escape(placement.caption or path.name), muted), Spacer(1, 3 * mm)])
+                detail = (placement.caption or "").strip()
+                caption = f"{label}{f'｜{detail}' if detail else ''}"
+                story.extend([image, Paragraph(escape(caption), muted), Spacer(1, 3 * mm)])
             except (OSError, ValueError):
                 continue
 

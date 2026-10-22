@@ -95,7 +95,11 @@ def generate(llm, prompts: Prompts, brief: Brief, ev: Evidence, strategy: Strate
         "compose",
         {
             "需求": brief_block(brief),
-            "策略": json.dumps({"scene": strategy.scene, "platform": strategy.platform}, ensure_ascii=False),
+            "策略": json.dumps(
+                {"scene": strategy.scene, "platform": strategy.platform,
+                 "performance_reference": strategy.performance},
+                ensure_ascii=False,
+            ),
             "事实点清单": facts_block(ev),
             "可用图片": images_block(ev, brief.product),
             "表达参考": context_block(ev),
@@ -119,7 +123,11 @@ def rewrite(
         {
             "稿件": draft_to_json(draft),
             "问题": issues_text,
-            "策略": json.dumps({"scene": strategy.scene, "platform": strategy.platform}, ensure_ascii=False),
+            "策略": json.dumps(
+                {"scene": strategy.scene, "platform": strategy.platform,
+                 "performance_reference": strategy.performance},
+                ensure_ascii=False,
+            ),
             "事实点清单": facts_block(ev),
             "可用图片": images_block(ev, brief.product),
             "表达参考": context_block(ev),

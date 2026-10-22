@@ -40,13 +40,21 @@ class Outcome:
 
 
 class Pipeline:
-    def __init__(self, llm, store, prompts: Prompts, review_mode: str = "strict"):
+    def __init__(
+        self,
+        llm,
+        store,
+        prompts: Prompts,
+        review_mode: str = "strict",
+        performance_provider: Callable[[Brief], dict] | None = None,
+    ):
         if review_mode not in ("strict", "relaxed"):
             raise ValueError("review_mode 必须为 strict 或 relaxed")
         self.llm = llm
         self.store = store
         self.prompts = prompts
         self.review_mode = "strict" if getattr(store, "requires_strict_review", False) else review_mode
+        self.performance_provider = performance_provider
 
     def _llm(self, stage: str):
         resolve = getattr(self.llm, "for_stage", None)
@@ -62,6 +70,21 @@ class Pipeline:
         """向界面报告可核验的阶段摘要，不暴露模型内部推理。"""
         if callback:
             callback(title, detail)
+
+    def _match_strategy(self, s: Session) -> None:
+        performance = {}
+        if self.performance_provider:
+            try:
+                performance = self.performance_provider(s.brief) or {}
+            except Exception as exc:  # 宣传数据只是参考，读取失败不能阻断主创作链路。
+                self._trace(s, "宣传数据参考", result="读取失败，已跳过", error=str(exc))
+        s.strategy = strategy.match(s.brief, performance)
+        refs = performance.get("references", []) if performance else []
+        self._trace(
+            s, "3 策略匹配", scene=s.strategy.scene.get("name"),
+            platform=s.strategy.platform["name"], performance_references=len(refs),
+            top_reference_weight=(refs[0].get("reference_weight") if refs else None),
+        )
 
     # ---- 阶段1:多轮追问 ----
     def talk(self, s: Session, user_text: str, progress: ProgressCallback | None = None) -> Outcome:
@@ -104,11 +127,12 @@ class Pipeline:
             out = self._match_evidence(s, progress)
             if out:
                 return out
-        s.strategy = strategy.match(b)                                         # 阶段3
-        self._trace(s, "3 策略匹配", scene=s.strategy.scene.get("name"), platform=s.strategy.platform["name"])
+        self._match_strategy(s)                                                # 阶段3
+        refs = s.strategy.performance.get("references", [])
+        reference_note = f"，并参考 {len(refs)} 篇历史高表现作品" if refs else ""
         self._progress(
             progress, "策略已匹配",
-            f"按{s.strategy.scene.get('name')}场景和{s.strategy.platform['name']}规则组织内容",
+            f"按{s.strategy.scene.get('name')}场景和{s.strategy.platform['name']}规则组织内容{reference_note}",
         )
         return self.generate(s, progress=progress)
 
@@ -204,10 +228,19 @@ class Pipeline:
         return Outcome("review", s, refusals=refusals)
 
     # ---- 阶段7:确认与修改 ----
-    def feedback(self, s: Session, user_text: str, progress: ProgressCallback | None = None) -> Outcome:
+    def feedback(
+        self,
+        s: Session,
+        user_text: str,
+        progress: ProgressCallback | None = None,
+        intent_override: dict | None = None,
+    ) -> Outcome:
         s.history.append({"role": "用户", "content": user_text})
         self._progress(progress, "正在理解修改要求", "判断需要调整文案、平台、场景还是产品")
-        intent = revise.classify(self._llm("revise_intent"), self.prompts, s.brief, s.draft, user_text)
+        # 下拉框等结构化界面动作直接给出可靠意图，避免再让模型猜测“本次创作设置”。
+        intent = intent_override or revise.classify(
+            self._llm("revise_intent"), self.prompts, s.brief, s.draft, user_text
+        )
         self._trace(s, "7 修改意图", **intent)
         new_brief, step = revise.apply(s.brief, intent, user_text)
         if new_brief is None:
@@ -222,7 +255,7 @@ class Pipeline:
             self._progress(progress, "修改范围已确认", "复用已核验资料，只重新生成文案")
             return self.generate(s, progress=progress)
         if step == "strategy":                  # 换场景/平台:资料复用,重配策略表
-            s.strategy = strategy.match(new_brief)
+            self._match_strategy(s)
             self._trace(s, "3 策略匹配(重配)", scene=s.strategy.scene.get("name"), platform=s.strategy.platform["name"])
             self._progress(progress, "发布策略已更新", f"重新适配{new_brief.scene}场景与{new_brief.platform}平台")
             return self.generate(s, progress=progress)

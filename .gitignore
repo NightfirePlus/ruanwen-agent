@@ -21,3 +21,7 @@ knowledge_base/*
 !knowledge_base/current/
 knowledge_base/current/**/*.sqlite3
 knowledge_base/current/**/*.sqlite3-*
+
+# 用户确认后的作品库、宣传数据与门店长期记忆（运行时数据）
+data/*.sqlite3
+data/*.sqlite3-*

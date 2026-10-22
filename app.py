@@ -13,6 +13,7 @@ from __future__ import annotations
 import inspect
 import logging
 import os
+import sqlite3
 import tempfile
 import threading
 from html import escape
@@ -33,6 +34,7 @@ from agent.catalogkb import DEFAULT_RUNTIME_KB, make_store as open_store
 from agent.models import Session
 from agent.pipeline import Outcome, Pipeline
 from agent.prompts import PromptError, Prompts
+from agent.workspace import get_workspace
 
 load_dotenv()
 
@@ -59,7 +61,10 @@ def get_pipeline() -> Pipeline:
             llm = make_llm()
             default_mode = "strict" if isinstance(llm, ModelRouter) else "relaxed"
             mode = os.environ.get("REVIEW_MODE", default_mode).strip().lower()
-            _pipe = Pipeline(llm, make_store(), prompts, review_mode=mode)
+            _pipe = Pipeline(
+                llm, make_store(), prompts, review_mode=mode,
+                performance_provider=get_workspace().performance_guidance,
+            )
     return _pipe
 
 
@@ -138,12 +143,19 @@ def render_scene_card(s: Session | None) -> str:
         return "_生成后显示产品、受众、场景与发布目标。_"
     b = s.brief
     angle = s.strategy.scene.get("angle", "") if s.strategy else "等待策略匹配"
+    refs = s.strategy.performance.get("references", []) if s.strategy else []
+    performance_note = ""
+    if refs:
+        performance_note = (
+            f"\n\n**宣传数据参考**　{len(refs)} 篇历史作品 · "
+            f"最高权重 {refs[0]['reference_weight']:.2f}"
+        )
     return (
         f"**产品**　{b.product or '待确认'}\n\n"
         f"**受众**　{b.audience or '待确认'}\n\n"
         f"**场景／平台**　{b.scene or '待确认'} ／ {b.platform or '待确认'}\n\n"
         f"**内容目标**　{b.goal or '待确认'}\n\n"
-        f"**内容切入点**　{angle}"
+        f"**内容切入点**　{angle}{performance_note}"
     )
 
 
@@ -157,6 +169,12 @@ def render_evidence_card(s: Session | None) -> str:
         lines.append(f"- **{fact.id}** {fact.text}\n  <small>{fact.source_path}</small>")
     if len(facts) > 8:
         lines.append(f"- 另有 {len(facts) - 8} 条事实已匹配")
+    used_images = {placement.image_id for placement in (s.draft.images if s.draft else [])}
+    images = [image for image in s.evidence.images if image.model and (not used_images or image.id in used_images)]
+    if images:
+        lines += ["", "**配图来源**"]
+        for image in images[:4]:
+            lines.append(f"- {image.id} {image.source_path or image.name}")
     return "\n".join(lines)
 
 
@@ -204,7 +222,12 @@ def _panel_values(s: Session | None):
 
 
 # ---- 对话：后台执行流水线，前台按真实回调逐步更新 ----
-def user_send_stream(message: str, history: list, state: dict | None):
+def user_send_stream(
+    message: str,
+    history: list,
+    state: dict | None,
+    forced_intent: dict | None = None,
+):
     message = (message or "").strip()
     if not message:
         yield "", history, state, *_panel_values((state or {}).get("session"))
@@ -228,15 +251,31 @@ def user_send_stream(message: str, history: list, state: dict | None):
             pipe = get_pipeline()
             if (state.get("last") in ("review", "done", "need_more_info")
                     and s.draft is not None and s.review is not None and s.review.passed):
-                outcome = pipe.feedback(s, message, progress=progress)
+                outcome = pipe.feedback(
+                    s, message, progress=progress, intent_override=forced_intent
+                )
             else:
                 outcome = pipe.talk(s, message, progress=progress)
-            result.update(out=outcome, state={"session": s, "last": outcome.status})
+            next_state = {**state, "session": s, "last": outcome.status, "work_id": None}
+            if outcome.status == "done":
+                try:
+                    next_state["work_id"] = get_workspace().save_confirmed_work(
+                        s, image_url=web_image_url
+                    )
+                except (OSError, ValueError, sqlite3.Error) as exc:
+                    next_state["archive_error"] = str(exc)
+                    logging.getLogger(__name__).exception("确认稿写入作品库失败")
+            else:
+                next_state.pop("archive_error", None)
+            result.update(out=outcome, state=next_state)
         except (LLMError, PromptError, LocalKBError) as exc:
-            result.update(error=f"❌ {exc}", state={"session": s, "last": "error"})
+            result.update(error=f"❌ {exc}", state={**state, "session": s, "last": "error"})
         except Exception as exc:  # 兜底，避免界面崩溃
             logging.getLogger(__name__).exception("页面生成失败")
-            result.update(error=f"❌ 系统错误：{type(exc).__name__}: {exc}", state={"session": s, "last": "error"})
+            result.update(
+                error=f"❌ 系统错误：{type(exc).__name__}: {exc}",
+                state={**state, "session": s, "last": "error"},
+            )
         finally:
             if pipe is not None:
                 try:
@@ -268,6 +307,10 @@ def user_send_stream(message: str, history: list, state: dict | None):
         answer = result["error"]
     if "out" in result and result["out"].status in ("review", "done"):
         answer += "\n\n" + render_article_card(s)
+    if final_state.get("work_id"):
+        answer += f"\n\n📚 已保存到历史作品库（作品 #{final_state['work_id']}）。"
+    elif final_state.get("archive_error"):
+        answer += f"\n\n⚠️ 定稿成功，但保存历史作品失败：{final_state['archive_error']}"
     log = render_progress(events, False)
     display[-1] = {"role": "assistant", "content": f"{log}\n\n{answer}".strip()}
     yield "", [dict(item) for item in display], final_state, *_panel_values(s)
@@ -332,15 +375,198 @@ def composer_send(message, product, audience, scene, platform, goal, history, st
         value if value != old else None for value, old in zip(settings, previous)
     ]
     request = compose_request(message, *changed)
-    for values in user_send_stream(request, history, state):
+    session = (state or {}).get("session")
+    product_changed = (
+        previous is not None and product and product != previous[0]
+        and session is not None and session.draft is not None
+    )
+    forced_intent = None
+    if product_changed:
+        forced_intent = {
+            "action": "change_product", "value": product,
+            "note": "用户通过创作设置更换产品",
+        }
+    for values in user_send_stream(request, history, state, forced_intent=forced_intent):
         new_state = values[2]
         if isinstance(new_state, dict) and "session" in new_state:
             new_state = {**new_state, "composer_settings": settings}
         yield values[:2] + (new_state,) + values[3:]
 
 
+def _preference_context(preferences: dict | None) -> str:
+    if not preferences:
+        return ""
+    labels = (
+        ("preferred_tone", "常用语气"),
+        ("preferred_platforms", "常用平台"),
+        ("audience_focus", "重点客群"),
+        ("content_preferences", "内容偏好"),
+        ("avoid_topics", "需避免内容"),
+        ("notes", "其他个人习惯"),
+    )
+    details = [
+        f"{label}：{preferences.get(key)}"
+        for key, label in labels if preferences.get(key)
+    ]
+    if not details:
+        return ""
+    return "当前用户的长期创作偏好：" + "；".join(details)
+
+
+def composer_send_with_preferences(
+    message, product, audience, scene, platform, goal, history, state, preferences
+):
+    context = _preference_context(preferences)
+    enriched = (message or "").strip()
+    if context:
+        enriched = f"{enriched}\n\n{context}" if enriched else context
+    yield from composer_send(
+        enriched, product, audience, scene, platform, goal, history, state
+    )
+
+
 def toggle_settings(opened):
     return not opened, gr.update(visible=not opened)
+
+
+def toggle_account(opened):
+    return not opened, gr.update(visible=not opened)
+
+
+# ---- 账户下的历史作品、宣传数据与用户偏好 ----
+def _work_choices() -> list[tuple[str, str]]:
+    choices = []
+    for work in get_workspace().list_works():
+        when = work["confirmed_at"].replace("T", " ")[:16]
+        label = f"{when} · {work['product']} · {work['platform']} · {work['title']}"
+        choices.append((label, str(work["id"])))
+    return choices
+
+
+def _performance_markdown(work_id) -> str:
+    records = get_workspace().performance_for(work_id)
+    if not records:
+        return "_尚未记录宣传数据。_"
+    totals = {
+        key: sum(int(record[key]) for record in records)
+        for key in ("impressions", "likes", "shares", "inquiries", "store_visits", "orders")
+    }
+    lines = [
+        f"**累计 {len(records)} 次记录**　曝光 {totals['impressions']} · 点赞 {totals['likes']} · "
+        f"分享 {totals['shares']} · 咨询 {totals['inquiries']} · 到店 {totals['store_visits']} · 成交 {totals['orders']}",
+        "",
+    ]
+    for record in records[:8]:
+        note = f" · {record['notes']}" if record["notes"] else ""
+        lines.append(
+            f"- {record['recorded_at'].replace('T', ' ')[:16]}：曝光 {record['impressions']}，"
+            f"点赞 {record['likes']}，分享 {record['shares']}，咨询 {record['inquiries']}，"
+            f"到店 {record['store_visits']}，成交 {record['orders']}{note}"
+        )
+    return "\n".join(lines)
+
+
+def load_history_work(work_id):
+    work = get_workspace().get_work(work_id)
+    if not work:
+        return "", "", "", "", "", "", "", "_请选择一篇历史作品。_", "_尚未记录宣传数据。_"
+    updated = work.get("updated_at") or work["confirmed_at"]
+    preview = (
+        f"_确认于 {work['confirmed_at'].replace('T', ' ')[:16]} · "
+        f"最后修改 {updated.replace('T', ' ')[:16]}_\n\n{work['article_markdown']}"
+    )
+    return (
+        work["title"], work["product"], work["audience"], work["scene"],
+        work["platform"], work["goal"], work["article_markdown"], preview,
+        _performance_markdown(work_id),
+    )
+
+
+def refresh_history(selected=None):
+    choices = _work_choices()
+    values = {value for _, value in choices}
+    chosen = str(selected) if selected is not None and str(selected) in values else (choices[0][1] if choices else None)
+    return (gr.update(choices=choices, value=chosen), *load_history_work(chosen))
+
+
+def refresh_history_choices(state: dict | None):
+    choices = _work_choices()
+    work_id = (state or {}).get("work_id")
+    if work_id:
+        return gr.update(choices=choices, value=str(work_id))
+    return gr.update(choices=choices)
+
+
+def archive_status(state: dict | None) -> str:
+    if (state or {}).get("work_id"):
+        return f"✅ 已归档为历史作品 #{state['work_id']}"
+    if (state or {}).get("archive_error"):
+        return f"⚠️ 归档失败：{state['archive_error']}"
+    return "确认定稿后自动存入历史作品库"
+
+
+def save_performance(
+    work_id, impressions, likes, shares, inquiries, store_visits, orders, notes
+):
+    if not work_id:
+        return "⚠️ 请先选择历史作品。", "_尚未记录宣传数据。_"
+    try:
+        get_workspace().add_performance(
+            work_id, impressions, likes, shares, inquiries, store_visits, orders, notes
+        )
+    except (TypeError, ValueError, OSError, sqlite3.Error) as exc:
+        return f"⚠️ 保存失败：{exc}", _performance_markdown(work_id)
+    return "✅ 宣传数据已记录。", _performance_markdown(work_id)
+
+
+def save_history_work(
+    work_id, title, product, audience, scene, platform, goal, article_markdown
+):
+    if not work_id:
+        return "⚠️ 请先选择历史作品。", gr.update(), "_请选择一篇历史作品。_"
+    try:
+        work = get_workspace().update_work(
+            work_id, title=title, product=product, audience=audience, scene=scene,
+            platform=platform, goal=goal, article_markdown=article_markdown,
+        )
+    except (TypeError, ValueError, OSError, sqlite3.Error) as exc:
+        return f"⚠️ 保存失败：{exc}", gr.update(), article_markdown or ""
+    updated = (work.get("updated_at") or "").replace("T", " ")[:16]
+    preview = f"_最后修改 {updated}_\n\n{work['article_markdown']}"
+    return "✅ 历史作品修改已保存。", refresh_history_choices({"work_id": work_id}), preview
+
+
+_EMPTY_PREFERENCES = {
+    "account_id": "local", "display_name": "当前用户",
+    "preferred_tone": "", "preferred_platforms": "", "audience_focus": "",
+    "content_preferences": "", "avoid_topics": "", "notes": "",
+}
+
+
+def save_user_preferences(
+    display_name, preferred_tone, preferred_platforms, audience_focus,
+    content_preferences, avoid_topics, notes
+):
+    try:
+        preferences = get_workspace().save_user_preferences(
+            display_name=display_name,
+            preferred_tone=preferred_tone,
+            preferred_platforms=preferred_platforms,
+            audience_focus=audience_focus,
+            content_preferences=content_preferences,
+            avoid_topics=avoid_topics,
+            notes=notes,
+        )
+    except (ValueError, OSError, sqlite3.Error) as exc:
+        return {}, f"⚠️ 保存失败：{exc}", "**当前账户**"
+    summary = f"**{preferences['display_name']}**\n\n本地账户 · 偏好已启用"
+    return preferences, "✅ 用户偏好已保存，将自动用于后续创作。", summary
+
+
+def select_latest_tab(state: dict | None):
+    if (state or {}).get("last") in ("review", "done"):
+        return gr.update(selected="preview")
+    return gr.skip()
 
 
 # ---- 外观 ----
@@ -383,6 +609,39 @@ html, body { background: var(--app-bg) !important; }
 #hero .header-note { color: #929aa6; font-size: 11px; margin-left: 24px; }
 #status-pill { text-align: right; }
 #status-pill p { color: #64746e; font-size: 11px; margin: 0; }
+#account-actions { align-items: center; justify-content: flex-end; gap: 8px; }
+#account-button { min-height: 32px; font-size: 11px; border-radius: 9px; white-space: nowrap; }
+#account-center {
+  position: fixed; z-index: 200; top: 76px; right: 22px;
+  width: min(900px, calc(100vw - 44px)); height: min(760px, calc(100dvh - 98px));
+  overflow-x: hidden !important; overflow-y: auto !important;
+  overscroll-behavior: contain; scrollbar-gutter: stable; -webkit-overflow-scrolling: touch;
+  padding: 18px; gap: 10px; box-sizing: border-box;
+  background: #fff; border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: 0 22px 70px rgba(26, 36, 53, .2);
+}
+#account-header {
+  position: sticky; top: -18px; z-index: 5; align-items: center;
+  margin: -18px -4px 0; padding: 18px 4px 10px;
+  border-bottom: 1px solid var(--line); background: #fff;
+}
+#account-summary .prose p { margin: 0; font-size: 11px; color: #7a8494; }
+#account-close { min-height: 30px; font-size: 11px; border: 0; box-shadow: none; }
+#account-tabs {
+  display: flex; flex-direction: column; flex: 0 0 auto !important;
+  min-height: max-content !important; overflow: visible !important;
+}
+#account-tabs .tabitem, #account-tabs [role="tabpanel"] {
+  height: auto !important; min-height: 0 !important; overflow: visible !important;
+}
+#account-history-content, #preferences-content {
+  height: auto !important; min-height: 0 !important; overflow: visible !important;
+  padding: 14px 4px 28px; box-sizing: border-box; gap: 12px;
+}
+#account-center::-webkit-scrollbar { width: 10px; }
+#account-center::-webkit-scrollbar-thumb { background: #cfd4dc; border: 3px solid #fff; border-radius: 10px; }
+#history-preview { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: #fafbfc; }
+#history-preview img { display: block; max-width: 100%; max-height: 340px; object-fit: contain; margin: 16px auto; border-radius: 10px; }
 #workspace {
   align-items: stretch; gap: 16px; height: calc(100dvh - 112px); min-height: 510px;
 }
@@ -428,6 +687,9 @@ html, body { background: var(--app-bg) !important; }
 #result-preview { height: 100%; overflow: auto; padding: 24px 32px; box-sizing: border-box; }
 #result-preview .prose { max-width: 760px; margin: auto; font-size: 14px; line-height: 1.9; }
 #result-preview img { display: block; max-width: 100%; max-height: 430px; object-fit: contain; margin: 20px auto; border-radius: 12px; }
+.metrics-row { gap: 8px; flex-wrap: wrap; }
+.metrics-row > div { min-width: 95px !important; }
+#preferences-content textarea { min-height: 70px; }
 #composer {
   position: relative; flex: 0 0 auto !important; min-width: 0 !important;
   margin: 10px 16px 14px; width: auto;
@@ -485,6 +747,7 @@ footer { display: none !important; }
   #left-rail, #right-rail { order: 1; flex: 1 1 44% !important; overflow: visible; }
   #status-pill { display: none; }
   #result-preview { padding: 18px; }
+  #account-center { top: 64px; right: 10px; width: calc(100vw - 20px); height: calc(100dvh - 76px); padding: 12px; }
 }
 """
 
@@ -513,14 +776,81 @@ def build_ui() -> gr.Blocks:
             with gr.Column(scale=3, min_width=0):
                 gr.HTML(HERO)
             with gr.Column(scale=1, min_width=0):
-                gr.Markdown(pipeline_status(), elem_id="status-pill")
+                with gr.Row(elem_id="account-actions"):
+                    gr.Markdown(pipeline_status(), elem_id="status-pill")
+                    account_button = gr.Button("账户信息", scale=0, min_width=72, elem_id="account-button")
 
         session_state = gr.State({"session": None, "last": ""})
         settings_open = gr.State(False)
+        account_open = gr.State(False)
+        initial_preferences = get_workspace().get_user_preferences()
+        preference_state = gr.State(initial_preferences)
+        initial_history_choices = _work_choices()
+        initial_work_id = initial_history_choices[0][1] if initial_history_choices else None
+        initial_history = load_history_work(initial_work_id)
         try:
             products = sorted(make_store().models())
         except (LocalKBError, OSError):
             products = []
+
+        with gr.Column(visible=False, elem_id="account-center") as account_panel:
+            with gr.Row(elem_id="account-header"):
+                account_summary = gr.Markdown(
+                    f"**{initial_preferences['display_name']}**\n\n本地账户 · 历史与偏好",
+                    elem_id="account-summary",
+                )
+                account_close = gr.Button("关闭", scale=0, min_width=58, elem_id="account-close")
+            with gr.Tabs(selected="account_history", elem_id="account-tabs"):
+                with gr.Tab("历史作品", id="account_history"):
+                    with gr.Column(elem_id="account-history-content"):
+                        with gr.Row():
+                            history_selector = gr.Dropdown(
+                                label="已确认作品", choices=initial_history_choices,
+                                value=initial_work_id, interactive=True, scale=4,
+                            )
+                            history_refresh = gr.Button("刷新", scale=0, min_width=64)
+                        history_title = gr.Textbox(label="作品标题", value=initial_history[0])
+                        with gr.Row():
+                            history_product = gr.Textbox(label="产品", value=initial_history[1])
+                            history_audience = gr.Textbox(label="受众", value=initial_history[2])
+                            history_scene = gr.Textbox(label="场景", value=initial_history[3])
+                        with gr.Row():
+                            history_platform = gr.Textbox(label="平台", value=initial_history[4])
+                            history_goal = gr.Textbox(label="目标", value=initial_history[5])
+                        history_article = gr.Textbox(
+                            label="作品正文（Markdown）", value=initial_history[6], lines=12,
+                        )
+                        history_save = gr.Button("保存作品修改", variant="primary")
+                        history_status = gr.Markdown()
+                        gr.Markdown("### 修改预览")
+                        history_preview = gr.Markdown(initial_history[7], elem_id="history-preview")
+                        gr.Markdown("### 宣传数据")
+                        performance_history = gr.Markdown(initial_history[8])
+                        with gr.Row(elem_classes="metrics-row"):
+                            metric_impressions = gr.Number(label="曝光", value=0, minimum=0, precision=0)
+                            metric_likes = gr.Number(label="点赞", value=0, minimum=0, precision=0)
+                            metric_shares = gr.Number(label="分享", value=0, minimum=0, precision=0)
+                            metric_inquiries = gr.Number(label="咨询", value=0, minimum=0, precision=0)
+                            metric_visits = gr.Number(label="到店", value=0, minimum=0, precision=0)
+                            metric_orders = gr.Number(label="成交", value=0, minimum=0, precision=0)
+                        metric_notes = gr.Textbox(label="数据备注", placeholder="例如：发布 24 小时，小红书自然流量")
+                        metric_save = gr.Button("记录宣传数据")
+                        metric_status = gr.Markdown()
+                with gr.Tab("用户偏好", id="account_preferences"):
+                    with gr.Column(elem_id="preferences-content"):
+                        gr.Markdown("### 用户偏好\n这些偏好属于当前账户，并会自动用于后续创作。")
+                        preference_name = gr.Textbox(
+                            label="用户名称", value=initial_preferences.get("display_name", "当前用户")
+                        )
+                        with gr.Row():
+                            preference_tone = gr.Textbox(label="常用语气", value=initial_preferences.get("preferred_tone", ""), placeholder="真诚、专业、少用感叹号")
+                            preference_platforms = gr.Textbox(label="常用平台", value=initial_preferences.get("preferred_platforms", ""), placeholder="朋友圈、小红书")
+                        preference_audience = gr.Textbox(label="重点客群", value=initial_preferences.get("audience_focus", ""), placeholder="高校学生、商务办公人群")
+                        preference_content = gr.Textbox(label="内容偏好", value=initial_preferences.get("content_preferences", ""), lines=2, placeholder="偏重体验、以真实使用场景开篇")
+                        preference_avoid = gr.Textbox(label="需避免内容", value=initial_preferences.get("avoid_topics", ""), lines=2, placeholder="不写未经确认的价格，不使用夸张承诺")
+                        preference_notes = gr.Textbox(label="其他个人习惯", value=initial_preferences.get("notes", ""), lines=2)
+                        preference_save = gr.Button("保存用户偏好", variant="primary")
+                        preference_status = gr.Markdown("用户偏好已启用。" if initial_preferences.get("updated_at") else "尚未设置用户偏好。")
 
         with gr.Row(equal_height=False, elem_id="workspace"):
             with gr.Column(scale=2, min_width=0, elem_id="left-rail"):
@@ -547,7 +877,7 @@ def build_ui() -> gr.Blocks:
                         if "type" in _CHATBOT_PARAMS:
                             chatbot_kw["type"] = "messages"
                         chatbot = gr.Chatbot(**chatbot_kw)
-                    with gr.Tab("图文预览", id="preview", elem_id="preview-pane"):
+                    with gr.Tab("最新成果", id="preview", elem_id="preview-pane"):
                         article_card = gr.Markdown(render_article_card(None), elem_id="result-preview")
 
                 with gr.Column(elem_id="composer"):
@@ -605,8 +935,9 @@ def build_ui() -> gr.Blocks:
                         report_docx = gr.DownloadButton("DOCX", interactive=False, min_width=0)
                         report_pdf = gr.DownloadButton("PDF", interactive=False, min_width=0)
                     gr.HTML('<div id="download-note">完成核验后可下载</div>')
+                    archive_note = gr.Markdown("确认定稿后自动存入历史作品库")
 
-        turn_inputs = [msg, product, audience, scene, platform, goal, chatbot, session_state]
+        turn_inputs = [msg, product, audience, scene, platform, goal, chatbot, session_state, preference_state]
         turn_outputs = [msg, chatbot, session_state, scene_card, evidence_card, article_card, review_card]
         # 共用并发队列，避免连续点击与回车同时修改同一会话。
         event_kwargs = {"concurrency_limit": 1, "concurrency_id": "creation"}
@@ -615,13 +946,20 @@ def build_ui() -> gr.Blocks:
                 lambda: (gr.update(selected="chat"), False, gr.update(visible=False)),
                 outputs=[work_tabs, settings_open, settings_panel], queue=False,
             ).then(
-                composer_send, turn_inputs, turn_outputs, **event_kwargs,
+                composer_send_with_preferences, turn_inputs, turn_outputs, **event_kwargs,
             )
         settings_toggle.click(
             toggle_settings, settings_open, [settings_open, settings_panel], queue=False,
         )
         settings_done.click(
             lambda: (False, gr.update(visible=False)), outputs=[settings_open, settings_panel], queue=False,
+        )
+        account_button.click(
+            toggle_account, [account_open], [account_open, account_panel], queue=False,
+        )
+        account_close.click(
+            lambda: (False, gr.update(visible=False)),
+            outputs=[account_open, account_panel], queue=False,
         )
         reset.click(
             reset_chat, [session_state],
@@ -630,6 +968,45 @@ def build_ui() -> gr.Blocks:
         ).then(lambda: gr.update(selected="chat"), outputs=work_tabs, queue=False)
         download_outputs = [publish_md, publish_docx, publish_pdf, report_md, report_docx, report_pdf]
         session_state.change(prepare_downloads, [session_state], download_outputs)
+        session_state.change(select_latest_tab, [session_state], [work_tabs], queue=False)
+        session_state.change(refresh_history_choices, [session_state], [history_selector], queue=False)
+        session_state.change(archive_status, [session_state], [archive_note], queue=False)
+
+        history_selector.change(
+            load_history_work, [history_selector],
+            [history_title, history_product, history_audience, history_scene,
+             history_platform, history_goal, history_article, history_preview,
+             performance_history], queue=False,
+        )
+        history_refresh.click(
+            refresh_history, [history_selector],
+            [history_selector, history_title, history_product, history_audience,
+             history_scene, history_platform, history_goal, history_article,
+             history_preview, performance_history], queue=False,
+        )
+        history_article.change(
+            lambda article: article or "_正文为空。_", [history_article], [history_preview], queue=False,
+        )
+        history_save.click(
+            save_history_work,
+            [history_selector, history_title, history_product, history_audience,
+             history_scene, history_platform, history_goal, history_article],
+            [history_status, history_selector, history_preview],
+        )
+        metric_save.click(
+            save_performance,
+            [history_selector, metric_impressions, metric_likes, metric_shares,
+             metric_inquiries, metric_visits, metric_orders, metric_notes],
+            [metric_status, performance_history],
+        )
+
+        preference_save.click(
+            save_user_preferences,
+            [preference_name, preference_tone, preference_platforms,
+             preference_audience, preference_content, preference_avoid,
+             preference_notes],
+            [preference_state, preference_status, account_summary],
+        )
 
     return demo
 
