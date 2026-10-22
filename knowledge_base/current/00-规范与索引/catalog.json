@@ -87170,11 +87170,1688 @@
           "建议用途": "产品介绍配图，使用前核对画面与具体配置"
         }
       }
+    },
+    {
+      "id": "DOC-8a5e38e2584bf2bd",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 L420/综合沟通卡.md",
+      "model_key": "华为擎云 L420",
+      "official_product": "华为擎云 L420",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 L420/综合沟通卡.md",
+        "sha256": "986bf5f81c92844c794a29ee63215c0c3f2a463a6916dfcee55e0dd53fc45fd9",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l420/",
+          "https://qingyun.huawei.com/laptops/qingyun-l420/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "986bf5f81c92844c794a29ee63215c0c3f2a463a6916dfcee55e0dd53fc45fd9"
+      },
+      "sha256": "986bf5f81c92844c794a29ee63215c0c3f2a463a6916dfcee55e0dd53fc45fd9",
+      "depends_on": [
+        "DOC-c7fbf07bae7b58ca"
+      ]
+    },
+    {
+      "id": "DOC-bc86bc290436aaf3",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 L420x/综合沟通卡.md",
+      "model_key": "华为擎云 L420x",
+      "official_product": "华为擎云 L420x",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 L420x/综合沟通卡.md",
+        "sha256": "1b2dca45e4385506b22c3b99806b94f658ea4b0df8da8dceeaafc8ec70f6cd46",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l420x/",
+          "https://qingyun.huawei.com/laptops/qingyun-l420x/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "1b2dca45e4385506b22c3b99806b94f658ea4b0df8da8dceeaafc8ec70f6cd46"
+      },
+      "sha256": "1b2dca45e4385506b22c3b99806b94f658ea4b0df8da8dceeaafc8ec70f6cd46",
+      "depends_on": [
+        "DOC-ebad4628d5422a6f"
+      ]
+    },
+    {
+      "id": "DOC-bf1c76bad8c2cfce",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 L420z/综合沟通卡.md",
+      "model_key": "华为擎云 L420z",
+      "official_product": "华为擎云 L420z",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 L420z/综合沟通卡.md",
+        "sha256": "6196ca514b542fac66ec79201d962ca81428706694f6b1260f1680439e9b7cc3",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l420z/",
+          "https://qingyun.huawei.com/laptops/qingyun-l420z/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "6196ca514b542fac66ec79201d962ca81428706694f6b1260f1680439e9b7cc3"
+      },
+      "sha256": "6196ca514b542fac66ec79201d962ca81428706694f6b1260f1680439e9b7cc3",
+      "depends_on": [
+        "DOC-af0721f6783979b8"
+      ]
+    },
+    {
+      "id": "DOC-a9bf17682c90bf49",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 L540x/综合沟通卡.md",
+      "model_key": "华为擎云 L540x",
+      "official_product": "华为擎云 L540x",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 L540x/综合沟通卡.md",
+        "sha256": "c67a9bf4a65e7804d581f89a4beb05851e13bfa2a9bfd242b01461b844a8ed2e",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l540x/",
+          "https://qingyun.huawei.com/laptops/qingyun-l540x/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "c67a9bf4a65e7804d581f89a4beb05851e13bfa2a9bfd242b01461b844a8ed2e"
+      },
+      "sha256": "c67a9bf4a65e7804d581f89a4beb05851e13bfa2a9bfd242b01461b844a8ed2e",
+      "depends_on": [
+        "DOC-bb791f8d055b6be0"
+      ]
+    },
+    {
+      "id": "DOC-5d6c9de885b31445",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 L540x 优享版/综合沟通卡.md",
+      "model_key": "华为擎云 L540x 优享版",
+      "official_product": "华为擎云 L540x 优享版",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 L540x 优享版/综合沟通卡.md",
+        "sha256": "e73ce2ba6b4c9f9bd1fe99970db4df4579c11fe662acfcaf600b61188ca30c9e",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l540x-youxiangban/",
+          "https://qingyun.huawei.com/laptops/qingyun-l540x-youxiangban/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "e73ce2ba6b4c9f9bd1fe99970db4df4579c11fe662acfcaf600b61188ca30c9e"
+      },
+      "sha256": "e73ce2ba6b4c9f9bd1fe99970db4df4579c11fe662acfcaf600b61188ca30c9e",
+      "depends_on": [
+        "DOC-be59ec4b444957b6"
+      ]
+    },
+    {
+      "id": "DOC-1da393c180ede6aa",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 L540z/综合沟通卡.md",
+      "model_key": "华为擎云 L540z",
+      "official_product": "华为擎云 L540z",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 L540z/综合沟通卡.md",
+        "sha256": "cf08184be2230a5164791fa7e5df539a8f111d98d82b83fda273aa8fd41158d4",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l540z/",
+          "https://qingyun.huawei.com/laptops/qingyun-l540z/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "cf08184be2230a5164791fa7e5df539a8f111d98d82b83fda273aa8fd41158d4"
+      },
+      "sha256": "cf08184be2230a5164791fa7e5df539a8f111d98d82b83fda273aa8fd41158d4",
+      "depends_on": [
+        "DOC-d614ddbb34d9ad67"
+      ]
+    },
+    {
+      "id": "DOC-b2fcdeddb3b0fa83",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 L540z 优享版/综合沟通卡.md",
+      "model_key": "华为擎云 L540z 优享版",
+      "official_product": "华为擎云 L540z 优享版",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 L540z 优享版/综合沟通卡.md",
+        "sha256": "5b03d61a104e3d994dfeed61d35d0292ced2e908d707e87517a0efae8a763b18",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/laptops/qingyun-l540z-youxiangban/",
+          "https://qingyun.huawei.com/laptops/qingyun-l540z-youxiangban/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "5b03d61a104e3d994dfeed61d35d0292ced2e908d707e87517a0efae8a763b18"
+      },
+      "sha256": "5b03d61a104e3d994dfeed61d35d0292ced2e908d707e87517a0efae8a763b18",
+      "depends_on": [
+        "DOC-f5032078c5cc1641"
+      ]
+    },
+    {
+      "id": "DOC-bfd387d3eb9b34f7",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 W515y/综合沟通卡.md",
+      "model_key": "华为擎云 W515y",
+      "official_product": "华为擎云 W515y",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 W515y/综合沟通卡.md",
+        "sha256": "90d91f2bf3f1fde34bfbbbff5c208fed0eefa61031692dacefbc0474b14b3410",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/desktops/qingyun-w515y/",
+          "https://qingyun.huawei.com/desktops/qingyun-w515y/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "90d91f2bf3f1fde34bfbbbff5c208fed0eefa61031692dacefbc0474b14b3410"
+      },
+      "sha256": "90d91f2bf3f1fde34bfbbbff5c208fed0eefa61031692dacefbc0474b14b3410",
+      "depends_on": [
+        "DOC-6368a0589ee224ad"
+      ]
+    },
+    {
+      "id": "DOC-013abf3c972d04f0",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 W585x 优享版/综合沟通卡.md",
+      "model_key": "华为擎云 W585x 优享版",
+      "official_product": "华为擎云 W585x 优享版",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 W585x 优享版/综合沟通卡.md",
+        "sha256": "e0d6ec0300f6cf3a29da7a281d8d30f1dc4b506e8671b73310bbf6d9360ef1a6",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/desktops/qingyun-w585x-youxiangban/",
+          "https://qingyun.huawei.com/desktops/qingyun-w585x-youxiangban/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "e0d6ec0300f6cf3a29da7a281d8d30f1dc4b506e8671b73310bbf6d9360ef1a6"
+      },
+      "sha256": "e0d6ec0300f6cf3a29da7a281d8d30f1dc4b506e8671b73310bbf6d9360ef1a6",
+      "depends_on": [
+        "DOC-528c2c64ae4e8138"
+      ]
+    },
+    {
+      "id": "DOC-34a198bf86c28097",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 W585y 行业版/综合沟通卡.md",
+      "model_key": "华为擎云 W585y 行业版",
+      "official_product": "华为擎云 W585y 行业版",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 W585y 行业版/综合沟通卡.md",
+        "sha256": "975312c5e7e4cf1b5e397c0c38078d1e151b6e9f62890d8017e29324a7cfc5a9",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/desktops/qingyun-w585y-industry/",
+          "https://qingyun.huawei.com/desktops/qingyun-w585y-industry/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "975312c5e7e4cf1b5e397c0c38078d1e151b6e9f62890d8017e29324a7cfc5a9"
+      },
+      "sha256": "975312c5e7e4cf1b5e397c0c38078d1e151b6e9f62890d8017e29324a7cfc5a9",
+      "depends_on": [
+        "DOC-fe0f7a8bdb19a826"
+      ]
+    },
+    {
+      "id": "DOC-e4e7ea4128034602",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 W585y/综合沟通卡.md",
+      "model_key": "华为擎云 W585y",
+      "official_product": "华为擎云 W585y",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 W585y/综合沟通卡.md",
+        "sha256": "57b7aa91a8545fed89ed9217349107a40a67a963373b04d636b9dc0687e6a316",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/desktops/qingyun-w585y/",
+          "https://qingyun.huawei.com/desktops/qingyun-w585y/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "57b7aa91a8545fed89ed9217349107a40a67a963373b04d636b9dc0687e6a316"
+      },
+      "sha256": "57b7aa91a8545fed89ed9217349107a40a67a963373b04d636b9dc0687e6a316",
+      "depends_on": [
+        "DOC-2cc9aefe71d94766"
+      ]
+    },
+    {
+      "id": "DOC-28cac36bff5ac23e",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MateBook Fold 企业版/综合沟通卡.md",
+      "model_key": "HUAWEI MateBook Fold 企业版",
+      "official_product": "HUAWEI MateBook Fold 企业版",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MateBook Fold 企业版/综合沟通卡.md",
+        "sha256": "af8325061634336b9a8bd24fb2323b86f3df9fe53105c8c0e153cea1c9fd01c9",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/harmonyos-computer/matebook-fold-enterprise/",
+          "https://qingyun.huawei.com/harmonyos-computer/matebook-fold-enterprise/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "af8325061634336b9a8bd24fb2323b86f3df9fe53105c8c0e153cea1c9fd01c9"
+      },
+      "sha256": "af8325061634336b9a8bd24fb2323b86f3df9fe53105c8c0e153cea1c9fd01c9",
+      "depends_on": [
+        "DOC-5e7c9103b6ed803f"
+      ]
+    },
+    {
+      "id": "DOC-a08fb4a7ad69a078",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 HM740/综合沟通卡.md",
+      "model_key": "华为擎云 HM740",
+      "official_product": "华为擎云 HM740",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 HM740/综合沟通卡.md",
+        "sha256": "ffc65842527544dd064e9a9621a5236e7bcc4e007f0eb838f22d87403b823267",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/harmonyos-computer/qingyun-hm740/",
+          "https://qingyun.huawei.com/harmonyos-computer/qingyun-hm740/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "ffc65842527544dd064e9a9621a5236e7bcc4e007f0eb838f22d87403b823267"
+      },
+      "sha256": "ffc65842527544dd064e9a9621a5236e7bcc4e007f0eb838f22d87403b823267",
+      "depends_on": [
+        "DOC-4dc9d50dd38676f5"
+      ]
+    },
+    {
+      "id": "DOC-6e28d92007fe0162",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/华为擎云 HM940/综合沟通卡.md",
+      "model_key": "华为擎云 HM940",
+      "official_product": "华为擎云 HM940",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/华为擎云 HM940/综合沟通卡.md",
+        "sha256": "1e2349a9fd2de637720c6a76c47c8999d8dfe96f5898ce769561f4c426343de5",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://qingyun.huawei.com/harmonyos-computer/qingyun-hm940/",
+          "https://qingyun.huawei.com/harmonyos-computer/qingyun-hm940/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "1e2349a9fd2de637720c6a76c47c8999d8dfe96f5898ce769561f4c426343de5"
+      },
+      "sha256": "1e2349a9fd2de637720c6a76c47c8999d8dfe96f5898ce769561f4c426343de5",
+      "depends_on": [
+        "DOC-603a6ca798dd7d47"
+      ]
+    },
+    {
+      "id": "DOC-a66f105df3c08927",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MatePad Edge/综合沟通卡.md",
+      "model_key": "HUAWEI MatePad Edge",
+      "official_product": "HUAWEI MatePad Edge",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MatePad Edge/综合沟通卡.md",
+        "sha256": "1dfd7672f7112c4fea7c853ad2c0f2b154a28479c0450bf92269f357379efae1",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/tablets/matepad-edge/",
+          "https://consumer.huawei.com/cn/tablets/matepad-edge/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "1dfd7672f7112c4fea7c853ad2c0f2b154a28479c0450bf92269f357379efae1"
+      },
+      "sha256": "1dfd7672f7112c4fea7c853ad2c0f2b154a28479c0450bf92269f357379efae1",
+      "depends_on": [
+        "DOC-a14282d332f7e3e9"
+      ]
+    },
+    {
+      "id": "DOC-91387edc4be752f5",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MatePad Pro Max/综合沟通卡.md",
+      "model_key": "HUAWEI MatePad Pro Max",
+      "official_product": "HUAWEI MatePad Pro Max",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MatePad Pro Max/综合沟通卡.md",
+        "sha256": "f4d5ca59b0e73423dbaae53369d6725476ca58574410ca253e01bf5037252d75",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/tablets/matepad-pro-max/",
+          "https://consumer.huawei.com/cn/tablets/matepad-pro-max/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "f4d5ca59b0e73423dbaae53369d6725476ca58574410ca253e01bf5037252d75"
+      },
+      "sha256": "f4d5ca59b0e73423dbaae53369d6725476ca58574410ca253e01bf5037252d75",
+      "depends_on": [
+        "DOC-6dabcfa0ae3fc4f5"
+      ]
+    },
+    {
+      "id": "DOC-fe1a97abd3773e82",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MatePad Pro 12 英寸/综合沟通卡.md",
+      "model_key": "HUAWEI MatePad Pro 12 英寸",
+      "official_product": "HUAWEI MatePad Pro 12 英寸",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MatePad Pro 12 英寸/综合沟通卡.md",
+        "sha256": "6e28a285114d5b586b1f7de790871968e51c941bb29ea90d70b88fc8352ab696",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/tablets/matepad-pro-12/",
+          "https://consumer.huawei.com/cn/tablets/matepad-pro-12/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "6e28a285114d5b586b1f7de790871968e51c941bb29ea90d70b88fc8352ab696"
+      },
+      "sha256": "6e28a285114d5b586b1f7de790871968e51c941bb29ea90d70b88fc8352ab696",
+      "depends_on": [
+        "DOC-3032f42808f83444"
+      ]
+    },
+    {
+      "id": "DOC-cadea66bb58e37c0",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MatePad Air Z/综合沟通卡.md",
+      "model_key": "HUAWEI MatePad Air Z",
+      "official_product": "HUAWEI MatePad Air Z",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MatePad Air Z/综合沟通卡.md",
+        "sha256": "3071c9ce9c09d7592e6e97171cc5d80c0610ea67e44b473c9884390df3c884ef",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/tablets/matepad-air-z/",
+          "https://consumer.huawei.com/cn/tablets/matepad-air-z/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "3071c9ce9c09d7592e6e97171cc5d80c0610ea67e44b473c9884390df3c884ef"
+      },
+      "sha256": "3071c9ce9c09d7592e6e97171cc5d80c0610ea67e44b473c9884390df3c884ef",
+      "depends_on": [
+        "DOC-c644e4ade953c87c"
+      ]
+    },
+    {
+      "id": "DOC-14a94937eed27bbb",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MatePad Air 12 英寸/综合沟通卡.md",
+      "model_key": "HUAWEI MatePad Air 12 英寸",
+      "official_product": "HUAWEI MatePad Air 12 英寸",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MatePad Air 12 英寸/综合沟通卡.md",
+        "sha256": "fa59c60fbc20f0e99a201ed42526b99d233d5b08d722ab216196f46e2fba0fd1",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/tablets/matepad-air-12/",
+          "https://consumer.huawei.com/cn/tablets/matepad-air-12/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "fa59c60fbc20f0e99a201ed42526b99d233d5b08d722ab216196f46e2fba0fd1"
+      },
+      "sha256": "fa59c60fbc20f0e99a201ed42526b99d233d5b08d722ab216196f46e2fba0fd1",
+      "depends_on": [
+        "DOC-21c99507404ec1da"
+      ]
+    },
+    {
+      "id": "DOC-02d8361bb1065834",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MatePad Mini/综合沟通卡.md",
+      "model_key": "HUAWEI MatePad Mini",
+      "official_product": "HUAWEI MatePad Mini",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MatePad Mini/综合沟通卡.md",
+        "sha256": "39478e002489e125db8b0c233a27c9c17452bc4e8fb9344acadc19758ce82a19",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/tablets/matepad-mini/",
+          "https://consumer.huawei.com/cn/tablets/matepad-mini/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "39478e002489e125db8b0c233a27c9c17452bc4e8fb9344acadc19758ce82a19"
+      },
+      "sha256": "39478e002489e125db8b0c233a27c9c17452bc4e8fb9344acadc19758ce82a19",
+      "depends_on": [
+        "DOC-5fcf232284d546d1"
+      ]
+    },
+    {
+      "id": "DOC-d13ef7198430a66a",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MatePad 11.5/综合沟通卡.md",
+      "model_key": "HUAWEI MatePad 11.5",
+      "official_product": "HUAWEI MatePad 11.5",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MatePad 11.5/综合沟通卡.md",
+        "sha256": "d6827138ea763bbaf7ee975df643e158a2c66008cd6a05989e823f1a3704e6d9",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/tablets/matepad-11-5-2026/",
+          "https://consumer.huawei.com/cn/tablets/matepad-11-5-2026/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "d6827138ea763bbaf7ee975df643e158a2c66008cd6a05989e823f1a3704e6d9"
+      },
+      "sha256": "d6827138ea763bbaf7ee975df643e158a2c66008cd6a05989e823f1a3704e6d9",
+      "depends_on": [
+        "DOC-f92ed1c8a8f98083"
+      ]
+    },
+    {
+      "id": "DOC-d6a74135b1098ddd",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MatePad 11.5 S 2025/综合沟通卡.md",
+      "model_key": "HUAWEI MatePad 11.5 S 2025",
+      "official_product": "HUAWEI MatePad 11.5 S 2025",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MatePad 11.5 S 2025/综合沟通卡.md",
+        "sha256": "c5fadb04cc11605721a4f2c9820fb59bbec7da5fb510e1fcf11009f59f472ba0",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/tablets/matepad-11-5-s-2025/",
+          "https://consumer.huawei.com/cn/tablets/matepad-11-5-s-2025/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "c5fadb04cc11605721a4f2c9820fb59bbec7da5fb510e1fcf11009f59f472ba0"
+      },
+      "sha256": "c5fadb04cc11605721a4f2c9820fb59bbec7da5fb510e1fcf11009f59f472ba0",
+      "depends_on": [
+        "DOC-ef8e57025ba1f926"
+      ]
+    },
+    {
+      "id": "DOC-eb64d91ca15b0ab2",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI MatePad SE/综合沟通卡.md",
+      "model_key": "HUAWEI MatePad SE",
+      "official_product": "HUAWEI MatePad SE",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI MatePad SE/综合沟通卡.md",
+        "sha256": "e0382e72d32ceccf30335207cbd7f5841f8a909020a80ebe4c22c5936659924c",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/tablets/matepad-se-11/",
+          "https://consumer.huawei.com/cn/tablets/matepad-se-11/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "e0382e72d32ceccf30335207cbd7f5841f8a909020a80ebe4c22c5936659924c"
+      },
+      "sha256": "e0382e72d32ceccf30335207cbd7f5841f8a909020a80ebe4c22c5936659924c",
+      "depends_on": [
+        "DOC-7f1ecf2027b9fc03"
+      ]
+    },
+    {
+      "id": "DOC-b2853148004daaf5",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI Mate 90 RS 非凡大师/综合沟通卡.md",
+      "model_key": "HUAWEI Mate 90 RS 非凡大师",
+      "official_product": "HUAWEI Mate 90 RS 非凡大师",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI Mate 90 RS 非凡大师/综合沟通卡.md",
+        "sha256": "3d234fbdb10ad10ef3abc2b2fc8a1cd306c872496e9fb9482afc817558f2318f",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/phones/mate90-rs-ultimate-design/",
+          "https://consumer.huawei.com/cn/phones/mate90-rs-ultimate-design/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "3d234fbdb10ad10ef3abc2b2fc8a1cd306c872496e9fb9482afc817558f2318f"
+      },
+      "sha256": "3d234fbdb10ad10ef3abc2b2fc8a1cd306c872496e9fb9482afc817558f2318f",
+      "depends_on": [
+        "DOC-8bbda84fd5aaf238"
+      ]
+    },
+    {
+      "id": "DOC-39b9dd0743f28c6e",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI Mate 90 Pro Max/综合沟通卡.md",
+      "model_key": "HUAWEI Mate 90 Pro Max",
+      "official_product": "HUAWEI Mate 90 Pro Max",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI Mate 90 Pro Max/综合沟通卡.md",
+        "sha256": "5169d8430e6d46b018e4e849a8af90811837112c529871e06117cb706b05f3b2",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/phones/mate90-pro-max/",
+          "https://consumer.huawei.com/cn/phones/mate90-pro-max/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "5169d8430e6d46b018e4e849a8af90811837112c529871e06117cb706b05f3b2"
+      },
+      "sha256": "5169d8430e6d46b018e4e849a8af90811837112c529871e06117cb706b05f3b2",
+      "depends_on": [
+        "DOC-8b0e84583c74eb6f"
+      ]
+    },
+    {
+      "id": "DOC-d39f011c4f8bae28",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI Mate 90 Pro/综合沟通卡.md",
+      "model_key": "HUAWEI Mate 90 Pro",
+      "official_product": "HUAWEI Mate 90 Pro",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI Mate 90 Pro/综合沟通卡.md",
+        "sha256": "562f27e2b2951019efc0d9cfb4a7f2814aab23df009f69f603392f142f32e087",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/phones/mate90-pro/",
+          "https://consumer.huawei.com/cn/phones/mate90-pro/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "562f27e2b2951019efc0d9cfb4a7f2814aab23df009f69f603392f142f32e087"
+      },
+      "sha256": "562f27e2b2951019efc0d9cfb4a7f2814aab23df009f69f603392f142f32e087",
+      "depends_on": [
+        "DOC-8ec9bfc8f76f19e8"
+      ]
+    },
+    {
+      "id": "DOC-694507c209272e14",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI Mate 90/综合沟通卡.md",
+      "model_key": "HUAWEI Mate 90",
+      "official_product": "HUAWEI Mate 90",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI Mate 90/综合沟通卡.md",
+        "sha256": "20220d523f0425c9895443ef672c79010ec0db36592fa3904332a2089d6c50cf",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/phones/mate90/",
+          "https://consumer.huawei.com/cn/phones/mate90/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "20220d523f0425c9895443ef672c79010ec0db36592fa3904332a2089d6c50cf"
+      },
+      "sha256": "20220d523f0425c9895443ef672c79010ec0db36592fa3904332a2089d6c50cf",
+      "depends_on": [
+        "DOC-7a1fbc134febdc7c"
+      ]
+    },
+    {
+      "id": "DOC-267ea76d1a7b465e",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI nova 16 Pro/综合沟通卡.md",
+      "model_key": "HUAWEI nova 16 Pro",
+      "official_product": "HUAWEI nova 16 Pro",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI nova 16 Pro/综合沟通卡.md",
+        "sha256": "5aeff594f32914391a05704ee7005959628361dcda2474d61e4e93927ac617ac",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/phones/nova16-pro/",
+          "https://consumer.huawei.com/cn/phones/nova16-pro/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "5aeff594f32914391a05704ee7005959628361dcda2474d61e4e93927ac617ac"
+      },
+      "sha256": "5aeff594f32914391a05704ee7005959628361dcda2474d61e4e93927ac617ac",
+      "depends_on": [
+        "DOC-dc6fe682fc3dcd18"
+      ]
+    },
+    {
+      "id": "DOC-ba42b7046776bd0d",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI Mate XT 2 非凡大师/综合沟通卡.md",
+      "model_key": "HUAWEI Mate XT 2 非凡大师",
+      "official_product": "HUAWEI Mate XT 2 非凡大师",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI Mate XT 2 非凡大师/综合沟通卡.md",
+        "sha256": "dfcaccf0a154a84e36be8f295ea02a7e070fcc02653be0db122245d41950b5e5",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/phones/mate-xt-2-ultimate-design/",
+          "https://consumer.huawei.com/cn/phones/mate-xt-2-ultimate-design/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "dfcaccf0a154a84e36be8f295ea02a7e070fcc02653be0db122245d41950b5e5"
+      },
+      "sha256": "dfcaccf0a154a84e36be8f295ea02a7e070fcc02653be0db122245d41950b5e5",
+      "depends_on": [
+        "DOC-88a56f9d2bd7aa88"
+      ]
+    },
+    {
+      "id": "DOC-51c116a88ca128c0",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI Pura X View/综合沟通卡.md",
+      "model_key": "HUAWEI Pura X View",
+      "official_product": "HUAWEI Pura X View",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI Pura X View/综合沟通卡.md",
+        "sha256": "6d0b0beb11ca6e4202c8eebe08cd439275e49f923512184d3288f097d04f6828",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/phones/pura-x-view/",
+          "https://consumer.huawei.com/cn/phones/pura-x-view/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "6d0b0beb11ca6e4202c8eebe08cd439275e49f923512184d3288f097d04f6828"
+      },
+      "sha256": "6d0b0beb11ca6e4202c8eebe08cd439275e49f923512184d3288f097d04f6828",
+      "depends_on": [
+        "DOC-0daa0d8205365c05"
+      ]
+    },
+    {
+      "id": "DOC-1edc034c89c00d49",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI Pura X Max/综合沟通卡.md",
+      "model_key": "HUAWEI Pura X Max",
+      "official_product": "HUAWEI Pura X Max",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI Pura X Max/综合沟通卡.md",
+        "sha256": "817d7c4685a31aeb223d0fcfc49aecdba86559b31a87b41031a6422372c68fc5",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/phones/pura-x-max/",
+          "https://consumer.huawei.com/cn/phones/pura-x-max/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "817d7c4685a31aeb223d0fcfc49aecdba86559b31a87b41031a6422372c68fc5"
+      },
+      "sha256": "817d7c4685a31aeb223d0fcfc49aecdba86559b31a87b41031a6422372c68fc5",
+      "depends_on": [
+        "DOC-5f9b271c24efa490"
+      ]
+    },
+    {
+      "id": "DOC-d4be29e10f44aef5",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI nova 16 SE/综合沟通卡.md",
+      "model_key": "HUAWEI nova 16 SE",
+      "official_product": "HUAWEI nova 16 SE",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI nova 16 SE/综合沟通卡.md",
+        "sha256": "afe29d7aea63698cfe8bf2efb5235d3a5f2df9eb7b874612dc12a2813e83210b",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/phones/nova16-se/",
+          "https://consumer.huawei.com/cn/phones/nova16-se/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "afe29d7aea63698cfe8bf2efb5235d3a5f2df9eb7b874612dc12a2813e83210b"
+      },
+      "sha256": "afe29d7aea63698cfe8bf2efb5235d3a5f2df9eb7b874612dc12a2813e83210b",
+      "depends_on": [
+        "DOC-f0dcfd99cdb9c511"
+      ]
+    },
+    {
+      "id": "DOC-bf88ab7f2901f912",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI WATCH D3/综合沟通卡.md",
+      "model_key": "HUAWEI WATCH D3",
+      "official_product": "HUAWEI WATCH D3",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI WATCH D3/综合沟通卡.md",
+        "sha256": "6684cbf4448ecee73b6207a7ac55ac300bcbde65727165133122efaf26c00b50",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/wearables/watch-d3/",
+          "https://consumer.huawei.com/cn/wearables/watch-d3/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "6684cbf4448ecee73b6207a7ac55ac300bcbde65727165133122efaf26c00b50"
+      },
+      "sha256": "6684cbf4448ecee73b6207a7ac55ac300bcbde65727165133122efaf26c00b50",
+      "depends_on": [
+        "DOC-0097c7953fe1d873"
+      ]
+    },
+    {
+      "id": "DOC-dfb4a270a865679b",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI WATCH Ultimate 2/综合沟通卡.md",
+      "model_key": "HUAWEI WATCH Ultimate 2",
+      "official_product": "HUAWEI WATCH Ultimate 2",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI WATCH Ultimate 2/综合沟通卡.md",
+        "sha256": "77ffc81bfceacf1a68e4947ccd2d9aed49d39d722e783e9d014003f832db9bb2",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/wearables/watch-ultimate-2/",
+          "https://consumer.huawei.com/cn/wearables/watch-ultimate-2/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "77ffc81bfceacf1a68e4947ccd2d9aed49d39d722e783e9d014003f832db9bb2"
+      },
+      "sha256": "77ffc81bfceacf1a68e4947ccd2d9aed49d39d722e783e9d014003f832db9bb2",
+      "depends_on": [
+        "DOC-a195e6bf977bc6c7"
+      ]
+    },
+    {
+      "id": "DOC-fd343febae29a2a8",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI WATCH 6 Pro/综合沟通卡.md",
+      "model_key": "HUAWEI WATCH 6 Pro",
+      "official_product": "HUAWEI WATCH 6 Pro",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI WATCH 6 Pro/综合沟通卡.md",
+        "sha256": "87ea11971260d5111e38fead840c7d99142e102a5f929531fccd018744b65576",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/wearables/watch-6-pro/",
+          "https://consumer.huawei.com/cn/wearables/watch-6-pro/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "87ea11971260d5111e38fead840c7d99142e102a5f929531fccd018744b65576"
+      },
+      "sha256": "87ea11971260d5111e38fead840c7d99142e102a5f929531fccd018744b65576",
+      "depends_on": [
+        "DOC-0768645cb82bb676"
+      ]
+    },
+    {
+      "id": "DOC-a958e2ef46adf34d",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI WATCH 6/综合沟通卡.md",
+      "model_key": "HUAWEI WATCH 6",
+      "official_product": "HUAWEI WATCH 6",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI WATCH 6/综合沟通卡.md",
+        "sha256": "95113c5d92be54a7acbbcc1100e4dc3e05f1bee3e954295f5629859723115df5",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/wearables/watch-6/",
+          "https://consumer.huawei.com/cn/wearables/watch-6/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "95113c5d92be54a7acbbcc1100e4dc3e05f1bee3e954295f5629859723115df5"
+      },
+      "sha256": "95113c5d92be54a7acbbcc1100e4dc3e05f1bee3e954295f5629859723115df5",
+      "depends_on": [
+        "DOC-f8c6340d67be93c3"
+      ]
+    },
+    {
+      "id": "DOC-72907fb0ced72a15",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI WATCH FIT 5 Pro/综合沟通卡.md",
+      "model_key": "HUAWEI WATCH FIT 5 Pro",
+      "official_product": "HUAWEI WATCH FIT 5 Pro",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI WATCH FIT 5 Pro/综合沟通卡.md",
+        "sha256": "c110b847a28e5c20dc502090686efcc1abc47ad23ed32ff78d157e225122e28a",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/wearables/watch-fit5-pro/",
+          "https://consumer.huawei.com/cn/wearables/watch-fit5-pro/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "c110b847a28e5c20dc502090686efcc1abc47ad23ed32ff78d157e225122e28a"
+      },
+      "sha256": "c110b847a28e5c20dc502090686efcc1abc47ad23ed32ff78d157e225122e28a",
+      "depends_on": [
+        "DOC-eb65be81bfdb604f"
+      ]
+    },
+    {
+      "id": "DOC-f0d516a8baf4706a",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI WATCH FIT 5/综合沟通卡.md",
+      "model_key": "HUAWEI WATCH FIT 5",
+      "official_product": "HUAWEI WATCH FIT 5",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI WATCH FIT 5/综合沟通卡.md",
+        "sha256": "2a8d078088c0edbd1e007e8ada53cb39b83700e9be9229f816da6f70eebc132b",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/wearables/watch-fit5/",
+          "https://consumer.huawei.com/cn/wearables/watch-fit5/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "2a8d078088c0edbd1e007e8ada53cb39b83700e9be9229f816da6f70eebc132b"
+      },
+      "sha256": "2a8d078088c0edbd1e007e8ada53cb39b83700e9be9229f816da6f70eebc132b",
+      "depends_on": [
+        "DOC-0ae1409964feca99"
+      ]
+    },
+    {
+      "id": "DOC-3f2b0483c10c0253",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI WATCH GT 7 Pro/综合沟通卡.md",
+      "model_key": "HUAWEI WATCH GT 7 Pro",
+      "official_product": "HUAWEI WATCH GT 7 Pro",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI WATCH GT 7 Pro/综合沟通卡.md",
+        "sha256": "b34bd31d82ede8f0389d886194ff2a65468f2414be31a3eae6dba313209499c3",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/wearables/watch-gt7-pro/",
+          "https://consumer.huawei.com/cn/wearables/watch-gt7-pro/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "b34bd31d82ede8f0389d886194ff2a65468f2414be31a3eae6dba313209499c3"
+      },
+      "sha256": "b34bd31d82ede8f0389d886194ff2a65468f2414be31a3eae6dba313209499c3",
+      "depends_on": [
+        "DOC-d9abc4353bf0f160"
+      ]
+    },
+    {
+      "id": "DOC-4cf3dc4fa9df01c8",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI WATCH GT 7/综合沟通卡.md",
+      "model_key": "HUAWEI WATCH GT 7",
+      "official_product": "HUAWEI WATCH GT 7",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI WATCH GT 7/综合沟通卡.md",
+        "sha256": "b92d2fa96324679fcad3d15fee2b321d7f984359f41e6767f7b732d59013d5ab",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/wearables/watch-gt7/",
+          "https://consumer.huawei.com/cn/wearables/watch-gt7/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "b92d2fa96324679fcad3d15fee2b321d7f984359f41e6767f7b732d59013d5ab"
+      },
+      "sha256": "b92d2fa96324679fcad3d15fee2b321d7f984359f41e6767f7b732d59013d5ab",
+      "depends_on": [
+        "DOC-2e95a745adc26999"
+      ]
+    },
+    {
+      "id": "DOC-360b24fc1a47a30e",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI FreeClip 2 耳夹耳机/综合沟通卡.md",
+      "model_key": "HUAWEI FreeClip 2 耳夹耳机",
+      "official_product": "HUAWEI FreeClip 2 耳夹耳机",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI FreeClip 2 耳夹耳机/综合沟通卡.md",
+        "sha256": "2149a64f79923cda77e0efdfd3a71c17d3562e512139ac0a846a53843af56bf5",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/headphones/freeclip2/",
+          "https://consumer.huawei.com/cn/headphones/freeclip2/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "2149a64f79923cda77e0efdfd3a71c17d3562e512139ac0a846a53843af56bf5"
+      },
+      "sha256": "2149a64f79923cda77e0efdfd3a71c17d3562e512139ac0a846a53843af56bf5",
+      "depends_on": [
+        "DOC-2b95573fb4c5f598"
+      ]
+    },
+    {
+      "id": "DOC-1a9b7a7586479a67",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI FreeBuds Neo/综合沟通卡.md",
+      "model_key": "HUAWEI FreeBuds Neo",
+      "official_product": "HUAWEI FreeBuds Neo",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI FreeBuds Neo/综合沟通卡.md",
+        "sha256": "3d50d32e1e68b236dbe22c839ae2f7b7e06cfe1fe1fd0f73b5d6fc5f8128d121",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/headphones/freebuds-neo/",
+          "https://consumer.huawei.com/cn/headphones/freebuds-neo/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "3d50d32e1e68b236dbe22c839ae2f7b7e06cfe1fe1fd0f73b5d6fc5f8128d121"
+      },
+      "sha256": "3d50d32e1e68b236dbe22c839ae2f7b7e06cfe1fe1fd0f73b5d6fc5f8128d121",
+      "depends_on": [
+        "DOC-28b61c63fb4c24ec"
+      ]
+    },
+    {
+      "id": "DOC-3d455071cc6e1f14",
+      "category": "marketing",
+      "kind": "role_guidance",
+      "path": "04-营销表达/按型号/HUAWEI FreeBuds 7/综合沟通卡.md",
+      "model_key": "HUAWEI FreeBuds 7",
+      "official_product": "HUAWEI FreeBuds 7",
+      "platform": null,
+      "system_scope_raw": null,
+      "sku_scope": null,
+      "review_status": "pending_review",
+      "publishable": false,
+      "live_verified_at": null,
+      "issues": [],
+      "source": {
+        "path": "04-营销表达/按型号/HUAWEI FreeBuds 7/综合沟通卡.md",
+        "sha256": "bb3bcc025976e634e68b842e3e0cccae9bce5940fbe8fc8f9c9ab61834b2dec9",
+        "line_spans": [
+          {
+            "start": 1,
+            "end": 56
+          }
+        ],
+        "urls": [
+          "https://consumer.huawei.com/cn/headphones/freebuds7/",
+          "https://consumer.huawei.com/cn/headphones/freebuds7/specs/"
+        ],
+        "dates_in_source": []
+      },
+      "selection": {
+        "sections": [],
+        "prefixes": [],
+        "sha256": "bb3bcc025976e634e68b842e3e0cccae9bce5940fbe8fc8f9c9ab61834b2dec9"
+      },
+      "sha256": "bb3bcc025976e634e68b842e3e0cccae9bce5940fbe8fc8f9c9ab61834b2dec9",
+      "depends_on": [
+        "DOC-6196ce039944363e"
+      ]
     }
   ],
   "usage_policy": "runtime-policy.json；通过标记保存在usage-review.sqlite3，不代表官网或人工复核",
   "schema_version": 2,
-  "updated_at": "2026-10-22T23:45:45+08:00",
+  "updated_at": "2026-10-23T00:02:01+08:00",
   "content_layers": {
     "fact": [
       "product_facts"
