@@ -118,5 +118,50 @@
     "source": "model_fetch/evidence/harmonyos-computer_qingyun-hm940/来源清单.csv",
     "path": "00-规范与索引/来源登记/0ac7432a7f-来源清单.csv",
     "sha256": "0ac7432a7fd815590d3a057e95833782617a218fdf6153909da051fc1a530b03"
+  },
+  {
+    "source": "model_fetch/evidence/matepad-edge/来源清单.csv",
+    "path": "00-规范与索引/来源登记/5883fc9e65-来源清单.csv",
+    "sha256": "5883fc9e6501a5c3943f2a4dca7732064e4fb3a58b9ea3b3c81699852e47bac0"
+  },
+  {
+    "source": "model_fetch/evidence/matepad-pro-max/来源清单.csv",
+    "path": "00-规范与索引/来源登记/f0e09bacbf-来源清单.csv",
+    "sha256": "f0e09bacbf210816017362428658635861883a306e91cc05cca4104b269e2883"
+  },
+  {
+    "source": "model_fetch/evidence/matepad-pro-12/来源清单.csv",
+    "path": "00-规范与索引/来源登记/08b8296c99-来源清单.csv",
+    "sha256": "08b8296c995758d1927357b2061fb9bc5aa06e22162544a57d7e74a7c48649fc"
+  },
+  {
+    "source": "model_fetch/evidence/matepad-air-z/来源清单.csv",
+    "path": "00-规范与索引/来源登记/745845a8f3-来源清单.csv",
+    "sha256": "745845a8f39044d158778086a7d9b6184efaabfabeed192cd728723a15ebd5ed"
+  },
+  {
+    "source": "model_fetch/evidence/matepad-air-12/来源清单.csv",
+    "path": "00-规范与索引/来源登记/6c31db00f5-来源清单.csv",
+    "sha256": "6c31db00f5205947dbd12928b361bd80ca71ea6e38329cb7772755dedc3342af"
+  },
+  {
+    "source": "model_fetch/evidence/matepad-mini/来源清单.csv",
+    "path": "00-规范与索引/来源登记/1f2141e2aa-来源清单.csv",
+    "sha256": "1f2141e2aa0931ff6e5e59f5c25515f2a90f45cb92d60bf7f2f37ff88c8be3b3"
+  },
+  {
+    "source": "model_fetch/evidence/matepad-11-5/来源清单.csv",
+    "path": "00-规范与索引/来源登记/a29f118568-来源清单.csv",
+    "sha256": "a29f11856860653a9f4a79bb086d560c639bcf2944fd5f511e33ee345df57b84"
+  },
+  {
+    "source": "model_fetch/evidence/matepad-11-5-s-2025/来源清单.csv",
+    "path": "00-规范与索引/来源登记/3936f9883a-来源清单.csv",
+    "sha256": "3936f9883adaf9fe8eb3ae5ddd189d82ec123013cb0d75129e4d1c2d73b47fa5"
+  },
+  {
+    "source": "model_fetch/evidence/matepad-se/来源清单.csv",
+    "path": "00-规范与索引/来源登记/bad1f600fb-来源清单.csv",
+    "sha256": "bad1f600fb21be38e550ce721e32be08c0e55491ca0bb7d29eac30ddff39f589"
   }
 ]
