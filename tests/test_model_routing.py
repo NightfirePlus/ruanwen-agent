@@ -7,7 +7,7 @@ import urllib.error
 from unittest.mock import patch
 
 from agent.llm import LLMClient, LLMError, RequestBudget
-from agent.model_routing import ModelRouter, STAGES, llm_multi_router, make_llm, modelscope_router
+from agent.model_routing import ModelRouter, STAGES, llm_multi_router, make_llm
 from agent.models import Session
 from agent.pipeline import Pipeline
 from helpers import FULL_BRIEF, FakeLLM, FakeStore, good_draft, make_prompts
@@ -47,18 +47,23 @@ class BudgetTest(unittest.TestCase):
                 client.json("test")
         self.assertEqual(send.call_count, 1)
 
-    def test_profile_does_not_repair_json(self):
-        with patch.dict(os.environ, {"MODELSCOPE_API_TOKEN": "fake"}):
-            client = modelscope_router().for_stage("intake")
+    def test_single_profile_does_not_repair_json(self):
+        client = LLMClient(api_key="fake", repair_json=False, max_retries=0)
         with patch("agent.llm.urllib.request.urlopen", return_value=response("invalid")) as send:
             with self.assertRaisesRegex(LLMError, "合法 JSON"):
                 client.json("test")
         self.assertEqual(send.call_count, 1)
 
+    def test_multi_profile_repairs_json_once(self):
+        client = LLMClient(api_key="fake", repair_json=True, max_retries=1)
+        with patch("agent.llm.urllib.request.urlopen",
+                   side_effect=[response("invalid"), response('{"ok":true}')]) as send:
+            self.assertEqual(client.json("test"), {"ok": True})
+        self.assertEqual(send.call_count, 2)
+
     def test_burst_429_is_retried_and_eventually_succeeds(self):
         error = urllib.error.HTTPError("https://example.test", 429, "limited", {}, None)
-        with patch.dict(os.environ, {"MODELSCOPE_API_TOKEN": "fake"}):
-            client = modelscope_router().for_stage("evidence")
+        client = LLMClient(api_key="fake", max_retries=3)
         with patch("agent.llm.urllib.request.urlopen", side_effect=[error, response()]) as send, \
                 patch("agent.llm.time.sleep") as sleep:
             self.assertEqual(client.json("test"), {"ok": True})
@@ -111,9 +116,13 @@ class BudgetTest(unittest.TestCase):
 
 
 class RoutingTest(unittest.TestCase):
-    def test_deployment_defaults_to_routing_without_local_env(self):
-        with patch.dict(os.environ, {"MODELSCOPE_API_TOKEN": "fake"}, clear=True):
+    def test_deployment_defaults_to_routing_when_llm_endpoint_is_set(self):
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake", "LLM_BASE_URL": "https://example.test/v1"}, clear=True):
             self.assertIsInstance(make_llm(), ModelRouter)
+
+    def test_without_endpoint_falls_back_to_single_client(self):
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake"}, clear=True):
+            self.assertIsInstance(make_llm(), LLMClient)
 
     def test_smoke_plan_renders_all_prompts_without_network(self):
         from tools.smoke_models import cases
@@ -139,21 +148,10 @@ class RoutingTest(unittest.TestCase):
                                      "LLM_ENABLE_THINKING": ""}):
             self.assertIsNone(make_llm()._enable_thinking)
 
-    def test_default_stays_single_and_explicit_profile_uses_own_endpoint(self):
-        with patch.dict(os.environ, {"LLM_API_KEY": "fake", "LLM_PROFILE": "single"}):
-            self.assertIsInstance(make_llm(), LLMClient)
-        with patch.dict(os.environ, {"LLM_API_KEY": "fake", "LLM_BASE_URL": "https://example.test/v1",
-                                     "LLM_PROFILE": "modelscope-v1"}):
-            router = make_llm()
-            self.assertEqual(set(router.stages), STAGES)
-            self.assertTrue(all(c._base_url == "https://api-inference.modelscope.cn/v1"
-                                for c in router.clients.values()))
-            self.assertIs(router.for_stage("compose"), router.for_stage("rewrite"))
-            self.assertIs(router.for_stage("chunk_generate"), router.for_stage("chunk_rewrite"))
-            self.assertIs(router.for_stage("chunk_generate"), router.for_stage("coherence"))
-            self.assertIsNot(router.for_stage("chunk_generate"), router.for_stage("chunk_review"))
-            self.assertIs(router.for_stage("chunk_review"), router.for_stage("coherence_review"))
-            self.assertIsNot(router.for_stage("compose"), router.for_stage("fact_review"))
+    def test_unknown_profile_is_rejected(self):
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake", "LLM_PROFILE": "modelscope-v1"}):
+            with self.assertRaisesRegex(LLMError, "LLM_PROFILE"):
+                make_llm()
 
     def test_llm_multi_profile_uses_llm_endpoint_and_five_roles(self):
         with patch.dict(os.environ, {

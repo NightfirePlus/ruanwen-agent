@@ -88,7 +88,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", action="store_true", help="实际执行，最多4次HTTP请求，失败立即停止")
     parser.add_argument("--resume", action="store_true", help="复核已保存响应，只续跑未调用阶段，总计仍不超过4次")
-    parser.add_argument("--profile", choices=("single", "llm-multi-v1", "modelscope-v1"),
+    parser.add_argument("--profile", choices=("single", "llm-multi-v1"),
                         help="临时覆盖 .env 中的 LLM_PROFILE")
     args = parser.parse_args()
     load_dotenv()
@@ -97,7 +97,7 @@ def main():
     profile = os.environ.get("LLM_PROFILE", "").strip()
     if not profile:
         profile = ("llm-multi-v1" if os.environ.get("LLM_API_KEY", "").strip()
-                   and os.environ.get("LLM_BASE_URL", "").strip() else "modelscope-v1")
+                   and os.environ.get("LLM_BASE_URL", "").strip() else "single")
     report_path = REPORT_DIR / f"model-check-{profile}.json"
     tasks = cases()  # 先完成本地提示词渲染，避免浪费调用
     if not args.run:

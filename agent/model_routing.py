@@ -1,4 +1,4 @@
-"""按运行配置把各阶段路由到单模型、LLM 端点多模型或魔搭多模型。"""
+"""按运行配置把各阶段路由到 LLM 端点的多模型分工，或单个兼容模型。"""
 from __future__ import annotations
 
 import json
@@ -8,10 +8,7 @@ from pathlib import Path
 from .llm import LLMClient, LLMError, RequestBudget
 
 CONFIG_DIR = Path(__file__).resolve().parents[1] / "config"
-MODELSCOPE_CONFIG = CONFIG_DIR / "model_routing.json"
 LLM_MULTI_CONFIG = CONFIG_DIR / "llm_model_routing.json"
-# 兼容引用旧常量的外部工具。
-CONFIG = MODELSCOPE_CONFIG
 STAGES = frozenset((
     "intake", "revise_intent", "evidence",
     "compose", "rewrite",                         # 保留给兼容工具和旧运行记录
@@ -31,23 +28,6 @@ class ModelRouter:
         if stage not in self.stages:
             raise LLMError(f"未配置阶段模型：{stage}")
         return self.clients[self.stages[stage]]
-
-
-def modelscope_router(*, budget: RequestBudget | None = None) -> ModelRouter:
-    config = json.loads(MODELSCOPE_CONFIG.read_text(encoding="utf-8"))
-    key = next((os.environ.get(k, "").strip() for k in (
-        "MODELSCOPE_API_TOKEN", "MODELSCOPE_SDK_TOKEN", "MODELSCOPE_API_KEY", "LLM_API_KEY"
-    ) if os.environ.get(k, "").strip()), "")
-    if not key:
-        raise LLMError("请设置 MODELSCOPE_API_TOKEN，或将魔搭访问令牌填入 LLM_API_KEY")
-    clients = {
-        # 魔搭推理接口会对连续请求做突发限流(429 limit_burst_rate)，窗口只有几秒；
-        # 保留少量重试平滑请求节奏，避免第一次撞上限流就中断整轮生成。
-        role: LLMClient(api_key=key, base_url=config["base_url"], timeout=120, max_retries=3,
-                        repair_json=False, budget=budget, **spec)
-        for role, spec in config["models"].items()
-    }
-    return ModelRouter(clients, config["stages"])
 
 
 def llm_multi_router(*, budget: RequestBudget | None = None) -> ModelRouter:
@@ -84,10 +64,11 @@ def _optional_bool(name: str) -> bool | None:
 
 
 def make_llm():
+    # 默认使用环境里的 LLM_API_KEY / LLM_BASE_URL 端点分工；未配置端点时退回单模型。
     profile = os.environ.get("LLM_PROFILE", "").strip()
     if not profile:
         profile = ("llm-multi-v1" if os.environ.get("LLM_API_KEY", "").strip()
-                   and os.environ.get("LLM_BASE_URL", "").strip() else "modelscope-v1")
+                   and os.environ.get("LLM_BASE_URL", "").strip() else "single")
     if profile == "single":
         options = {}
         thinking = _optional_bool("LLM_ENABLE_THINKING")
@@ -99,6 +80,4 @@ def make_llm():
         return LLMClient(**options)
     if profile == "llm-multi-v1":
         return llm_multi_router()
-    if profile == "modelscope-v1":
-        return modelscope_router()
-    raise LLMError("LLM_PROFILE 必须为 single、llm-multi-v1 或 modelscope-v1")
+    raise LLMError("LLM_PROFILE 必须为 single 或 llm-multi-v1")

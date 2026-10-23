@@ -1,6 +1,6 @@
 # 华为PC营销软文智能体
 
-**[核心架构规范](docs/core-architecture.md)** · [查看项目进度与下一步](ROADMAP.md) · [当前运行约定](docs/knowledge-runtime.md) · [最新真实性能对比](docs/runtime-benchmark-2026-10-22.md) · [魔搭部署](README_MODELSCOPE.md)
+**[核心架构规范](docs/core-architecture.md)** · [查看项目进度与下一步](ROADMAP.md) · [当前运行约定](docs/knowledge-runtime.md) · [最新真实性能对比](docs/runtime-benchmark-2026-10-22.md) · [部署说明](README_MODELSCOPE.md)
 
 当前：规范任务说明、统一写作上下文、文章分块规划、生成/重写与审核双队列、事实锁定的整文连贯性编辑、全文终审和内容块级回退均已接入核心 `Pipeline`。知识库运行时完全信任：产品事实按原文取用，营销表达与人群场景参考直接进入写作上下文，知识库阶段不调用模型；保留哈希一致、型号归属、异常尺寸字段和事实冲突等确定性校验，候选修订与人工批准回写仍保留。
 
@@ -49,14 +49,13 @@
 | `LLM_API_KEY` | 大模型 Key(OpenAI 兼容接口) |
 | `LLM_BASE_URL` | 大模型接口地址,默认阿里云百炼公共端点 |
 | `LLM_MODEL` | 模型名,默认 `qwen-plus` |
-| `LLM_PROFILE` | `llm-multi-v1` 使用 `LLM_API_KEY` 端点的多模型分工；`modelscope-v1` 使用魔搭分工；`single` 使用单模型；未设置且同时存在 `LLM_API_KEY`、`LLM_BASE_URL` 时自动选择 `llm-multi-v1`，否则使用魔搭配置 |
-| `MODELSCOPE_API_TOKEN` | 分工模式的魔搭令牌；也可沿用填有魔搭令牌的 `LLM_API_KEY` |
+| `LLM_PROFILE` | `llm-multi-v1` 使用 `LLM_API_KEY` 端点的多模型分工；`single` 使用单模型；**未设置时**同时存在 `LLM_API_KEY`、`LLM_BASE_URL` 就自动选择 `llm-multi-v1`，否则退回单模型 |
 | `KB_LOCAL_DIR` | 默认使用 `knowledge_base/current`；可指定当前知识库的实际存储位置 |
 | `PROMPTS_DIR` | 可选，指向另一套提示词目录；默认使用项目内的 `prompts/` |
 
 不要把任何凭证写入代码、README、截图或演示视频。当前知识库随项目上传，令牌、本地配置和运行时审核数据库不提交。
 
-`LLM_PROFILE=llm-multi-v1` 使用 `config/llm_model_routing.json`：Qwen3.8 Flash负责需求理解、修改意图和文章规划；DeepSeek V4.1 Flash负责内容块生成/重写和整文连贯性编辑；GLM-5.2负责逐块审核、连贯性事实锁和全文终审。结构化理解、规划与审核显式关闭思考模式，减少延迟、无关推演和输出截断。`modelscope-v1` 的独立配置仍保留在 `config/model_routing.json`，供魔搭部署或备用。图片暂不调用视觉模型，只使用知识库中已登记且绑定精确型号的素材。知识库核验的历史结论与候选修订保存在独立 SQLite 索引中，仅供追溯。
+`LLM_PROFILE=llm-multi-v1` 使用 `config/llm_model_routing.json`：Qwen3.8 Flash负责需求理解、修改意图和文章规划；DeepSeek V4.1 Flash负责内容块生成/重写和整文连贯性编辑；GLM-5.2负责逐块审核、连贯性事实锁和全文终审。结构化理解、规划与审核显式关闭思考模式，减少延迟、无关推演和输出截断。图片暂不调用视觉模型，只使用知识库中已登记且绑定精确型号的素材。知识库核验的历史结论与候选修订保存在独立 SQLite 索引中，仅供追溯。
 
 具体物理模型可以调整，但生成/重写与审核两个队列角色、知识核验权限和事实边界保持不变。详见 [核心架构规范](docs/core-architecture.md) 与 [运行约定](docs/knowledge-runtime.md)。
 

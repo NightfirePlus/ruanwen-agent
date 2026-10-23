@@ -9,8 +9,7 @@ sys.path.insert(0, str(ROOT))
 from agent import compose, compliance, fact_check, strategy
 from agent.catalogkb import CatalogStore, DEFAULT_RUNTIME_KB
 from agent.envfile import load_dotenv
-from agent.llm import RequestBudget
-from agent.model_routing import modelscope_router
+from agent.model_routing import make_llm
 from agent.models import Brief
 from agent.prompts import Prompts
 
@@ -33,14 +32,7 @@ def main():
     def save():
         report_path.parent.mkdir(exist_ok=True)
         report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-    class RecordedBudget(RequestBudget):
-        def consume(self):
-            super().consume()
-            report["requests_started"] = self.used
-            save()
-    budget = RecordedBudget(2)
-    budget.used = report["requests_started"]
-    router = modelscope_router(budget=budget)
+    router = make_llm()
     prompts = Prompts.load()
     store = CatalogStore(DEFAULT_RUNTIME_KB)
     brief = Brief(product="HUAWEI MateBook 14", audience="大学新生", scene="开学季", platform="朋友圈",
