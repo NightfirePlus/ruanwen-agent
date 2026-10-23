@@ -230,6 +230,41 @@ class FactCheckTest(unittest.TestCase):
         self.assertTrue(any("已跳过" in i.detail for i in issues))   # 明确提示,不静默
         self.assertTrue(fact_check.rule_check(d, ev_with("重量约1.36kg"), B, S) is not None)
 
+    def test_registered_caption_needs_no_fact_support(self):
+        # 图注逐字采用知识库登记说明时，即使含数字、规格或型号写法，也不要求事实点支持。
+        ev = ev_with("重量约1.36kg")
+        ev.images[0].caption = "16GB 内存，HDMI 2.1，MateBook X Pro"
+        d = Draft(
+            body=[Paragraph("外观展示")],
+            images=[ImagePlacement("I1", 0, "16GB 内存，HDMI 2.1，MateBook X Pro")],
+        )
+        self.assertFalse([i for i in self.rules(d, ev) if i.where == "图注 I1"])
+
+    def test_changed_caption_is_still_checked(self):
+        ev = ev_with("重量约1.36kg")
+        ev.images[0].caption = "主视觉"
+        d = Draft(body=[Paragraph("外观展示")], images=[ImagePlacement("I1", 0, "续航20小时")])
+        self.assertTrue(any(i.where == "图注 I1" and i.severity == "error" for i in self.rules(d, ev)))
+
+    def test_llm_caption_issue_dropped_for_registered_caption(self):
+        llm = FakeLLM(fact_issues=[{"where": "图注 I1", "detail": "图注没有事实依据"}])
+        ev = ev_with("重量约1.36kg")
+        d = Draft(body=[Paragraph("外观展示")], images=[ImagePlacement("I1", 0, "主视觉")])
+        issues = fact_check.check(llm, make_prompts(), d, ev, B, S)
+        self.assertFalse([i for i in issues if i.where == "图注 I1"])
+
+    def test_used_images_are_excluded_from_later_blocks(self):
+        from agent import compose
+        from agent.models import ContentBlock
+
+        ev = ev_with("重量约1.36kg")
+        used = ContentBlock(id="B1", kind="body", objective="外观",
+                            draft=Draft(images=[ImagePlacement("I1", 0, "主视觉")]))
+        listed = compose.images_block(ev, "MateBook 14")
+        remaining = compose.images_block(ev, "MateBook 14", exclude=compose.used_image_ids([used]))
+        self.assertIn('"id": "I1"', listed)
+        self.assertNotIn('"id": "I1"', remaining)
+
 
 class ComplianceTest(unittest.TestCase):
     ev = ev_with("重量约1.36kg")

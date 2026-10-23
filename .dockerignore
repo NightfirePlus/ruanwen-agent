@@ -1,0 +1,13 @@
+.git
+.env
+.local
+.vscode
+__pycache__
+**/__pycache__
+*.pyc
+*.pdf
+*.docx
+archive
+data
+samples
+

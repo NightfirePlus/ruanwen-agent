@@ -22,7 +22,7 @@ from typing import Callable
 from . import briefing, chunk_pipeline, chunk_review, compliance, compose, evidence, export, fact_check, intake, planning, prune, revise, strategy
 from .knowledge import KnowledgeError
 from .llm import LLMError
-from .models import Brief, Draft, Review, Session
+from .models import Brief, ContextPackage, Draft, Review, Session
 from .norm import norm_model
 from .prompts import PromptError, Prompts
 
@@ -48,6 +48,7 @@ class Pipeline:
         prompts: Prompts,
         review_mode: str = "strict",
         performance_provider: Callable[[Brief], dict] | None = None,
+        preference_provider: Callable[[], dict] | None = None,
     ):
         if review_mode not in ("strict", "relaxed"):
             raise ValueError("review_mode 必须为 strict 或 relaxed")
@@ -56,6 +57,7 @@ class Pipeline:
         self.prompts = prompts
         self.review_mode = "strict" if getattr(store, "requires_strict_review", False) else review_mode
         self.performance_provider = performance_provider
+        self.preference_provider = preference_provider
 
     def _llm(self, stage: str):
         resolve = getattr(self.llm, "for_stage", None)
@@ -80,11 +82,57 @@ class Pipeline:
             except Exception as exc:  # 宣传数据只是参考，读取失败不能阻断主创作链路。
                 self._trace(s, "宣传数据参考", result="读取失败，已跳过", error=str(exc))
         s.strategy = strategy.match(s.brief, performance)
+        s.context_package = None
         refs = performance.get("references", []) if performance else []
         self._trace(
             s, "3 策略匹配", scene=s.strategy.scene.get("name"),
             platform=s.strategy.platform["name"], performance_references=len(refs),
             top_reference_weight=(refs[0].get("reference_weight") if refs else None),
+        )
+
+    def _assemble_context(self, s: Session) -> None:
+        """把所有下游输入收拢为带权限边界的统一上下文包。"""
+        if not s.evidence or not s.strategy:
+            s.context_package = None
+            return
+        preferences = {}
+        if self.preference_provider:
+            try:
+                preferences = self.preference_provider() or {}
+            except Exception as exc:  # 长期偏好是表达参考，读取失败不能升级为主链路故障。
+                self._trace(s, "用户偏好", result="读取失败，已跳过", error=str(exc))
+        allowed_preferences = {
+            key: value for key, value in preferences.items()
+            if key in {
+                "preferred_tone", "preferred_platforms", "audience_focus",
+                "content_preferences", "avoid_topics", "notes", "updated_at",
+            } and value not in (None, "")
+        }
+        manifest = []
+        hashes = s.evidence.review_stats.get("source_hashes", {})
+        for path in dict.fromkeys(s.evidence.sources + [
+            row.get("path", "") for row in s.evidence.context if row.get("path")
+        ]):
+            manifest.append({"path": path, "sha256": hashes.get(path, "")})
+        s.context_package = ContextPackage(
+            canonical_brief=s.canonical_brief,
+            facts=list(s.evidence.facts),
+            images=list(s.evidence.images),
+            expression_references=list(s.evidence.context),
+            user_preferences=allowed_preferences,
+            performance_references=list(s.strategy.performance.get("references", [])),
+            scene=dict(s.strategy.scene),
+            platform=dict(s.strategy.platform),
+            source_manifest=manifest,
+            verification={},
+        )
+        self._trace(
+            s, "3.5 统一上下文装配",
+            contract=s.context_package.contract_version,
+            facts=len(s.context_package.facts), images=len(s.context_package.images),
+            expression_references=len(s.context_package.expression_references),
+            performance_references=len(s.context_package.performance_references),
+            preferences=sorted(s.context_package.user_preferences),
         )
 
     def _normalize_brief(self, s: Session) -> None:
@@ -109,7 +157,7 @@ class Pipeline:
         if selected:
             s.brief.product = selected
             s.brief.product_type = ""
-            s.evidence = s.strategy = s.content_plan = s.draft = s.review = None
+            s.evidence = s.strategy = s.context_package = s.content_plan = s.draft = s.review = None
             s.canonical_brief = ""
             s.brief = intake.normalize(s.brief)
             questions = intake.validate(s.brief)
@@ -153,7 +201,7 @@ class Pipeline:
             if not self.store.connect()["connected"]:
                 return self._block(s, f"本地知识库“{self.store.kb_name}”不可用，请检查 KB_LOCAL_DIR 和产品事实目录")
             collect = getattr(self.store, "collect", None)
-            s.evidence = (collect(self._llm("evidence"), self.prompts, b, progress)
+            s.evidence = (collect(b, progress)
                           if collect else evidence.build(self._llm("evidence"), self.prompts, self.store, b.product))
         except (KnowledgeError, OSError) as exc:
             return self._block(s, f"本地知识库读取失败：{exc}")
@@ -239,13 +287,14 @@ class Pipeline:
             out = self._match_evidence(s, progress)
             if out:
                 return out
+        self._assemble_context(s)
         if not (reuse_plan and s.content_plan):
             s.content_plan = None
             self._progress(progress, "正在规划文章", "确定内容块、事实白名单和必要依赖")
             try:
                 s.content_plan = planning.create(
                     self._llm("content_plan"), self.prompts, s.canonical_brief,
-                    s.evidence, s.strategy,
+                    s.evidence, s.strategy, s.context_package,
                 )
             except (LLMError, PromptError) as exc:
                 return self._block(s, f"文章规划模型调用失败：{exc}")
@@ -262,7 +311,7 @@ class Pipeline:
         flow = chunk_pipeline.run(
             self._llm("chunk_generate"), self._llm("chunk_review"), self.prompts,
             s.canonical_brief, s.brief, s.evidence, s.strategy, s.content_plan,
-            self.review_mode, progress,
+            self.review_mode, progress, s.context_package,
         )
         self._trace(
             s, "5 分块队列", events=flow.events, metrics=flow.metrics,
@@ -354,6 +403,24 @@ class Pipeline:
         self._progress(progress, "生成完成", f"阻断项已通过；{warn_count} 项提示可在右侧核验卡查看")
         return Outcome("review", s, refusals=flow.refusals)
 
+    def resume(self, s: Session, progress: ProgressCallback | None = None) -> Outcome:
+        """从持久化检查点继续；仅重跑未冻结阶段和中断中的内容块。"""
+        s.prepare_resume()
+        if s.draft and s.review and s.review.passed:
+            self._progress(progress, "检查点已恢复", "已恢复通过核验的稿件，可继续修改或确认")
+            return Outcome("review", s)
+        questions = intake.validate(s.brief)
+        if questions:
+            self._progress(progress, "检查点已恢复", f"还有 {len(questions)} 项关键信息需要确认")
+            return Outcome("need_more_info", s, questions=questions)
+        self._progress(progress, "检查点已恢复", "从最近安全阶段继续处理")
+        self._normalize_brief(s)
+        if s.content_plan and s.evidence and s.strategy:
+            return self.generate(s, progress=progress, reuse_plan=True)
+        if s.evidence:
+            return self.produce(s, reuse_evidence=True, progress=progress)
+        return self.produce(s, progress=progress)
+
     # ---- 阶段7:确认与修改 ----
     def feedback(
         self,
@@ -394,12 +461,13 @@ class Pipeline:
             return self.generate(s, progress=progress, reuse_plan=True)
         if step == "strategy":                  # 换场景/平台:资料复用,重配策略表
             self._match_strategy(s)
+            self._assemble_context(s)
             self._trace(s, "3 策略匹配(重配)", scene=s.strategy.scene.get("name"), platform=s.strategy.platform["name"])
             self._progress(progress, "发布策略已更新", f"重新适配{new_brief.scene}场景与{new_brief.platform}平台")
             s.content_plan = None
             return self.generate(s, progress=progress)
         # 换产品:资料、策略、稿件全部作废,从结构化需求重来
-        s.evidence = s.strategy = s.content_plan = s.draft = s.review = None
+        s.evidence = s.strategy = s.context_package = s.content_plan = s.draft = s.review = None
         s.canonical_brief = ""
         # 可以重抽其他需求，但明确的最新型号不能被历史抽取结果覆盖。
         chosen_product = s.brief.product

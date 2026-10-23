@@ -97,7 +97,7 @@ class ChunkPipelineTest(unittest.TestCase):
             {"id": "B3", "kind": "closing", "objective": "收束", "fact_ids": []},
         ]}, self.evidence)
         self.assertIn("非空标题和非空导语", plan.blocks[0].objective)
-        self.assertIn("至少一个正文段落", plan.blocks[1].objective)
+        self.assertIn("完整的正文小节", plan.blocks[1].objective)
         self.assertIn("非空行动引导", plan.blocks[2].objective)
         self.assertEqual(plan.blocks[0].fact_ids, [])
         self.assertLessEqual(len(plan.blocks[1].fact_ids), 3)

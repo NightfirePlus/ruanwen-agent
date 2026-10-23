@@ -86,6 +86,22 @@ class BudgetTest(unittest.TestCase):
                 client.json("test")
         self.assertEqual(send.call_count, 1)
 
+    def test_truncated_output_retries_with_larger_limit_and_concise_instruction(self):
+        client = LLMClient(api_key="fake", max_tokens=128, enable_thinking=False, max_retries=1)
+        with patch(
+            "agent.llm.urllib.request.urlopen",
+            side_effect=[response('{"partial":', "length"), response('{"ok":true}')],
+        ) as send:
+            self.assertEqual(client.json("test"), {"ok": True})
+        self.assertEqual(send.call_count, 2)
+        first = json.loads(send.call_args_list[0].args[0].data)
+        second = json.loads(send.call_args_list[1].args[0].data)
+        self.assertEqual(first["max_tokens"], 128)
+        self.assertEqual(second["max_tokens"], 1152)
+        self.assertIn("长度上限", second["messages"][-1]["content"])
+        self.assertEqual(client.requests[0]["finish_reason"], "length")
+        self.assertTrue(client.requests[1]["success"])
+
     def test_empty_or_missing_content_does_not_pass(self):
         for content in (None, "", []):
             client = LLMClient(api_key="fake", max_retries=0)

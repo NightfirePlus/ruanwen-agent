@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import re
 
-from .models import Evidence, ImageRef, Issue
+from .models import Draft, Evidence, ImageRef, Issue
 
 
 def norm_model(s: str) -> str:
@@ -87,3 +87,41 @@ def llm_issues(data: dict, stage: str) -> list[Issue]:
 def usable_images(ev: Evidence, model: str) -> list[ImageRef]:
     """只有确认属于该型号的图片才可用;所属型号未确认的不进入生成。"""
     return [i for i in ev.images if i.model and norm_model(i.model) == norm_model(model)]
+
+
+CAPTION_WHERE = re.compile(r"^图注\s*(\S+)")
+
+
+def caption_id(where: str) -> str:
+    """从“图注 I1”这类位置里取出图片 ID。"""
+    match = CAPTION_WHERE.match((where or "").strip())
+    return match[1] if match else ""
+
+
+def registered_captions(ev: Evidence) -> dict[str, str]:
+    """知识库登记的图注原文。"""
+    return {i.id: (i.caption or "").strip() for i in ev.images if (i.caption or "").strip()}
+
+
+def caption_is_registered(where: str, caption: str, registered: dict[str, str]) -> bool:
+    """图注是否逐字采用了知识库登记说明。"""
+    expected = registered.get(caption_id(where))
+    return bool(expected) and (caption or "").strip() == expected
+
+
+def drop_registered_caption_issues(issues: list[Issue], draft: Draft, ev: Evidence) -> list[Issue]:
+    """登记图注逐字使用时不再要求事实依据,也不因此删除图片。
+
+    图注只是知识库已登记的展示文案,不是产品主张;只有 fact 阶段的问题被豁免。
+    合规阶段仍按平台规则检查,避免把违规用语带进成稿。
+    """
+    registered = registered_captions(ev)
+    captions = {pl.image_id: pl.caption for pl in draft.images}
+    kept = []
+    for issue in issues:
+        if issue.stage == "fact" and caption_is_registered(
+            issue.where, captions.get(caption_id(issue.where), ""), registered
+        ):
+            continue
+        kept.append(issue)
+    return kept

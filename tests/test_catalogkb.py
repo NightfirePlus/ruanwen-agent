@@ -8,7 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from PIL import Image
-from agent.catalogkb import CatalogStore, ReviewCache, INDEX, sha, original_excerpt
+from agent.catalogkb import CatalogStore, INDEX, sha, original_excerpt
 from agent.knowledge import KnowledgeError
 from agent.models import Brief
 from agent.prompts import Prompts
@@ -19,10 +19,12 @@ class Analysis:
     def __init__(self):
         self.calls = 0
         self.bad = False
+        self.status = "passed"
     def json(self, user, **kwargs):
         self.calls += 1
-        facts = [{"text": "编造的事实" if self.bad else "内存16GB。"}] if '"kind": "product_facts"' in user else []
-        return dict(status="passed", facts=facts, guidance=[] if facts else ["学生更关心学习。"], excluded=[], reason="测试")
+        excerpt = "屏幕14.2英寸。" if "屏幕14.2英寸" in user else "内存16GB。"
+        facts = [{"text": "编造的事实" if self.bad else excerpt}] if '"kind": "product_facts"' in user else []
+        return dict(status=self.status, facts=facts, guidance=[] if facts else ["学生更关心学习。"], excluded=[], reason="测试")
 
 
 class Vision:
@@ -74,37 +76,14 @@ class CatalogTest(unittest.TestCase):
         (self.root / INDEX / "catalog.json").write_text(json.dumps(dict(version=1,
             models=[dict(model_key="MateBook 14", official_product="MateBook 14")], records=self.records), ensure_ascii=False), encoding="utf-8")
 
-    def collect(self, prompts=None):
-        return self.store.collect(self.analysis, prompts or self.prompts, self.brief)
-
-    def test_first_use_reviews_then_persistent_cache_reuses_without_calls(self):
-        before = {r["path"]: (self.root / r["path"]).read_bytes() for r in self.records}
-        first = self.collect()
-        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 0))
-        self.assertEqual(first.review_stats["new"], 2)
-        self.assertEqual(len(first.facts), 1)
-        self.assertEqual(len(first.context), 1)
-        self.assertEqual(len(first.images), 2)
-        self.store = CatalogStore(self.root)  # 模拟应用重启
-        second = self.collect()
-        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 0))
-        self.assertEqual(second.review_stats["cached"], 2)
-        self.assertEqual(before, {p: (self.root / p).read_bytes() for p in before})
+    def collect(self):
+        return self.store.collect(self.brief)
 
     def test_registered_images_are_available_without_visual_model_call(self):
         ev = self.collect()
         self.assertEqual(len(ev.images), 2)
         self.assertTrue(all(not image.review for image in ev.images))
         self.assertEqual(self.vision.calls, 0)
-
-    def test_changed_caption_updates_registered_image_without_model_call(self):
-        self.collect()
-        self.records[-1]["source"]["index_row"]["官网图片说明"] = "改为接口细节说明"
-        self.write_catalog()
-        ev = self.collect()
-        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 0))
-        self.assertEqual(ev.review_stats["new"], 0)
-        self.assertEqual(ev.images[-1].caption, "改为接口细节说明")
 
     def test_catalog_caption_fills_missing_legacy_index_caption(self):
         self.records[-1]["source"]["index_row"]["官网图片说明"] = ""
@@ -128,14 +107,6 @@ class CatalogTest(unittest.TestCase):
         self.assertEqual(len(ev.images), 2)
         self.assertEqual(self.vision.calls, 0)
 
-    def test_changed_prompt_or_model_invalidates_corresponding_cache(self):
-        self.collect()
-        texts = dict(self.prompts._t)
-        texts["material_review"] += "\n增加新的审阅规则。"
-        self.collect(Prompts(texts))
-        self.assertEqual(self.vision.calls, 0)
-        self.assertEqual(self.analysis.calls, 4)
-
     def test_cached_session_checks_file_and_catalog_versions(self):
         ev = self.collect()
         self.assertTrue(self.store.still_valid(ev))
@@ -146,18 +117,6 @@ class CatalogTest(unittest.TestCase):
     def test_whitespace_only_differences_are_recovered_as_exact_original(self):
         self.assertEqual(original_excerpt("长度 300 mm", "长度\n300 mm\n厚度"), "长度\n300 mm")
         self.assertIsNone(original_excerpt("长度301mm", "长度\n300 mm"))
-
-    def test_suspicious_dimension_section_is_withheld_from_the_auditor(self):
-        record = self.records[0]
-        text = "# MateBook 14\n内存16GB。\n## 机身尺寸\n长度\n15.9 mm\n厚度\n227.79 mm\n## 屏幕\n屏幕信息。"
-        (self.root / record["path"]).write_text(text, encoding="utf-8")
-        record["sha256"] = sha((self.root / record["path"]).read_bytes())
-        self.write_catalog()
-        ev = self.collect()
-        self.assertTrue(ev.dropped)
-        self.assertEqual([f.text for f in ev.facts], ["内存16GB。"])
-        self.assertIn("15.9", ev.originals[0]["text"])
-        self.assertTrue(ev.originals[0]["exclusions"])
 
     def test_pipeline_runs_all_roles_with_new_catalog_and_reuses_reviews(self):
         from agent.model_routing import ModelRouter, STAGES
@@ -196,6 +155,7 @@ class CatalogTest(unittest.TestCase):
                        coherence=Fixed(draft), revise_intent=Fixed({"action": "confirm"}))
         router = ModelRouter(clients, {s: s for s in STAGES})
         pipe = Pipeline(router, self.store, self.prompts)
+        # 完全信任模式(默认):知识库不调用复核模型,产品事实按原文进入写作上下文。
         out = pipe.talk(Session(), "给新生写软文")
         self.assertEqual(out.status, "review", out.reason)
         self.assertTrue(any("产品外观" in value for value in clients["chunk_generate"].inputs))
@@ -203,12 +163,12 @@ class CatalogTest(unittest.TestCase):
         self.assertIn("内存16GB", clients["fact_review"].inputs[0])
         self.assertEqual(pipe.feedback(out.session, "确认").status, "done")
         pipe.talk(Session(), "再写一篇")
-        self.assertEqual((self.analysis.calls, self.vision.calls), (2, 0))
+        self.assertEqual((self.analysis.calls, self.vision.calls), (0, 0))
 
-    def test_new_store_cannot_downgrade_necessary_reviews(self):
+    def test_new_store_defaults_to_trusted_relaxed_review(self):
         from agent.pipeline import Pipeline
         pipe = Pipeline(self.analysis, self.store, self.prompts, review_mode="relaxed")
-        self.assertEqual(pipe.review_mode, "strict")
+        self.assertEqual(pipe.review_mode, "relaxed")
 
     def test_standalone_validation_needs_no_original_library(self):
         from tools.validate_knowledge_base import inspect_library
@@ -255,25 +215,6 @@ class CatalogTest(unittest.TestCase):
         self.collect()
         self.assertEqual(self.vision.calls, 0)
 
-    def test_hallucinated_quote_never_becomes_passed_or_retried_automatically(self):
-        self.analysis.bad = True
-        with self.assertRaises(KnowledgeError):
-            self.collect()
-        with self.assertRaises(KnowledgeError):
-            self.collect()
-        self.assertEqual(self.analysis.calls, 1)
-        db = ReviewCache(self.root / INDEX / "usage-review.sqlite3")
-        with db.db() as conn:
-            self.assertEqual(conn.execute("SELECT status FROM reviews").fetchall(), [("failed",)])
-
-    def test_quota_exhaustion_does_not_cache_an_unattempted_item_as_failure(self):
-        with patch.dict("os.environ", {"KB_REVIEW_MAX_CALLS": "1"}):
-            with self.assertRaises(KnowledgeError):
-                self.collect()
-        self.assertEqual(self.analysis.calls, 1)
-        self.collect()
-        self.assertEqual(self.analysis.calls, 2)
-
     def test_discovery_and_historical_records_are_not_product_facts(self):
         for kind, cat in (("product_discovery", "products"), ("historical_price_snapshot", "dynamic")):
             row = copy.deepcopy(self.records[1])
@@ -296,35 +237,48 @@ class CatalogTest(unittest.TestCase):
         business["sha256"] = sha((self.root / business["path"]).read_bytes())
         self.records.extend((competitor, business))
         self.write_catalog()
-        self.assertNotIn("C1", {r["id"] for r in self.store.references(self.brief, 10)})
-        self.assertNotIn("B1", {r["id"] for r in self.store.references(self.brief, 10)})
+        slots = {"platform": 1, "copy": 1, "audience": 5}
+        self.assertNotIn("C1", {r["id"] for _, r in self.store.references(self.brief, slots)})
+        self.assertNotIn("B1", {r["id"] for _, r in self.store.references(self.brief, slots)})
         comparing = copy.deepcopy(self.brief)
         comparing.main_problem = "与竞品对比"
-        self.assertIn("C1", {r["id"] for r in self.store.references(comparing, 10)})
+        self.assertIn("C1", {r["id"] for _, r in self.store.references(comparing, slots)})
         commercial = copy.deepcopy(self.brief)
         commercial.main_problem = "价格优惠"
-        self.assertIn("B1", {r["id"] for r in self.store.references(commercial, 10)})
+        self.assertIn("B1", {r["id"] for _, r in self.store.references(commercial, slots)})
 
 
-class ConcurrentCacheTest(unittest.TestCase):
-    def test_concurrent_same_material_only_one_computation(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            cache = ReviewCache(Path(tmp) / "cache.db")
-            started, finish = threading.Event(), threading.Event()
-            calls = []
-            def compute():
-                calls.append(1)
-                started.set()
-                finish.wait(3)
-                return {"status": "passed"}
-            worker = threading.Thread(target=lambda: cache.obtain("key", compute))
-            worker.start()
-            self.assertTrue(started.wait(3))
-            try:
-                with self.assertRaises(KnowledgeError):
-                    cache.obtain("key", compute)
-            finally:
-                finish.set()
-                worker.join(3)
-            self.assertEqual(calls, [1])
-            self.assertEqual(cache.obtain("key", compute), ({"status": "passed"}, True))
+class ReferenceSlotTest(unittest.TestCase):
+    """表达参考按类型分名额:名额互不挤占,缺一类时留空,不用别的类型补位。"""
+
+    def test_role_aliases_normalized(self):
+        from agent.catalogkb import norm_role
+        self.assertEqual(norm_role("大学新生", "开学季"), "学生")
+        self.assertEqual(norm_role("老师", "教学办公"), "教师")
+        self.assertEqual(norm_role("商务差旅用户", ""), "商务差旅")
+        self.assertEqual(norm_role("", ""), "")
+
+    def test_empty_slot_is_left_empty_instead_of_backfilled(self):
+        store = CatalogStore.__new__(CatalogStore)
+        store.records = lambda model=None: [
+            {"id": "P", "kind": "platform_guide", "category": "marketing", "platform": "公众号",
+             "model_key": None, "source": {"path": "04-营销表达/微信公众号图文模板.md"}},
+            {"id": "S", "kind": "reference_material", "category": "scenarios", "platform": None,
+             "model_key": None, "source": {"path": "03-人群场景/08-高校学生/客户画像.md"}},
+        ]
+        store.models = lambda: {}
+        brief = Brief(product="MateBook 14", audience="高校学生", scene="学习", platform="公众号", goal="种草")
+        picked = store.references(brief, {"platform": 1, "copy": 1, "audience": 1})
+        self.assertEqual([(bucket, r["id"]) for bucket, r in picked], [("platform", "P"), ("audience", "S")])
+
+    def test_slots_configured_in_policy_override_defaults(self):
+        store = CatalogStore.__new__(CatalogStore)
+        slots = store.reference_slots({"reference_slots": {"platform": 2, "copy": 0, "audience": 3}})
+        self.assertEqual(slots, {"platform": 2, "copy": 0, "audience": 3})
+
+    def test_legacy_total_limit_still_read(self):
+        store = CatalogStore.__new__(CatalogStore)
+        self.assertEqual(store.reference_slots({"reference_limit": 1}),
+                         {"platform": 1, "copy": 0, "audience": 0})
+
+

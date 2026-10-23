@@ -84,22 +84,29 @@ class LLMClient:
         self._records_lock = threading.Lock()
 
     def _chat(self, messages: list[dict], temperature: float, json_mode: bool) -> str:
-        body: dict[str, Any] = {"model": self.model, "messages": messages, "temperature": temperature}
-        if json_mode:
-            body["response_format"] = {"type": "json_object"}
-        if self._max_tokens is not None:
-            body["max_tokens"] = self._max_tokens
-        if self._enable_thinking is not None:
-            body["enable_thinking"] = self._enable_thinking
-        data = json.dumps(body, ensure_ascii=False).encode("utf-8")
         headers = {"Authorization": f"Bearer {self._api_key}", "Content-Type": "application/json"}
         last: Exception | None = None
+        request_messages = list(messages)
+        retry_max_tokens = self._max_tokens
+        length_retries = 0
         for attempt in range(self._max_retries + 1):
             if self._budget:
                 self._budget.consume()
             record = {"model": self.model, "success": False}
             started = time.monotonic()
             try:
+                body: dict[str, Any] = {
+                    "model": self.model,
+                    "messages": request_messages,
+                    "temperature": temperature,
+                }
+                if json_mode:
+                    body["response_format"] = {"type": "json_object"}
+                if retry_max_tokens is not None:
+                    body["max_tokens"] = retry_max_tokens
+                if self._enable_thinking is not None:
+                    body["enable_thinking"] = self._enable_thinking
+                data = json.dumps(body, ensure_ascii=False).encode("utf-8")
                 req = urllib.request.Request(
                     f"{self._base_url}/chat/completions", data=data, headers=headers, method="POST"
                 )
@@ -108,8 +115,24 @@ class LLMClient:
                 choice = payload["choices"][0]
                 record["usage"] = payload.get("usage", {})
                 record["finish_reason"] = choice.get("finish_reason")
-                if choice.get("finish_reason") == "length":
-                    raise LLMError("模型输出达到长度上限，停止处理截断结果；未自动重试")
+                if choice.get("finish_reason") in ("length", "max_tokens"):
+                    length_retries += 1
+                    record["length_retry"] = length_retries
+                    last = LLMError(
+                        f"模型输出达到长度上限，自动重试 {length_retries}/{self._max_retries} 次后仍被截断"
+                    )
+                    if attempt >= self._max_retries:
+                        raise last
+                    if retry_max_tokens is not None:
+                        retry_max_tokens = min(16_384, max(retry_max_tokens + 1024, retry_max_tokens * 2))
+                    request_messages = list(messages) + [{
+                        "role": "user",
+                        "content": (
+                            "上一次输出达到长度上限。请重新完整回答，压缩解释和重复内容；"
+                            + ("只输出精简合法 JSON。" if json_mode else "保留所有必要结论。")
+                        ),
+                    }]
+                    continue
                 content = choice["message"]["content"]
                 if not isinstance(content, str) or not content.strip():
                     raise LLMError("模型未返回有效正文，停止处理；未自动重试")

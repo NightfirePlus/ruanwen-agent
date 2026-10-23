@@ -11,7 +11,8 @@ import json
 import math
 import os
 import sqlite3
-from contextlib import contextmanager
+import tempfile
+from contextlib import closing, contextmanager
 from dataclasses import asdict
 from datetime import datetime
 from functools import lru_cache
@@ -113,8 +114,22 @@ class WorkspaceStore:
                     content_preferences TEXT NOT NULL DEFAULT '',
                     avoid_topics TEXT NOT NULL DEFAULT '',
                     notes TEXT NOT NULL DEFAULT '',
+                    history_reference INTEGER NOT NULL DEFAULT 1,
                     updated_at TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS creation_checkpoints (
+                    checkpoint_id TEXT PRIMARY KEY,
+                    account_id TEXT NOT NULL DEFAULT 'local',
+                    status TEXT NOT NULL,
+                    session_json TEXT NOT NULL,
+                    chat_json TEXT NOT NULL DEFAULT '[]',
+                    state_json TEXT NOT NULL DEFAULT '{}',
+                    error TEXT NOT NULL DEFAULT '',
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS idx_creation_checkpoints_account_updated
+                    ON creation_checkpoints(account_id, updated_at DESC);
                 """
             )
             # 兼容已经由上一版本创建的作品库。
@@ -125,6 +140,12 @@ class WorkspaceStore:
             exists = conn.execute(
                 "SELECT 1 FROM user_preferences WHERE account_id = ?", (DEFAULT_ACCOUNT_ID,)
             ).fetchone()
+            # 旧库补列：历史作品参与创作参考的开关，默认开启。
+            columns = {row["name"] for row in conn.execute("PRAGMA table_info(user_preferences)")}
+            if "history_reference" not in columns:
+                conn.execute(
+                    "ALTER TABLE user_preferences ADD COLUMN history_reference INTEGER NOT NULL DEFAULT 1"
+                )
             if not exists:
                 legacy = conn.execute(
                     "SELECT * FROM store_memories ORDER BY updated_at DESC LIMIT 1"
@@ -241,6 +262,18 @@ class WorkspaceStore:
                 raise ValueError("未找到对应的历史作品")
         return self.get_work(key) or {}
 
+    def delete_work(self, work_id: int | str) -> int:
+        """删除历史作品及其关联的宣传数据。"""
+        try:
+            key = int(work_id)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("请选择要删除的历史作品") from exc
+        with self._connection() as conn:
+            cursor = conn.execute("DELETE FROM works WHERE id = ?", (key,))
+            if not cursor.rowcount:
+                raise ValueError("未找到对应的历史作品")
+        return key
+
     def add_performance(
         self,
         work_id: int | str,
@@ -291,6 +324,9 @@ class WorkspaceStore:
         权重同时考虑效果率、数据量可信度和与本次任务的相似度。曝光量只提高
         可信度，不会单独让低互动作品获得高权重。
         """
+        # 用户可以在历史作品库关闭“参与创作参考”；关闭后不读取任何历史作品。
+        if not int(self.get_user_preferences().get("history_reference", 1)):
+            return {"mode": "disabled", "rule": "用户已关闭历史作品参与创作参考", "references": []}
         with self._connection() as conn:
             rows = conn.execute(
                 """
@@ -311,6 +347,12 @@ class WorkspaceStore:
         candidates = []
         for row in rows:
             data = dict(row)
+            metric_keys = (
+                "impressions", "likes", "shares", "inquiries", "store_visits", "orders",
+            )
+            # 仅有一条空记录或备注不算宣传数据，不得影响后续软文生成。
+            if not any(int(data[key] or 0) > 0 for key in metric_keys):
+                continue
             similarity_parts = {
                 "同平台": 4 if data["platform"] == brief.platform else 0,
                 "同场景": 3 if data["scene"] == brief.scene else 0,
@@ -419,11 +461,12 @@ class WorkspaceStore:
         return {
             "account_id": account_id, "display_name": "当前用户",
             "preferred_tone": "", "preferred_platforms": "", "audience_focus": "",
-            "content_preferences": "", "avoid_topics": "", "notes": "", "updated_at": "",
+            "content_preferences": "", "avoid_topics": "", "notes": "",
+            "history_reference": 1, "updated_at": "",
         }
 
     def save_user_preferences(
-        self, account_id: str = DEFAULT_ACCOUNT_ID, **fields: str
+        self, account_id: str = DEFAULT_ACCOUNT_ID, **fields: Any
     ) -> dict[str, Any]:
         allowed = (
             "display_name", "preferred_tone", "preferred_platforms", "audience_focus",
@@ -431,13 +474,19 @@ class WorkspaceStore:
         )
         cleaned = {field: (fields.get(field) or "").strip() for field in allowed}
         cleaned["display_name"] = cleaned["display_name"] or "当前用户"
+        # 开关未提交时保留原值，避免“保存偏好”把开关意外重置。
+        if fields.get("history_reference") is None:
+            cleaned["history_reference"] = int(self.get_user_preferences(account_id).get("history_reference", 1))
+        else:
+            cleaned["history_reference"] = 1 if fields["history_reference"] else 0
         with self._connection() as conn:
             conn.execute(
                 """
                 INSERT INTO user_preferences(
                     account_id, display_name, preferred_tone, preferred_platforms,
-                    audience_focus, content_preferences, avoid_topics, notes, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    audience_focus, content_preferences, avoid_topics, notes,
+                    history_reference, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(account_id) DO UPDATE SET
                     display_name=excluded.display_name,
                     preferred_tone=excluded.preferred_tone,
@@ -446,16 +495,147 @@ class WorkspaceStore:
                     content_preferences=excluded.content_preferences,
                     avoid_topics=excluded.avoid_topics,
                     notes=excluded.notes,
+                    history_reference=excluded.history_reference,
                     updated_at=excluded.updated_at
                 """,
                 (
                     account_id, cleaned["display_name"], cleaned["preferred_tone"],
                     cleaned["preferred_platforms"], cleaned["audience_focus"],
                     cleaned["content_preferences"], cleaned["avoid_topics"],
-                    cleaned["notes"], _now(),
+                    cleaned["notes"], cleaned["history_reference"], _now(),
                 ),
             )
         return self.get_user_preferences(account_id)
+
+    def save_checkpoint(
+        self,
+        checkpoint_id: str,
+        session: Session,
+        status: str,
+        *,
+        chat_history: list[dict] | None = None,
+        state: dict[str, Any] | None = None,
+        error: str = "",
+        account_id: str = DEFAULT_ACCOUNT_ID,
+    ) -> str:
+        """幂等保存创作检查点；不保存凭证、模型提示词或内部推理。"""
+        key = (checkpoint_id or "").strip()
+        if not key:
+            raise ValueError("checkpoint_id 不能为空")
+        safe_state = {
+            name: value for name, value in (state or {}).items()
+            if name != "session" and isinstance(value, (str, int, float, bool, list, dict, type(None)))
+        }
+        now = _now()
+        with self._connection() as conn:
+            conn.execute(
+                """
+                INSERT INTO creation_checkpoints(
+                    checkpoint_id, account_id, status, session_json, chat_json,
+                    state_json, error, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(checkpoint_id) DO UPDATE SET
+                    status=excluded.status,
+                    session_json=excluded.session_json,
+                    chat_json=excluded.chat_json,
+                    state_json=excluded.state_json,
+                    error=excluded.error,
+                    updated_at=excluded.updated_at
+                """,
+                (
+                    key, account_id, status,
+                    json.dumps(session.to_dict(), ensure_ascii=False),
+                    json.dumps(chat_history or [], ensure_ascii=False),
+                    json.dumps(safe_state, ensure_ascii=False),
+                    (error or "")[:2000], now, now,
+                ),
+            )
+        return key
+
+    @staticmethod
+    def _checkpoint(row: sqlite3.Row | None) -> dict[str, Any] | None:
+        if not row:
+            return None
+        result = dict(row)
+        result["session"] = Session.from_dict(json.loads(result.pop("session_json")))
+        result["chat_history"] = json.loads(result.pop("chat_json") or "[]")
+        result["state"] = json.loads(result.pop("state_json") or "{}")
+        return result
+
+    def get_checkpoint(self, checkpoint_id: str) -> dict[str, Any] | None:
+        with self._connection() as conn:
+            row = conn.execute(
+                "SELECT * FROM creation_checkpoints WHERE checkpoint_id = ?",
+                ((checkpoint_id or "").strip(),),
+            ).fetchone()
+        return self._checkpoint(row)
+
+    def latest_checkpoint(
+        self,
+        account_id: str = DEFAULT_ACCOUNT_ID,
+        statuses: tuple[str, ...] | None = None,
+    ) -> dict[str, Any] | None:
+        statuses = statuses or ("running", "error", "need_more_info", "blocked", "review")
+        placeholders = ",".join("?" for _ in statuses)
+        with self._connection() as conn:
+            row = conn.execute(
+                f"""
+                SELECT * FROM creation_checkpoints
+                WHERE account_id = ? AND status IN ({placeholders})
+                ORDER BY updated_at DESC LIMIT 1
+                """,
+                (account_id, *statuses),
+            ).fetchone()
+        return self._checkpoint(row)
+
+    def mark_checkpoint(self, checkpoint_id: str, status: str) -> None:
+        with self._connection() as conn:
+            conn.execute(
+                "UPDATE creation_checkpoints SET status=?, updated_at=? WHERE checkpoint_id=?",
+                (status, _now(), (checkpoint_id or "").strip()),
+            )
+
+    def prune_checkpoints(self, keep: int = 100, account_id: str = DEFAULT_ACCOUNT_ID) -> int:
+        """每个账户只保留最近的检查点，避免运行数据库无限增长。"""
+        keep = max(1, int(keep))
+        with self._connection() as conn:
+            before = conn.total_changes
+            conn.execute(
+                """
+                DELETE FROM creation_checkpoints
+                WHERE checkpoint_id IN (
+                    SELECT checkpoint_id FROM creation_checkpoints
+                    WHERE account_id = ?
+                    ORDER BY updated_at DESC LIMIT -1 OFFSET ?
+                )
+                """,
+                (account_id, keep),
+            )
+            return conn.total_changes - before
+
+    def quick_check(self) -> bool:
+        with self._connection() as conn:
+            return conn.execute("PRAGMA quick_check").fetchone()[0] == "ok"
+
+    def backup_to(self, destination: Path | str) -> Path:
+        """使用 SQLite 在线备份 API 生成一致性快照并原子替换目标文件。"""
+        target = Path(destination)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        handle, temp_name = tempfile.mkstemp(
+            prefix=target.name + ".", suffix=".tmp", dir=target.parent
+        )
+        os.close(handle)
+        temp = Path(temp_name)
+        try:
+            with closing(self._connect()) as source, closing(sqlite3.connect(temp)) as backup:
+                source.backup(backup)
+                if backup.execute("PRAGMA quick_check").fetchone()[0] != "ok":
+                    raise sqlite3.DatabaseError("备份数据库完整性检查失败")
+                backup.commit()
+            temp.replace(target)
+            return target
+        finally:
+            temp.unlink(missing_ok=True)
 
 
 @lru_cache(maxsize=1)

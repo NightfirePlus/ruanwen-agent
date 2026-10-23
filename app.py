@@ -16,6 +16,7 @@ import os
 import sqlite3
 import tempfile
 import threading
+import time
 from html import escape
 from queue import Empty, Queue
 from uuid import uuid4
@@ -28,15 +29,18 @@ import gradio as gr
 from agent import artifacts, export
 from agent.envfile import load_dotenv
 from agent.llm import LLMError
-from agent.model_routing import ModelRouter, make_llm
+from agent.model_routing import make_llm
 from agent.knowledge import LocalKBError
 from agent.catalogkb import DEFAULT_RUNTIME_KB, make_store as open_store
 from agent.models import Session
+from agent.operations import configure_logging, log_turn, request_snapshot
 from agent.pipeline import Outcome, Pipeline
 from agent.prompts import PromptError, Prompts
 from agent.workspace import get_workspace
 
 load_dotenv()
+configure_logging()
+logger = logging.getLogger(__name__)
 
 DEFAULT_LOCAL_KB = DEFAULT_RUNTIME_KB
 
@@ -59,11 +63,12 @@ def get_pipeline() -> Pipeline:
             custom = os.environ.get("PROMPTS_DIR")
             prompts = Prompts.load(Path(custom) if custom else None, strict=False)
             llm = make_llm()
-            default_mode = "strict" if isinstance(llm, ModelRouter) else "relaxed"
-            mode = os.environ.get("REVIEW_MODE", default_mode).strip().lower()
+            # 默认高信任：模型审核只提示，不再因单条主观意见阻断成稿；确定性的规则错误仍然阻断。
+            mode = os.environ.get("REVIEW_MODE", "relaxed").strip().lower()
             _pipe = Pipeline(
                 llm, make_store(), prompts, review_mode=mode,
                 performance_provider=get_workspace().performance_guidance,
+                preference_provider=get_workspace().get_user_preferences,
             )
     return _pipe
 
@@ -192,18 +197,23 @@ def render_evidence_card(s: Session | None) -> str:
 
 
 def render_review_card(s: Session | None) -> str:
-    if not s or not s.review:
+    if not s:
         return "_稿件生成后，这里会展示事实、图片与合规检查结果。_"
-    review = s.review
-    errors = review.errors
-    warns = [i for i in review.issues if i.severity == "warn"]
-    status = "✅ **阻断项已通过**" if not errors else f"⛔ **仍有 {len(errors)} 项阻断问题**"
-    lines = [status, "", f"事实与合规提示：**{len(warns)}** 项"]
-    for issue in review.issues[:10]:
-        icon = "⛔" if issue.severity == "error" else "💡"
-        lines.append(f"- {icon} **{issue.where}**：{issue.detail}")
-    if review.removed:
-        lines.append(f"\n已自动移除 {len(review.removed)} 处无依据或不合规内容。")
+    if not s.review:
+        return "_稿件生成后，这里会展示事实、图片与合规检查结果。_"
+
+    lines = []
+    if s.review:
+        review = s.review
+        errors = review.errors
+        warns = [i for i in review.issues if i.severity == "warn"]
+        status = "✅ **稿件阻断项已通过**" if not errors else f"⛔ **仍有 {len(errors)} 项阻断问题**"
+        lines += [status, "", f"事实与合规提示：**{len(warns)}** 项"]
+        for issue in review.issues[:10]:
+            icon = "⛔" if issue.severity == "error" else "💡"
+            lines.append(f"- {icon} **{issue.where}**：{issue.detail}")
+        if review.removed:
+            lines.append(f"\n已自动移除 {len(review.removed)} 处无依据或不合规内容。")
     return "\n".join(lines)
 
 
@@ -213,25 +223,69 @@ def render_article_card(s: Session | None) -> str:
     return export.to_article_markdown(s, image_url=web_image_url)
 
 
-def render_progress(events: list[tuple[str, str]], running: bool = True) -> str:
-    if not events:
-        return "正在开始处理……" if running else ""
-    records = "".join(
-        f"<li><strong>{escape(title)}</strong><br>{escape(detail)}</li>"
-        for title, detail in events
-    )
-    log = (
-        f"<details><summary>处理过程 · {len(events)} 条更新</summary>"
-        f"<ol>{records}</ol></details>"
-    )
+def _duration_text(seconds: float) -> str:
+    seconds = max(0.0, float(seconds))
+    if seconds < 60:
+        return f"{seconds:.1f} 秒"
+    minutes, rest = divmod(seconds, 60)
+    return f"{int(minutes)} 分 {rest:.1f} 秒"
+
+
+def _elapsed_html(elapsed: float, running: bool) -> str:
+    """顶部计时条文本：运行中显示「当前用时」，结束后显示「总用时」。"""
     if running:
-        title, detail = events[-1]
-        return f"**{title}**\n\n{detail}\n\n{log}"
-    return log
+        return f'<span class="elapsed-value">当前用时 {_duration_text(elapsed)}</span>'
+    return f'<span class="elapsed-value elapsed-done">总用时 {_duration_text(elapsed)}</span>'
+
+
+def render_progress(events: list[dict], running: bool = True, elapsed: float = 0.0) -> str:
+    elapsed = max(0.0, float(elapsed))
+    # 运行中的「当前用时」改由顶部计时条实时刷新，摘要里只放条数，
+    # 避免每次刷新都重绘整条消息、把用户展开的 details 折叠回去。
+    if running:
+        summary = f"处理过程 · {len(events)} 条更新"
+    else:
+        summary = f"处理过程 · {len(events)} 条更新 · 总用时 {_duration_text(elapsed)}"
+    record_parts = []
+    for event in events:
+        duration = event.get("duration")
+        if duration is None:
+            duration = elapsed - float(event.get("started", 0.0))
+        record_parts.append(
+            f"<li><strong>{escape(str(event['title']))}</strong>"
+            f" <span class=\"progress-duration\">用时 {escape(_duration_text(duration))}</span>"
+            f"<br>{escape(str(event['detail']))}</li>"
+        )
+    records = "".join(record_parts)
+    log = f"<details><summary>{summary}</summary>" + (f"<ol>{records}</ol>" if records else "") + "</details>"
+    if not running:
+        return log
+    if not events:
+        return f"正在开始处理……\n\n{log}"
+    current = events[-1]
+    return f"**{current['title']}**\n\n{current['detail']}\n\n{log}"
 
 
 def _panel_values(s: Session | None):
     return render_scene_card(s), render_evidence_card(s), render_article_card(s), render_review_card(s)
+
+
+def _save_checkpoint(
+    checkpoint_id: str,
+    session: Session,
+    status: str,
+    history: list,
+    state: dict,
+    error: str = "",
+) -> None:
+    try:
+        get_workspace().save_checkpoint(
+            checkpoint_id, session, status, chat_history=history, state=state, error=error
+        )
+        if status != "running":
+            get_workspace().prune_checkpoints(100)
+    except (OSError, ValueError, sqlite3.Error, TypeError):
+        logger.exception("创作检查点保存失败")
 
 
 # ---- 对话：后台执行流水线，前台按真实回调逐步更新 ----
@@ -240,36 +294,52 @@ def user_send_stream(
     history: list,
     state: dict | None,
     forced_intent: dict | None = None,
+    resume: bool = False,
 ):
     message = (message or "").strip()
-    if not message:
-        yield "", history, state, *_panel_values((state or {}).get("session"))
+    if not message and not resume:
+        yield "", history, state, *_panel_values((state or {}).get("session")), ""
         return
 
     state = state or {"session": None, "last": ""}
     s = state.get("session") or Session()
-    display = (history or []) + [
-        {"role": "user", "content": message},
-        {"role": "assistant", "content": "正在开始处理……"},
-    ]
+    checkpoint_id = state.get("checkpoint_id") or uuid4().hex
+    state = {**state, "session": s, "checkpoint_id": checkpoint_id}
+    started = time.monotonic()
+    display = list(history or [])
+    if not resume:
+        display.append({"role": "user", "content": message})
+    display.append({
+        "role": "assistant",
+        "content": render_progress([], True, 0.0),
+    })
     event_queue: Queue = Queue()
     result: dict = {}
+    _save_checkpoint(checkpoint_id, s, "running", display, state)
 
     def progress(title: str, detail: str) -> None:
-        event_queue.put(("progress", title, detail, _panel_values(s)))
+        _save_checkpoint(checkpoint_id, s, "running", display, state)
+        event_queue.put(("progress", title, detail, time.monotonic() - started, _panel_values(s)))
 
     def worker() -> None:
         pipe = None
+        before = {"requests": 0, "success": 0, "tokens": 0}
         try:
             pipe = get_pipeline()
-            if (state.get("last") in ("review", "done", "need_more_info")
+            before = request_snapshot(pipe.llm)
+            if resume:
+                outcome = pipe.resume(s, progress=progress)
+            elif (state.get("last") in ("review", "done", "need_more_info")
                     and s.draft is not None and s.review is not None and s.review.passed):
                 outcome = pipe.feedback(
                     s, message, progress=progress, intent_override=forced_intent
                 )
             else:
                 outcome = pipe.talk(s, message, progress=progress)
-            next_state = {**state, "session": s, "last": outcome.status, "work_id": None}
+            next_state = {
+                **state, "session": s, "last": outcome.status,
+                "work_id": None, "checkpoint_id": checkpoint_id,
+            }
             if outcome.status == "done":
                 try:
                     next_state["work_id"] = get_workspace().save_confirmed_work(
@@ -282,12 +352,15 @@ def user_send_stream(
                 next_state.pop("archive_error", None)
             result.update(out=outcome, state=next_state)
         except (LLMError, PromptError, LocalKBError) as exc:
-            result.update(error=f"❌ {exc}", state={**state, "session": s, "last": "error"})
+            result.update(
+                error=f"❌ {exc}",
+                state={**state, "session": s, "last": "error", "checkpoint_id": checkpoint_id},
+            )
         except Exception as exc:  # 兜底，避免界面崩溃
-            logging.getLogger(__name__).exception("页面生成失败")
+            logger.exception("页面生成失败")
             result.update(
                 error=f"❌ 系统错误：{type(exc).__name__}: {exc}",
-                state={**state, "session": s, "last": "error"},
+                state={**state, "session": s, "last": "error", "checkpoint_id": checkpoint_id},
             )
         finally:
             if pipe is not None:
@@ -295,23 +368,53 @@ def user_send_stream(
                     pipe._trace(s, "页面结果", status=result["state"]["last"])
                     pipe.save(s, f"web-{uuid4().hex}")
                 except Exception:
-                    logging.getLogger(__name__).warning("运行记录保存失败")
-            event_queue.put(("done",))
+                    logger.warning("运行记录保存失败")
+                after = request_snapshot(pipe.llm)
+                log_turn(logger, checkpoint_id, result["state"]["last"], started, before, after)
+            final_status = result.get("state", {}).get("last", "error")
+            _save_checkpoint(
+                checkpoint_id, s, final_status, display, result.get("state", state),
+                result.get("error", ""),
+            )
+            event_queue.put(("done", time.monotonic() - started))
 
     initial_panels = _panel_values(s)
     threading.Thread(target=worker, daemon=True).start()
-    events: list[tuple[str, str]] = []
-    yield "", [dict(item) for item in display], gr.skip(), *initial_panels
+    events: list[dict] = []
+    latest_panels = initial_panels
+    total_elapsed = 0.0
+    last_timer_tick = -1
+    yield "", [dict(item) for item in display], gr.skip(), *initial_panels, _elapsed_html(0.0, True)
     while True:
         try:
             event = event_queue.get(timeout=0.25)
         except Empty:
+            current_elapsed = time.monotonic() - started
+            timer_tick = int(current_elapsed * 2)  # 0.5 秒粒度，只刷新顶部计时条
+            if timer_tick != last_timer_tick:
+                last_timer_tick = timer_tick
+                # 不重绘聊天消息，避免把用户展开的 details 折叠回去；也不清空输入框。
+                yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip(), _elapsed_html(current_elapsed, True)
             continue
         if event[0] == "done":
+            total_elapsed = float(event[1])
+            if events and events[-1].get("duration") is None:
+                events[-1]["duration"] = max(0.0, total_elapsed - events[-1]["started"])
             break
-        events.append((event[1], event[2]))
-        display[-1] = {"role": "assistant", "content": render_progress(events, True)}
-        yield "", [dict(item) for item in display], gr.skip(), *event[3]
+        event_started = float(event[3])
+        if events and events[-1].get("duration") is None:
+            events[-1]["duration"] = max(0.0, event_started - events[-1]["started"])
+        events.append({
+            "title": event[1], "detail": event[2],
+            "started": event_started, "duration": None,
+        })
+        latest_panels = event[4]
+        last_timer_tick = int(event_started * 2)
+        display[-1] = {
+            "role": "assistant",
+            "content": render_progress(events, True, event_started),
+        }
+        yield gr.skip(), [dict(item) for item in display], gr.skip(), *latest_panels, _elapsed_html(event_started, True)
 
     final_state = result["state"]
     if "out" in result:
@@ -324,9 +427,42 @@ def user_send_stream(
         answer += f"\n\n📚 已保存到历史作品库（作品 #{final_state['work_id']}）。"
     elif final_state.get("archive_error"):
         answer += f"\n\n⚠️ 定稿成功，但保存历史作品失败：{final_state['archive_error']}"
-    log = render_progress(events, False)
+    log = render_progress(events, False, total_elapsed)
     display[-1] = {"role": "assistant", "content": f"{log}\n\n{answer}".strip()}
-    yield "", [dict(item) for item in display], final_state, *_panel_values(s)
+    _save_checkpoint(
+        checkpoint_id, s, final_state.get("last", "error"), display, final_state,
+        result.get("error", ""),
+    )
+    yield "", [dict(item) for item in display], final_state, *_panel_values(s), _elapsed_html(total_elapsed, False)
+
+
+def resume_latest_stream(history: list, state: dict | None):
+    """恢复当前账户最近的未归档检查点；中断/错误任务从安全阶段自动续跑。"""
+    try:
+        checkpoint = get_workspace().latest_checkpoint()
+    except (OSError, sqlite3.Error, ValueError) as exc:
+        message = {"role": "assistant", "content": f"⚠️ 无法读取恢复点：{exc}"}
+        yield "", list(history or []) + [message], state, *_panel_values((state or {}).get("session")), ""
+        return
+    if not checkpoint:
+        message = {"role": "assistant", "content": "没有可恢复的创作检查点。"}
+        yield "", list(history or []) + [message], state, *_panel_values((state or {}).get("session")), ""
+        return
+    restored_state = {
+        **checkpoint.get("state", {}),
+        "session": checkpoint["session"],
+        "last": checkpoint["status"],
+        "checkpoint_id": checkpoint["checkpoint_id"],
+    }
+    restored_history = checkpoint.get("chat_history") or list(history or [])
+    if checkpoint["status"] in ("running", "error"):
+        yield from user_send_stream("", restored_history, restored_state, resume=True)
+        return
+    restored_history = list(restored_history) + [{
+        "role": "assistant",
+        "content": f"✅ 已恢复 {checkpoint['updated_at']} 的创作状态，可继续补充、修改或确认。",
+    }]
+    yield "", restored_history, restored_state, *_panel_values(checkpoint["session"]), ""
 
 
 def user_send(message: str, history: list, state: dict | None):
@@ -338,10 +474,16 @@ def user_send(message: str, history: list, state: dict | None):
 
 
 def reset_chat(state: dict | None):
+    checkpoint_id = (state or {}).get("checkpoint_id")
+    if checkpoint_id:
+        try:
+            get_workspace().mark_checkpoint(checkpoint_id, "abandoned")
+        except (OSError, sqlite3.Error):
+            logger.warning("旧检查点未能标记为已放弃", exc_info=True)
     return (
         [], {"session": None, "last": ""}, "",
         render_scene_card(None), render_evidence_card(None), render_article_card(None),
-        render_review_card(None),
+        render_review_card(None), "",
     )
 
 
@@ -429,12 +571,10 @@ def _preference_context(preferences: dict | None) -> str:
 def composer_send_with_preferences(
     message, product, audience, scene, platform, goal, history, state, preferences
 ):
-    context = _preference_context(preferences)
-    enriched = (message or "").strip()
-    if context:
-        enriched = f"{enriched}\n\n{context}" if enriched else context
+    # 偏好由核心 Pipeline 的统一上下文装配读取；不再拼进用户消息，避免被
+    # 需求理解或事实审核误当成用户确认的产品事实。preferences 参数保留给旧 UI 调用契约。
     yield from composer_send(
-        enriched, product, audience, scene, platform, goal, history, state
+        message, product, audience, scene, platform, goal, history, state
     )
 
 
@@ -549,6 +689,39 @@ def save_history_work(
     return "✅ 历史作品修改已保存。", refresh_history_choices({"work_id": work_id}), preview
 
 
+def delete_history_work(work_id, state: dict | None):
+    """删除选中的历史作品，随后选择剩余列表中的最新一篇。"""
+    if isinstance(work_id, str) and work_id.startswith("__cancel__:"):
+        original_id = work_id.split(":", 1)[1]
+        return (
+            "已取消删除。", gr.update(value=original_id),
+            *load_history_work(original_id), state or {},
+        )
+    if not work_id:
+        return (
+            "未删除任何作品。", gr.update(), *load_history_work(None), state or {},
+        )
+    try:
+        deleted_id = get_workspace().delete_work(work_id)
+    except (TypeError, ValueError, OSError, sqlite3.Error) as exc:
+        return (
+            f"⚠️ 删除失败：{exc}", gr.update(), *load_history_work(work_id), state or {},
+        )
+
+    choices = _work_choices()
+    chosen = choices[0][1] if choices else None
+    next_state = dict(state or {})
+    if str(next_state.get("work_id", "")) == str(deleted_id):
+        next_state.pop("work_id", None)
+        next_state.pop("archive_error", None)
+    return (
+        f"✅ 历史作品 #{deleted_id} 已删除，关联宣传数据也已删除。",
+        gr.update(choices=choices, value=chosen),
+        *load_history_work(chosen),
+        next_state,
+    )
+
+
 _EMPTY_PREFERENCES = {
     "account_id": "local", "display_name": "当前用户",
     "preferred_tone": "", "preferred_platforms": "", "audience_focus": "",
@@ -574,6 +747,17 @@ def save_user_preferences(
         return {}, f"⚠️ 保存失败：{exc}", "**当前账户**"
     summary = f"**{preferences['display_name']}**\n\n本地账户 · 偏好已启用"
     return preferences, "✅ 用户偏好已保存，将自动用于后续创作。", summary
+
+
+def set_history_reference(enabled: bool) -> str:
+    """历史作品是否参与创作参考；关闭后新创作不再读取任何历史作品。"""
+    try:
+        get_workspace().save_user_preferences(history_reference=1 if enabled else 0)
+    except (ValueError, OSError, sqlite3.Error) as exc:
+        return f"⚠️ 设置保存失败：{exc}"
+    if enabled:
+        return "✅ 已开启：后续创作会把高表现历史作品作为写法与角度参考。"
+    return "✅ 已关闭：后续创作不再读取历史作品，只看知识库与本次需求。"
 
 
 def select_latest_tab(state: dict | None):
@@ -678,7 +862,10 @@ html, body { background: var(--app-bg) !important; }
 #evidence-body, #review-body { max-height: 43vh; overflow-y: auto; }
 #center-topbar { align-items: center; margin: 0; padding: 8px 16px 0; gap: 12px; flex-shrink: 0; }
 #center-title { font-size: 13px; font-weight: 650; color: #374151; }
-#reset-button { min-height: 28px; font-size: 11px; border: 0; background: transparent; box-shadow: none; color: #7a8494; white-space: nowrap; }
+#elapsed-timer { display: flex; align-items: center; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; }
+#elapsed-timer .elapsed-value { font-size: 11px; color: #a06a74; font-weight: 500; }
+#elapsed-timer .elapsed-done { color: #8a94a3; }
+#reset-button, #resume-button { min-height: 28px; font-size: 11px; border: 0; background: transparent; box-shadow: none; color: #7a8494; white-space: nowrap; }
 #work-tabs { display: flex; flex-direction: column; flex: 1; min-height: 0; gap: 0; }
 #work-tabs > .tab-wrapper, #work-tabs > .tab-nav { padding: 0 18px; border-bottom: 1px solid #f0f1f4; flex-shrink: 0; }
 #work-tabs [role="tab"] { font-size: 12px; padding: 11px 14px; border-radius: 0; }
@@ -693,6 +880,9 @@ html, body { background: var(--app-bg) !important; }
 #chat-box .message summary { cursor: pointer; color: #7a8494; }
 #chat-box .message details ol { margin: 10px 0; padding-left: 20px; }
 #chat-box .message details li { margin-bottom: 9px; }
+#chat-box .message .progress-duration {
+  display: inline-block; margin-left: 6px; color: #a06a74; font-size: 10px; font-weight: 500;
+}
 #chat-box img { display: block; max-width: 100%; max-height: 350px; object-fit: contain; border-radius: 12px; margin: 14px auto; }
 #chat-box .empty-chat { color: #8993a2; text-align: center; }
 #chat-box .empty-chat h2 { font-size: 21px; color: #414c5d; margin-bottom: 10px; }
@@ -833,7 +1023,9 @@ def build_ui() -> gr.Blocks:
                         history_article = gr.Textbox(
                             label="作品正文（Markdown）", value=initial_history[6], lines=12,
                         )
-                        history_save = gr.Button("保存作品修改", variant="primary")
+                        with gr.Row():
+                            history_save = gr.Button("保存作品修改", variant="primary")
+                            history_delete = gr.Button("删除所选作品", variant="stop")
                         history_status = gr.Markdown()
                         gr.Markdown("### 修改预览")
                         history_preview = gr.Markdown(initial_history[7], elem_id="history-preview")
@@ -849,6 +1041,13 @@ def build_ui() -> gr.Blocks:
                         metric_notes = gr.Textbox(label="数据备注", placeholder="例如：发布 24 小时，小红书自然流量")
                         metric_save = gr.Button("记录宣传数据")
                         metric_status = gr.Markdown()
+                        gr.Markdown("### 创作参考")
+                        history_reference = gr.Checkbox(
+                            label="允许历史作品参与软文生成参考",
+                            value=bool(initial_preferences.get("history_reference", 1)),
+                            info="开启后，与本次需求相似且表现好的历史作品会作为写法、结构与行动引导的参考；历史作品不会成为产品事实来源。",
+                        )
+                        history_reference_status = gr.Markdown()
                 with gr.Tab("用户偏好", id="account_preferences"):
                     with gr.Column(elem_id="preferences-content"):
                         gr.Markdown("### 用户偏好\n这些偏好属于当前账户，并会自动用于后续创作。")
@@ -876,7 +1075,9 @@ def build_ui() -> gr.Blocks:
 
             with gr.Column(scale=8, min_width=0, elem_id="center-stage"):
                 with gr.Row(elem_id="center-topbar"):
-                    gr.HTML('<span id="center-title">创作空间</span>')
+                    gr.HTML('<span id="center-title">创作空间</span>', scale=0)
+                    elapsed_timer = gr.HTML(value="", elem_id="elapsed-timer", scale=1, min_width=0)
+                    resume = gr.Button("恢复中断", scale=0, min_width=70, elem_id="resume-button")
                     reset = gr.Button("新建对话", scale=0, min_width=70, elem_id="reset-button")
                 with gr.Tabs(selected="chat", elem_id="work-tabs") as work_tabs:
                     with gr.Tab("对话创作", id="chat", elem_id="chat-pane"):
@@ -951,7 +1152,7 @@ def build_ui() -> gr.Blocks:
                     archive_note = gr.Markdown("确认定稿后自动存入历史作品库")
 
         turn_inputs = [msg, product, audience, scene, platform, goal, chatbot, session_state, preference_state]
-        turn_outputs = [msg, chatbot, session_state, scene_card, evidence_card, article_card, review_card]
+        turn_outputs = [msg, chatbot, session_state, scene_card, evidence_card, article_card, review_card, elapsed_timer]
         # 共用并发队列，避免连续点击与回车同时修改同一会话。
         event_kwargs = {"concurrency_limit": 1, "concurrency_id": "creation"}
         for trigger in (msg.submit, send.click):
@@ -961,6 +1162,11 @@ def build_ui() -> gr.Blocks:
             ).then(
                 composer_send_with_preferences, turn_inputs, turn_outputs, **event_kwargs,
             )
+        resume.click(
+            lambda: gr.update(selected="chat"), outputs=work_tabs, queue=False,
+        ).then(
+            resume_latest_stream, [chatbot, session_state], turn_outputs, **event_kwargs,
+        )
         settings_toggle.click(
             toggle_settings, settings_open, [settings_open, settings_panel], queue=False,
         )
@@ -976,7 +1182,7 @@ def build_ui() -> gr.Blocks:
         )
         reset.click(
             reset_chat, [session_state],
-            [chatbot, session_state, msg, scene_card, evidence_card, article_card, review_card],
+            [chatbot, session_state, msg, scene_card, evidence_card, article_card, review_card, elapsed_timer],
             **event_kwargs,
         ).then(lambda: gr.update(selected="chat"), outputs=work_tabs, queue=False)
         download_outputs = [publish_md, publish_docx, publish_pdf, report_md, report_docx, report_pdf]
@@ -1006,6 +1212,22 @@ def build_ui() -> gr.Blocks:
              history_scene, history_platform, history_goal, history_article],
             [history_status, history_selector, history_preview],
         )
+        history_delete.click(
+            delete_history_work,
+            [history_selector, session_state],
+            [history_status, history_selector, history_title, history_product,
+             history_audience, history_scene, history_platform, history_goal,
+             history_article, history_preview, performance_history, session_state],
+            js="""(workId, state) => {
+                if (!workId) {
+                    return [null, state];
+                }
+                if (!window.confirm("确定删除这篇历史作品吗？关联宣传数据也会一并删除。")) {
+                    return [`__cancel__:${workId}`, state];
+                }
+                return [workId, state];
+            }""",
+        )
         metric_save.click(
             save_performance,
             [history_selector, metric_impressions, metric_likes, metric_shares,
@@ -1019,6 +1241,9 @@ def build_ui() -> gr.Blocks:
              preference_audience, preference_content, preference_avoid,
              preference_notes],
             [preference_state, preference_status, account_summary],
+        )
+        history_reference.change(
+            set_history_reference, [history_reference], [history_reference_status],
         )
 
     return demo

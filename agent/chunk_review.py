@@ -3,10 +3,10 @@ from __future__ import annotations
 
 import json
 
-from . import briefing, compliance, fact_check
+from . import briefing, compliance, fact_check, section
 from .compose import draft_to_json, facts_block, images_block, originals_block
 from .models import Brief, ContentBlock, Draft, Evidence, Issue, Review, Strategy
-from .norm import normalize_where
+from .norm import drop_registered_caption_issues, normalize_where
 from .prompts import Prompts
 
 
@@ -30,6 +30,21 @@ def _contract_issues(block: ContentBlock, draft: Draft) -> list[Issue]:
             add(f"正文第{index}段", f"使用了未分配给当前块的事实编号 {','.join(extra)}",
                 "只使用当前块事实白名单，或删除相关主张")
     return issues
+
+
+def _length_issues(block: ContentBlock, draft: Draft, strategy: Strategy, blocks: int = 0) -> list[Issue]:
+    """正文块写得明显偏短时要求扩写;只提示补全已有事实,不催生新内容。
+
+篇幅只是成稿质量问题,不是事实错误:按 warn 提交,让重写模型补足,但不会因此删段或阻断成稿。
+"""
+    if block.kind != "body":
+        return []
+    platform = strategy.platform
+    paragraphs = [p.text for p in draft.body]
+    if not section.is_short(platform, block.kind, paragraphs, blocks):
+        return []
+    return [Issue("fact", "rule", "warn", "当前块",
+                  section.short_hint(platform, block.kind, paragraphs, blocks), "按提示补足篇幅")]
 
 
 def parse_llm_issues(data: dict) -> list[Issue]:
@@ -61,8 +76,10 @@ def check(
     brief: Brief,
     strategy: Strategy,
     review_mode: str = "strict",
+    blocks: int = 0,
 ) -> Review:
     issues = _contract_issues(block, draft)
+    issues += _length_issues(block, draft, strategy, blocks)
     issues += fact_check.rule_check(draft, evidence, brief, strategy)
     issues += compliance.rule_check(draft, evidence)
     data = llm.json(prompts.render("chunk_review", {
@@ -78,6 +95,7 @@ def check(
         "图片登记": images_block(evidence, brief.product),
     }), temperature=0.1)
     issues += parse_llm_issues(data)
+    issues = drop_registered_caption_issues(issues, draft, evidence)
     if review_mode == "relaxed":
         for issue in issues:
             if issue.source == "llm":

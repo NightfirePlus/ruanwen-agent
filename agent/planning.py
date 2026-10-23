@@ -3,8 +3,9 @@ from __future__ import annotations
 
 import json
 
+from . import section
 from .compose import facts_block
-from .models import ContentBlock, ContentPlan, Evidence, Strategy
+from .models import ContentBlock, ContentPlan, ContextPackage, Evidence, Strategy
 from .prompts import Prompts
 
 KINDS = ("opening", "body", "closing")
@@ -12,7 +13,7 @@ MAX_BLOCKS = 8
 
 STRUCTURE_REQUIREMENTS = {
     "opening": "必须同时生成非空标题和非空导语；只写规范需求中的受众、场景与关注问题，不写产品参数、功能或效果",
-    "body": "必须生成至少一个正文段落",
+    "body": "必须生成完整的正文小节，而不是一两句话",
     "closing": "必须生成非空行动引导，并按平台要求生成标签；不新增产品参数、功能、效果、权益或承诺",
 }
 
@@ -33,8 +34,9 @@ def _fallback(fact_ids: list[str]) -> ContentPlan:
     ])
 
 
-def parse_plan(data: dict, evidence: Evidence) -> ContentPlan:
+def parse_plan(data: dict, evidence: Evidence, strategy: Strategy | None = None) -> ContentPlan:
     allowed_facts = {fact.id for fact in evidence.facts}
+    platform = strategy.platform if strategy else {}
     raw_blocks = data.get("blocks", []) if isinstance(data, dict) else []
     blocks: list[ContentBlock] = []
     seen: set[str] = set()
@@ -49,11 +51,12 @@ def parse_plan(data: dict, evidence: Evidence) -> ContentPlan:
         fact_ids = list(dict.fromkeys(str(value) for value in item.get("fact_ids", [])
                                       if str(value) in allowed_facts))
         # 标题、导语和收束没有段落级 fact_ids 载体，不在这些块中承载产品事实；
-        # 正文块控制事实密度，避免一段同时压入过多限定条件而造成遗漏；上限保留
-        # 三条，以免机械截断后让模型规划的目标与事实白名单互相矛盾。
-        fact_ids = fact_ids[:3] if kind == "body" else []
+        # 正文块的条数上限跟随平台篇幅：一篇长文只给两条事实，写出来必然只剩短句罗列。
+        fact_ids = fact_ids[:section.fact_cap(platform, kind)] if kind == "body" else []
+        # 只有收束块可以依赖前面的块（要承接具体论点）。正文块之间一旦连成依赖链，
+        # 生成与审核就没法并行，整篇耗时会成倍增加，所以这里直接把正文块的依赖清空。
         depends_on = list(dict.fromkeys(str(value) for value in item.get("depends_on", [])
-                                        if str(value) in seen))
+                                        if str(value) in seen)) if kind == "closing" else []
         blocks.append(ContentBlock(
             block_id, kind, _with_structure_requirement(kind, objective), fact_ids, depends_on
         ))
@@ -78,20 +81,37 @@ def parse_plan(data: dict, evidence: Evidence) -> ContentPlan:
     return ContentPlan(normalized)
 
 
-def create(llm, prompts: Prompts, canonical_brief: str, evidence: Evidence, strategy: Strategy) -> ContentPlan:
+def create(
+    llm,
+    prompts: Prompts,
+    canonical_brief: str,
+    evidence: Evidence,
+    strategy: Strategy,
+    context_package: ContextPackage | None = None,
+) -> ContentPlan:
+    strategy_payload = (
+        context_package.strategy_payload()
+        if context_package else {
+            "scene": strategy.scene,
+            "platform": strategy.platform,
+            "performance_reference": strategy.performance,
+        }
+    )
     data = llm.json(
         prompts.render(
             "content_plan",
             {
                 "规范需求": canonical_brief,
-                "策略": json.dumps(
-                    {"scene": strategy.scene, "platform": strategy.platform,
-                     "performance_reference": strategy.performance},
-                    ensure_ascii=False,
-                ),
-                "事实点清单": facts_block(evidence),
+                "策略": json.dumps(strategy_payload, ensure_ascii=False),
+                "篇幅目标": json.dumps(section.plan_targets(strategy.platform), ensure_ascii=False),
+                "事实点清单": facts_block(evidence, context_package),
             },
         ),
         temperature=0.2,
     )
-    return parse_plan(data, evidence)
+    return parse_plan(data, evidence, strategy)
+
+
+def content_blocks(plan: ContentPlan | None) -> int:
+    """计划里真正写正文的块数，用于换算单块篇幅。"""
+    return sum(1 for block in plan.blocks if block.kind == "body") if plan else 0

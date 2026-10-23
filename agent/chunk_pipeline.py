@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 from typing import Callable
 
 from . import chunk_review, compose, prune
-from .models import Brief, ContentBlock, ContentPlan, Draft, Evidence, Review, Strategy
+from .models import Brief, ContentBlock, ContentPlan, ContextPackage, Draft, Evidence, Review, Strategy
 from .prompts import Prompts
 
 MAX_REWRITES = 2
@@ -65,6 +65,7 @@ def run(
     plan: ContentPlan,
     review_mode: str = "strict",
     progress: ProgressCallback | None = None,
+    context_package: ContextPackage | None = None,
 ) -> FlowResult:
     """运行两个单消费者队列，使写作和审核在不同内容块上重叠执行。"""
     writer_queue: queue.Queue[WorkItem | None] = queue.Queue()
@@ -101,12 +102,12 @@ def run(
                     )
                     draft, refusals = compose.rewrite_chunk(
                         writer_llm, prompts, canonical_brief, brief, evidence, strategy,
-                        plan, block, passed_blocks(), issues_text,
+                        plan, block, passed_blocks(), issues_text, context_package,
                     )
                 else:
                     draft, refusals = compose.generate_chunk(
                         writer_llm, prompts, canonical_brief, brief, evidence, strategy,
-                        plan, block, passed_blocks(),
+                        plan, block, passed_blocks(), context_package,
                     )
                 events.put(Event("written", block.id, item.version, draft=draft,
                                  refusals=refusals, seconds=time.monotonic() - started,
@@ -126,6 +127,7 @@ def run(
             try:
                 review = chunk_review.check(
                     reviewer_llm, prompts, block, item.draft, evidence, brief, strategy, review_mode,
+                    blocks=len(plan.blocks),
                 )
                 events.put(Event("reviewed", item.block_id, item.version, review=review,
                                  seconds=time.monotonic() - started, wait_seconds=waited))
@@ -162,11 +164,14 @@ def run(
     failure = ""
     try:
         while not all(block.status == "passed" for block in plan.blocks):
+            # 每轮循环先派发一遍可生成的块，再等事件。派发不能只挂在事件回调上：
+            # 否则队列空闲的这段时间里，已满足条件的块要等到下一个事件回来才被送进生成队列。
+            schedule_ready()
             try:
-                event = events.get(timeout=0.25)
+                event = events.get(timeout=0.05)
             except queue.Empty:
                 active = any(block.status in ("generating", "reviewing") for block in plan.blocks)
-                if not active and not schedule_ready():
+                if not active:
                     failure = "内容块依赖无法满足，流水线已停止"
                     break
                 continue
@@ -193,7 +198,6 @@ def run(
                                     "version": block.version, "seconds": round(event.seconds, 3),
                                     "wait_seconds": round(event.wait_seconds, 3)})
                 emit("内容块进入审核队列", f"{block.id} 第 {block.version} 版已生成，等待事实与合规审核")
-                schedule_ready()
                 continue
 
             review = event.review or Review([])
@@ -211,7 +215,18 @@ def run(
                 if first_passed_seconds is None:
                     first_passed_seconds = time.monotonic() - flow_started
                 emit("内容块审核通过", f"{block.id} 第 {block.version} 版已冻结")
-                schedule_ready()
+                continue
+            # 篇幅不足属于成稿质量提示:先退回重写补足篇幅,但不消耗阻断重写名额,写不到位也照样冻结。
+            length_hint = any(issue.severity == "warn" and "篇幅" in issue.detail for issue in review.issues)
+            if length_hint and block.attempts == 1:
+                block.status = "generating"
+                block.attempts += 1
+                block.version += 1
+                rewrites += 1
+                writer_queue.put(WorkItem("rewrite", block.id, block.version))
+                flow_events.append({"event": "queued_rewrite", "block": block.id,
+                                    "version": block.version, "reason": "篇幅不足"})
+                emit("内容块篇幅偏短", f"{block.id} 退回重写补足篇幅")
                 continue
             if block.attempts <= MAX_REWRITES:
                 block.status = "generating"

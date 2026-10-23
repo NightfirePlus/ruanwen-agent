@@ -45,19 +45,18 @@ def main():
     store = CatalogStore(DEFAULT_RUNTIME_KB)
     brief = Brief(product="HUAWEI MateBook 14", audience="大学新生", scene="开学季", platform="朋友圈",
                   goal="种草", stage="了解产品", main_problem="外观和日常学习", extra="只介绍有依据的特点，语气自然")
-    os.environ.update(KB_REFERENCE_LIMIT="0", KB_IMAGE_LIMIT="1", KB_REVIEW_MAX_CALLS="2")
+    os.environ.update(KB_REFERENCE_LIMIT="0", KB_IMAGE_LIMIT="1")
     save()
     try:
-        ev = store.collect(router.for_stage("evidence"), prompts, brief,
-                           lambda title, detail: print(title + "：" + detail, flush=True))
+        ev = store.collect(brief, lambda title, detail: print(title + "：" + detail, flush=True))
         report["first_use"] = {"facts": len(ev.facts), "images": len(ev.images), "stats": ev.review_stats,
                                "image_review_disabled": True, "excluded": ev.dropped}
         before = report["requests_started"]
-        os.environ["KB_REVIEW_MAX_CALLS"] = "0"
-        again = store.collect(router.for_stage("evidence"), prompts, brief)
-        report["cache_reused_without_requests"] = before == report["requests_started"] and bool(again.review_stats["cached"])
-        if not report["cache_reused_without_requests"]:
-            raise RuntimeError("缓存复用未达到预期")
+        again = store.collect(brief)
+        # 完全信任知识库:知识库阶段不发起任何模型请求。
+        report["no_model_requests"] = before == report["requests_started"]
+        if not report["no_model_requests"] or len(again.facts) != len(ev.facts):
+            raise RuntimeError("知识库阶段发起了模型请求或结果不一致")
         if "--skip-compose" in sys.argv:
             report["scope"] = "文字资料复核、登记图片读取与缓存；写作仅离线验证，未调用"
             report["completed"] = bool(ev.facts)

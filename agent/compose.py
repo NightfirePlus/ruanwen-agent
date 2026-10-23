@@ -6,25 +6,67 @@ import re
 from copy import deepcopy
 from dataclasses import fields
 
-from .models import Brief, ContentBlock, ContentPlan, Draft, Evidence, ImagePlacement, Paragraph, Strategy
+from . import section
+from .models import Brief, ContentBlock, ContentPlan, ContextPackage, Draft, Evidence, ImagePlacement, Paragraph, Strategy
 from .norm import usable_images
 from .prompts import Prompts
 
 
-def facts_block(ev: Evidence) -> str:
-    return "\n".join(f"[{f.id}] ({f.model}) {f.text}  〔来源:{f.source_path}〕" for f in ev.facts)
+def facts_block(ev: Evidence, package: ContextPackage | None = None) -> str:
+    facts = package.facts if package else ev.facts
+    return "\n".join(f"[{f.id}] ({f.model}) {f.text}  〔来源:{f.source_path}〕" for f in facts)
 
 
-def images_block(ev: Evidence, model: str) -> str:
-    imgs = usable_images(ev, model)
+def images_block(
+    ev: Evidence, model: str, package: ContextPackage | None = None,
+    exclude: set[str] | None = None,
+) -> str:
+    image_source = Evidence(images=package.images) if package else ev
+    imgs = [i for i in usable_images(image_source, model) if not exclude or i.id not in exclude]
     return "\n".join(json.dumps({"id": i.id, "model": i.model, "name": i.name,
         "source": i.source_path, "registered_caption": i.caption, "usage": i.usage,
         "note": i.note, "basis": "知识库已登记并绑定型号；未执行视觉模型审图"},
         ensure_ascii=False) for i in imgs) or "(无)"
 
 
-def context_block(ev: Evidence) -> str:
-    return json.dumps(ev.context, ensure_ascii=False)
+def used_image_ids(passed: list[ContentBlock]) -> set[str]:
+    """已经写进通过块的图片，后续块不再重复提供。"""
+    return {placement.image_id for block in passed if block.draft
+            for placement in block.draft.images}
+
+
+BUCKET_LABELS = {
+    "platform": "平台写法：该平台的语气、结构与图文节奏",
+    "copy": "成稿写法：可直接模仿的篇幅、段落节奏与句式",
+    "audience": "人群场景：受众顾虑、使用任务与推荐边界",
+}
+
+
+def _label_references(references: list[dict]) -> list[dict]:
+    """给每份参考标出用途，便于写作模型区分该学语气、学结构还是学受众语言。"""
+    return [dict(item, usage=BUCKET_LABELS.get(item.get("bucket", ""), "表达与场景参考")) for item in references]
+
+
+def context_block(ev: Evidence, package: ContextPackage | None = None) -> str:
+    references = package.expression_references if package else ev.context
+    payload = {
+        "references": _label_references(references),
+        "source": "知识库表达参考全文摘录，仅用于学习写法与人群语言；其中的参数、功能、价格、体验不得作为本轮产品事实",
+        "authority": (
+            package.authority.get("expression_references")
+            if package else "仅影响表达、结构和场景，不得升级为产品事实"
+        ),
+    }
+    return json.dumps(payload, ensure_ascii=False)
+
+
+def strategy_block(strategy: Strategy, package: ContextPackage | None = None) -> str:
+    payload = package.strategy_payload() if package else {
+        "scene": strategy.scene,
+        "platform": strategy.platform,
+        "performance_reference": strategy.performance,
+    }
+    return json.dumps(payload, ensure_ascii=False)
 
 
 def originals_block(ev: Evidence) -> str:
@@ -114,6 +156,16 @@ def restrict_to_block(draft: Draft, block: ContentBlock) -> Draft:
     return Draft(body=list(draft.body), images=list(draft.images))
 
 
+def chunk_length(platform: dict, block: ContentBlock, plan: ContentPlan) -> str:
+    """当前块应达到的篇幅;非正文块返回空串。"""
+    if block.kind != "body":
+        return ""
+    expected = section.expected_chars(platform, block.kind, section.body_blocks(plan))
+    if not expected:
+        return ""
+    return f"约{expected}字，至少{section.paragraphs_per_block(platform, section.body_blocks(plan))}段"
+
+
 def _chunk_values(
     canonical_brief: str,
     strategy: Strategy,
@@ -121,28 +173,32 @@ def _chunk_values(
     block: ContentBlock,
     passed: list[ContentBlock],
     ev: Evidence,
+    context_package: ContextPackage | None = None,
 ) -> dict[str, str]:
     return {
         "规范需求": canonical_brief,
-        "策略": json.dumps(
-            {"scene": strategy.scene, "platform": strategy.platform,
-             "performance_reference": strategy.performance},
-            ensure_ascii=False,
-        ),
+        "策略": strategy_block(strategy, context_package),
         "内容计划": plan_to_json(plan),
         "当前块": json.dumps({
             "id": block.id, "kind": block.kind, "objective": block.objective,
             "fact_ids": block.fact_ids, "depends_on": block.depends_on,
             "version": block.version,
+            "篇幅": chunk_length(strategy.platform, block, plan),
         }, ensure_ascii=False),
         "已通过块": json.dumps([
             {"id": item.id, "kind": item.kind,
              "draft": json.loads(draft_to_json(item.draft)) if item.draft else {}}
             for item in passed
         ], ensure_ascii=False),
-        "事实点清单": facts_block(ev),
-        "可用图片": images_block(ev, ev.facts[0].model if ev.facts else ""),
-        "表达参考": context_block(ev),
+        "事实点清单": facts_block(ev, context_package),
+        "可用图片": images_block(
+            ev,
+            (context_package.facts[0].model if context_package and context_package.facts
+             else ev.facts[0].model if ev.facts else ""),
+            context_package,
+            exclude=used_image_ids(passed),
+        ),
+        "表达参考": context_block(ev, context_package),
     }
 
 
@@ -156,9 +212,10 @@ def generate_chunk(
     plan: ContentPlan,
     block: ContentBlock,
     passed: list[ContentBlock],
+    context_package: ContextPackage | None = None,
 ) -> tuple[Draft, list[str]]:
-    values = _chunk_values(canonical_brief, strategy, plan, block, passed, ev)
-    values["可用图片"] = images_block(ev, brief.product)
+    values = _chunk_values(canonical_brief, strategy, plan, block, passed, ev, context_package)
+    values["可用图片"] = images_block(ev, brief.product, context_package, exclude=used_image_ids(passed))
     draft, refusals = parse_draft(llm.json(
         prompts.render("chunk_generate", values),
         system=prompts.writer_system,
@@ -178,10 +235,11 @@ def rewrite_chunk(
     block: ContentBlock,
     passed: list[ContentBlock],
     issues_text: str,
+    context_package: ContextPackage | None = None,
 ) -> tuple[Draft, list[str]]:
-    values = _chunk_values(canonical_brief, strategy, plan, block, passed, ev)
+    values = _chunk_values(canonical_brief, strategy, plan, block, passed, ev, context_package)
     values.update({
-        "可用图片": images_block(ev, brief.product),
+        "可用图片": images_block(ev, brief.product, context_package, exclude=used_image_ids(passed)),
         "当前块稿件": draft_to_json(block.draft or Draft()),
         "审核问题": issues_text,
     })
@@ -255,19 +313,18 @@ def edit_coherence(
     return (draft if violations else candidate), violations, refusals
 
 
-def generate(llm, prompts: Prompts, brief: Brief, ev: Evidence, strategy: Strategy) -> tuple[Draft, list[str]]:
+def generate(
+    llm, prompts: Prompts, brief: Brief, ev: Evidence, strategy: Strategy,
+    context_package: ContextPackage | None = None,
+) -> tuple[Draft, list[str]]:
     user = prompts.render(
         "compose",
         {
             "需求": brief_block(brief),
-            "策略": json.dumps(
-                {"scene": strategy.scene, "platform": strategy.platform,
-                 "performance_reference": strategy.performance},
-                ensure_ascii=False,
-            ),
-            "事实点清单": facts_block(ev),
-            "可用图片": images_block(ev, brief.product),
-            "表达参考": context_block(ev),
+            "策略": strategy_block(strategy, context_package),
+            "事实点清单": facts_block(ev, context_package),
+            "可用图片": images_block(ev, brief.product, context_package),
+            "表达参考": context_block(ev, context_package),
         },
     )
     return parse_draft(llm.json(user, system=prompts.writer_system, temperature=0.7))
@@ -281,6 +338,7 @@ def rewrite(
     brief: Brief,
     ev: Evidence,
     strategy: Strategy,
+    context_package: ContextPackage | None = None,
 ) -> tuple[Draft, list[str]]:
     """按核验与合规发现的问题改写:只动有问题的部分。"""
     user = prompts.render(
@@ -288,14 +346,10 @@ def rewrite(
         {
             "稿件": draft_to_json(draft),
             "问题": issues_text,
-            "策略": json.dumps(
-                {"scene": strategy.scene, "platform": strategy.platform,
-                 "performance_reference": strategy.performance},
-                ensure_ascii=False,
-            ),
-            "事实点清单": facts_block(ev),
-            "可用图片": images_block(ev, brief.product),
-            "表达参考": context_block(ev),
+            "策略": strategy_block(strategy, context_package),
+            "事实点清单": facts_block(ev, context_package),
+            "可用图片": images_block(ev, brief.product, context_package),
+            "表达参考": context_block(ev, context_package),
         },
     )
     return parse_draft(llm.json(user, system=prompts.writer_system, temperature=0.4))

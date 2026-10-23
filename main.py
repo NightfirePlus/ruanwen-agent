@@ -40,7 +40,10 @@ def build(strict: bool) -> Pipeline:
     prompts = Prompts.load(Path(custom) if custom else None, strict=strict)
     if prompts.problems:
         print(prompts.report(), file=sys.stderr)
-    return Pipeline(make_llm(), make_store(), prompts)
+    return Pipeline(
+        make_llm(), make_store(), prompts,
+        review_mode=os.environ.get("REVIEW_MODE", "relaxed").strip().lower(),
+    )
 
 
 def show(pipe: Pipeline, out: Outcome, save: bool) -> None:

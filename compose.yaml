@@ -1,0 +1,19 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      PORT: "7860"
+      WORKSPACE_DB: /app/data/marketing_workspace.sqlite3
+      KB_LOCAL_DIR: /app/knowledge_base/current
+    ports:
+      - "7860:7860"
+    volumes:
+      - runtime-data:/app/data
+      - knowledge-data:/app/knowledge_base/current
+
+volumes:
+  runtime-data:
+  knowledge-data:

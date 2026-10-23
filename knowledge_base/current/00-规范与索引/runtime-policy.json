@@ -1,18 +1,19 @@
 {
   "contract_version": 1,
-  "rules_version": "usage-review-1",
   "runtime_enabled": true,
-  "strategy": "文字资料首次使用复核，按文件/元数据/来源/依赖/模型/提示词版本缓存；图片按登记归属直接使用",
-  "snapshot_fact_verification_completed": false,
+  "strategy": "产品事实按原文取用，参考资料直接进入写作上下文；知识库阶段不调用模型",
   "historical_prices_allowed": false,
   "business_rule_templates_allowed": true,
   "competitor_materials_scope": "仅在明确比较意图下作为对比框架和待核线索；对外竞品事实需重新核对品牌官网",
   "general_images_allowed": false,
   "reference_material_is_product_evidence": false,
-  "review_max_calls": 3,
   "reference_limit": 2,
-  "image_limit": 2,
+  "reference_slots": {
+    "platform": 1,
+    "copy": 1,
+    "audience": 1
+  },
+  "image_limit": 8,
   "image_review_enabled": false,
-  "mutable_review_index": "usage-review.sqlite3",
-  "failure_policy": "文字资料failed/in_progress不放行、不自动重试；uncertain/rejected复用为排除结果"
+  "policy": "完全信任：产品事实按原文取用，知识库阶段不调用模型；保留哈希、型号、尺寸字段与冲突校验"
 }

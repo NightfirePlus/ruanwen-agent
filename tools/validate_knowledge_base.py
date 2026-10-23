@@ -66,12 +66,24 @@ def inspect_library(root):
     errors, images = [], 0
     try:
         records = store.records()
-        store.policy()
+        policy = store.policy()
         paths = [r["path"] for r in records]
         if len(paths) != len(set(paths)):
             errors.append("索引包含重复文件路径")
         for record in records:
             _check_source(store, record, errors)
+            lifecycle = record.get("lifecycle")
+            if lifecycle is not None:
+                required_fields = {
+                    "material_type", "ingested_at", "source_urls", "source_dates",
+                    "verification_required", "ttl_days", "last_verified_at", "expires_at",
+                }
+                if not required_fields.issubset(lifecycle):
+                    errors.append("生命周期元数据不完整：" + record["path"])
+                elif lifecycle["material_type"] != record["kind"]:
+                    errors.append("生命周期资料类型与 kind 不一致：" + record["path"])
+                if lifecycle.get("verification_required") and not lifecycle.get("source_urls"):
+                    errors.append("需官网核验的资料缺少来源 URL：" + record["path"])
             try:
                 raw = store._raw(record)
                 path = store._safe(record["path"])
@@ -119,11 +131,11 @@ def inspect_library(root):
                         continue
                     if row.get("source_sha256") != sha(store._safe(record["path"]).read_bytes()):
                         errors.append("派生视图未随产品事实更新：" + record["path"])
-        cache = store._safe(f"{INDEX}/usage-review.sqlite3")
-        if cache.exists():
-            with sqlite3.connect(cache.as_uri() + "?mode=ro", uri=True) as db:
+        verification = store._safe(f"{INDEX}/knowledge-verification.sqlite3")
+        if verification.exists():
+            with sqlite3.connect(verification.as_uri() + "?mode=ro", uri=True) as db:
                 if db.execute("PRAGMA quick_check").fetchone()[0] != "ok":
-                    errors.append("审核索引损坏")
+                    errors.append("核验索引损坏")
     except Exception as exc:
         from agent.knowledge import KnowledgeError
         if not isinstance(exc, (KnowledgeError, OSError, ValueError, KeyError, sqlite3.Error)):

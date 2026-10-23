@@ -13,7 +13,10 @@ import re
 from . import briefing
 from .compose import draft_to_json, facts_block, images_block, originals_block
 from .models import Brief, Draft, Evidence, Issue, Strategy
-from .norm import llm_issues, mentioned_models, norm_model, spec_versions, usable_images
+from .norm import (
+    caption_is_registered, drop_registered_caption_issues, llm_issues,
+    mentioned_models, norm_model, registered_captions, spec_versions, usable_images,
+)
 from .prompts import Prompts, PromptError
 
 NUM_UNIT = re.compile(
@@ -59,14 +62,25 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
             if f and norm_model(f.model) != main:
                 add("error", where, f"引用了型号“{f.model}”的事实,但主推型号是“{brief.product}”", "改用主推型号的事实")
 
+    # 图注逐字采用知识库登记说明时,它只是官方展示文案,不需要事实点支持。
+    registered = registered_captions(ev)
+
+    def is_registered_caption(where, text):
+        return caption_is_registered(where, text, registered)
+
     for where, text in [("标题", draft.title), ("导语", draft.intro), ("行动引导", draft.cta)] + [(f"图注 {im.image_id}", im.caption) for im in draft.images]:
+        if is_registered_caption(where, text):
+            continue
         for n in _nums(text):
             if n not in all_text:
                 add("error", where, f"数值“{n}”不在知识库事实中", "删除或改写")
 
+    # 登记图注不参与规格、型号等事实检查;其余片段逐项核对。
+    segments = [(where, text) for where, text in draft.segments() if not is_registered_caption(where, text)]
+
     # 规格版本号(HDMI 2.1、USB 3.2、蓝牙 5.1……):稿中出现的写法必须能在知识库事实原文里找到
     known_versions = spec_versions("".join(f.text for f in ev.facts))
-    for where, text in draft.segments():
+    for where, text in segments:
         for v in sorted(spec_versions(text) - known_versions):
             add("error", where, f"规格版本“{v}”不在知识库事实中(资料没有写明该版本)", "删除版本号,只写资料中有的内容")
 
@@ -75,7 +89,7 @@ def rule_check(draft: Draft, ev: Evidence, brief: Brief, strategy: Strategy) -> 
     # “MateBook D 16 SE 版”、相近型号里有“MateBook D 16”),只传相近型号会让完整的
     # 主推型号写法命中它的前缀,误报为混入相近型号。一起匹配后再排除主推型号本身。
     model_names = [brief.product, *ev.candidates]
-    for where, text in draft.segments():
+    for where, text in segments:
         for other in mentioned_models(text, model_names):
             if norm_model(other) != main:
                 add("error", where, f"出现了相近型号“{other}”,主推型号是“{brief.product}”", "核对型号,删除相近型号的内容")
@@ -124,4 +138,4 @@ def check(llm, prompts: Prompts, draft: Draft, ev: Evidence, brief: Brief, strat
         issues += llm_check(llm, prompts, draft, ev, brief)
     except PromptError as e:      # 提示词还没写好时,规则部分照常工作,并明确提示 LLM 部分被跳过
         issues.append(Issue("fact", "llm", "warn", "事实核验", f"LLM 核验已跳过:{e}"))
-    return issues
+    return drop_registered_caption_issues(issues, draft, ev)
