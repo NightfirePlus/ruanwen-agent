@@ -13,3 +13,7 @@
 - `project-history/sample-runs-2026-10-23/`：v2.0 前的分块流水线调试运行记录，保留用于对比输出变化。
 
 新样例不再提交到仓库根目录，需要时由 `generate_samples.py` 在本地生成。
+
+## 说明书历史版本
+
+- `project-history/manual-before-revision-2026-10-23/`：复赛说明书改版前的原始 docx/PDF，以及当时的 4 张界面截图（首页、小红书成稿、朋友圈、门店海报）。仅作历史对比，现行版以仓库根目录的 `作品说明书-复赛版.docx` / `.pdf` 为准。
