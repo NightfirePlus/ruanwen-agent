@@ -6,6 +6,7 @@ __pycache__/
 *.pyc
 # 赛题手册不随代码发布
 *.pdf
+!作品说明书-复赛版.pdf
 
 # 知识库本地缓存(目录结构与资料正文),不提交
 .cache/
@@ -27,3 +28,6 @@ data/*.sqlite3
 data/*.sqlite3-*
 data/logs/
 data/backups/
+
+# 构建中间产物
+tmp/
