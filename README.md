@@ -1,6 +1,6 @@
-# 华为PC营销软文智能体
+# 华为PC营销软文智能体 v2.0
 
-**[核心架构规范](docs/core-architecture.md)** · [查看项目进度与下一步](ROADMAP.md) · [当前运行约定](docs/knowledge-runtime.md) · [最新真实性能对比](docs/runtime-benchmark-2026-10-22.md) · [部署说明](README_MODELSCOPE.md)
+**[核心架构规范](docs/core-architecture.md)** · [项目进度](ROADMAP.md) · [运行约定](docs/knowledge-runtime.md) · [部署说明](README_MODELSCOPE.md) · [历史归档](archive/README.md)
 
 当前：规范任务说明、统一写作上下文、文章分块规划、生成/重写与审核双队列、事实锁定的整文连贯性编辑、全文终审和内容块级回退均已接入核心 `Pipeline`。知识库运行时完全信任：产品事实按原文取用，营销表达与人群场景参考直接进入写作上下文，知识库阶段不调用模型；保留哈希一致、型号归属、异常尺寸字段和事实冲突等确定性校验，候选修订与人工批准回写仍保留。
 
@@ -9,7 +9,7 @@
 ## 目标核心流程
 
 ```
-多轮追问 ─▶ 结构化需求 ─▶ 规范任务说明 ─▶ 知识安全门禁 ─▶ 上下文装配 ─▶ 文章分块规划
+多轮追问 ─▶ 结构化需求 ─▶ 规范任务说明 ─▶ 知识库读取与校验 ─▶ 上下文装配 ─▶ 文章分块规划
                                                                   │
                                                                   ▼
                     ┌─▶ 生成/重写模型 ─▶ 审核队列 ─▶ 审核模型 ──通过──▶ 已通过块
@@ -89,7 +89,7 @@ python tools/backup_runtime.py                   # 一致性备份工作台与�
 token 计量，不保存密钥或提示词。可通过 `ALERT_MAX_TURN_SECONDS`、`ALERT_MAX_REQUESTS`、`ALERT_MAX_TOKENS`、
 `LOG_DIR`、`LOG_MAX_BYTES` 和 `LOG_BACKUP_COUNT` 调整告警与日志策略。
 
-每次运行默认把完整记录(含每个阶段的输入输出)保存到 `samples/`,用 `--no-save` 关闭。
+每次运行默认把完整记录(含每个阶段的输入输出)保存到本地 `samples/`,用 `--no-save` 关闭。该目录不提交到仓库。
 
 ## 提示词
 
@@ -125,9 +125,9 @@ agent/    各阶段与调度器
 config/   scenes.json 场景表 / platforms.json 平台表 / compliance_rules.json 合规词表
 prompts/  全部提示词
 tests/    单元测试(不联网、不使用真实凭证)
-samples/  运行记录
 knowledge_base/current/ 唯一运行知识库
 archive/  不参与运行的项目历史记录
+data/     运行时数据(检查点、作品库、日志),不提交
 ROADMAP.md 项目进度与待办
 main.py   命令行入口
 ```

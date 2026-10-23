@@ -1,0 +1,1847 @@
+{
+  "brief": {
+    "product": "HUAWEI MateBook 14",
+    "product_type": "",
+    "audience": "大学新生",
+    "scene": "开学季",
+    "platform": "小红书",
+    "goal": "种草",
+    "stage": "",
+    "main_problem": "",
+    "extra": "",
+    "llm_notes": "用户未指定产品大类，根据型号推断为轻薄本但按规则留空；未明确购买阶段和具体痛点。"
+  },
+  "canonical_brief": "产品：HUAWEI MateBook 14；目标受众：大学新生；使用场景：开学季；发布平台：小红书；创作目标：种草。",
+  "evidence": {
+    "facts": [
+      {
+        "id": "F1",
+        "model": "HUAWEI MateBook 14",
+        "text": "操作系统：HarmonyOS 6",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F2",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 长度：312.6 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F3",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 宽度：226.8 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F4",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 厚度：14.5 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F5",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 重量：约 1.33 kg（圆键盘含电池）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F6",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 重量：约 1.32 kg（方键盘含电池）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F7",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 尺寸：14.2 英寸",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F8",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 类型：OLED（抗反射屏）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F9",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 屏占比：91%",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F10",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕比例：3:2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F11",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 分辨率：2880 × 1920，243 PPI",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F12",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 静态刷新率：60 Hz / 120 Hz",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F13",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 动态刷新率：智能动态调节（默认）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F14",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 亮度：标准版：典型亮度：450 nits",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F15",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 亮度：标准版：峰值亮度：500 nits",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F16",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 亮度：柔光版：典型亮度：500 nits",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F17",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 亮度：柔光版：峰值亮度：600 nits",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F18",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 色域：100% sRGB（典型值）、P3 广色域（典型值）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F19",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 色准：平均 DeltaE < 1，支持多屏同色显示",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F20",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 对比度：1000000:1（典型值）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F21",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 可视角度：178°（典型值）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F22",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 触摸屏：支持 10 点触控",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F23",
+        "model": "HUAWEI MateBook 14",
+        "text": "处理器：麒麟 X90",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F24",
+        "model": "HUAWEI MateBook 14",
+        "text": "存储：512 GB / 1 TB",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F25",
+        "model": "HUAWEI MateBook 14",
+        "text": "内存：24 GB / 32 GB",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F26",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 WLAN：Wi-Fi 7，IEEE 802.11a/b/g/n/ac/ax/be，160 MHz",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F27",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 WLAN：2.4 GHz 和 5 GHz 双频",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F28",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 WLAN：支持 WPA、WPA2、WPA3",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F29",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 星闪：支持，星闪 E1.0",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F30",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 蓝牙：蓝牙 6.0",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F31",
+        "model": "HUAWEI MateBook 14",
+        "text": "电池 材料：锂聚合物",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F32",
+        "model": "HUAWEI MateBook 14",
+        "text": "电池 容量：70 Wh（额定容量）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F33",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：左侧：HDMI2.1 TMDS × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F34",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：左侧：USB-C × 1*",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F35",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：左侧：USB-A × 1**",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F36",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：左侧：3.5 mm 耳机和麦克风二合一接口",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F37",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：右侧：USB-A × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F38",
+        "model": "HUAWEI MateBook 14",
+        "text": "键盘和触控板 全尺寸背光键盘",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F39",
+        "model": "HUAWEI MateBook 14",
+        "text": "键盘和触控板 触控板：支持 5 点触控",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F40",
+        "model": "HUAWEI MateBook 14",
+        "text": "键盘和触控板 电源键：指纹电源键",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F41",
+        "model": "HUAWEI MateBook 14",
+        "text": "摄像头：1080P 高清摄像头",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F42",
+        "model": "HUAWEI MateBook 14",
+        "text": "音频 扬声器：扬声器 × 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F43",
+        "model": "HUAWEI MateBook 14",
+        "text": "音频 麦克风：麦克风 × 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F44",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 PC × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F45",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 USB-C 电源适配器（适配器和充电线一体式连接）× 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F46",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 快速指南 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F47",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 贴纸 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F48",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 抛光布 × 1（仅柔光屏支持）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      }
+    ],
+    "images": [
+      {
+        "id": "IMG-08f8cb6ac09e10ce",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png",
+        "caption": "原野绿多彩配色",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-color-green.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-d6c0f67c5e77b799",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png",
+        "caption": "HUAWEI MateBook 14 樱粉金",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-color-pink.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-23d8b8a790082310",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg",
+        "caption": "手写笔创作场景",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-accessories-m-pen-3.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-0391312d4f63d44f",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png",
+        "caption": "深空灰沉稳配色",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-color-grey.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-d623ed8c056d8942",
+        "model": "HUAWEI MateBook 14",
+        "name": "d623ed8c-vmall_matebook-14-harmonyos_强劲性能释放展示_02.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\d623ed8c-vmall_matebook-14-harmonyos_强劲性能释放展示_02.jpg",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/d623ed8c-vmall_matebook-14-harmonyos_强劲性能释放展示_02.jpg",
+        "caption": "强劲性能释放展示 02",
+        "usage": "与正文事实一致时用于产品外观或对应场景配图",
+        "origin_url": "https://res2.vmallres.com/pimages/FssCdnProxy/vmall_product_uom/pmsSalesFile/428_428_420CAA0FC25BCDC5ED39334331B0B562.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-578dcffad7c339e2",
+        "model": "HUAWEI MateBook 14",
+        "name": "578dcffa-vmall_matebook-14-harmonyos_原野绿键盘俯视外观_03.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\578dcffa-vmall_matebook-14-harmonyos_原野绿键盘俯视外观_03.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/578dcffa-vmall_matebook-14-harmonyos_原野绿键盘俯视外观_03.png",
+        "caption": "原野绿键盘俯视外观 03",
+        "usage": "与正文事实一致时用于产品外观或对应场景配图",
+        "origin_url": "https://res2.vmallres.com/pimages/FssCdnProxy/vmall_product_uom/pmsSalesFile/428_428_3708F8B2545B169E52F9B3BFEE5DF2F5.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-733b0086461fedf2",
+        "model": "HUAWEI MateBook 14",
+        "name": "733b0086-vmall_matebook-14-harmonyos_轻薄原野绿侧面细节_04.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\733b0086-vmall_matebook-14-harmonyos_轻薄原野绿侧面细节_04.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/733b0086-vmall_matebook-14-harmonyos_轻薄原野绿侧面细节_04.png",
+        "caption": "轻薄原野绿侧面细节 04",
+        "usage": "与正文事实一致时用于产品外观或对应场景配图",
+        "origin_url": "https://res2.vmallres.com/pimages/FssCdnProxy/vmall_product_uom/pmsSalesFile/428_428_35A94B08C66B2031CE4AF5C901CF37D7.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-b8c11bbb9b6ac9ef",
+        "model": "HUAWEI MateBook 14",
+        "name": "b8c11bbb-vmall_matebook-14-harmonyos_原野绿简洁A面外观_05.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\b8c11bbb-vmall_matebook-14-harmonyos_原野绿简洁A面外观_05.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/b8c11bbb-vmall_matebook-14-harmonyos_原野绿简洁A面外观_05.png",
+        "caption": "原野绿简洁A面外观 05",
+        "usage": "与正文事实一致时用于产品外观或对应场景配图",
+        "origin_url": "https://res2.vmallres.com/pimages/FssCdnProxy/vmall_product_uom/pmsSalesFile/428_428_68DFBAF7A08A83ACA14962A1E3F8E407.png",
+        "note": "",
+        "review": {}
+      }
+    ],
+    "candidates": [
+      "HUAWEI MateBook Fold 非凡大师",
+      "HUAWEI MateBook Pro",
+      "HUAWEI MateBook Pro S",
+      "MateBook 14 酷睿 Ultra",
+      "MateBook D 14",
+      "MateBook D 16",
+      "MateBook D 16 SE 版",
+      "MateBook GT 系列",
+      "MateBook X系列",
+      "HUAWEI MateBook Fold 企业版"
+    ],
+    "conflicts": [],
+    "dropped": [],
+    "sources": [
+      "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+    ],
+    "context": [
+      {
+        "path": "04-营销表达/小红书图文模板.md",
+        "kind": "platform_guide",
+        "bucket": "platform",
+        "quotes": [
+          "# 小红书图文创作指南\n\n## 三、写作流程\n\n首图只给一个结果或冲突；第二张交代人物和任务；中段每张解决一个问题；倒数第二张展示结果或前后对比；末图给核对清单和评论问题。正文与图序一致。\n\n每个段落都要能回答下列至少一项：用户遇到什么问题、进行了什么动作、用什么证据验证、在哪些条件下成立、下一步做什么。不能回答这些问题的形容词、口号和重复参数应删除。\n\n\n## 五、正例\n\n《今天换了三个办公地点，我只记录电脑真正帮上的地方》依次拍装包、咖啡店查资料、会议接力和回家归档，最后说明版本条件。\n\n正例的关键不是语气好听，而是对象、任务、证据和限制互相对应。即使移除品牌名，读者仍能看懂这段内容解决了什么问题。\n\n## 六、反例\n\n九张不同型号官方图拼在一起，正文声称“亲测一整天”，却没有使用过程、配置、时间和原创照片。\n\n反例常见原因包括：把不同型号拼成一台产品、把实验室条件删除、把第三方观点改成官方事实、用过期价格制造紧迫感、用未授权图片或把想象写成亲身体验。"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      },
+      {
+        "path": "04-营销表达/补充资料/6db92c0da2-小红书完整成稿.md",
+        "kind": "reference_material",
+        "bucket": "copy",
+        "quotes": [
+          "# HUAWEI MateBook 14｜小红书完整成稿\n\n## 案例元数据\n\n- 平台：小红书\n- 产品：HUAWEI MateBook 14\n- 目标读者：希望兼顾学习、办公室任务、触控交互和鸿蒙设备协同的主流用户。\n- 内容目标：用卡片与短正文帮助读者完成版本核验，不虚构个人体验\n- 内容属性：基于公开事实重新撰写的完整参考成稿，不是实测报告，也不代表真实客户经历\n- 事实基准：对应 P1 文件与官方页面，核验基准日沿用任务卡记录；发布前必须再次核验\n- 动态信息：本文不写价格、补贴、赠品、库存、销量和交期\n- 配套任务卡：`P6-营销素材库/09-按型号平台/HUAWEI MateBook 14/小红书.md`\n\n## 选题说明\n\n这篇内容围绕“日常学习和办公选 14 英寸电脑，为什么屏幕比例、接口和生态比单看配置更重要？”展开。它不从抽象的“高端”“全能”或“性价比”起笔，而把读者放进一个可验证的任务：上午在教室记笔记，下午接显示器整理表格，晚上还要把手机里的资料归到同一份项目文件中。正文的判断顺序是：先确认 HarmonyOS 应用路线，再比较标准版与柔光版，最后核对接口是否覆盖自己的投屏、移动硬盘和耳机。\n\n选择这个角度，是因为同一系列中的系统、屏幕、处理器、内存、接口或随包装配件可能不同。文章只使用对应任务卡列出的事实锚点；没有公开证据的体验不写成结论，涉及软件与外设时统一引导读者携带真实任务验证。\n\n## 完整成稿\n\n### 封面标题\n\n1. HUAWEI MateBook 14 怎么选才不串版本\n2. 先写任务，再看这台电脑合不合适\n\n### 7 页卡片成稿\n\n**第 1 页｜先别背参数**  \n一台 14 英寸电脑是否顺手，往往不取决于参数表最长的那一栏，而取决于一天里的任务能否连续完成。先写下三个必须完成的任务，再打开规格页。\n\n**第 2 页｜系统与处理器**  \nHarmonyOS 6；麒麟 X90 处理器。必须使用的软件和插件没有确认前，不先下兼容结论。\n\n**第 3 页｜屏幕与显示**  \n14.2 英寸 3:2 OLED 抗反射触控屏，2880 × 1920，支持 60 Hz / 120 Hz 与默认智能动态调节。数字后面的版本与模式条件要一起保留。\n\n**第 4 页｜屏幕与显示**  \n标准版与柔光版亮度规格不同；平均 DeltaE < 1 与多屏同色也须保留官网条件。键盘、笔、扩展坞和充电器也要算进真实出行组合。\n\n**第 5 页｜连接与功能**  \n约 1.32 kg / 1.33 kg，差异与方键盘、圆键盘版本有关；厚度 14.5 mm。系列可选范围不等于正在购买的那一台。\n\n**第 6 页｜配置与供电**  \n24 GB / 32 GB 内存，512 GB / 1 TB 存储，70 Wh 额定容量电池。带自己的文件和外设，按真实顺序连接。\n\n**第 7 页｜连接与功能**  \n接口含 HDMI、USB-C、两个 USB-A 和 3.5 mm 音频口；具体传输、显示和供电能力以规格页为准。如果条件没满足，就不要把能力写成无条件标配。\n\n### 笔记正文\n\n先给结论：HUAWEI MateBook 14 值不值得进入你的候选清单，要看任务，不看形容词。\n\n把场景写具体一点：上午在教室记笔记，下午接显示器整理表格，晚上还要把手机里的资料归到同一份项目文件中。对应的核验顺序也会变得很清楚——先看系统和必须使用的软件，再核对目标 SKU 的屏幕、配置、接口与配件。对这台产品，尤其要注意：先确认 HarmonyOS 应用路线，再比较标准版与柔光版，最后核对接口是否覆盖自己的投屏、移动硬盘和耳机。\n\n更适合继续了解的人，是愿意在购买前核验常用应用，同时重视 3:2 触控屏、常用接口和跨设备工作流的人。需要先停下来补验证的人，是依赖尚未确认的 Windows 专用程序，或把标准版与柔光版的亮度、表面效果混作一项参数的人。如果到店，只做一件事就按这套流程：带一份常用文档和一个常用外设到店，依次验证打开、编辑、投屏、文件流转和接口占用。把结果拍下来并写进订单，比记住“最高可选”可靠。\n\n这篇不是个人长期体验，也没有替任何软件作兼容承诺。价格、赠品、库存和交期以发布当日授权渠道为准；不同销售版本配置可能不同，请以官方规格页及实际销售 SKU 为准。\n\n #电脑选购 #华为电脑 #办公设备 #学习工具 #数码信息 #购机核验\n\n## 图文/镜头方案\n\n图片只从 `P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/图片索引.csv` 选择；下表路径均已在本地知识库中存在。\n\n| 顺序 | 现有素材 | 画面用途 | 图注/字幕建议 |\n|---:|---|---|---|\n| 1 | `P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png` | 封面/首图 | 原野绿多彩配色；使用前核对画面与目标销售版本。 |\n| 2 | `P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png` | 任务场景 | HUAWEI MateBook 14 樱粉金；使用前核对画面与目标销售版本。 |\n| 3 | `P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg` | 核心事实 | 手写笔创作场景；使用前核对画面与目标销售版本。 |\n"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      },
+      {
+        "path": "04-营销表达/按型号/HUAWEI MateBook 14/学生用户沟通卡.md",
+        "kind": "role_guidance",
+        "bucket": "audience",
+        "quotes": [
+          "# HUAWEI MateBook 14｜学生用户沟通卡\n\n## 先核课程清单\n\n1. 专业未来两年必装哪些软件、考试客户端、编译环境或插件？把专业、单位或课程要求的必装软件列出准确名称、版本和插件，逐一核验是否有可用的鸿蒙方案。\n2. 每天往返宿舍和教室多远，是否需要带充电器？请用户按自己的通勤包试装 1.32/1.33 kg 机身，并把充电器也计入携带判断。\n3. 作业以长文档、代码、表格、绘图还是视频为主？让用户在店内灯光下比较标准显示与目标 SKU；若诉求是减反光，必须确认购买的是柔光版。\n4. 预算必须覆盖电脑之外的转接器、鼠标、手写笔和软件授权吗？\n\n## 把参数翻译成学习任务\n\n- 阅读与分屏：14.2 英寸 OLED 采用 3:2 比例、2880 × 1920 分辨率；规格列出 60 Hz / 120 Hz，刷新率会随模式与应用变化。\n- 课程负载：麒麟 X90 搭配 24 GB 或 32 GB 内存，存储有 512 GB、1 TB 版本。\n- 教室/宿舍连接：原生接口包括 1 个 USB-C、2 个 USB-A、HDMI 2.1 TMDS 和 3.5 mm 耳麦口，适合现场按顾客外设逐一对口。\n- 网课条件：配备 1080P 摄像头、2 个扬声器和 2 个麦克风。\n- 型号专属事实：麒麟 X90、70 Wh 电池与“1 个 USB-C + 2 个 USB-A + HDMI”组合，是识别这台鸿蒙 MateBook 14 的关键事实。\n\n可以说：“这台机是否适合你的专业，先看课程软件能否稳定使用，再看背得动、接得上和容量够不够；外观或单一跑分排在这些之后。”\n\n## 反问确认\n\n- 如果某门核心课软件不兼容，你是否有学校机房或远程桌面这一条可靠替代路径？\n- 你更需要四年内的容量余量，还是当下更低预算？24/32 GB 与 512 GB/1 TB 均为版本差异，成交单必须落到具体 SKU。\n\n## 推荐范围\n\n- 适用：适合认可鸿蒙工作流、重视 3:2 OLED 和原生常用接口的日常学习办公用户。\n- 不适用/先别下单：若必须运行尚未验证的 Windows 专用软件、驱动或宏插件，应先完成兼容验证，再决定是否推荐。\n- 到店验证：带学生证无关，真正应带的是课程软件清单、常用课件和要接的 U 盘/投影线。\n\n## 面向学生的合规边界\n\n不承诺“所有专业都能用”“大学四年不卡”或固定续航；不把 AI 生成内容当作正确答案，也不暗示能绕过考试、版权或学术规范。不同系统、内存、硬盘和屏幕版本按实际 SKU 说明。只有柔光版支持官网所称“云晰柔光屏”；AI 换脸检测需手动开启，且仅覆盖官网列明的部分视频通话应用，只能作为风险提示。\n\n## 事实与限制来源\n\n- 本地产品事实：`P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md`\n- 本地限定语：`P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md`\n- 官方产品页：https://consumer.huawei.com/cn/harmonyos-computer/matebook-14-harmonyos-version/\n- 官方规格页：https://consumer.huawei.com/cn/harmonyos-computer/matebook-14-harmonyos-version/specs/"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      }
+    ],
+    "originals": [
+      {
+        "path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "text": "> 迁移候选，尚未完成人工事实复核。原文中的核验声明仅代表原库记录。\n\n# HUAWEI MateBook 14（鸿蒙版） - 产品事实\n\n> 来源：华为官网公开产品页与规格页。抓取日期：2026-10-17。配置可能因销售版本而异，生成内容时必须保留限定条件并以实际销售版本为准。\n\n## 来源\n\n- 产品页：https://consumer.huawei.com/cn/harmonyos-computer/matebook-14-harmonyos-version/\n- 规格页：https://consumer.huawei.com/cn/harmonyos-computer/matebook-14-harmonyos-version/specs/\n\n## 官方规格摘录\n\n## 操作系统\n\n操作系统：HarmonyOS 6\n\n## 尺寸与重量\n\n长度：312.6 mm\n\n宽度：226.8 mm\n\n厚度：14.5 mm\n\n重量：约 1.33 kg（圆键盘含电池）\n\n重量：约 1.32 kg（方键盘含电池）\n\n*实际机身重量根据配置、制造工艺、测量方法的不同可能有所差异。\n\n## 屏幕\n\n尺寸：14.2 英寸\n\n*显示屏采用圆角设计，按照标准矩形测量时，屏幕的对角线长度是 14.2 英寸（实际可视区域略小）。\n\n类型：OLED（抗反射屏）\n\n屏占比：91%\n\n屏幕比例：3:2\n\n分辨率：2880 × 1920，243 PPI\n\n静态刷新率：60 Hz / 120 Hz\n\n动态刷新率：智能动态调节（默认）\n\n亮度：标准版：典型亮度：450 nits\n\n亮度：标准版：峰值亮度：500 nits\n\n亮度：柔光版：典型亮度：500 nits\n\n亮度：柔光版：峰值亮度：600 nits\n\n色域：100% sRGB（典型值）、P3 广色域（典型值）\n\n色准：平均 DeltaE < 1，支持多屏同色显示\n\n*多屏同色，根据应用软件、屏幕设置、使用习惯、环境等因素不同，可能略有差异，请以实际体验为准。购买时最新支持的设备机型请见官网或咨询华为商用客户服务专线（950803）。\n\n对比度：1000000:1（典型值）\n\n可视角度：178°（典型值）\n\n触摸屏：支持 10 点触控\n\n## 处理器\n\n处理器：麒麟 X90\n\n## 存储\n\n存储：512 GB / 1 TB\n\n## 内存\n\n内存：24 GB / 32 GB\n\n## 无线连接\n\nWLAN：Wi-Fi 7，IEEE 802.11a/b/g/n/ac/ax/be，160 MHz\n\nWLAN：2.4 GHz 和 5 GHz 双频\n\nWLAN：支持 WPA、WPA2、WPA3\n\n星闪：支持，星闪 E1.0\n\n蓝牙：蓝牙 6.0\n\n## 电池\n\n材料：锂聚合物\n\n容量：70 Wh（额定容量）\n\n## 接口\n\n接口：左侧：HDMI2.1 TMDS × 1\n\n接口：左侧：USB-C × 1*\n\n接口：左侧：USB-A × 1**\n\n接口：左侧：3.5 mm 耳机和麦克风二合一接口\n\n接口：右侧：USB-A × 1\n\n*左侧 USB-C × 1，支持充电、支持数据（USB3.2 Gen1）和对外供电（开机状态最大 10 W：5V2A，关机状态最大 66 W：20V3.3A），支持 DisplayPort1.2（最大分辨率 4K@60 Hz）；\n\n**左侧第 2 个、右侧第 2 个，USB 3.2 Gen1 × 2，支持充电、支持数据（USB3.2 Gen1）和支持对外供电 10 W（5V2A）\n\n## 键盘和触控板\n\n全尺寸背光键盘\n\n触控板：支持 5 点触控\n\n电源键：指纹电源键\n\n## 摄像头\n\n摄像头：1080P 高清摄像头\n\n*不同模式的照片和视频像素可能有差异，请以实际为准。\n\n## 音频\n\n扬声器：扬声器 × 2\n\n麦克风：麦克风 × 2\n\n## 包装清单\n\nPC × 1\n\nUSB-C 电源适配器（适配器和充电线一体式连接）× 1\n\n快速指南 × 1\n\n贴纸 × 1\n\n抛光布 × 1（仅柔光屏支持）\n",
+        "exclusions": []
+      }
+    ],
+    "review_stats": {
+      "excluded": 0,
+      "catalog_signature": "dc8e09c09bb0a05ec320b1329c10608125c148c96b0de0d6e7573bb682dfa3c4",
+      "source_hashes": {
+        "01-产品事实/HUAWEI MateBook 14/产品事实.md": "e8dbcb071d0145372056530ad64015380856f243a5beffc564e18bf8bb86da99",
+        "04-营销表达/小红书图文模板.md": "1e2f9c003843d67bc5e635e8dce49e20c4746fcc693df9a53498a5aa0b035e7f",
+        "04-营销表达/按型号/HUAWEI MateBook 14/学生用户沟通卡.md": "a67b9108f87ec283f7a81592e24ad39c18731611b8165dd4c85688429761963b",
+        "04-营销表达/补充资料/6db92c0da2-小红书完整成稿.md": "fdd157ee17fc4749e36639b33caa4c966c121382ee8fc3730de71de52d6a3759",
+        "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png": "9f9470747d7e3c406b87c31ecd5d51f1f3542626001ed8b00b04c5db8973de82",
+        "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png": "e320384c91d75f723fb785fce8505c9ce099980cf4330e37d08d75430f32650d",
+        "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg": "85fadb0cbceb8632b00301aa07db8b815469e0107b8c89b5d91baab15a9c281b",
+        "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png": "ab085ae7d9fd83af91b68e1b32c9f6f2148ca22e0d656f16f89815b93650f440",
+        "05-图片素材/HUAWEI MateBook 14/d623ed8c-vmall_matebook-14-harmonyos_强劲性能释放展示_02.jpg": "0bc94b00136a83292b1820a564b48087ddba3125b9852be977b4018e2e030c4f",
+        "05-图片素材/HUAWEI MateBook 14/578dcffa-vmall_matebook-14-harmonyos_原野绿键盘俯视外观_03.png": "c892487b3077760859991b683017ac96f876e040357aa9aa0ffbf4fa9babe972",
+        "05-图片素材/HUAWEI MateBook 14/733b0086-vmall_matebook-14-harmonyos_轻薄原野绿侧面细节_04.png": "b2a991f2763fd7d646e6a362b48536e3949c197137f097ad06b5fcb6fb3e321b",
+        "05-图片素材/HUAWEI MateBook 14/b8c11bbb-vmall_matebook-14-harmonyos_原野绿简洁A面外观_05.png": "d36c93bb3309a15889de0c880c67fea59c1dd548e29cb823f84058989bc5076d"
+      }
+    }
+  },
+  "strategy": {
+    "scene": {
+      "name": "开学季",
+      "angle": "围绕学习、携带、续航和多设备协同,不要把所有学生需求归结为单一性能指标",
+      "focus": [
+        "便携与重量",
+        "续航与课堂/图书馆场景",
+        "学习办公软件体验",
+        "多设备协同"
+      ],
+      "avoid": [
+        "只堆性能参数",
+        "编造学生优惠"
+      ],
+      "in_table": true
+    },
+    "platform": {
+      "name": "小红书",
+      "form": "口语化标题、短段落、使用场景、话题标签",
+      "title": "口语化标题,20字以内,带具体场景或人群,可含1个emoji",
+      "length": "正文300-600字,每段不超过3行",
+      "structure": [
+        "开头一句话点出场景或痛点",
+        "按使用场景分短段,每段一个卖点",
+        "结尾给选购建议和互动提问"
+      ],
+      "tone": "亲切、轻松、像朋友分享;不得伪造个人使用经历,以'适合'、'如果你'等表述代替",
+      "images": {
+        "min": 3,
+        "max": 6
+      },
+      "cta": "邀请评论区交流或收藏,可引导到店体验",
+      "tags": {
+        "min": 5,
+        "max": 8
+      },
+      "field_mapping": "title=标题, intro=开头一句, body=短段落, cta=结尾互动, tags=话题标签",
+      "first_person_experience": false
+    },
+    "performance": {
+      "mode": "advisory_weight",
+      "rule": "权重越高越优先参考表达方式与内容角度；不得作为产品事实、参数或承诺依据",
+      "references": []
+    }
+  },
+  "context_package": {
+    "contract_version": "writing-context-v1",
+    "canonical_brief": "产品：HUAWEI MateBook 14；目标受众：大学新生；使用场景：开学季；发布平台：小红书；创作目标：种草。",
+    "facts": [
+      {
+        "id": "F1",
+        "model": "HUAWEI MateBook 14",
+        "text": "操作系统：HarmonyOS 6",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F2",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 长度：312.6 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F3",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 宽度：226.8 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F4",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 厚度：14.5 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F5",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 重量：约 1.33 kg（圆键盘含电池）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F6",
+        "model": "HUAWEI MateBook 14",
+        "text": "尺寸与重量 重量：约 1.32 kg（方键盘含电池）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F7",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 尺寸：14.2 英寸",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F8",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 类型：OLED（抗反射屏）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F9",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 屏占比：91%",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F10",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕比例：3:2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F11",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 分辨率：2880 × 1920，243 PPI",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F12",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 静态刷新率：60 Hz / 120 Hz",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F13",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 动态刷新率：智能动态调节（默认）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F14",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 亮度：标准版：典型亮度：450 nits",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F15",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 亮度：标准版：峰值亮度：500 nits",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F16",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 亮度：柔光版：典型亮度：500 nits",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F17",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 亮度：柔光版：峰值亮度：600 nits",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F18",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 色域：100% sRGB（典型值）、P3 广色域（典型值）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F19",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 色准：平均 DeltaE < 1，支持多屏同色显示",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F20",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 对比度：1000000:1（典型值）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F21",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 可视角度：178°（典型值）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F22",
+        "model": "HUAWEI MateBook 14",
+        "text": "屏幕 触摸屏：支持 10 点触控",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F23",
+        "model": "HUAWEI MateBook 14",
+        "text": "处理器：麒麟 X90",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F24",
+        "model": "HUAWEI MateBook 14",
+        "text": "存储：512 GB / 1 TB",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F25",
+        "model": "HUAWEI MateBook 14",
+        "text": "内存：24 GB / 32 GB",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F26",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 WLAN：Wi-Fi 7，IEEE 802.11a/b/g/n/ac/ax/be，160 MHz",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F27",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 WLAN：2.4 GHz 和 5 GHz 双频",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F28",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 WLAN：支持 WPA、WPA2、WPA3",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F29",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 星闪：支持，星闪 E1.0",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F30",
+        "model": "HUAWEI MateBook 14",
+        "text": "无线连接 蓝牙：蓝牙 6.0",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F31",
+        "model": "HUAWEI MateBook 14",
+        "text": "电池 材料：锂聚合物",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F32",
+        "model": "HUAWEI MateBook 14",
+        "text": "电池 容量：70 Wh（额定容量）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F33",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：左侧：HDMI2.1 TMDS × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F34",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：左侧：USB-C × 1*",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F35",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：左侧：USB-A × 1**",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F36",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：左侧：3.5 mm 耳机和麦克风二合一接口",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F37",
+        "model": "HUAWEI MateBook 14",
+        "text": "接口：右侧：USB-A × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F38",
+        "model": "HUAWEI MateBook 14",
+        "text": "键盘和触控板 全尺寸背光键盘",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F39",
+        "model": "HUAWEI MateBook 14",
+        "text": "键盘和触控板 触控板：支持 5 点触控",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F40",
+        "model": "HUAWEI MateBook 14",
+        "text": "键盘和触控板 电源键：指纹电源键",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F41",
+        "model": "HUAWEI MateBook 14",
+        "text": "摄像头：1080P 高清摄像头",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F42",
+        "model": "HUAWEI MateBook 14",
+        "text": "音频 扬声器：扬声器 × 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F43",
+        "model": "HUAWEI MateBook 14",
+        "text": "音频 麦克风：麦克风 × 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F44",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 PC × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F45",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 USB-C 电源适配器（适配器和充电线一体式连接）× 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F46",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 快速指南 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F47",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 贴纸 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      },
+      {
+        "id": "F48",
+        "model": "HUAWEI MateBook 14",
+        "text": "包装清单 抛光布 × 1（仅柔光屏支持）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      }
+    ],
+    "images": [
+      {
+        "id": "IMG-08f8cb6ac09e10ce",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png",
+        "caption": "原野绿多彩配色",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-color-green.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-d6c0f67c5e77b799",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png",
+        "caption": "HUAWEI MateBook 14 樱粉金",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-color-pink.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-23d8b8a790082310",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg",
+        "caption": "手写笔创作场景",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-accessories-m-pen-3.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-0391312d4f63d44f",
+        "model": "HUAWEI MateBook 14",
+        "name": "hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png",
+        "caption": "深空灰沉稳配色",
+        "usage": "按画面含义用于对应段落，发布前核对具体销售版本",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-14-harmonyos-version/img/design/huawei-matebook-14-color-grey.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-d623ed8c056d8942",
+        "model": "HUAWEI MateBook 14",
+        "name": "d623ed8c-vmall_matebook-14-harmonyos_强劲性能释放展示_02.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\d623ed8c-vmall_matebook-14-harmonyos_强劲性能释放展示_02.jpg",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/d623ed8c-vmall_matebook-14-harmonyos_强劲性能释放展示_02.jpg",
+        "caption": "强劲性能释放展示 02",
+        "usage": "与正文事实一致时用于产品外观或对应场景配图",
+        "origin_url": "https://res2.vmallres.com/pimages/FssCdnProxy/vmall_product_uom/pmsSalesFile/428_428_420CAA0FC25BCDC5ED39334331B0B562.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-578dcffad7c339e2",
+        "model": "HUAWEI MateBook 14",
+        "name": "578dcffa-vmall_matebook-14-harmonyos_原野绿键盘俯视外观_03.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\578dcffa-vmall_matebook-14-harmonyos_原野绿键盘俯视外观_03.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/578dcffa-vmall_matebook-14-harmonyos_原野绿键盘俯视外观_03.png",
+        "caption": "原野绿键盘俯视外观 03",
+        "usage": "与正文事实一致时用于产品外观或对应场景配图",
+        "origin_url": "https://res2.vmallres.com/pimages/FssCdnProxy/vmall_product_uom/pmsSalesFile/428_428_3708F8B2545B169E52F9B3BFEE5DF2F5.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-733b0086461fedf2",
+        "model": "HUAWEI MateBook 14",
+        "name": "733b0086-vmall_matebook-14-harmonyos_轻薄原野绿侧面细节_04.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\733b0086-vmall_matebook-14-harmonyos_轻薄原野绿侧面细节_04.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/733b0086-vmall_matebook-14-harmonyos_轻薄原野绿侧面细节_04.png",
+        "caption": "轻薄原野绿侧面细节 04",
+        "usage": "与正文事实一致时用于产品外观或对应场景配图",
+        "origin_url": "https://res2.vmallres.com/pimages/FssCdnProxy/vmall_product_uom/pmsSalesFile/428_428_35A94B08C66B2031CE4AF5C901CF37D7.png",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-b8c11bbb9b6ac9ef",
+        "model": "HUAWEI MateBook 14",
+        "name": "b8c11bbb-vmall_matebook-14-harmonyos_原野绿简洁A面外观_05.png",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook 14\\b8c11bbb-vmall_matebook-14-harmonyos_原野绿简洁A面外观_05.png",
+        "source_path": "05-图片素材/HUAWEI MateBook 14/b8c11bbb-vmall_matebook-14-harmonyos_原野绿简洁A面外观_05.png",
+        "caption": "原野绿简洁A面外观 05",
+        "usage": "与正文事实一致时用于产品外观或对应场景配图",
+        "origin_url": "https://res2.vmallres.com/pimages/FssCdnProxy/vmall_product_uom/pmsSalesFile/428_428_68DFBAF7A08A83ACA14962A1E3F8E407.png",
+        "note": "",
+        "review": {}
+      }
+    ],
+    "expression_references": [
+      {
+        "path": "04-营销表达/小红书图文模板.md",
+        "kind": "platform_guide",
+        "bucket": "platform",
+        "quotes": [
+          "# 小红书图文创作指南\n\n## 三、写作流程\n\n首图只给一个结果或冲突；第二张交代人物和任务；中段每张解决一个问题；倒数第二张展示结果或前后对比；末图给核对清单和评论问题。正文与图序一致。\n\n每个段落都要能回答下列至少一项：用户遇到什么问题、进行了什么动作、用什么证据验证、在哪些条件下成立、下一步做什么。不能回答这些问题的形容词、口号和重复参数应删除。\n\n\n## 五、正例\n\n《今天换了三个办公地点，我只记录电脑真正帮上的地方》依次拍装包、咖啡店查资料、会议接力和回家归档，最后说明版本条件。\n\n正例的关键不是语气好听，而是对象、任务、证据和限制互相对应。即使移除品牌名，读者仍能看懂这段内容解决了什么问题。\n\n## 六、反例\n\n九张不同型号官方图拼在一起，正文声称“亲测一整天”，却没有使用过程、配置、时间和原创照片。\n\n反例常见原因包括：把不同型号拼成一台产品、把实验室条件删除、把第三方观点改成官方事实、用过期价格制造紧迫感、用未授权图片或把想象写成亲身体验。"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      },
+      {
+        "path": "04-营销表达/补充资料/6db92c0da2-小红书完整成稿.md",
+        "kind": "reference_material",
+        "bucket": "copy",
+        "quotes": [
+          "# HUAWEI MateBook 14｜小红书完整成稿\n\n## 案例元数据\n\n- 平台：小红书\n- 产品：HUAWEI MateBook 14\n- 目标读者：希望兼顾学习、办公室任务、触控交互和鸿蒙设备协同的主流用户。\n- 内容目标：用卡片与短正文帮助读者完成版本核验，不虚构个人体验\n- 内容属性：基于公开事实重新撰写的完整参考成稿，不是实测报告，也不代表真实客户经历\n- 事实基准：对应 P1 文件与官方页面，核验基准日沿用任务卡记录；发布前必须再次核验\n- 动态信息：本文不写价格、补贴、赠品、库存、销量和交期\n- 配套任务卡：`P6-营销素材库/09-按型号平台/HUAWEI MateBook 14/小红书.md`\n\n## 选题说明\n\n这篇内容围绕“日常学习和办公选 14 英寸电脑，为什么屏幕比例、接口和生态比单看配置更重要？”展开。它不从抽象的“高端”“全能”或“性价比”起笔，而把读者放进一个可验证的任务：上午在教室记笔记，下午接显示器整理表格，晚上还要把手机里的资料归到同一份项目文件中。正文的判断顺序是：先确认 HarmonyOS 应用路线，再比较标准版与柔光版，最后核对接口是否覆盖自己的投屏、移动硬盘和耳机。\n\n选择这个角度，是因为同一系列中的系统、屏幕、处理器、内存、接口或随包装配件可能不同。文章只使用对应任务卡列出的事实锚点；没有公开证据的体验不写成结论，涉及软件与外设时统一引导读者携带真实任务验证。\n\n## 完整成稿\n\n### 封面标题\n\n1. HUAWEI MateBook 14 怎么选才不串版本\n2. 先写任务，再看这台电脑合不合适\n\n### 7 页卡片成稿\n\n**第 1 页｜先别背参数**  \n一台 14 英寸电脑是否顺手，往往不取决于参数表最长的那一栏，而取决于一天里的任务能否连续完成。先写下三个必须完成的任务，再打开规格页。\n\n**第 2 页｜系统与处理器**  \nHarmonyOS 6；麒麟 X90 处理器。必须使用的软件和插件没有确认前，不先下兼容结论。\n\n**第 3 页｜屏幕与显示**  \n14.2 英寸 3:2 OLED 抗反射触控屏，2880 × 1920，支持 60 Hz / 120 Hz 与默认智能动态调节。数字后面的版本与模式条件要一起保留。\n\n**第 4 页｜屏幕与显示**  \n标准版与柔光版亮度规格不同；平均 DeltaE < 1 与多屏同色也须保留官网条件。键盘、笔、扩展坞和充电器也要算进真实出行组合。\n\n**第 5 页｜连接与功能**  \n约 1.32 kg / 1.33 kg，差异与方键盘、圆键盘版本有关；厚度 14.5 mm。系列可选范围不等于正在购买的那一台。\n\n**第 6 页｜配置与供电**  \n24 GB / 32 GB 内存，512 GB / 1 TB 存储，70 Wh 额定容量电池。带自己的文件和外设，按真实顺序连接。\n\n**第 7 页｜连接与功能**  \n接口含 HDMI、USB-C、两个 USB-A 和 3.5 mm 音频口；具体传输、显示和供电能力以规格页为准。如果条件没满足，就不要把能力写成无条件标配。\n\n### 笔记正文\n\n先给结论：HUAWEI MateBook 14 值不值得进入你的候选清单，要看任务，不看形容词。\n\n把场景写具体一点：上午在教室记笔记，下午接显示器整理表格，晚上还要把手机里的资料归到同一份项目文件中。对应的核验顺序也会变得很清楚——先看系统和必须使用的软件，再核对目标 SKU 的屏幕、配置、接口与配件。对这台产品，尤其要注意：先确认 HarmonyOS 应用路线，再比较标准版与柔光版，最后核对接口是否覆盖自己的投屏、移动硬盘和耳机。\n\n更适合继续了解的人，是愿意在购买前核验常用应用，同时重视 3:2 触控屏、常用接口和跨设备工作流的人。需要先停下来补验证的人，是依赖尚未确认的 Windows 专用程序，或把标准版与柔光版的亮度、表面效果混作一项参数的人。如果到店，只做一件事就按这套流程：带一份常用文档和一个常用外设到店，依次验证打开、编辑、投屏、文件流转和接口占用。把结果拍下来并写进订单，比记住“最高可选”可靠。\n\n这篇不是个人长期体验，也没有替任何软件作兼容承诺。价格、赠品、库存和交期以发布当日授权渠道为准；不同销售版本配置可能不同，请以官方规格页及实际销售 SKU 为准。\n\n #电脑选购 #华为电脑 #办公设备 #学习工具 #数码信息 #购机核验\n\n## 图文/镜头方案\n\n图片只从 `P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/图片索引.csv` 选择；下表路径均已在本地知识库中存在。\n\n| 顺序 | 现有素材 | 画面用途 | 图注/字幕建议 |\n|---:|---|---|---|\n| 1 | `P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png` | 封面/首图 | 原野绿多彩配色；使用前核对画面与目标销售版本。 |\n| 2 | `P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png` | 任务场景 | HUAWEI MateBook 14 樱粉金；使用前核对画面与目标销售版本。 |\n| 3 | `P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/images/hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg` | 核心事实 | 手写笔创作场景；使用前核对画面与目标销售版本。 |\n"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      },
+      {
+        "path": "04-营销表达/按型号/HUAWEI MateBook 14/学生用户沟通卡.md",
+        "kind": "role_guidance",
+        "bucket": "audience",
+        "quotes": [
+          "# HUAWEI MateBook 14｜学生用户沟通卡\n\n## 先核课程清单\n\n1. 专业未来两年必装哪些软件、考试客户端、编译环境或插件？把专业、单位或课程要求的必装软件列出准确名称、版本和插件，逐一核验是否有可用的鸿蒙方案。\n2. 每天往返宿舍和教室多远，是否需要带充电器？请用户按自己的通勤包试装 1.32/1.33 kg 机身，并把充电器也计入携带判断。\n3. 作业以长文档、代码、表格、绘图还是视频为主？让用户在店内灯光下比较标准显示与目标 SKU；若诉求是减反光，必须确认购买的是柔光版。\n4. 预算必须覆盖电脑之外的转接器、鼠标、手写笔和软件授权吗？\n\n## 把参数翻译成学习任务\n\n- 阅读与分屏：14.2 英寸 OLED 采用 3:2 比例、2880 × 1920 分辨率；规格列出 60 Hz / 120 Hz，刷新率会随模式与应用变化。\n- 课程负载：麒麟 X90 搭配 24 GB 或 32 GB 内存，存储有 512 GB、1 TB 版本。\n- 教室/宿舍连接：原生接口包括 1 个 USB-C、2 个 USB-A、HDMI 2.1 TMDS 和 3.5 mm 耳麦口，适合现场按顾客外设逐一对口。\n- 网课条件：配备 1080P 摄像头、2 个扬声器和 2 个麦克风。\n- 型号专属事实：麒麟 X90、70 Wh 电池与“1 个 USB-C + 2 个 USB-A + HDMI”组合，是识别这台鸿蒙 MateBook 14 的关键事实。\n\n可以说：“这台机是否适合你的专业，先看课程软件能否稳定使用，再看背得动、接得上和容量够不够；外观或单一跑分排在这些之后。”\n\n## 反问确认\n\n- 如果某门核心课软件不兼容，你是否有学校机房或远程桌面这一条可靠替代路径？\n- 你更需要四年内的容量余量，还是当下更低预算？24/32 GB 与 512 GB/1 TB 均为版本差异，成交单必须落到具体 SKU。\n\n## 推荐范围\n\n- 适用：适合认可鸿蒙工作流、重视 3:2 OLED 和原生常用接口的日常学习办公用户。\n- 不适用/先别下单：若必须运行尚未验证的 Windows 专用软件、驱动或宏插件，应先完成兼容验证，再决定是否推荐。\n- 到店验证：带学生证无关，真正应带的是课程软件清单、常用课件和要接的 U 盘/投影线。\n\n## 面向学生的合规边界\n\n不承诺“所有专业都能用”“大学四年不卡”或固定续航；不把 AI 生成内容当作正确答案，也不暗示能绕过考试、版权或学术规范。不同系统、内存、硬盘和屏幕版本按实际 SKU 说明。只有柔光版支持官网所称“云晰柔光屏”；AI 换脸检测需手动开启，且仅覆盖官网列明的部分视频通话应用，只能作为风险提示。\n\n## 事实与限制来源\n\n- 本地产品事实：`P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/产品事实.md`\n- 本地限定语：`P1-产品参数库/01-鸿蒙电脑/HUAWEI MateBook 14/卖点与限制.md`\n- 官方产品页：https://consumer.huawei.com/cn/harmonyos-computer/matebook-14-harmonyos-version/\n- 官方规格页：https://consumer.huawei.com/cn/harmonyos-computer/matebook-14-harmonyos-version/specs/"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      }
+    ],
+    "user_preferences": {},
+    "performance_references": [],
+    "scene": {
+      "name": "开学季",
+      "angle": "围绕学习、携带、续航和多设备协同,不要把所有学生需求归结为单一性能指标",
+      "focus": [
+        "便携与重量",
+        "续航与课堂/图书馆场景",
+        "学习办公软件体验",
+        "多设备协同"
+      ],
+      "avoid": [
+        "只堆性能参数",
+        "编造学生优惠"
+      ],
+      "in_table": true
+    },
+    "platform": {
+      "name": "小红书",
+      "form": "口语化标题、短段落、使用场景、话题标签",
+      "title": "口语化标题,20字以内,带具体场景或人群,可含1个emoji",
+      "length": "正文300-600字,每段不超过3行",
+      "structure": [
+        "开头一句话点出场景或痛点",
+        "按使用场景分短段,每段一个卖点",
+        "结尾给选购建议和互动提问"
+      ],
+      "tone": "亲切、轻松、像朋友分享;不得伪造个人使用经历,以'适合'、'如果你'等表述代替",
+      "images": {
+        "min": 3,
+        "max": 6
+      },
+      "cta": "邀请评论区交流或收藏,可引导到店体验",
+      "tags": {
+        "min": 5,
+        "max": 8
+      },
+      "field_mapping": "title=标题, intro=开头一句, body=短段落, cta=结尾互动, tags=话题标签",
+      "first_person_experience": false
+    },
+    "source_manifest": [
+      {
+        "path": "01-产品事实/HUAWEI MateBook 14/产品事实.md",
+        "sha256": "e8dbcb071d0145372056530ad64015380856f243a5beffc564e18bf8bb86da99"
+      },
+      {
+        "path": "04-营销表达/小红书图文模板.md",
+        "sha256": "1e2f9c003843d67bc5e635e8dce49e20c4746fcc693df9a53498a5aa0b035e7f"
+      },
+      {
+        "path": "04-营销表达/补充资料/6db92c0da2-小红书完整成稿.md",
+        "sha256": "fdd157ee17fc4749e36639b33caa4c966c121382ee8fc3730de71de52d6a3759"
+      },
+      {
+        "path": "04-营销表达/按型号/HUAWEI MateBook 14/学生用户沟通卡.md",
+        "sha256": "a67b9108f87ec283f7a81592e24ad39c18731611b8165dd4c85688429761963b"
+      }
+    ],
+    "verification": {},
+    "authority": {
+      "facts": "唯一可用于产品参数、功能、条件和效果主张的证据",
+      "images": "仅证明素材登记与型号归属，不证明画面中的产品事实",
+      "expression_references": "仅影响角度、结构和措辞，不得升级为产品事实",
+      "user_preferences": "仅影响语气、选题偏好和禁区，不得升级为产品事实",
+      "performance_references": "仅影响角度、结构和行动引导，不得升级为产品事实"
+    }
+  },
+  "content_plan": {
+    "blocks": [
+      {
+        "id": "B1",
+        "kind": "opening",
+        "objective": "生成符合小红书风格的口语化标题（20字以内，含场景/人群及emoji）和开头导语。导语需点出大学新生开学季携带电脑或上课的痛点，语气亲切轻松，不伪造个人经历，为后续正文铺垫。；必须同时生成非空标题和非空导语；只写规范需求中的受众、场景与关注问题，不写产品参数、功能或效果",
+        "fact_ids": [],
+        "depends_on": [],
+        "status": "passed",
+        "version": 1,
+        "attempts": 1,
+        "draft": {
+          "title": "开学季选电脑🎒先理清自己的需求",
+          "intro": "开学季挑电脑，很多人一上来就被参数表绕晕了，其实新生更该先想清楚：每天上课要不要带着走、常用软件顺不顺手、和手里的手机平板能不能连起来。这篇就按日常学习场景一条条聊，帮你把关注顺序排明白，再决定要不要去店里上手试试。",
+          "body": [],
+          "cta": "",
+          "tags": [],
+          "images": []
+        },
+        "issues": [
+          {
+            "stage": "fact",
+            "source": "rule",
+            "severity": "warn",
+            "where": "配图方案",
+            "detail": "图片数量 0 少于平台建议的 3 张(可能是知识库可用图片不足)",
+            "suggestion": "",
+            "ref": ""
+          }
+        ],
+        "removed": []
+      },
+      {
+        "id": "B2",
+        "kind": "body",
+        "objective": "撰写第一个正文小节，聚焦‘便携与外观’场景。结合事实描述机身轻薄尺寸、重量以及屏幕规格（如OLED、高屏占比、3:2比例），强调其适合放入书包携带以及在图书馆/教室使用的视觉体验。段落短小精悍，每段不超过3行，避免堆砌参数，侧重呈现产品物理属性带来的直观感受。；必须生成完整的正文小节，而不是一两句话",
+        "fact_ids": [
+          "F5",
+          "F6",
+          "F7",
+          "F8"
+        ],
+        "depends_on": [],
+        "status": "passed",
+        "version": 1,
+        "attempts": 1,
+        "draft": {
+          "title": "",
+          "intro": "",
+          "body": [
+            {
+              "text": "开学季挑电脑，先看一个最容易被忽略的点——带出去方不方便。",
+              "fact_ids": []
+            },
+            {
+              "text": "HUAWEI MateBook 14 的重量有两个数值：约 1.33 kg（圆键盘含电池）、约 1.32 kg（方键盘含电池）。看规格时记得把键盘版本一起对上，别把两个数字看混。",
+              "fact_ids": [
+                "F5",
+                "F6"
+              ]
+            },
+            {
+              "text": "如果你每天要在宿舍、教室、图书馆之间来回，可以把这两个数值和自己平时背的包放一起对比，再决定要不要把充电器也算进日常携带的那份清单里。",
+              "fact_ids": [
+                "F5",
+                "F6"
+              ]
+            },
+            {
+              "text": "屏幕给到的是 14.2 英寸 OLED（抗反射屏）。抗反射是规格里的写法，如果你常坐靠窗或顶灯下的座位，建议到店在同一盏灯下对着屏幕自己看一眼。",
+              "fact_ids": [
+                "F7",
+                "F8"
+              ]
+            },
+            {
+              "text": "便携和外观这块，先记三点就好：重量看键盘版本、屏幕 14.2 英寸、类型为 OLED 抗反射屏。规格是参考，到店按自己的实际感受再确认。",
+              "fact_ids": [
+                "F5",
+                "F6",
+                "F7",
+                "F8"
+              ]
+            }
+          ],
+          "cta": "",
+          "tags": [],
+          "images": [
+            {
+              "image_id": "IMG-578dcffad7c339e2",
+              "after_paragraph": 1,
+              "caption": "原野绿键盘俯视外观 03",
+              "reason": "该段说明重量与圆键盘、方键盘版本有关，配键盘外观图与段落内容对应"
+            },
+            {
+              "image_id": "IMG-733b0086461fedf2",
+              "after_paragraph": 2,
+              "caption": "轻薄原野绿侧面细节 04",
+              "reason": "该段讲日常往返携带的重量数值，配侧面外观素材与便携话题对应"
+            },
+            {
+              "image_id": "IMG-08f8cb6ac09e10ce",
+              "after_paragraph": 3,
+              "caption": "原野绿多彩配色",
+              "reason": "该段讲屏幕规格并建议到店查看，配产品外观配色素材衔接上下文"
+            }
+          ]
+        },
+        "issues": [
+          {
+            "stage": "fact",
+            "source": "llm",
+            "severity": "warn",
+            "where": "正文第2段",
+            "detail": "稿件表述为“圆键盘含电池”和“方键盘含电池”，与事实点 F5、F6 的原文不一致，存在事实点引用偏差。",
+            "suggestion": "将“圆键盘含电池”修改为“圆键盘版含电池”，将“方键盘含电池”修改为“方键盘版含电池”。",
+            "ref": ""
+          },
+          {
+            "stage": "fact",
+            "source": "llm",
+            "severity": "warn",
+            "where": "正文第4段",
+            "detail": "稿件表述“屏幕给到的是 14.2 英寸 OLED（抗反射屏）”遗漏了事实点 F7 的限定条件，原始资料注明该尺寸为按标准矩形测量时的对角线长度，且实际可视区域略小。",
+            "suggestion": "补充“按标准矩形测量”的限定条件，或注明实际可视区域略小。",
+            "ref": ""
+          }
+        ],
+        "removed": []
+      },
+      {
+        "id": "B3",
+        "kind": "body",
+        "objective": "撰写第二个正文小节，聚焦‘续航与多设备协同’场景。结合事实描述电池容量、处理器型号以及HarmonyOS系统特性，强调其在长时间课堂学习中的电量保障以及与华为其他设备的连接能力（如星闪、蓝牙）。保持客观陈述，使用‘适合’、‘如果你’等引导性措辞，突出高效学习和无缝流转的体验优势。；必须生成完整的正文小节，而不是一两句话",
+        "fact_ids": [
+          "F1",
+          "F23",
+          "F32",
+          "F29"
+        ],
+        "depends_on": [],
+        "status": "passed",
+        "version": 2,
+        "attempts": 2,
+        "draft": {
+          "title": "",
+          "intro": "",
+          "body": [
+            {
+              "text": "上课连着上、图书馆一坐一下午，电量是很多新生会先考虑的点。这台机器标注的电池容量是 70 Wh（额定容量）。实际能用多久和屏幕亮度、后台程序、外接设备都有关系，不好一概而论，建议按自己的作息到店里感受一下耗电节奏。",
+              "fact_ids": [
+                "F32"
+              ]
+            },
+            {
+              "text": "配置这边，处理器是麒麟 X90，操作系统是 HarmonyOS 6。如果你平时就在用华为设备，可以重点确认常用学习软件在这套系统上的适配情况；把课程里要求的必装软件和插件列成一张清单逐项核对，再对照处理器型号做判断，别只看型号就下单。",
+              "fact_ids": [
+                "F23",
+                "F1"
+              ]
+            },
+            {
+              "text": "多设备协同上，它支持星闪 E1.0。如果手头已经有支持星闪的配件，可以带去店里现场连一次，看看顺不顺手；具体能实现哪些联动、适配哪些设备，以官方说明和门店演示为准。",
+              "fact_ids": [
+                "F29"
+              ]
+            },
+            {
+              "text": "选的时候把电池容量、处理器和系统版本写进对比表，再留一栏写清「每天要带它去哪、要连什么设备」，参数对得上，才谈得上适不适合。",
+              "fact_ids": []
+            }
+          ],
+          "cta": "",
+          "tags": [],
+          "images": [
+            {
+              "image_id": "IMG-d623ed8c056d8942",
+              "after_paragraph": 1,
+              "caption": "强劲性能释放展示 02",
+              "reason": "该段提到麒麟 X90 处理器与 HarmonyOS 6，配图对应配置与运行相关段落，型号归属为 HUAWEI MateBook 14，且未被已通过块使用"
+            }
+          ]
+        },
+        "issues": [
+          {
+            "stage": "fact",
+            "source": "rule",
+            "severity": "warn",
+            "where": "配图方案",
+            "detail": "图片数量 1 少于平台建议的 3 张(可能是知识库可用图片不足)",
+            "suggestion": "",
+            "ref": ""
+          },
+          {
+            "stage": "fact",
+            "source": "llm",
+            "severity": "warn",
+            "where": "正文第3段",
+            "detail": "正文提及“多设备协同”并建议用户确认“能实现哪些联动、适配哪些设备”，但事实点 F29 仅支持“支持星闪 E1.0”，未包含与其他华为设备连接、协同或联动能力的依据。块约束要求结合事实描述与华为其他设备的连接能力，但当前事实点不足以支持正文中关于多设备协同的引导性陈述。",
+            "suggestion": "删除或修改关于“多设备协同”“联动”“适配哪些设备”的表述，仅保留事实点支持的“支持星闪 E1.0”及客观连接说明；若需描述与其他设备的连接能力，需补充对应的事实点支持。",
+            "ref": ""
+          }
+        ],
+        "removed": []
+      },
+      {
+        "id": "B4",
+        "kind": "closing",
+        "objective": "生成结尾行动引导（CTA）和话题标签。CTA部分邀请读者在评论区交流选购心得或收藏笔记，可温和引导到店体验，语气像朋友分享建议。提供5-8个相关的小红书话题标签，涵盖产品名、目标人群和使用场景。；必须生成非空行动引导，并按平台要求生成标签；不新增产品参数、功能、效果、权益或承诺",
+        "fact_ids": [],
+        "depends_on": [
+          "B2",
+          "B3"
+        ],
+        "status": "passed",
+        "version": 1,
+        "attempts": 1,
+        "draft": {
+          "title": "",
+          "intro": "",
+          "body": [],
+          "cta": "如果你是准备开学的新生，可以把这篇先收藏着，列好自己每天的学习任务再对照着挑。有拿不准的地方，欢迎在评论区说说你平时要带电脑去哪些地方、要装哪些软件，大家一起帮你理一理；也可以直接去线下门店上手感受一下，亲手试过再决定更踏实。",
+          "tags": [
+            "#华为MateBook14",
+            "#大学新生",
+            "#开学季",
+            "#笔记本选购",
+            "#学习装备",
+            "#数码分享"
+          ],
+          "images": []
+        },
+        "issues": [
+          {
+            "stage": "fact",
+            "source": "rule",
+            "severity": "warn",
+            "where": "配图方案",
+            "detail": "图片数量 0 少于平台建议的 3 张(可能是知识库可用图片不足)",
+            "suggestion": "",
+            "ref": ""
+          }
+        ],
+        "removed": []
+      }
+    ]
+  },
+  "draft": {
+    "title": "开学季选电脑🎒先理清自己的需求",
+    "intro": "开学季挑电脑，很多人一上来就被参数表绕晕了。其实新生更该先想清楚三件事：每天上课要不要带着走、常用软件顺不顺手、和手里的手机平板能不能连起来。这篇就按日常学习场景一条条聊，帮你把关注顺序排明白，再决定要不要去店里上手试试。",
+    "body": [
+      {
+        "text": "先说一个最容易被忽略、却每天都躲不开的点——带出去方不方便。课表排满的时候，电脑是要跟着你在宿舍、教室、图书馆之间来回走的，重不重会直接影响你愿不愿意天天背着它。",
+        "fact_ids": []
+      },
+      {
+        "text": "以 HUAWEI MateBook 14 为例，它的重量有两个数值：约 1.33 kg（圆键盘含电池）、约 1.32 kg（方键盘含电池）。看规格的时候记得把键盘版本一起对上，别把两个数字看混。",
+        "fact_ids": [
+          "F5",
+          "F6"
+        ]
+      },
+      {
+        "text": "如果你每天都要在宿舍、教室、图书馆之间来回，可以把这两个数值和自己平时背的包放一起掂量一下，再决定要不要把充电器也算进日常携带的那份清单里。",
+        "fact_ids": [
+          "F5",
+          "F6"
+        ]
+      },
+      {
+        "text": "说完携带，再看看屏幕——它大概是你每天盯得最久的部分。这台给到的是 14.2 英寸 OLED（抗反射屏）。抗反射是规格里的写法，如果你常坐靠窗或顶灯下的座位，建议到店在同一盏灯下对着屏幕自己看一眼。",
+        "fact_ids": [
+          "F7",
+          "F8"
+        ]
+      },
+      {
+        "text": "所以便携和外观这块，先记三点就好：重量看键盘版本、屏幕 14.2 英寸、类型为 OLED 抗反射屏。规格只是参考，到店按自己的实际感受再确认。",
+        "fact_ids": [
+          "F5",
+          "F6",
+          "F7",
+          "F8"
+        ]
+      },
+      {
+        "text": "外在的部分看完了，再回到很多新生会先考虑的点——电量。上课连着上、图书馆一坐一下午，续航就变得很实际。这台机器标注的电池容量是 70 Wh（额定容量）。实际能用多久和屏幕亮度、后台程序、外接设备都有关系，不好一概而论，建议按自己的作息到店里感受一下耗电节奏。",
+        "fact_ids": [
+          "F32"
+        ]
+      },
+      {
+        "text": "电量之外，配置决定的是你后面几年用起来顺不顺。这台机器的处理器是麒麟 X90，操作系统是 HarmonyOS 6。如果你平时就在用华为设备，可以重点确认常用学习软件在这套系统上的适配情况——把课程里要求的必装软件和插件列成一张清单逐项核对，再对照处理器型号做判断，别只看型号就下单。",
+        "fact_ids": [
+          "F23",
+          "F1"
+        ]
+      },
+      {
+        "text": "配置之外，多设备协同也值得提前看一眼。它支持星闪 E1.0。如果手头已经有支持星闪的配件，可以带去店里现场连一次，看看顺不顺手；具体能实现哪些联动、适配哪些设备，以官方说明和门店演示为准。",
+        "fact_ids": [
+          "F29"
+        ]
+      },
+      {
+        "text": "最后，把这些信息整理成一张自己的对比表：把电池容量、处理器和系统版本写进去，再留一栏写清「每天要带它去哪、要连什么设备」。参数对得上，才谈得上适不适合。",
+        "fact_ids": []
+      }
+    ],
+    "cta": "如果你是准备开学的新生，可以把这篇先收藏着，列好自己每天的学习任务，再对照着挑。有拿不准的地方，欢迎在评论区说说你平时要带电脑去哪些地方、要装哪些软件，大家一起帮你理一理；也可以直接去线下门店上手感受一下，亲手试过再决定更踏实。",
+    "tags": [
+      "#华为MateBook14",
+      "#大学新生",
+      "#开学季",
+      "#笔记本选购",
+      "#学习装备",
+      "#数码分享"
+    ],
+    "images": [
+      {
+        "image_id": "IMG-578dcffad7c339e2",
+        "after_paragraph": 1,
+        "caption": "原野绿键盘俯视外观 03",
+        "reason": "该段说明重量与圆键盘、方键盘版本有关，配键盘外观图与段落内容对应"
+      },
+      {
+        "image_id": "IMG-733b0086461fedf2",
+        "after_paragraph": 2,
+        "caption": "轻薄原野绿侧面细节 04",
+        "reason": "该段讲日常往返携带的重量数值，配侧面外观素材与便携话题对应"
+      },
+      {
+        "image_id": "IMG-08f8cb6ac09e10ce",
+        "after_paragraph": 3,
+        "caption": "原野绿多彩配色",
+        "reason": "该段讲屏幕规格并建议到店查看，配产品外观配色素材衔接上下文"
+      },
+      {
+        "image_id": "IMG-d623ed8c056d8942",
+        "after_paragraph": 6,
+        "caption": "强劲性能释放展示 02",
+        "reason": "该段提到麒麟 X90 处理器与 HarmonyOS 6，配图对应配置与运行相关段落，型号归属为 HUAWEI MateBook 14，且未被已通过块使用"
+      }
+    ]
+  },
+  "review": {
+    "issues": [
+      {
+        "stage": "fact",
+        "source": "llm",
+        "severity": "warn",
+        "where": "正文第7段",
+        "detail": "稿件提到“如果你平时就在用华为设备，可以重点确认常用学习软件在这套系统上的适配情况”，虽然给出了到店核对的建议，但未明确点出 HarmonyOS 6 作为新系统在软件生态上可能存在的客观限制。对于大学新生这一目标受众，常用专业软件或插件的兼容性是影响几年使用体验的核心因素，仅建议核对而不点明系统生态现状，容易导致受众低估潜在的适配风险。",
+        "suggestion": "在提及操作系统为 HarmonyOS 6 时，客观补充说明其作为新系统在部分第三方软件或插件适配上的现状，强调务必确认课程必装软件的兼容性，避免下单后才发现无法使用。",
+        "ref": ""
+      },
+      {
+        "stage": "compliance",
+        "source": "llm",
+        "severity": "warn",
+        "where": "图注 IMG-d623ed8c056d8942",
+        "detail": "图注“强劲性能释放展示”带有夸大性能的营销色彩，且正文仅客观提及处理器型号，未提供性能释放相关事实支撑，存在无依据的性能夸大暗示。",
+        "suggestion": "将图注修改为客观描述，如“产品外观展示”或“原野绿配色展示”，避免对性能进行无依据的夸大渲染。",
+        "ref": ""
+      }
+    ],
+    "removed": []
+  },
+  "history": [
+    {
+      "role": "用户",
+      "content": "请按以下设置创作营销图文。\n\n本次创作设置：产品：HUAWEI MateBook 14；受众：大学新生；场景：开学季；平台：小红书；目标：种草"
+    }
+  ],
+  "trace": [
+    {
+      "stage": "1 结构化需求",
+      "at": "14:43:46",
+      "brief": {
+        "product": "HUAWEI MateBook 14",
+        "product_type": "",
+        "audience": "大学新生",
+        "scene": "开学季",
+        "platform": "小红书",
+        "goal": "种草",
+        "stage": "",
+        "main_problem": "",
+        "extra": "",
+        "llm_notes": "用户未指定产品大类，根据型号推断为轻薄本但按规则留空；未明确购买阶段和具体痛点。"
+      },
+      "questions": []
+    },
+    {
+      "stage": "1.5 规范任务说明",
+      "at": "14:43:46",
+      "canonical_brief": "产品：HUAWEI MateBook 14；目标受众：大学新生；使用场景：开学季；发布平台：小红书；创作目标：种草。"
+    },
+    {
+      "stage": "2 资料匹配",
+      "at": "14:43:46",
+      "facts": 48,
+      "images": 8,
+      "sources": [
+        "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      ],
+      "dropped": [],
+      "conflicts": [],
+      "similar_models": [
+        "HUAWEI MateBook Fold 非凡大师",
+        "HUAWEI MateBook Pro",
+        "HUAWEI MateBook Pro S",
+        "MateBook 14 酷睿 Ultra",
+        "MateBook D 14",
+        "MateBook D 16",
+        "MateBook D 16 SE 版",
+        "MateBook GT 系列",
+        "MateBook X系列",
+        "HUAWEI MateBook Fold 企业版"
+      ],
+      "usage_review": {
+        "excluded": 0,
+        "catalog_signature": "dc8e09c09bb0a05ec320b1329c10608125c148c96b0de0d6e7573bb682dfa3c4",
+        "source_hashes": {
+          "01-产品事实/HUAWEI MateBook 14/产品事实.md": "e8dbcb071d0145372056530ad64015380856f243a5beffc564e18bf8bb86da99",
+          "04-营销表达/小红书图文模板.md": "1e2f9c003843d67bc5e635e8dce49e20c4746fcc693df9a53498a5aa0b035e7f",
+          "04-营销表达/按型号/HUAWEI MateBook 14/学生用户沟通卡.md": "a67b9108f87ec283f7a81592e24ad39c18731611b8165dd4c85688429761963b",
+          "04-营销表达/补充资料/6db92c0da2-小红书完整成稿.md": "fdd157ee17fc4749e36639b33caa4c966c121382ee8fc3730de71de52d6a3759",
+          "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png": "9f9470747d7e3c406b87c31ecd5d51f1f3542626001ed8b00b04c5db8973de82",
+          "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png": "e320384c91d75f723fb785fce8505c9ce099980cf4330e37d08d75430f32650d",
+          "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg": "85fadb0cbceb8632b00301aa07db8b815469e0107b8c89b5d91baab15a9c281b",
+          "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png": "ab085ae7d9fd83af91b68e1b32c9f6f2148ca22e0d656f16f89815b93650f440",
+          "05-图片素材/HUAWEI MateBook 14/d623ed8c-vmall_matebook-14-harmonyos_强劲性能释放展示_02.jpg": "0bc94b00136a83292b1820a564b48087ddba3125b9852be977b4018e2e030c4f",
+          "05-图片素材/HUAWEI MateBook 14/578dcffa-vmall_matebook-14-harmonyos_原野绿键盘俯视外观_03.png": "c892487b3077760859991b683017ac96f876e040357aa9aa0ffbf4fa9babe972",
+          "05-图片素材/HUAWEI MateBook 14/733b0086-vmall_matebook-14-harmonyos_轻薄原野绿侧面细节_04.png": "b2a991f2763fd7d646e6a362b48536e3949c197137f097ad06b5fcb6fb3e321b",
+          "05-图片素材/HUAWEI MateBook 14/b8c11bbb-vmall_matebook-14-harmonyos_原野绿简洁A面外观_05.png": "d36c93bb3309a15889de0c880c67fea59c1dd548e29cb823f84058989bc5076d"
+        }
+      }
+    },
+    {
+      "stage": "3 策略匹配",
+      "at": "14:43:46",
+      "scene": "开学季",
+      "platform": "小红书",
+      "performance_references": 0,
+      "top_reference_weight": null
+    },
+    {
+      "stage": "3.5 统一上下文装配",
+      "at": "14:43:46",
+      "contract": "writing-context-v1",
+      "facts": 48,
+      "images": 8,
+      "expression_references": 3,
+      "performance_references": 0,
+      "preferences": []
+    },
+    {
+      "stage": "4 文章分块规划",
+      "at": "14:43:56",
+      "blocks": [
+        {
+          "id": "B1",
+          "kind": "opening",
+          "objective": "生成符合小红书风格的口语化标题（20字以内，含场景/人群及emoji）和开头导语。导语需点出大学新生开学季携带电脑或上课的痛点，语气亲切轻松，不伪造个人经历，为后续正文铺垫。；必须同时生成非空标题和非空导语；只写规范需求中的受众、场景与关注问题，不写产品参数、功能或效果",
+          "fact_ids": [],
+          "depends_on": []
+        },
+        {
+          "id": "B2",
+          "kind": "body",
+          "objective": "撰写第一个正文小节，聚焦‘便携与外观’场景。结合事实描述机身轻薄尺寸、重量以及屏幕规格（如OLED、高屏占比、3:2比例），强调其适合放入书包携带以及在图书馆/教室使用的视觉体验。段落短小精悍，每段不超过3行，避免堆砌参数，侧重呈现产品物理属性带来的直观感受。；必须生成完整的正文小节，而不是一两句话",
+          "fact_ids": [
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ],
+          "depends_on": []
+        },
+        {
+          "id": "B3",
+          "kind": "body",
+          "objective": "撰写第二个正文小节，聚焦‘续航与多设备协同’场景。结合事实描述电池容量、处理器型号以及HarmonyOS系统特性，强调其在长时间课堂学习中的电量保障以及与华为其他设备的连接能力（如星闪、蓝牙）。保持客观陈述，使用‘适合’、‘如果你’等引导性措辞，突出高效学习和无缝流转的体验优势。；必须生成完整的正文小节，而不是一两句话",
+          "fact_ids": [
+            "F1",
+            "F23",
+            "F32",
+            "F29"
+          ],
+          "depends_on": []
+        },
+        {
+          "id": "B4",
+          "kind": "closing",
+          "objective": "生成结尾行动引导（CTA）和话题标签。CTA部分邀请读者在评论区交流选购心得或收藏笔记，可温和引导到店体验，语气像朋友分享建议。提供5-8个相关的小红书话题标签，涵盖产品名、目标人群和使用场景。；必须生成非空行动引导，并按平台要求生成标签；不新增产品参数、功能、效果、权益或承诺",
+          "fact_ids": [],
+          "depends_on": [
+            "B2",
+            "B3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "5 分块队列",
+      "at": "14:47:26",
+      "events": [
+        {
+          "event": "queued_generate",
+          "block": "B1",
+          "version": 1
+        },
+        {
+          "event": "queued_generate",
+          "block": "B2",
+          "version": 1
+        },
+        {
+          "event": "queued_generate",
+          "block": "B3",
+          "version": 1
+        },
+        {
+          "event": "written",
+          "block": "B1",
+          "version": 1,
+          "seconds": 10.249,
+          "wait_seconds": 0.0
+        },
+        {
+          "event": "reviewed",
+          "block": "B1",
+          "version": 1,
+          "seconds": 1.449,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 1
+        },
+        {
+          "event": "written",
+          "block": "B2",
+          "version": 1,
+          "seconds": 25.428,
+          "wait_seconds": 10.239
+        },
+        {
+          "event": "reviewed",
+          "block": "B2",
+          "version": 1,
+          "seconds": 4.385,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 2
+        },
+        {
+          "event": "written",
+          "block": "B3",
+          "version": 1,
+          "seconds": 32.649,
+          "wait_seconds": 35.66
+        },
+        {
+          "event": "reviewed",
+          "block": "B3",
+          "version": 1,
+          "seconds": 23.755,
+          "wait_seconds": 0.0,
+          "errors": 1,
+          "warnings": 2
+        },
+        {
+          "event": "queued_rewrite",
+          "block": "B3",
+          "version": 2,
+          "errors": 1
+        },
+        {
+          "event": "written",
+          "block": "B3",
+          "version": 2,
+          "seconds": 36.632,
+          "wait_seconds": 0.0
+        },
+        {
+          "event": "reviewed",
+          "block": "B3",
+          "version": 2,
+          "seconds": 25.258,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 2
+        },
+        {
+          "event": "queued_generate",
+          "block": "B4",
+          "version": 1
+        },
+        {
+          "event": "written",
+          "block": "B4",
+          "version": 1,
+          "seconds": 33.746,
+          "wait_seconds": 0.0
+        },
+        {
+          "event": "reviewed",
+          "block": "B4",
+          "version": 1,
+          "seconds": 22.116,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 1
+        }
+      ],
+      "metrics": {
+        "first_block_passed_seconds": 11.7,
+        "total_seconds": 209.859,
+        "writer_processing_seconds": 138.704,
+        "reviewer_processing_seconds": 76.962,
+        "writer_queue_wait_seconds": 45.899,
+        "reviewer_queue_wait_seconds": 0.0,
+        "generated_versions": 5,
+        "reviewed_versions": 5,
+        "rewrites": 1,
+        "rewrite_rate": 0.2
+      },
+      "result": "passed"
+    },
+    {
+      "stage": "6 整文连贯性编辑",
+      "at": "14:47:52",
+      "applied": true,
+      "notes": []
+    },
+    {
+      "stage": "7 全文终审",
+      "at": "14:47:59",
+      "errors": 0,
+      "warns": 2,
+      "coherence_notes": []
+    },
+    {
+      "stage": "页面结果",
+      "at": "14:47:59",
+      "status": "review"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# 部署说明
+# 部署说明（v2.0）
 
 [核心架构规范](docs/core-architecture.md) · [项目进度](ROADMAP.md) · [运行约定](docs/knowledge-runtime.md)
 

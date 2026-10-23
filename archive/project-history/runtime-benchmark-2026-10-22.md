@@ -5,7 +5,7 @@
 - 当前测试只使用 `.env` 中的 `LLM_API_KEY` 和 `LLM_BASE_URL`，运行配置为 `single`；主测试模型为 `deepseek-v4.1-flash`，另用历史同款 `qwen-plus` 做兼容性与隔离复测。全程未调用魔搭路由或魔搭令牌。
 - 测试需求沿用历史基准：为大学新生生成 MateBook D 14 开学季小红书种草文，重点为学习办公与便携性，只使用知识库事实。
 - 当前流程为需求理解、知识匹配、文章规划、生成/重写与审核双队列、连贯性编辑、全文事实与合规终审。
-- 历史数据直接引用 [`archive/project-history/runtime-benchmark-2026-10-21.md`](../archive/project-history/runtime-benchmark-2026-10-21.md)，没有重新运行或修改旧架构。
+- 历史数据直接引用 [`runtime-benchmark-2026-10-21.md`](runtime-benchmark-2026-10-21.md)，没有重新运行或修改旧架构。
 
 本对比反映“当前整套系统相对历史实测”的变化，不是严格的单变量架构实验：历史模型为 `qwen-plus`，当前模型为 `deepseek-v4.1-flash`；知识库版本、图片审核策略和提示词也已变化。当前首轮已有 2 份资料审核缓存，仅新增复核 1 份，因此不是完全无缓存冷启动。
 

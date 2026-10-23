@@ -1,0 +1,318 @@
+{
+  "brief": {
+    "product": "HUAWEI MateBook Fold 非凡大师",
+    "product_type": "",
+    "audience": "大学新生",
+    "scene": "开学季",
+    "platform": "小红书",
+    "goal": "种草",
+    "stage": "",
+    "main_problem": "",
+    "extra": "",
+    "llm_notes": "产品为具体型号；product_type未明确，留空；stage未提及，留空"
+  },
+  "evidence": {
+    "facts": [
+      {
+        "id": "F1",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "HarmonyOS 6.1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F2",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "宽度\n\n展开态：382.5 mm\n\n闭合态：288.5 mm\n\n深度\n\n展开态：288.5 mm\n\n闭合态：193.7 mm\n\n高度\n\n展开态：7.6 mm（左）/ 7.3 mm（右）\n\n闭合态：14.9 mm\n\n*左是指摄像头所在的左半屏，右是指非摄像头所在的右半屏。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F3",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "约 1.16 kg（含电池,不含键盘）\n\n*实际尺寸和重量依配置、制造工艺、测量方法的不同可能有所差异。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F4",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "尺寸\n\n展开态：18 英寸\n\n折叠态：13 英寸\n\n*显示屏采用圆角设计，按照标准矩形测量时，展开态时屏幕的对角线长度是 18 英寸（实际可视区域略小）；折叠态时上半屏和下半屏的对角线长度是 13 英寸。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F5",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "类型\n\n双层 OLED（柔性显示屏）\n\nUTG 超薄玻璃",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F6",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "屏占比\n\n92%\n\n*数据来源于华为实验室，测量数据标准以屏幕可视区域尺寸对屏幕尺寸计算屏幕占比，请以实物为准",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F7",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "屏幕比例\n\n展开态：4:3\n\n折叠态（半屏）：3:2\n\n*展开态和折叠态时上半屏和下半屏的屏幕比例。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F8",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "分辨率\n\n展开态：3296 × 2472\n\n折叠态（半屏）：2472 × 1648\n\n*显示屏采用圆角设计，展开态和折叠态的分辨率对应标准矩形，实际屏幕有效像素略少。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F9",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "亮度\n\n典型亮度：700 nits\n\n峰值亮度：1600 nits\n\n*典型值，数据来源于华为实验室。在 HDR 内容显示时，局部峰值亮度可达 1600 nits，请以实际体验为准。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F10",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "色域\n\nP3 广色域\n\n*P3 广色域色彩管理随应用表现存在差异。请以实际体验为准。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F11",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "对比度\n\nHDR 模式：2000000:1\n\n普通模式：1000000:1\n\n*典型值，数据来源于华为实验室。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F12",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "麒麟X90 Plus",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F13",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "2 TB / 1 TB / 512 GB SSD\n\n*硬盘格式化之后的实际容量可能较小。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F14",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "24 GB / 32 GB\n\n*可使用的内存容量小于此值，因为系统软件占用部分空间。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F15",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "WLAN\n\nWi-Fi 6，IEEE 802.11a/b/g/n/ac/ax，160 MHz\n\n2.4 GHz 和 5 GHz 双频\n\n2 × 2 MIMO\n\n支持 WPA/WPA2/WPA3\n\n蓝牙\n\n蓝牙 5.2\n\n星闪\n\n支持，星闪 E1.0",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      },
+      {
+        "id": "F16",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "text": "容量\n\n74.69 Wh（额定容量）\n\n*电池使用时间依使用情况和设置的不同可能有所差异。",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "media_id": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      }
+    ],
+    "images": [
+      {
+        "id": "IMG-ae4d742c4c432551",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "name": "hwpc_matebook-fold-ultimate-design_多彩配色外观_03_6e547337.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook Fold 非凡大师\\hwpc_matebook-fold-ultimate-design_多彩配色外观_03_6e547337.jpg",
+        "source_path": "05-图片素材/HUAWEI MateBook Fold 非凡大师/hwpc_matebook-fold-ultimate-design_多彩配色外观_03_6e547337.jpg",
+        "caption": "HUAWEI MateBook Fold 非凡大师流光金",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-fold-ultimate-design-2026/imgs/huawei-matebook-fold-ultimate-design-gold-blur.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-d031a749f82b88e8",
+        "model": "HUAWEI MateBook Fold 非凡大师",
+        "name": "hwpc_matebook-fold-ultimate-design_多彩配色外观_04_8a0efa3c.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\HUAWEI MateBook Fold 非凡大师\\hwpc_matebook-fold-ultimate-design_多彩配色外观_04_8a0efa3c.jpg",
+        "source_path": "05-图片素材/HUAWEI MateBook Fold 非凡大师/hwpc_matebook-fold-ultimate-design_多彩配色外观_04_8a0efa3c.jpg",
+        "caption": "HUAWEI MateBook Fold 非凡大师天际白",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/harmonyos-computer/matebook-fold-ultimate-design-2026/imgs/huawei-matebook-fold-ultimate-design-white-blur.jpg",
+        "note": "",
+        "review": {}
+      }
+    ],
+    "candidates": [
+      "HUAWEI MateBook 14",
+      "HUAWEI MateBook Pro",
+      "HUAWEI MateBook Pro S",
+      "MateBook D 14",
+      "MateBook D 16",
+      "MateBook D 16 SE 版"
+    ],
+    "conflicts": [
+      "型号 matebookfold非凡大师 的“展开态：<值>”出现多个取值:288.5mm、382.5mm",
+      "型号 matebookfold非凡大师 的“闭合态：<值>”出现多个取值:14.9mm、193.7mm、288.5mm"
+    ],
+    "dropped": [],
+    "sources": [
+      "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+    ],
+    "context": [
+      {
+        "path": "04-营销表达/小红书图文模板.md",
+        "kind": "platform_guide",
+        "quotes": [
+          "首图只给一个结果或冲突；第二张交代人物和任务；中段每张解决一个问题；倒数第二张展示结果或前后对比；末图给核对清单和评论问题。正文与图序一致。",
+          "每个段落都要能回答下列至少一项：用户遇到什么问题、进行了什么动作、用什么证据验证、在哪些条件下成立、下一步做什么。不能回答这些问题的形容词、口号和重复参数应删除。",
+          "《今天换了三个办公地点，我只记录电脑真正帮上的地方》依次拍装包、咖啡店查资料、会议接力和回家归档，最后说明版本条件。",
+          "正例的关键不是语气好听，而是对象、任务、证据和限制互相对应。即使移除品牌名，读者仍能看懂这段内容解决了什么问题。",
+          "九张不同型号官方图拼在一起，正文声称“亲测一整天”，却没有使用过程、配置、时间和原创照片。",
+          "反例常见原因包括：把不同型号拼成一台产品、把实验室条件删除、把第三方观点改成官方事实、用过期价格制造紧迫感、用未授权图片或把想象写成亲身体验。"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      },
+      {
+        "path": "03-人群场景/07-学生学习/学生学习场景卡.md",
+        "kind": "reference_material",
+        "quotes": [
+          "面向高校学生、中小学生家庭、教师和校园IT，把选课、课堂记录、作业、编程/设计、研究、考试、社团和宿舍使用放入同一学习周期。目标是先确保课程要求、软件许可、数据备份和健康使用，再讨论便携、屏幕、性能或娱乐偏好。",
+          "使用本指南时，先完成场景发现，再到 P1 核对完整 SKU 和产品事实，到 P7 核对官方使用与故障支持；价格、库存、赠品、交期、补贴和合同服务只能引用获授权且带日期的动态记录。不能把系列级“最高/可选”参数写成某一销售配置，不能用另一型号、另一系统或另一版本的事实替代当前对象。",
+          "所有结论分为四类：**已确认**（有可复核证据）、**待测试**（问题已定义但未在目标环境通过）、**不适用**（该角色明确不需要并写出理由）、**不支持/不通过**（有证据表明门槛未满足）。便利功能、主观偏好或一次演示不能抵消业务门槛失败。",
+          "门槛问题决定方案能否进入候选，例如指定系统/软件、组织安全、必要外设、数据规则或关键任务；偏好问题用于候选之间比较，例如外观、手感、颜色或某种便利。门槛未知时只保留候选范围，不直接给唯一结论。",
+          "证据文件应标注来源、版本、适用对象、核验人和日期。截图只截结论相关区域并脱敏；账号密码、验证码、恢复密钥、证书私钥、真实客户数据和内部报价不得进入共享知识库。第三方软件的系统要求由其官方文档或厂商确认，华为产品页面不能替第三方兼容性背书。",
+          "价格和学生优惠是动态信息，只使用购买当日的授权页面，不写入长期指南。"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      }
+    ],
+    "originals": [
+      {
+        "path": "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md",
+        "text": "> 迁移候选，尚未完成人工事实复核。原文中的核验声明仅代表原库记录。\n\n# HUAWEI MateBook Fold 非凡大师 - 产品事实\n\n> 来源：华为官网公开产品页与规格页。抓取日期：2026-10-17。配置可能因销售版本而异，生成内容时必须保留限定条件并以实际销售版本为准。\n\n## 来源\n\n- 产品页：https://consumer.huawei.com/cn/harmonyos-computer/matebook-fold-ultimate-design/\n- 规格页：https://consumer.huawei.com/cn/harmonyos-computer/matebook-fold-ultimate-design/specs/\n\n## 官方规格摘录\n\n## 操作系统\n\nHarmonyOS 6.1\n\n## 尺寸与重量\n\n宽度\n\n展开态：382.5 mm\n\n闭合态：288.5 mm\n\n深度\n\n展开态：288.5 mm\n\n闭合态：193.7 mm\n\n高度\n\n展开态：7.6 mm（左）/ 7.3 mm（右）\n\n闭合态：14.9 mm\n\n*左是指摄像头所在的左半屏，右是指非摄像头所在的右半屏。\n\n重量\n\n约 1.16 kg（含电池,不含键盘）\n\n*实际尺寸和重量依配置、制造工艺、测量方法的不同可能有所差异。\n\n## 屏幕\n\n尺寸\n\n展开态：18 英寸\n\n折叠态：13 英寸\n\n*显示屏采用圆角设计，按照标准矩形测量时，展开态时屏幕的对角线长度是 18 英寸（实际可视区域略小）；折叠态时上半屏和下半屏的对角线长度是 13 英寸。\n\n类型\n\n双层 OLED（柔性显示屏）\n\nUTG 超薄玻璃\n\n屏占比\n\n92%\n\n*数据来源于华为实验室，测量数据标准以屏幕可视区域尺寸对屏幕尺寸计算屏幕占比，请以实物为准\n\n屏幕比例\n\n展开态：4:3\n\n折叠态（半屏）：3:2\n\n*展开态和折叠态时上半屏和下半屏的屏幕比例。\n\n分辨率\n\n展开态：3296 × 2472\n\n折叠态（半屏）：2472 × 1648\n\n*显示屏采用圆角设计，展开态和折叠态的分辨率对应标准矩形，实际屏幕有效像素略少。\n\n亮度\n\n典型亮度：700 nits\n\n峰值亮度：1600 nits\n\n*典型值，数据来源于华为实验室。在 HDR 内容显示时，局部峰值亮度可达 1600 nits，请以实际体验为准。\n\n色域\n\nP3 广色域\n\n*P3 广色域色彩管理随应用表现存在差异。请以实际体验为准。\n\n对比度\n\nHDR 模式：2000000:1\n\n普通模式：1000000:1\n\n*典型值，数据来源于华为实验室。\n\n## 处理器\n\n麒麟X90 Plus\n\n## 存储\n\n2 TB / 1 TB / 512 GB SSD\n\n*硬盘格式化之后的实际容量可能较小。\n\n## 内存\n\n24 GB / 32 GB\n\n*可使用的内存容量小于此值，因为系统软件占用部分空间。\n\n## 无线连接\n\nWLAN\n\nWi-Fi 6，IEEE 802.11a/b/g/n/ac/ax，160 MHz\n\n2.4 GHz 和 5 GHz 双频\n\n2 × 2 MIMO\n\n支持 WPA/WPA2/WPA3\n\n蓝牙\n\n蓝牙 5.2\n\n星闪\n\n支持，星闪 E1.0\n\n## 电池\n\n材料\n\n锂聚合物\n\n容量\n\n74.69 Wh（额定容量）\n\n*电池使用时间依使用情况和设置的不同可能有所差异。\n\n## 接口\n\n折叠态（摄像头在上）\n\nUSB-C × 1（右侧）\n\nUSB-C × 1（上侧）\n\n## 键盘和触控板\n\n华为星跃随行键盘，星闪无线连接，1.5 mm 键程，压力触控板\n\n电源键\n\n指纹电源键\n\n音量键\n\n## 摄像头\n\n800 万像素前置摄像头\n\n## 音频\n\n扬声器 × 6\n\n麦克风 × 4\n\n## 特色应用\n\n华为笔记、天生会画、小艺慧记、小艺深度研究、小艺智慧搜索、小艺输入法、待机屏保、显示器模式、移动全景声、文件管理、图库、畅连、备忘录、日历、智慧生活、我的华为、华为云空间、华为应用市场、华为分享、应用接续、键鼠共享、跨设备剪贴板、超级终端、碰一碰、通信共享、无线投屏、有线投屏\n\n*如在选购或使用时对功能体验、使用限制、支持机⁠型等有疑问，请咨询华为客服（950800）⁠。\n\n## 包装清单\n\nHUAWEI MateBook Fold 非凡大师 × 1\n\n华为超级快充电源适配器（黑色）（Max 140 W）× 1\n\n电源适配器线（黑色编织）（USB-C）× 1\n\n华为星跃随行键盘 × 1\n\n屏幕擦拭布 × 1\n\n温馨提示卡片 × 1\n\nHUAWEI M-Pen 3 × 1\n\n备用笔尖 × 1\n\n笔尖夹 × 1\n\n手写笔笔套 × 1\n\n华为折叠电脑尊享收纳包 × 1\n\n快速指南（折叠电脑）× 1\n\n快速指南（手写笔）× 1\n\n即将离开consumer.huawei.com\n\n您即将跳转至第三方页面，华为无法控制，也无法对该页面内容负责。\n\n继续访问\n\n取消\n",
+        "exclusions": [
+          {
+            "quote": "迁移候选，尚未完成人工事实复核。原文中的核验声明仅代表原库记录。",
+            "reason": "属于原库记录状态与核验声明，不是产品事实，且不能据此宣称已获官网再次验证。"
+          },
+          {
+            "quote": "即将离开consumer.huawei.com\n\n您即将跳转至第三方页面，华为无法控制，也无法对该页面内容负责。\n\n继续访问\n\n取消",
+            "reason": "为页面跳转提示，非产品参数或使用条件。"
+          }
+        ]
+      }
+    ],
+    "review_stats": {
+      "new": 3,
+      "cached": 0,
+      "excluded": 0,
+      "catalog_signature": "4d5ebb693c019eed636a620987c187c002ba061aea5daa30da04e5b71c5a30bf",
+      "source_hashes": {
+        "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md": "c8669af8c84412d4a00355aaacf1af004af778e35021349ac9840235c501278f",
+        "04-营销表达/小红书图文模板.md": "1e2f9c003843d67bc5e635e8dce49e20c4746fcc693df9a53498a5aa0b035e7f",
+        "03-人群场景/07-学生学习/学生学习场景卡.md": "b32700860ab942d87860f43e8380ac11f90776e7f2aa6ec9fc7bfa371f5722af",
+        "05-图片素材/HUAWEI MateBook Fold 非凡大师/hwpc_matebook-fold-ultimate-design_多彩配色外观_03_6e547337.jpg": "fa79555380e2fe0f21150da4e4f0427fbd4eb2d63ba344f1e29a9b21af116552",
+        "05-图片素材/HUAWEI MateBook Fold 非凡大师/hwpc_matebook-fold-ultimate-design_多彩配色外观_04_8a0efa3c.jpg": "0c899ed8d886279a773ffb2b0e0a92c2cd495b4e2072b5d200349f82a60ea9af"
+      }
+    }
+  },
+  "strategy": null,
+  "draft": null,
+  "review": null,
+  "history": [
+    {
+      "role": "用户",
+      "content": "请按以下设置创作营销图文。\n\n本次创作设置：产品：HUAWEI MateBook Fold 非凡大师；受众：大学新生；场景：开学季；平台：小红书；目标：种草"
+    }
+  ],
+  "trace": [
+    {
+      "stage": "1 结构化需求",
+      "at": "22:43:40",
+      "brief": {
+        "product": "HUAWEI MateBook Fold 非凡大师",
+        "product_type": "",
+        "audience": "大学新生",
+        "scene": "开学季",
+        "platform": "小红书",
+        "goal": "种草",
+        "stage": "",
+        "main_problem": "",
+        "extra": "",
+        "llm_notes": "产品为具体型号；product_type未明确，留空；stage未提及，留空"
+      },
+      "questions": []
+    },
+    {
+      "stage": "2 资料匹配",
+      "at": "22:43:59",
+      "facts": 16,
+      "images": 2,
+      "sources": [
+        "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md"
+      ],
+      "dropped": [],
+      "conflicts": [
+        "型号 matebookfold非凡大师 的“展开态：<值>”出现多个取值:288.5mm、382.5mm",
+        "型号 matebookfold非凡大师 的“闭合态：<值>”出现多个取值:14.9mm、193.7mm、288.5mm"
+      ],
+      "similar_models": [
+        "HUAWEI MateBook 14",
+        "HUAWEI MateBook Pro",
+        "HUAWEI MateBook Pro S",
+        "MateBook D 14",
+        "MateBook D 16",
+        "MateBook D 16 SE 版"
+      ],
+      "usage_review": {
+        "new": 3,
+        "cached": 0,
+        "excluded": 0,
+        "catalog_signature": "4d5ebb693c019eed636a620987c187c002ba061aea5daa30da04e5b71c5a30bf",
+        "source_hashes": {
+          "01-产品事实/HUAWEI MateBook Fold 非凡大师/产品事实.md": "c8669af8c84412d4a00355aaacf1af004af778e35021349ac9840235c501278f",
+          "04-营销表达/小红书图文模板.md": "1e2f9c003843d67bc5e635e8dce49e20c4746fcc693df9a53498a5aa0b035e7f",
+          "03-人群场景/07-学生学习/学生学习场景卡.md": "b32700860ab942d87860f43e8380ac11f90776e7f2aa6ec9fc7bfa371f5722af",
+          "05-图片素材/HUAWEI MateBook Fold 非凡大师/hwpc_matebook-fold-ultimate-design_多彩配色外观_03_6e547337.jpg": "fa79555380e2fe0f21150da4e4f0427fbd4eb2d63ba344f1e29a9b21af116552",
+          "05-图片素材/HUAWEI MateBook Fold 非凡大师/hwpc_matebook-fold-ultimate-design_多彩配色外观_04_8a0efa3c.jpg": "0c899ed8d886279a773ffb2b0e0a92c2cd495b4e2072b5d200349f82a60ea9af"
+        }
+      }
+    },
+    {
+      "stage": "停止",
+      "at": "22:43:59",
+      "reason": "知识库资料存在冲突,请人工确认后再生成:型号 matebookfold非凡大师 的“展开态：<值>”出现多个取值:288.5mm、382.5mm;型号 matebookfold非凡大师 的“闭合态：<值>”出现多个取值:14.9mm、193.7mm、288.5mm"
+    },
+    {
+      "stage": "页面结果",
+      "at": "22:43:59",
+      "status": "blocked"
+    }
+  ]
+}

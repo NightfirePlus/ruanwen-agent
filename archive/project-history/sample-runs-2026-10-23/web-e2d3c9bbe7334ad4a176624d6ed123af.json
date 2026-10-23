@@ -1,0 +1,1967 @@
+{
+  "brief": {
+    "product": "华为擎云 L540z",
+    "product_type": "",
+    "audience": "大学新生",
+    "scene": "开学季",
+    "platform": "小红书",
+    "goal": "种草",
+    "stage": "",
+    "main_problem": "",
+    "extra": "",
+    "llm_notes": "用户最新一轮明确指定产品为华为擎云 L540z，覆盖之前的 HUAWEI MateBook 14；其他字段（受众、场景、平台、目标）沿用已确定信息。未提供具体痛点或购买阶段，留空。"
+  },
+  "canonical_brief": "产品：华为擎云 L540z；目标受众：大学新生；使用场景：开学季；发布平台：小红书；创作目标：种草。",
+  "evidence": {
+    "facts": [
+      {
+        "id": "F1",
+        "model": "华为擎云 L540z",
+        "text": "操作系统：银河麒麟桌面操作系统 V10",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F2",
+        "model": "华为擎云 L540z",
+        "text": "操作系统：统信桌面操作系统 V20",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F3",
+        "model": "华为擎云 L540z",
+        "text": "尺寸与重量 宽度：226.8 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F4",
+        "model": "华为擎云 L540z",
+        "text": "尺寸与重量 长度：312.6 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F5",
+        "model": "华为擎云 L540z",
+        "text": "尺寸与重量 高度：15.4 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F6",
+        "model": "华为擎云 L540z",
+        "text": "尺寸与重量 重量：约 1.32 kg（含电池）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F7",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 尺寸：14 英寸",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F8",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 类型：IPS",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F9",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 屏占比：88%",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F10",
+        "model": "华为擎云 L540z",
+        "text": "屏幕比例：3:2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F11",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 分辨率：2160 × 1440，185 ppi",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F12",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 亮度：400 尼特",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F13",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 色域：100% sRGB",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F14",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 可视角度：178°",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F15",
+        "model": "华为擎云 L540z",
+        "text": "存储：固态存储 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F16",
+        "model": "华为擎云 L540z",
+        "text": "内存：LPDDR5x",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F17",
+        "model": "华为擎云 L540z",
+        "text": "无线连接 WLAN：IEEE 802.11a/b/g/n/ac/ax，160 MHz",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F18",
+        "model": "华为擎云 L540z",
+        "text": "无线连接 WLAN：2.4 GHz 和 5 GHz 双频",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F19",
+        "model": "华为擎云 L540z",
+        "text": "无线连接 WLAN：2 × 2 MIMO",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F20",
+        "model": "华为擎云 L540z",
+        "text": "无线连接 蓝牙：蓝牙 4.2，硬件支持蓝牙 5.2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F21",
+        "model": "华为擎云 L540z",
+        "text": "类型：锂离子聚合物电池",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F22",
+        "model": "华为擎云 L540z",
+        "text": "电池 容量：70 Wh（额定容量）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F23",
+        "model": "华为擎云 L540z",
+        "text": "接口：USB-C × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F24",
+        "model": "华为擎云 L540z",
+        "text": "接口：USB-A × 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F25",
+        "model": "华为擎云 L540z",
+        "text": "接口：HDMI × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F26",
+        "model": "华为擎云 L540z",
+        "text": "接口：3.5 mm 耳机 & 麦克风二合一接口 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F27",
+        "model": "华为擎云 L540z",
+        "text": "接口：RJ45 网口 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F28",
+        "model": "华为擎云 L540z",
+        "text": "接口：隐私物理开关 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F29",
+        "model": "华为擎云 L540z",
+        "text": "键盘和触控板 全尺寸键盘",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F30",
+        "model": "华为擎云 L540z",
+        "text": "键盘和触控板 触控板：大尺寸触控板",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F31",
+        "model": "华为擎云 L540z",
+        "text": "键盘和触控板 电源键：指纹电源键",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F32",
+        "model": "华为擎云 L540z",
+        "text": "摄像头：1080P 高清摄像头（支持物理开关）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F33",
+        "model": "华为擎云 L540z",
+        "text": "音频 扬声器：× 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F34",
+        "model": "华为擎云 L540z",
+        "text": "音频 麦克风：× 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F35",
+        "model": "华为擎云 L540z",
+        "text": "包装清单 华为擎云 L540z × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F36",
+        "model": "华为擎云 L540z",
+        "text": "包装清单 电源适配器（含线）× 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F37",
+        "model": "华为擎云 L540z",
+        "text": "包装清单 快速指南 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F38",
+        "model": "华为擎云 L540z",
+        "text": "包装清单 装箱单 & 合格证（中箱侧）× 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      }
+    ],
+    "images": [
+      {
+        "id": "IMG-7e62a03fa7dd3cf4",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_主视觉_01_736276ec.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_主视觉_01_736276ec.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_主视觉_01_736276ec.jpg",
+        "caption": "华为擎云 L540z",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/kv/huawei-qingyun-l540z.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-5c2827a5503c8dd2",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_亮点轮播1_02_df337d98.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_亮点轮播1_02_df337d98.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播1_02_df337d98.jpg",
+        "caption": "亮点轮播1",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/reasons/huawei-qingyun-l540z-highlights-1.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-43017c939497b4d8",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_亮点轮播2_03_8b6056ff.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_亮点轮播2_03_8b6056ff.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播2_03_8b6056ff.jpg",
+        "caption": "亮点轮播2",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/reasons/huawei-qingyun-l540z-highlights-2.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-62309dc64110e9e9",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_亮点轮播3_04_f95045d3.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_亮点轮播3_04_f95045d3.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播3_04_f95045d3.jpg",
+        "caption": "亮点轮播3",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/reasons/huawei-qingyun-l540z-highlights-3.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-101417583d48917e",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_亮点轮播5_06_5d5150d5.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_亮点轮播5_06_5d5150d5.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播5_06_5d5150d5.jpg",
+        "caption": "亮点轮播5",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/reasons/huawei-qingyun-l540z-highlights-5-2x.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-f63d9cd91cc32d6d",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_生产力亮点_08_5894d779.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_生产力亮点_08_5894d779.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_生产力亮点_08_5894d779.jpg",
+        "caption": "生产力亮点",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/product/huawei-qingyun-l540z-productivity.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-ded500206b280fd8",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_超长续航_09_33bc05ff.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_超长续航_09_33bc05ff.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_超长续航_09_33bc05ff.jpg",
+        "caption": "用户使用华为擎云 L540z 办公，展示了笔记本的超长续航",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/battery/huawei-qingyun-l540z-battery.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-6db6062b3d45cb49",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_屏幕性能_10_ce776285.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_屏幕性能_10_ce776285.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_屏幕性能_10_ce776285.jpg",
+        "caption": "华为擎云 L540z 正视图，展示了屏幕性能",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/screen/huawei-qingyun-l540z-oled-screen.jpg",
+        "note": "",
+        "review": {}
+      }
+    ],
+    "candidates": [
+      "华为擎云 L420",
+      "华为擎云 L420x",
+      "华为擎云 L420z",
+      "华为擎云 L540x",
+      "华为擎云 L540x 优享版",
+      "华为擎云 L540z 优享版"
+    ],
+    "conflicts": [],
+    "dropped": [],
+    "sources": [
+      "01-产品事实/华为擎云 L540z/产品事实.md"
+    ],
+    "context": [
+      {
+        "path": "04-营销表达/小红书图文模板.md",
+        "kind": "platform_guide",
+        "bucket": "platform",
+        "quotes": [
+          "# 小红书图文创作指南\n\n## 三、写作流程\n\n首图只给一个结果或冲突；第二张交代人物和任务；中段每张解决一个问题；倒数第二张展示结果或前后对比；末图给核对清单和评论问题。正文与图序一致。\n\n每个段落都要能回答下列至少一项：用户遇到什么问题、进行了什么动作、用什么证据验证、在哪些条件下成立、下一步做什么。不能回答这些问题的形容词、口号和重复参数应删除。\n\n\n## 五、正例\n\n《今天换了三个办公地点，我只记录电脑真正帮上的地方》依次拍装包、咖啡店查资料、会议接力和回家归档，最后说明版本条件。\n\n正例的关键不是语气好听，而是对象、任务、证据和限制互相对应。即使移除品牌名，读者仍能看懂这段内容解决了什么问题。\n\n## 六、反例\n\n九张不同型号官方图拼在一起，正文声称“亲测一整天”，却没有使用过程、配置、时间和原创照片。\n\n反例常见原因包括：把不同型号拼成一台产品、把实验室条件删除、把第三方观点改成官方事实、用过期价格制造紧迫感、用未授权图片或把想象写成亲身体验。"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      },
+      {
+        "path": "01-产品事实/华为擎云 L540z/卖点与限制.md",
+        "kind": "product_guidance",
+        "bucket": "copy",
+        "quotes": [
+          "# 华为擎云 L540z｜卖点与限制\n\n\n## 一句话定位\n\n更适合看重 14 英寸 3:2 护眼屏、70 Wh 长续航、隐私物理开关和原生 RJ45 的麒麟/统信政企用户；官网规格摘录未列内存容量、存储容量和处理器型号，配置结论必须按 SKU 核对。\n\n这句话是进入选型讨论的起点，不是无条件推荐。应先确认用户的系统、应用、文件、外设、网络、账号和移动要求，再判断本型号是否值得进入候选清单。\n\n## 六个沟通角度\n\n### 1. 型号身份卡\n\n**可用结论**\n\n这是预装银河麒麟桌面操作系统 V10 或统信桌面操作系统 V20 的 14 英寸 IPS 笔记本，约 1.32 kg；内存与存储只列类型，未列容量。\n\n**支撑事实**\n\n- 官方名称为华为擎云 L540z。\n- 操作系统为银河麒麟桌面操作系统 V10 或统信桌面操作系统 V20。\n- 产品事实摘录中没有处理器章节。\n- 内存为 LPDDR5x，未列容量。\n- 存储为固态存储 × 1，未列容量。\n- 屏幕为 14 英寸 IPS，整机约 1.32 kg（含电池）。\n- 包装清单含主机、电源适配器（含线）、快速指南和装箱单 & 合格证。\n\n**表达边界**\n\n- 内存容量、存储容量和处理器型号均未在规格摘录中列出，不能自行补数。\n- 内存、存储和系统版本以实际销售 SKU 为准。\n- 包装清单未列保修卡，与部分同系列型号不同。\n\n### 2. 屏幕与显示卡\n\n**可用结论**\n\n核心显示组合为 14 英寸、3:2、2160 × 1440 的 IPS 屏，88% 屏占比，400 尼特典型亮度，覆盖 100% sRGB，可视角度 178°。\n\n**支撑事实**\n\n- 屏幕尺寸 14 英寸，类型为 IPS，屏占比 88%。\n- 屏幕比例 3:2，分辨率 2160 × 1440，185 ppi。\n- 亮度 400 尼特，色域 100% sRGB，可视角度 178°。\n- 产品页称其为 2.1K 护眼全面屏，通过莱茵低蓝光、无频闪认证。\n- 规格摘录未列触控支持、刷新率或色准数据。\n\n**表达边界**\n\n- 亮度、色域和可视角度均为典型值。\n- 2.1K 对应 2160 × 1440，不能写成更高分辨率。\n- 规格摘录未列触控，不能默认支持触控或手写。\n- 刷新率与色准需重新打开规格页核对。\n\n### 3. 性能与存储卡\n\n**可用结论**\n\n公开规格只确认 LPDDR5x 内存、固态存储和 IPS 屏幕，未列内存容量、存储容量与处理器型号；性能与容量均不能直接下结论。\n\n**支撑事实**\n\n- 内存类型为 LPDDR5x，规格摘录未列容量。\n- 存储为固态存储 × 1，规格摘录未列容量。\n- 产品事实摘录中没有处理器和显卡章节。\n- 产品页称开机、打开大型 PPT 和大型文件拷贝有速度提升，属官方对比数据。\n- 官方提示硬盘格式化后的实际容量可能较小。\n\n**表达边界**\n\n- 内存容量、存储容量、处理器型号、核心数和性能跑分均未在产品事实中列出。\n- 不能以 L540x 等相近型号的容量套用到 L540z。\n- 页面速度提升数据有对比基准和测试条件，不能写成绝对耗时。\n- 性能宣传必须绑定具体配置、系统版本、应用与测试条件。\n\n### 4. 便携续航接口卡\n\n**可用结论**\n\n机身约 312.6 × 226.8 × 15.4 mm、约 1.32 kg，配 70 Wh 电池，保留 USB-C、两个 USB-A、HDMI 1.4、RJ45、3.5 mm 音频口和隐私物理开关。\n\n**支撑事实**\n\n- 长度 312.6 mm、宽度 226.8 mm、高度 15.4 mm。\n- 重量约 1.32 kg（含电池）。\n- 电池额定容量 70 Wh；产品页称本地 1080P 视频播放可达 14 小时，搭配原装快充 15 分钟可充约 25%。\n- 接口为 USB-C × 1、USB-A × 2、HDMI × 1、3.5 mm 耳机 & 麦克风二合一接口 × 1、RJ45 网口 × 1。\n- 另列隐私物理开关 × 1。\n- 产品页标注 USB-A 为 USB-A 3.2、HDMI 为 HDMI 1.4。\n\n**表达边界**\n\n- 尺寸和重量会随配置、制造和测量方法变化。\n- 14 小时续航与 15 分钟充 25% 均来自华为实验室，实际受亮度、音量、设置、负载和环境影响。\n- 规格摘录未列 USB-C 与 USB-A 的完整协议版本，不能按全功能或高速接口宣传。\n- HDMI 1.4 的刷新率与分辨率上限需按官方说明核对。\n- RJ45 为原生网口，仍需确认企业网络准入与线缆规格。\n\n### 5. 系统协同与兼容卡\n\n**可用结论**\n\n系统路线为银河麒麟 V10 或统信 V20，配 Wi-Fi 6 双频 2 × 2 MIMO、蓝牙 4.2（硬件支持 5.2）、指纹电源键、1080P 摄像头物理开关和机身隐私物理开关。\n\n**支撑事实**\n\n- 操作系统为银河麒麟桌面操作系统 V10 或统信桌面操作系统 V20。\n- 无线连接为 IEEE 802.11a/b/g/n/ac/ax（160 MHz）、2.4 GHz 和 5 GHz 双频、2 × 2 MIMO，蓝牙 4.2（硬件支持蓝牙 5.2）。\n- 电源键集成指纹识别。\n- 摄像头为 1080P 高清摄像头，支持物理开关，产品页另列天侧摄像头安全指示灯。\n- 机身另设隐私物理开关 × 1。\n- 产品页称通过 Wi-Fi 无线性能五星认证。\n- 产品页列有设备完整性保护和可信运行环境。\n\n**表达边界**\n\n- 麒麟与统信两个系统版本的应用、外设和驱动兼容性需分别验证。\n- 蓝牙 4.2 是当前协议版本，硬件支持 5.2 不等于已启用 5.2 全部特性。\n- 隐私物理开关的具体控制范围以官方说明和系统设置为准。\n- Wi-Fi 速率提升数据有对比机型和测试环境，不能当作所有场景的保证。\n"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      },
+      {
+        "path": "03-人群场景/37-学生学习/学生学习场景卡.md",
+        "kind": "reference_material",
+        "bucket": "audience",
+        "quotes": [
+          "# 学生学习与成长场景执行指南\n\n\n## 一、指南定位与边界\n\n面向高校学生、中小学生家庭、教师和校园IT，把选课、课堂记录、作业、编程/设计、研究、考试、社团和宿舍使用放入同一学习周期。目标是先确保课程要求、软件许可、数据备份和健康使用，再讨论便携、屏幕、性能或娱乐偏好。\n\n使用本指南时，先完成场景发现，再到 P1 核对完整 SKU 和产品事实，到 P7 核对官方使用与故障支持；价格、库存、赠品、交期、补贴和合同服务只能引用获授权且带日期的动态记录。不能把系列级“最高/可选”参数写成某一销售配置，不能用另一型号、另一系统或另一版本的事实替代当前对象。\n\n所有结论分为四类：**已确认**（有可复核证据）、**待测试**（问题已定义但未在目标环境通过）、**不适用**（该角色明确不需要并写出理由）、**不支持/不通过**（有证据表明门槛未满足）。便利功能、主观偏好或一次演示不能抵消业务门槛失败。\n\n## 二、参与角色与职责\n\n| 角色 | 主要责任 | 确认边界 |\n|---|---|---|\n| 学生 | 说明课程、软件、携带、作业、协作与宿舍使用 | 确认真实学习任务 |\n| 任课教师/导师 | 提供课程要求、作业格式、实验环境和提交规则 | 确认课程门槛 |\n| 家长/资助者 | 明确预算边界、共用安排、健康与服务预期 | 确认家庭约束 |\n| 校园IT/实验室 | 维护账号、网络、机房、许可证和考试环境 | 确认校内条件 |\n| 同组同学/社团负责人 | 说明协作格式、共享平台与活动任务 | 确认协作兼容 |\n\n角色可以一人兼任，但责任不能消失。访谈、方案、试点和验收至少要有业务使用者与技术/支持责任人共同参与；销售或内容创作者不能替客户的业务、安全或IT人员确认兼容性。角色意见冲突时分别记录，不用平均值抹平岗位差异。\n\n## 三、端到端任务链\n\n| 顺序 | 阶段 | 要做的事 | 阶段产物 |\n|---:|---|---|---|\n| 1 | 入学/选课 | 收集课程大纲、软件和校园服务要求 | 学期需求清单 |\n| 2 | 课堂学习 | 记录、查阅、演示、投屏和临时协作 | 课堂成果 |\n| 3 | 作业实践 | 编程、设计、文档、实验或视频任务 | 可提交作品 |\n| 4 | 协作反馈 | 共享、评审、修改和版本管理 | 小组版本记录 |\n| 5 | 考试答辩 | 按校方规则准备账号、文件、网络和备用方式 | 考务准备卡 |\n| 6 | 学期归档 | 备份课程资料、退出账号、迁移与设备维护 | 学习档案 |\n\n每个阶段都要能回答四个问题：输入是什么、谁执行、怎样判断完成、失败后回到哪里。若只写“需要性能、续航、协同、便携”，却没有绑定到任务链的具体一步，就仍然不是可执行需求。\n\n## 四、典型痛点及其业务影响\n\n### 1. “专业推荐配置”过于粗糙\n\n同一专业不同年级、课程和软件版本差异很大。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n### 2. 学习与娱乐需求相互挤压\n\n预算、存储、时间和注意力需要家庭共同设边界。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n### 3. 校园服务和个人环境不一致\n\n宿舍网、校园网、机房、云平台和教师要求可能不同。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n### 4. 文件丢失或错版影响作业\n\n桌面、聊天、云盘和移动存储多处复制，缺少主版本。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n### 5. 只考虑首学期\n\n后续课程、实习、社团和维修期缺少规划。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n痛点排序采用“业务影响 × 发生概率 × 恢复难度”，但评分只用于排优先级，不凭空生成精确收益。涉及效率、时间、故障率或成本的数字，必须来自客户授权测量并写明环境、样本和日期；本指南不提供虚构比例。\n\n## 五、如何发现真正的问题\n\n### 5.1 访谈问题\n\n1. 未来一学年有哪些必修/选修课程，指定软件、版本、系统、插件和文件格式是什么？\n2. 作业是文档、代码、模型、图片、音视频还是实验数据，典型规模和提交方式是什么？\n3. 每天携带距离、可充电地点、课堂桌面、宿舍外设和噪音环境怎样？\n4. 校园账号、网络、VPN、许可证和考试规则由谁提供，个人设备能否接入？\n5. 学习资料如何备份，小组协作怎样避免错版，设备维修期间如何继续课程？\n6. 家庭共用、家长管理、隐私和娱乐时间有什么约定？\n\n### 5.2 现场观察法\n\n让目标岗位用脱敏材料从任务起点做到终点，观察账号、应用、文件、网络、外设、等待、返工和人工绕行。顾问只在安全风险或可能造成数据损失时叫停，不在旁边临时修正，否则无法发现培训与文档缺口。观察后用“条件—动作—结果—影响”复述，由受访者确认。\n\n### 5.3 门槛问题与偏好问题分开\n\n门槛问题决定方案能否进入候选，例如指定系统/软件、组织安全、必要外设、数据规则或关键任务；偏好问题用于候选之间比较，例如外观、手感、颜色或某种便利。门槛未知时只保留候选范围，不直接给唯一结论。\n\n## 六、证据包怎么建立\n\n| 证据类别 | 最低内容 | 状态 |\n|---|---|---|\n| 课程证据 | 课程大纲、教师通知、作业样例和截止时间 | 已确认 / 待补 / 不适用 |\n| 软件证据 | 官方系统要求、学校许可证与实验室说明 | 已确认 / 待补 / 不适用 |\n| 环境证据 | 教室/宿舍网络、投影、桌面和可用外设 | 已确认 / 待补 / 不适用 |\n"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      }
+    ],
+    "originals": [
+      {
+        "path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "text": "> 新增候选，尚未完成人工事实复核。\n\n# 华为擎云 L540z - 产品事实\n\n> 来源：华为擎云官网公开产品页与规格页。抓取日期：2026-10-21。配置可能因销售版本而异，生成内容时必须保留限定条件并以实际销售版本为准。\n\n## 来源\n\n- 产品页：https://qingyun.huawei.com/laptops/qingyun-l540z/\n- 规格页：https://qingyun.huawei.com/laptops/qingyun-l540z/specs/\n\n## 官方规格摘录\n\n## 操作系统\n\n操作系统：银河麒麟桌面操作系统 V10\n\n操作系统：统信桌面操作系统 V20\n\n## 尺寸与重量\n\n宽度：226.8 mm\n\n长度：312.6 mm\n\n高度：15.4 mm\n\n重量：约 1.32 kg（含电池）\n\n*实际尺寸和重量依配置、制造工艺、测量方法的不同可能有所差异。\n\n## 屏幕\n\n尺寸：14 英寸\n\n类型：IPS\n\n屏占比：88%\n\n屏幕比例：3:2\n\n分辨率：2160 × 1440，185 ppi\n\n亮度：400 尼特\n\n色域：100% sRGB\n\n可视角度：178°\n\n*屏幕亮度、色域、可视角度等数据为典型值。\n\n## 存储\n\n存储：固态存储 × 1\n\n*硬盘格式化之后的实际容量可能较小。\n\n## 内存\n\n内存：LPDDR5x\n\n## 无线连接\n\nWLAN：IEEE 802.11a/b/g/n/ac/ax，160 MHz\n\nWLAN：2.4 GHz 和 5 GHz 双频\n\nWLAN：2 × 2 MIMO\n\n蓝牙：蓝牙 4.2，硬件支持蓝牙 5.2\n\n## 电池\n\n类型：锂离子聚合物电池\n\n容量：70 Wh（额定容量）\n\n## 接口\n\n接口：USB-C × 1\n\n接口：USB-A × 2\n\n接口：HDMI × 1\n\n接口：3.5 mm 耳机 & 麦克风二合一接口 × 1\n\n接口：RJ45 网口 × 1\n\n接口：隐私物理开关 × 1\n\n## 键盘和触控板\n\n全尺寸键盘\n\n触控板：大尺寸触控板\n\n电源键：指纹电源键\n\n## 摄像头\n\n摄像头：1080P 高清摄像头（支持物理开关）\n\n## 音频\n\n扬声器：× 2\n\n麦克风：× 2\n## 包装清单\n\n华为擎云 L540z × 1\n\n电源适配器（含线）× 1\n\n快速指南 × 1\n\n装箱单 & 合格证（中箱侧）× 1\n",
+        "exclusions": []
+      }
+    ],
+    "review_stats": {
+      "excluded": 0,
+      "catalog_signature": "dc8e09c09bb0a05ec320b1329c10608125c148c96b0de0d6e7573bb682dfa3c4",
+      "source_hashes": {
+        "04-营销表达/小红书图文模板.md": "1e2f9c003843d67bc5e635e8dce49e20c4746fcc693df9a53498a5aa0b035e7f",
+        "03-人群场景/37-学生学习/学生学习场景卡.md": "b32700860ab942d87860f43e8380ac11f90776e7f2aa6ec9fc7bfa371f5722af",
+        "01-产品事实/华为擎云 L540z/产品事实.md": "878538ad1058f13edfd90bef73aeaee152e41ad593acbe52d0871665f005c478",
+        "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_主视觉_01_736276ec.jpg": "736276ecbdc08e7a9e6dca75961ea0367f24dd307f0c9e92fe36835478b0e32a",
+        "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播1_02_df337d98.jpg": "df337d986dfedeb5559520fd5307a6b0bd736e0456403588c0640a03db082fb8",
+        "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播2_03_8b6056ff.jpg": "8b6056ffd9444920e3550c6f723723a02aac48da8ced73dbfad846f459ed92f9",
+        "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播3_04_f95045d3.jpg": "f95045d3c363a59a3af51aa13ee8942cd8717f2ff76638bfc3c3d2558b81b56f",
+        "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播5_06_5d5150d5.jpg": "5d5150d527ddf3bfe3d7595a541e6408828a124cd9378b770afa0f1a0e61f2de",
+        "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_生产力亮点_08_5894d779.jpg": "5894d7792508e477d073e64e872cc93e6bf1e75cdcf9c7acb90af86ca17e8966",
+        "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_超长续航_09_33bc05ff.jpg": "33bc05ff17ebdb9c5c420e2c7931102fd0bd8648340e0e62442d2a32eca80a43",
+        "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_屏幕性能_10_ce776285.jpg": "ce77628582beb3746455980fdb5f923ab980e726a2d09f0011ea845e5278a19c",
+        "01-产品事实/华为擎云 L540z/卖点与限制.md": "83085c9f904796db55cd3c3b48f2d4895ab69675ca05ddb599ec451ab7bafc60"
+      }
+    }
+  },
+  "strategy": {
+    "scene": {
+      "name": "开学季",
+      "angle": "围绕学习、携带、续航和多设备协同,不要把所有学生需求归结为单一性能指标",
+      "focus": [
+        "便携与重量",
+        "续航与课堂/图书馆场景",
+        "学习办公软件体验",
+        "多设备协同"
+      ],
+      "avoid": [
+        "只堆性能参数",
+        "编造学生优惠"
+      ],
+      "in_table": true
+    },
+    "platform": {
+      "name": "小红书",
+      "form": "口语化标题、短段落、使用场景、话题标签",
+      "title": "口语化标题,20字以内,带具体场景或人群,可含1个emoji",
+      "length": "正文300-600字,每段不超过3行",
+      "structure": [
+        "开头一句话点出场景或痛点",
+        "按使用场景分短段,每段一个卖点",
+        "结尾给选购建议和互动提问"
+      ],
+      "tone": "亲切、轻松、像朋友分享;不得伪造个人使用经历,以'适合'、'如果你'等表述代替",
+      "images": {
+        "min": 3,
+        "max": 6
+      },
+      "cta": "邀请评论区交流或收藏,可引导到店体验",
+      "tags": {
+        "min": 5,
+        "max": 8
+      },
+      "field_mapping": "title=标题, intro=开头一句, body=短段落, cta=结尾互动, tags=话题标签",
+      "first_person_experience": false
+    },
+    "performance": {
+      "mode": "advisory_weight",
+      "rule": "权重越高越优先参考表达方式与内容角度；不得作为产品事实、参数或承诺依据",
+      "references": []
+    }
+  },
+  "context_package": {
+    "contract_version": "writing-context-v1",
+    "canonical_brief": "产品：华为擎云 L540z；目标受众：大学新生；使用场景：开学季；发布平台：小红书；创作目标：种草。",
+    "facts": [
+      {
+        "id": "F1",
+        "model": "华为擎云 L540z",
+        "text": "操作系统：银河麒麟桌面操作系统 V10",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F2",
+        "model": "华为擎云 L540z",
+        "text": "操作系统：统信桌面操作系统 V20",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F3",
+        "model": "华为擎云 L540z",
+        "text": "尺寸与重量 宽度：226.8 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F4",
+        "model": "华为擎云 L540z",
+        "text": "尺寸与重量 长度：312.6 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F5",
+        "model": "华为擎云 L540z",
+        "text": "尺寸与重量 高度：15.4 mm",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F6",
+        "model": "华为擎云 L540z",
+        "text": "尺寸与重量 重量：约 1.32 kg（含电池）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F7",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 尺寸：14 英寸",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F8",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 类型：IPS",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F9",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 屏占比：88%",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F10",
+        "model": "华为擎云 L540z",
+        "text": "屏幕比例：3:2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F11",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 分辨率：2160 × 1440，185 ppi",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F12",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 亮度：400 尼特",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F13",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 色域：100% sRGB",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F14",
+        "model": "华为擎云 L540z",
+        "text": "屏幕 可视角度：178°",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F15",
+        "model": "华为擎云 L540z",
+        "text": "存储：固态存储 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F16",
+        "model": "华为擎云 L540z",
+        "text": "内存：LPDDR5x",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F17",
+        "model": "华为擎云 L540z",
+        "text": "无线连接 WLAN：IEEE 802.11a/b/g/n/ac/ax，160 MHz",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F18",
+        "model": "华为擎云 L540z",
+        "text": "无线连接 WLAN：2.4 GHz 和 5 GHz 双频",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F19",
+        "model": "华为擎云 L540z",
+        "text": "无线连接 WLAN：2 × 2 MIMO",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F20",
+        "model": "华为擎云 L540z",
+        "text": "无线连接 蓝牙：蓝牙 4.2，硬件支持蓝牙 5.2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F21",
+        "model": "华为擎云 L540z",
+        "text": "类型：锂离子聚合物电池",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F22",
+        "model": "华为擎云 L540z",
+        "text": "电池 容量：70 Wh（额定容量）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F23",
+        "model": "华为擎云 L540z",
+        "text": "接口：USB-C × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F24",
+        "model": "华为擎云 L540z",
+        "text": "接口：USB-A × 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F25",
+        "model": "华为擎云 L540z",
+        "text": "接口：HDMI × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F26",
+        "model": "华为擎云 L540z",
+        "text": "接口：3.5 mm 耳机 & 麦克风二合一接口 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F27",
+        "model": "华为擎云 L540z",
+        "text": "接口：RJ45 网口 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F28",
+        "model": "华为擎云 L540z",
+        "text": "接口：隐私物理开关 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F29",
+        "model": "华为擎云 L540z",
+        "text": "键盘和触控板 全尺寸键盘",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F30",
+        "model": "华为擎云 L540z",
+        "text": "键盘和触控板 触控板：大尺寸触控板",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F31",
+        "model": "华为擎云 L540z",
+        "text": "键盘和触控板 电源键：指纹电源键",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F32",
+        "model": "华为擎云 L540z",
+        "text": "摄像头：1080P 高清摄像头（支持物理开关）",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F33",
+        "model": "华为擎云 L540z",
+        "text": "音频 扬声器：× 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F34",
+        "model": "华为擎云 L540z",
+        "text": "音频 麦克风：× 2",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F35",
+        "model": "华为擎云 L540z",
+        "text": "包装清单 华为擎云 L540z × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F36",
+        "model": "华为擎云 L540z",
+        "text": "包装清单 电源适配器（含线）× 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F37",
+        "model": "华为擎云 L540z",
+        "text": "包装清单 快速指南 × 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      },
+      {
+        "id": "F38",
+        "model": "华为擎云 L540z",
+        "text": "包装清单 装箱单 & 合格证（中箱侧）× 1",
+        "source_title": "产品事实.md",
+        "source_path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "media_id": "01-产品事实/华为擎云 L540z/产品事实.md"
+      }
+    ],
+    "images": [
+      {
+        "id": "IMG-7e62a03fa7dd3cf4",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_主视觉_01_736276ec.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_主视觉_01_736276ec.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_主视觉_01_736276ec.jpg",
+        "caption": "华为擎云 L540z",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/kv/huawei-qingyun-l540z.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-5c2827a5503c8dd2",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_亮点轮播1_02_df337d98.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_亮点轮播1_02_df337d98.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播1_02_df337d98.jpg",
+        "caption": "亮点轮播1",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/reasons/huawei-qingyun-l540z-highlights-1.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-43017c939497b4d8",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_亮点轮播2_03_8b6056ff.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_亮点轮播2_03_8b6056ff.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播2_03_8b6056ff.jpg",
+        "caption": "亮点轮播2",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/reasons/huawei-qingyun-l540z-highlights-2.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-62309dc64110e9e9",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_亮点轮播3_04_f95045d3.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_亮点轮播3_04_f95045d3.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播3_04_f95045d3.jpg",
+        "caption": "亮点轮播3",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/reasons/huawei-qingyun-l540z-highlights-3.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-101417583d48917e",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_亮点轮播5_06_5d5150d5.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_亮点轮播5_06_5d5150d5.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播5_06_5d5150d5.jpg",
+        "caption": "亮点轮播5",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/reasons/huawei-qingyun-l540z-highlights-5-2x.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-f63d9cd91cc32d6d",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_生产力亮点_08_5894d779.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_生产力亮点_08_5894d779.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_生产力亮点_08_5894d779.jpg",
+        "caption": "生产力亮点",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/product/huawei-qingyun-l540z-productivity.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-ded500206b280fd8",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_超长续航_09_33bc05ff.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_超长续航_09_33bc05ff.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_超长续航_09_33bc05ff.jpg",
+        "caption": "用户使用华为擎云 L540z 办公，展示了笔记本的超长续航",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/battery/huawei-qingyun-l540z-battery.jpg",
+        "note": "",
+        "review": {}
+      },
+      {
+        "id": "IMG-6db6062b3d45cb49",
+        "model": "华为擎云 L540z",
+        "name": "hwpc_qingyun-l540z_屏幕性能_10_ce776285.jpg",
+        "media_id": "D:\\泛\\软文智能体\\knowledge_base\\current\\05-图片素材\\华为擎云 L540z\\hwpc_qingyun-l540z_屏幕性能_10_ce776285.jpg",
+        "source_path": "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_屏幕性能_10_ce776285.jpg",
+        "caption": "华为擎云 L540z 正视图，展示了屏幕性能",
+        "usage": "产品介绍配图，使用前核对画面与具体配置",
+        "origin_url": "https://qingyun.huawei.com/content/dam/huawei-cbg-site/qingyun/mkt/pdp/laptops/qingyun-l540z/images/screen/huawei-qingyun-l540z-oled-screen.jpg",
+        "note": "",
+        "review": {}
+      }
+    ],
+    "expression_references": [
+      {
+        "path": "04-营销表达/小红书图文模板.md",
+        "kind": "platform_guide",
+        "bucket": "platform",
+        "quotes": [
+          "# 小红书图文创作指南\n\n## 三、写作流程\n\n首图只给一个结果或冲突；第二张交代人物和任务；中段每张解决一个问题；倒数第二张展示结果或前后对比；末图给核对清单和评论问题。正文与图序一致。\n\n每个段落都要能回答下列至少一项：用户遇到什么问题、进行了什么动作、用什么证据验证、在哪些条件下成立、下一步做什么。不能回答这些问题的形容词、口号和重复参数应删除。\n\n\n## 五、正例\n\n《今天换了三个办公地点，我只记录电脑真正帮上的地方》依次拍装包、咖啡店查资料、会议接力和回家归档，最后说明版本条件。\n\n正例的关键不是语气好听，而是对象、任务、证据和限制互相对应。即使移除品牌名，读者仍能看懂这段内容解决了什么问题。\n\n## 六、反例\n\n九张不同型号官方图拼在一起，正文声称“亲测一整天”，却没有使用过程、配置、时间和原创照片。\n\n反例常见原因包括：把不同型号拼成一台产品、把实验室条件删除、把第三方观点改成官方事实、用过期价格制造紧迫感、用未授权图片或把想象写成亲身体验。"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      },
+      {
+        "path": "01-产品事实/华为擎云 L540z/卖点与限制.md",
+        "kind": "product_guidance",
+        "bucket": "copy",
+        "quotes": [
+          "# 华为擎云 L540z｜卖点与限制\n\n\n## 一句话定位\n\n更适合看重 14 英寸 3:2 护眼屏、70 Wh 长续航、隐私物理开关和原生 RJ45 的麒麟/统信政企用户；官网规格摘录未列内存容量、存储容量和处理器型号，配置结论必须按 SKU 核对。\n\n这句话是进入选型讨论的起点，不是无条件推荐。应先确认用户的系统、应用、文件、外设、网络、账号和移动要求，再判断本型号是否值得进入候选清单。\n\n## 六个沟通角度\n\n### 1. 型号身份卡\n\n**可用结论**\n\n这是预装银河麒麟桌面操作系统 V10 或统信桌面操作系统 V20 的 14 英寸 IPS 笔记本，约 1.32 kg；内存与存储只列类型，未列容量。\n\n**支撑事实**\n\n- 官方名称为华为擎云 L540z。\n- 操作系统为银河麒麟桌面操作系统 V10 或统信桌面操作系统 V20。\n- 产品事实摘录中没有处理器章节。\n- 内存为 LPDDR5x，未列容量。\n- 存储为固态存储 × 1，未列容量。\n- 屏幕为 14 英寸 IPS，整机约 1.32 kg（含电池）。\n- 包装清单含主机、电源适配器（含线）、快速指南和装箱单 & 合格证。\n\n**表达边界**\n\n- 内存容量、存储容量和处理器型号均未在规格摘录中列出，不能自行补数。\n- 内存、存储和系统版本以实际销售 SKU 为准。\n- 包装清单未列保修卡，与部分同系列型号不同。\n\n### 2. 屏幕与显示卡\n\n**可用结论**\n\n核心显示组合为 14 英寸、3:2、2160 × 1440 的 IPS 屏，88% 屏占比，400 尼特典型亮度，覆盖 100% sRGB，可视角度 178°。\n\n**支撑事实**\n\n- 屏幕尺寸 14 英寸，类型为 IPS，屏占比 88%。\n- 屏幕比例 3:2，分辨率 2160 × 1440，185 ppi。\n- 亮度 400 尼特，色域 100% sRGB，可视角度 178°。\n- 产品页称其为 2.1K 护眼全面屏，通过莱茵低蓝光、无频闪认证。\n- 规格摘录未列触控支持、刷新率或色准数据。\n\n**表达边界**\n\n- 亮度、色域和可视角度均为典型值。\n- 2.1K 对应 2160 × 1440，不能写成更高分辨率。\n- 规格摘录未列触控，不能默认支持触控或手写。\n- 刷新率与色准需重新打开规格页核对。\n\n### 3. 性能与存储卡\n\n**可用结论**\n\n公开规格只确认 LPDDR5x 内存、固态存储和 IPS 屏幕，未列内存容量、存储容量与处理器型号；性能与容量均不能直接下结论。\n\n**支撑事实**\n\n- 内存类型为 LPDDR5x，规格摘录未列容量。\n- 存储为固态存储 × 1，规格摘录未列容量。\n- 产品事实摘录中没有处理器和显卡章节。\n- 产品页称开机、打开大型 PPT 和大型文件拷贝有速度提升，属官方对比数据。\n- 官方提示硬盘格式化后的实际容量可能较小。\n\n**表达边界**\n\n- 内存容量、存储容量、处理器型号、核心数和性能跑分均未在产品事实中列出。\n- 不能以 L540x 等相近型号的容量套用到 L540z。\n- 页面速度提升数据有对比基准和测试条件，不能写成绝对耗时。\n- 性能宣传必须绑定具体配置、系统版本、应用与测试条件。\n\n### 4. 便携续航接口卡\n\n**可用结论**\n\n机身约 312.6 × 226.8 × 15.4 mm、约 1.32 kg，配 70 Wh 电池，保留 USB-C、两个 USB-A、HDMI 1.4、RJ45、3.5 mm 音频口和隐私物理开关。\n\n**支撑事实**\n\n- 长度 312.6 mm、宽度 226.8 mm、高度 15.4 mm。\n- 重量约 1.32 kg（含电池）。\n- 电池额定容量 70 Wh；产品页称本地 1080P 视频播放可达 14 小时，搭配原装快充 15 分钟可充约 25%。\n- 接口为 USB-C × 1、USB-A × 2、HDMI × 1、3.5 mm 耳机 & 麦克风二合一接口 × 1、RJ45 网口 × 1。\n- 另列隐私物理开关 × 1。\n- 产品页标注 USB-A 为 USB-A 3.2、HDMI 为 HDMI 1.4。\n\n**表达边界**\n\n- 尺寸和重量会随配置、制造和测量方法变化。\n- 14 小时续航与 15 分钟充 25% 均来自华为实验室，实际受亮度、音量、设置、负载和环境影响。\n- 规格摘录未列 USB-C 与 USB-A 的完整协议版本，不能按全功能或高速接口宣传。\n- HDMI 1.4 的刷新率与分辨率上限需按官方说明核对。\n- RJ45 为原生网口，仍需确认企业网络准入与线缆规格。\n\n### 5. 系统协同与兼容卡\n\n**可用结论**\n\n系统路线为银河麒麟 V10 或统信 V20，配 Wi-Fi 6 双频 2 × 2 MIMO、蓝牙 4.2（硬件支持 5.2）、指纹电源键、1080P 摄像头物理开关和机身隐私物理开关。\n\n**支撑事实**\n\n- 操作系统为银河麒麟桌面操作系统 V10 或统信桌面操作系统 V20。\n- 无线连接为 IEEE 802.11a/b/g/n/ac/ax（160 MHz）、2.4 GHz 和 5 GHz 双频、2 × 2 MIMO，蓝牙 4.2（硬件支持蓝牙 5.2）。\n- 电源键集成指纹识别。\n- 摄像头为 1080P 高清摄像头，支持物理开关，产品页另列天侧摄像头安全指示灯。\n- 机身另设隐私物理开关 × 1。\n- 产品页称通过 Wi-Fi 无线性能五星认证。\n- 产品页列有设备完整性保护和可信运行环境。\n\n**表达边界**\n\n- 麒麟与统信两个系统版本的应用、外设和驱动兼容性需分别验证。\n- 蓝牙 4.2 是当前协议版本，硬件支持 5.2 不等于已启用 5.2 全部特性。\n- 隐私物理开关的具体控制范围以官方说明和系统设置为准。\n- Wi-Fi 速率提升数据有对比机型和测试环境，不能当作所有场景的保证。\n"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      },
+      {
+        "path": "03-人群场景/37-学生学习/学生学习场景卡.md",
+        "kind": "reference_material",
+        "bucket": "audience",
+        "quotes": [
+          "# 学生学习与成长场景执行指南\n\n\n## 一、指南定位与边界\n\n面向高校学生、中小学生家庭、教师和校园IT，把选课、课堂记录、作业、编程/设计、研究、考试、社团和宿舍使用放入同一学习周期。目标是先确保课程要求、软件许可、数据备份和健康使用，再讨论便携、屏幕、性能或娱乐偏好。\n\n使用本指南时，先完成场景发现，再到 P1 核对完整 SKU 和产品事实，到 P7 核对官方使用与故障支持；价格、库存、赠品、交期、补贴和合同服务只能引用获授权且带日期的动态记录。不能把系列级“最高/可选”参数写成某一销售配置，不能用另一型号、另一系统或另一版本的事实替代当前对象。\n\n所有结论分为四类：**已确认**（有可复核证据）、**待测试**（问题已定义但未在目标环境通过）、**不适用**（该角色明确不需要并写出理由）、**不支持/不通过**（有证据表明门槛未满足）。便利功能、主观偏好或一次演示不能抵消业务门槛失败。\n\n## 二、参与角色与职责\n\n| 角色 | 主要责任 | 确认边界 |\n|---|---|---|\n| 学生 | 说明课程、软件、携带、作业、协作与宿舍使用 | 确认真实学习任务 |\n| 任课教师/导师 | 提供课程要求、作业格式、实验环境和提交规则 | 确认课程门槛 |\n| 家长/资助者 | 明确预算边界、共用安排、健康与服务预期 | 确认家庭约束 |\n| 校园IT/实验室 | 维护账号、网络、机房、许可证和考试环境 | 确认校内条件 |\n| 同组同学/社团负责人 | 说明协作格式、共享平台与活动任务 | 确认协作兼容 |\n\n角色可以一人兼任，但责任不能消失。访谈、方案、试点和验收至少要有业务使用者与技术/支持责任人共同参与；销售或内容创作者不能替客户的业务、安全或IT人员确认兼容性。角色意见冲突时分别记录，不用平均值抹平岗位差异。\n\n## 三、端到端任务链\n\n| 顺序 | 阶段 | 要做的事 | 阶段产物 |\n|---:|---|---|---|\n| 1 | 入学/选课 | 收集课程大纲、软件和校园服务要求 | 学期需求清单 |\n| 2 | 课堂学习 | 记录、查阅、演示、投屏和临时协作 | 课堂成果 |\n| 3 | 作业实践 | 编程、设计、文档、实验或视频任务 | 可提交作品 |\n| 4 | 协作反馈 | 共享、评审、修改和版本管理 | 小组版本记录 |\n| 5 | 考试答辩 | 按校方规则准备账号、文件、网络和备用方式 | 考务准备卡 |\n| 6 | 学期归档 | 备份课程资料、退出账号、迁移与设备维护 | 学习档案 |\n\n每个阶段都要能回答四个问题：输入是什么、谁执行、怎样判断完成、失败后回到哪里。若只写“需要性能、续航、协同、便携”，却没有绑定到任务链的具体一步，就仍然不是可执行需求。\n\n## 四、典型痛点及其业务影响\n\n### 1. “专业推荐配置”过于粗糙\n\n同一专业不同年级、课程和软件版本差异很大。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n### 2. 学习与娱乐需求相互挤压\n\n预算、存储、时间和注意力需要家庭共同设边界。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n### 3. 校园服务和个人环境不一致\n\n宿舍网、校园网、机房、云平台和教师要求可能不同。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n### 4. 文件丢失或错版影响作业\n\n桌面、聊天、云盘和移动存储多处复制，缺少主版本。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n### 5. 只考虑首学期\n\n后续课程、实习、社团和维修期缺少规划。\n\n发现这类痛点时，先记录它影响的岗位、任务、发生频率与当前绕行办法；没有这些信息，不把它直接翻译成某项产品参数。\n\n痛点排序采用“业务影响 × 发生概率 × 恢复难度”，但评分只用于排优先级，不凭空生成精确收益。涉及效率、时间、故障率或成本的数字，必须来自客户授权测量并写明环境、样本和日期；本指南不提供虚构比例。\n\n## 五、如何发现真正的问题\n\n### 5.1 访谈问题\n\n1. 未来一学年有哪些必修/选修课程，指定软件、版本、系统、插件和文件格式是什么？\n2. 作业是文档、代码、模型、图片、音视频还是实验数据，典型规模和提交方式是什么？\n3. 每天携带距离、可充电地点、课堂桌面、宿舍外设和噪音环境怎样？\n4. 校园账号、网络、VPN、许可证和考试规则由谁提供，个人设备能否接入？\n5. 学习资料如何备份，小组协作怎样避免错版，设备维修期间如何继续课程？\n6. 家庭共用、家长管理、隐私和娱乐时间有什么约定？\n\n### 5.2 现场观察法\n\n让目标岗位用脱敏材料从任务起点做到终点，观察账号、应用、文件、网络、外设、等待、返工和人工绕行。顾问只在安全风险或可能造成数据损失时叫停，不在旁边临时修正，否则无法发现培训与文档缺口。观察后用“条件—动作—结果—影响”复述，由受访者确认。\n\n### 5.3 门槛问题与偏好问题分开\n\n门槛问题决定方案能否进入候选，例如指定系统/软件、组织安全、必要外设、数据规则或关键任务；偏好问题用于候选之间比较，例如外观、手感、颜色或某种便利。门槛未知时只保留候选范围，不直接给唯一结论。\n\n## 六、证据包怎么建立\n\n| 证据类别 | 最低内容 | 状态 |\n|---|---|---|\n| 课程证据 | 课程大纲、教师通知、作业样例和截止时间 | 已确认 / 待补 / 不适用 |\n| 软件证据 | 官方系统要求、学校许可证与实验室说明 | 已确认 / 待补 / 不适用 |\n| 环境证据 | 教室/宿舍网络、投影、桌面和可用外设 | 已确认 / 待补 / 不适用 |\n"
+        ],
+        "authority": "表达与场景参考，不是产品事实"
+      }
+    ],
+    "user_preferences": {},
+    "performance_references": [],
+    "scene": {
+      "name": "开学季",
+      "angle": "围绕学习、携带、续航和多设备协同,不要把所有学生需求归结为单一性能指标",
+      "focus": [
+        "便携与重量",
+        "续航与课堂/图书馆场景",
+        "学习办公软件体验",
+        "多设备协同"
+      ],
+      "avoid": [
+        "只堆性能参数",
+        "编造学生优惠"
+      ],
+      "in_table": true
+    },
+    "platform": {
+      "name": "小红书",
+      "form": "口语化标题、短段落、使用场景、话题标签",
+      "title": "口语化标题,20字以内,带具体场景或人群,可含1个emoji",
+      "length": "正文300-600字,每段不超过3行",
+      "structure": [
+        "开头一句话点出场景或痛点",
+        "按使用场景分短段,每段一个卖点",
+        "结尾给选购建议和互动提问"
+      ],
+      "tone": "亲切、轻松、像朋友分享;不得伪造个人使用经历,以'适合'、'如果你'等表述代替",
+      "images": {
+        "min": 3,
+        "max": 6
+      },
+      "cta": "邀请评论区交流或收藏,可引导到店体验",
+      "tags": {
+        "min": 5,
+        "max": 8
+      },
+      "field_mapping": "title=标题, intro=开头一句, body=短段落, cta=结尾互动, tags=话题标签",
+      "first_person_experience": false
+    },
+    "source_manifest": [
+      {
+        "path": "01-产品事实/华为擎云 L540z/产品事实.md",
+        "sha256": "878538ad1058f13edfd90bef73aeaee152e41ad593acbe52d0871665f005c478"
+      },
+      {
+        "path": "04-营销表达/小红书图文模板.md",
+        "sha256": "1e2f9c003843d67bc5e635e8dce49e20c4746fcc693df9a53498a5aa0b035e7f"
+      },
+      {
+        "path": "01-产品事实/华为擎云 L540z/卖点与限制.md",
+        "sha256": "83085c9f904796db55cd3c3b48f2d4895ab69675ca05ddb599ec451ab7bafc60"
+      },
+      {
+        "path": "03-人群场景/37-学生学习/学生学习场景卡.md",
+        "sha256": "b32700860ab942d87860f43e8380ac11f90776e7f2aa6ec9fc7bfa371f5722af"
+      }
+    ],
+    "verification": {},
+    "authority": {
+      "facts": "唯一可用于产品参数、功能、条件和效果主张的证据",
+      "images": "仅证明素材登记与型号归属，不证明画面中的产品事实",
+      "expression_references": "仅影响角度、结构和措辞，不得升级为产品事实",
+      "user_preferences": "仅影响语气、选题偏好和禁区，不得升级为产品事实",
+      "performance_references": "仅影响角度、结构和行动引导，不得升级为产品事实"
+    }
+  },
+  "content_plan": {
+    "blocks": [
+      {
+        "id": "B1",
+        "kind": "opening",
+        "objective": "生成口语化标题（20字以内，含场景/人群及1个emoji）和开头导语。导语需点出大学新生开学季选购笔记本的痛点或场景，语气亲切轻松，为后文介绍产品特性做铺垫，不直接罗列参数。；必须同时生成非空标题和非空导语；只写规范需求中的受众、场景与关注问题，不写产品参数、功能或效果",
+        "fact_ids": [],
+        "depends_on": [],
+        "status": "passed",
+        "version": 1,
+        "attempts": 1,
+        "draft": {
+          "title": "开学季选电脑，新生先理清这几件事🎒",
+          "intro": "开学季挑笔记本，是不是越看越懵？专业课要用的软件能不能跑、教室到宿舍来回带着方不方便、白天在外电池够不够用，每个人的答案都不一样。这篇不堆参数，就按大学新生的真实场景，把该关注的点一条条捋清楚，帮你先把需求想明白，再去看具体机型。",
+          "body": [],
+          "cta": "",
+          "tags": [],
+          "images": []
+        },
+        "issues": [
+          {
+            "stage": "fact",
+            "source": "rule",
+            "severity": "warn",
+            "where": "配图方案",
+            "detail": "图片数量 0 少于平台建议的 3 张(可能是知识库可用图片不足)",
+            "suggestion": "",
+            "ref": ""
+          }
+        ],
+        "removed": []
+      },
+      {
+        "id": "B2",
+        "kind": "body",
+        "objective": "撰写第一个正文小节，聚焦“便携与屏幕体验”。结合华为擎云 L540z 的重量、尺寸数据以及屏幕规格，描述其适合携带至教室或图书馆的物理形态，并客观陈述屏幕显示参数带来的视觉基础。每段不超过3行，避免推导具体学习效率，仅陈述事实支持的使用场景适配性。；必须生成完整的正文小节，而不是一两句话",
+        "fact_ids": [
+          "F6",
+          "F7",
+          "F9",
+          "F10"
+        ],
+        "depends_on": [],
+        "status": "passed",
+        "version": 2,
+        "attempts": 2,
+        "draft": {
+          "title": "",
+          "intro": "",
+          "body": [
+            {
+              "text": "开学带电脑，每天背来背去这件事值得先想清楚。华为擎云 L540z 整机重量约 1.32 kg（含电池），这是官方规格标注的数值，带“约”字，属于近似值。",
+              "fact_ids": [
+                "F6"
+              ]
+            },
+            {
+              "text": "要不要天天带、单程走多久、包里还要不要塞书和水杯，这几个问题可以先列出来，再把这个重量数字放进自己的对比清单里对一对。与其只盯着“轻不轻”这类形容词，不如先弄清楚自己每天实际要背多久、背多远，再去和其他候选机型逐项比。",
+              "fact_ids": [
+                "F6"
+              ]
+            },
+            {
+              "text": "屏幕部分，这台是 14 英寸，屏占比 88%，屏幕比例 3:2，三项都来自官方规格，是可以直接拿来对照的参数。",
+              "fact_ids": [
+                "F7",
+                "F9",
+                "F10"
+              ]
+            },
+            {
+              "text": "3:2 这个比例在选机时值得单独看一眼。如果日常任务以文档、资料和网页作业为主，可以把屏幕比例列进自己的对比项，再到线下实机看一眼显示效果和机身大小是否符合预期。",
+              "fact_ids": [
+                "F10"
+              ]
+            }
+          ],
+          "cta": "",
+          "tags": [],
+          "images": [
+            {
+              "image_id": "IMG-7e62a03fa7dd3cf4",
+              "after_paragraph": 2,
+              "caption": "华为擎云 L540z",
+              "reason": "该图为已登记的整机主视觉图，配合本小节“每天背着走”的便携话题，帮助读者对机身形态形成直观印象。"
+            },
+            {
+              "image_id": "IMG-6db6062b3d45cb49",
+              "after_paragraph": 4,
+              "caption": "华为擎云 L540z 正视图，展示了屏幕性能",
+              "reason": "该图登记为正视图并展示屏幕，与本小节屏幕尺寸、屏占比和比例段落对应，用于配合说明屏幕规格。"
+            }
+          ]
+        },
+        "issues": [
+          {
+            "stage": "fact",
+            "source": "rule",
+            "severity": "warn",
+            "where": "配图方案",
+            "detail": "图片数量 2 少于平台建议的 3 张(可能是知识库可用图片不足)",
+            "suggestion": "",
+            "ref": ""
+          },
+          {
+            "stage": "fact",
+            "source": "llm",
+            "severity": "warn",
+            "where": "正文第1段",
+            "detail": "稿件在陈述重量数值时，遗漏了原始资料中“实际尺寸和重量依配置、制造工艺、测量方法的不同可能有所差异”这一限定条件。",
+            "suggestion": "在提及重量数据时，补充说明实际重量可能因配置、制造工艺或测量方法不同而有所差异。",
+            "ref": ""
+          },
+          {
+            "stage": "fact",
+            "source": "llm",
+            "severity": "warn",
+            "where": "正文第3段",
+            "detail": "稿件在陈述屏幕尺寸、屏占比和屏幕比例参数时，未结合原始资料中的相关限定条件。虽然原始资料中屏幕部分的具体限定说明（如“典型值”）主要针对亮度、色域等，但稿件直接断言这三项“是可以直接拿来对照的参数”，与原始资料强调数据可能存在差异的整体语境存在偏差，且未提示配置差异可能带来的影响。",
+            "suggestion": "调整表述，避免使用“是可以直接拿来对照的参数”这类绝对化断言，并补充说明产品规格可能因销售版本或配置而异的通用提示。",
+            "ref": ""
+          },
+          {
+            "stage": "compliance",
+            "source": "llm",
+            "severity": "warn",
+            "where": "正文第3段",
+            "detail": "“是可以直接拿来对照的参数”这一表述过于绝对，未保留参数可能存在波动的限定条件，存在合规风险。",
+            "suggestion": "删除绝对化表述，改为客观陈述屏幕规格，并保留“具体参数以实际销售版本为准”等限定说明。",
+            "ref": ""
+          }
+        ],
+        "removed": []
+      },
+      {
+        "id": "B3",
+        "kind": "body",
+        "objective": "撰写第二个正文小节，聚焦“续航与连接稳定性”。基于电池容量和无线连接标准，说明该设备在长时间使用下的电力保障能力以及在校园网络环境中的连接表现。同时提及接口配置以展示扩展便利性。保持段落简短，语气像朋友分享，不使用第一人称伪造经历。；必须生成完整的正文小节，而不是一两句话",
+        "fact_ids": [
+          "F22",
+          "F17",
+          "F24",
+          "F25"
+        ],
+        "depends_on": [],
+        "status": "passed",
+        "version": 2,
+        "attempts": 2,
+        "draft": {
+          "title": "",
+          "intro": "",
+          "body": [
+            {
+              "text": "挑笔记本的时候，电池容量是很多人会多看一眼的地方。华为擎云 L540z 的电池额定容量为 70 Wh。这个数字属于规格层面的参考，实际能用多久还要看屏幕亮度、音量、系统设置、同时运行的任务和所处环境，不同专业、不同课表的差异可能不小，按自己的日常节奏去判断会更稳妥。",
+              "fact_ids": [
+                "F22"
+              ]
+            },
+            {
+              "text": "在校园里用电脑，无线连接往往是容易被忽略的一项。这款机型支持的 WLAN 标准为 IEEE 802.11a/b/g/n/ac/ax，支持 160 MHz。不过能不能用得上，还得看学校无线网络本身的配置和覆盖情况——宿舍、教学楼、图书馆常常是几套不同环境，建议先弄清楚自己校园网的接入方式，再做判断。",
+              "fact_ids": [
+                "F17"
+              ]
+            },
+            {
+              "text": "外接设备这块，机身提供 2 个 USB-A 接口和 1 个 HDMI 接口。USB-A 可以接常见的鼠标、U 盘一类设备；HDMI 接口在有投影或外接显示器的教室里，可以直接连线使用。接口的具体协议版本以官方规格页为准，如果你对特定外设有要求，下单前可以先核对一遍。",
+              "fact_ids": [
+                "F24",
+                "F25"
+              ]
+            }
+          ],
+          "cta": "",
+          "tags": [],
+          "images": [
+            {
+              "image_id": "IMG-ded500206b280fd8",
+              "after_paragraph": 0,
+              "caption": "用户使用华为擎云 L540z 办公，展示了笔记本的超长续航",
+              "reason": "该图与电池容量所在的段落内容对应，用于衔接续航话题。"
+            }
+          ]
+        },
+        "issues": [
+          {
+            "stage": "fact",
+            "source": "rule",
+            "severity": "warn",
+            "where": "配图方案",
+            "detail": "图片数量 1 少于平台建议的 3 张(可能是知识库可用图片不足)",
+            "suggestion": "",
+            "ref": ""
+          },
+          {
+            "stage": "fact",
+            "source": "llm",
+            "severity": "warn",
+            "where": "图片 IMG-ded500206b280fd8 的 caption",
+            "detail": "图注中使用了“超长续航”这一效果主张，但可用事实中仅有电池额定容量为 70 Wh 的参数，没有任何关于续航时间或效果评价的事实依据，属于无依据扩写。",
+            "suggestion": "将图注修改为客观描述，例如“用户使用华为擎云 L540z 办公”，删除“展示了笔记本的超长续航”的表述。",
+            "ref": ""
+          }
+        ],
+        "removed": []
+      },
+      {
+        "id": "B4",
+        "kind": "closing",
+        "objective": "生成结尾行动引导（CTA）和话题标签。总结前文提到的便携、续航等核心卖点，给出针对大学新生的选购建议或邀请评论区交流/收藏，可引导到店体验。提供5-8个相关话题标签。；必须生成非空行动引导，并按平台要求生成标签；不新增产品参数、功能、效果、权益或承诺",
+        "fact_ids": [],
+        "depends_on": [
+          "B2",
+          "B3"
+        ],
+        "status": "passed",
+        "version": 1,
+        "attempts": 1,
+        "draft": {
+          "title": "",
+          "intro": "",
+          "body": [],
+          "cta": "选笔记本这件事，与其听别人一句“够用”，不如先把每天要不要带、在外面待多久、上课要用哪些软件写下来，再拿着这份清单去挑。如果你也在准备开学装备，欢迎在评论区说说你的专业和日常用法，一起把关注顺序理清楚；拿不准的机型，也可以去线下门店实际看一看、试一试，再决定要不要放进候选清单。觉得这篇有帮助的话，先点个收藏，挑电脑的时候翻出来对一对～",
+          "tags": [
+            "#开学季",
+            "#大学新生",
+            "#笔记本电脑怎么选",
+            "#学生党笔记本",
+            "#开学装备清单",
+            "#华为擎云L540z",
+            "#选电脑先看需求"
+          ],
+          "images": []
+        },
+        "issues": [
+          {
+            "stage": "fact",
+            "source": "rule",
+            "severity": "warn",
+            "where": "配图方案",
+            "detail": "图片数量 0 少于平台建议的 3 张(可能是知识库可用图片不足)",
+            "suggestion": "",
+            "ref": ""
+          }
+        ],
+        "removed": []
+      }
+    ]
+  },
+  "draft": {
+    "title": "开学季选电脑，新生先理清这几件事🎒",
+    "intro": "开学季挑笔记本，是不是越看越懵？专业课要用的软件能不能跑、教室到宿舍来回带着方不方便、白天在外电池够不够用，每个人的答案都不一样。这篇不堆参数，就按大学新生的真实场景，把该关注的点一条条捋清楚，帮你先把需求想明白，再去看具体机型。",
+    "body": [
+      {
+        "text": "开学带电脑，每天背来背去这件事值得先想清楚。华为擎云 L540z 整机重量约 1.32 kg（含电池），这是官方规格标注的数值，带“约”字，属于近似值。",
+        "fact_ids": [
+          "F6"
+        ]
+      },
+      {
+        "text": "要不要天天带、单程走多久、包里还要不要塞书和水杯，这几个问题可以先列出来，再把这个重量数字放进自己的对比清单里对一对。与其只盯着“轻不轻”这类形容词，不如先弄清楚自己每天实际要背多久、背多远，再去和其他候选机型逐项比。",
+        "fact_ids": [
+          "F6"
+        ]
+      },
+      {
+        "text": "屏幕部分，这台是 14 英寸，屏占比 88%，屏幕比例 3:2，三项都来自官方规格，是可以直接拿来对照的参数。",
+        "fact_ids": [
+          "F7",
+          "F9",
+          "F10"
+        ]
+      },
+      {
+        "text": "3:2 这个比例在选机时值得单独看一眼。如果日常任务以文档、资料和网页作业为主，可以把屏幕比例列进自己的对比项，再到线下实机看一眼显示效果和机身大小是否符合预期。",
+        "fact_ids": [
+          "F10"
+        ]
+      },
+      {
+        "text": "挑笔记本的时候，电池容量是很多人会多看一眼的地方。华为擎云 L540z 的电池额定容量为 70 Wh。这个数字属于规格层面的参考，实际能用多久还要看屏幕亮度、音量、系统设置、同时运行的任务和所处环境，不同专业、不同课表的差异可能不小，按自己的日常节奏去判断会更稳妥。",
+        "fact_ids": [
+          "F22"
+        ]
+      },
+      {
+        "text": "在校园里用电脑，无线连接往往是容易被忽略的一项。这款机型支持的 WLAN 标准为 IEEE 802.11a/b/g/n/ac/ax，支持 160 MHz。不过能不能用得上，还得看学校无线网络本身的配置和覆盖情况——宿舍、教学楼、图书馆常常是几套不同环境，建议先弄清楚自己校园网的接入方式，再做判断。",
+        "fact_ids": [
+          "F17"
+        ]
+      },
+      {
+        "text": "外接设备这块，机身提供 2 个 USB-A 接口和 1 个 HDMI 接口。USB-A 可以接常见的鼠标、U 盘一类设备；HDMI 接口在有投影或外接显示器的教室里，可以直接连线使用。接口的具体协议版本以官方规格页为准，如果你对特定外设有要求，下单前可以先核对一遍。",
+        "fact_ids": [
+          "F24",
+          "F25"
+        ]
+      }
+    ],
+    "cta": "选笔记本这件事，与其听别人一句“够用”，不如先把每天要不要带、在外面待多久、上课要用哪些软件写下来，再拿着这份清单去挑。如果你也在准备开学装备，欢迎在评论区说说你的专业和日常用法，一起把关注顺序理清楚；拿不准的机型，也可以去线下门店实际看一看、试一试，再决定要不要放进候选清单。觉得这篇有帮助的话，先点个收藏，挑电脑的时候翻出来对一对～",
+    "tags": [
+      "#开学季",
+      "#大学新生",
+      "#笔记本电脑怎么选",
+      "#学生党笔记本",
+      "#开学装备清单",
+      "#华为擎云L540z",
+      "#选电脑先看需求"
+    ],
+    "images": [
+      {
+        "image_id": "IMG-7e62a03fa7dd3cf4",
+        "after_paragraph": 2,
+        "caption": "华为擎云 L540z",
+        "reason": "该图为已登记的整机主视觉图，配合本小节“每天背着走”的便携话题，帮助读者对机身形态形成直观印象。"
+      },
+      {
+        "image_id": "IMG-6db6062b3d45cb49",
+        "after_paragraph": 4,
+        "caption": "华为擎云 L540z 正视图，展示了屏幕性能",
+        "reason": "该图登记为正视图并展示屏幕，与本小节屏幕尺寸、屏占比和比例段落对应，用于配合说明屏幕规格。"
+      },
+      {
+        "image_id": "IMG-ded500206b280fd8",
+        "after_paragraph": 4,
+        "caption": "用户使用华为擎云 L540z 办公，展示了笔记本的超长续航",
+        "reason": "该图与电池容量所在的段落内容对应，用于衔接续航话题。"
+      }
+    ]
+  },
+  "review": {
+    "issues": [
+      {
+        "stage": "compliance",
+        "source": "llm",
+        "severity": "warn",
+        "where": "图注 IMG-ded500206b280fd8",
+        "detail": "图注中包含“超长续航”，属于夸大性能和使用效果，且无事实依据支持该绝对化效果描述。",
+        "suggestion": "将图注修改为客观描述，如“用户使用华为擎云 L540z 办公，展示笔记本续航能力”",
+        "ref": ""
+      }
+    ],
+    "removed": []
+  },
+  "history": [
+    {
+      "role": "用户",
+      "content": "请按以下设置创作营销图文。\n\n本次创作设置：产品：HUAWEI MateBook 14；受众：大学新生；场景：开学季；平台：小红书；目标：种草"
+    },
+    {
+      "role": "用户",
+      "content": "请按以下设置创作营销图文。\n\n本次创作设置：产品：华为擎云 L540z"
+    }
+  ],
+  "trace": [
+    {
+      "stage": "1 结构化需求",
+      "at": "14:43:46",
+      "brief": {
+        "product": "HUAWEI MateBook 14",
+        "product_type": "",
+        "audience": "大学新生",
+        "scene": "开学季",
+        "platform": "小红书",
+        "goal": "种草",
+        "stage": "",
+        "main_problem": "",
+        "extra": "",
+        "llm_notes": "用户未指定产品大类，根据型号推断为轻薄本但按规则留空；未明确购买阶段和具体痛点。"
+      },
+      "questions": []
+    },
+    {
+      "stage": "1.5 规范任务说明",
+      "at": "14:43:46",
+      "canonical_brief": "产品：HUAWEI MateBook 14；目标受众：大学新生；使用场景：开学季；发布平台：小红书；创作目标：种草。"
+    },
+    {
+      "stage": "2 资料匹配",
+      "at": "14:43:46",
+      "facts": 48,
+      "images": 8,
+      "sources": [
+        "01-产品事实/HUAWEI MateBook 14/产品事实.md"
+      ],
+      "dropped": [],
+      "conflicts": [],
+      "similar_models": [
+        "HUAWEI MateBook Fold 非凡大师",
+        "HUAWEI MateBook Pro",
+        "HUAWEI MateBook Pro S",
+        "MateBook 14 酷睿 Ultra",
+        "MateBook D 14",
+        "MateBook D 16",
+        "MateBook D 16 SE 版",
+        "MateBook GT 系列",
+        "MateBook X系列",
+        "HUAWEI MateBook Fold 企业版"
+      ],
+      "usage_review": {
+        "excluded": 0,
+        "catalog_signature": "dc8e09c09bb0a05ec320b1329c10608125c148c96b0de0d6e7573bb682dfa3c4",
+        "source_hashes": {
+          "01-产品事实/HUAWEI MateBook 14/产品事实.md": "e8dbcb071d0145372056530ad64015380856f243a5beffc564e18bf8bb86da99",
+          "04-营销表达/小红书图文模板.md": "1e2f9c003843d67bc5e635e8dce49e20c4746fcc693df9a53498a5aa0b035e7f",
+          "04-营销表达/按型号/HUAWEI MateBook 14/学生用户沟通卡.md": "a67b9108f87ec283f7a81592e24ad39c18731611b8165dd4c85688429761963b",
+          "04-营销表达/补充资料/6db92c0da2-小红书完整成稿.md": "fdd157ee17fc4749e36639b33caa4c966c121382ee8fc3730de71de52d6a3759",
+          "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_原野绿多彩配色_04.png": "9f9470747d7e3c406b87c31ecd5d51f1f3542626001ed8b00b04c5db8973de82",
+          "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_多彩配色外观_01_7e0eedb6.png": "e320384c91d75f723fb785fce8505c9ce099980cf4330e37d08d75430f32650d",
+          "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_手写笔创作场景_07.jpg": "85fadb0cbceb8632b00301aa07db8b815469e0107b8c89b5d91baab15a9c281b",
+          "05-图片素材/HUAWEI MateBook 14/hwpc_matebook-14-harmonyos_深空灰沉稳配色_05.png": "ab085ae7d9fd83af91b68e1b32c9f6f2148ca22e0d656f16f89815b93650f440",
+          "05-图片素材/HUAWEI MateBook 14/d623ed8c-vmall_matebook-14-harmonyos_强劲性能释放展示_02.jpg": "0bc94b00136a83292b1820a564b48087ddba3125b9852be977b4018e2e030c4f",
+          "05-图片素材/HUAWEI MateBook 14/578dcffa-vmall_matebook-14-harmonyos_原野绿键盘俯视外观_03.png": "c892487b3077760859991b683017ac96f876e040357aa9aa0ffbf4fa9babe972",
+          "05-图片素材/HUAWEI MateBook 14/733b0086-vmall_matebook-14-harmonyos_轻薄原野绿侧面细节_04.png": "b2a991f2763fd7d646e6a362b48536e3949c197137f097ad06b5fcb6fb3e321b",
+          "05-图片素材/HUAWEI MateBook 14/b8c11bbb-vmall_matebook-14-harmonyos_原野绿简洁A面外观_05.png": "d36c93bb3309a15889de0c880c67fea59c1dd548e29cb823f84058989bc5076d"
+        }
+      }
+    },
+    {
+      "stage": "3 策略匹配",
+      "at": "14:43:46",
+      "scene": "开学季",
+      "platform": "小红书",
+      "performance_references": 0,
+      "top_reference_weight": null
+    },
+    {
+      "stage": "3.5 统一上下文装配",
+      "at": "14:43:46",
+      "contract": "writing-context-v1",
+      "facts": 48,
+      "images": 8,
+      "expression_references": 3,
+      "performance_references": 0,
+      "preferences": []
+    },
+    {
+      "stage": "4 文章分块规划",
+      "at": "14:43:56",
+      "blocks": [
+        {
+          "id": "B1",
+          "kind": "opening",
+          "objective": "生成符合小红书风格的口语化标题（20字以内，含场景/人群及emoji）和开头导语。导语需点出大学新生开学季携带电脑或上课的痛点，语气亲切轻松，不伪造个人经历，为后续正文铺垫。；必须同时生成非空标题和非空导语；只写规范需求中的受众、场景与关注问题，不写产品参数、功能或效果",
+          "fact_ids": [],
+          "depends_on": []
+        },
+        {
+          "id": "B2",
+          "kind": "body",
+          "objective": "撰写第一个正文小节，聚焦‘便携与外观’场景。结合事实描述机身轻薄尺寸、重量以及屏幕规格（如OLED、高屏占比、3:2比例），强调其适合放入书包携带以及在图书馆/教室使用的视觉体验。段落短小精悍，每段不超过3行，避免堆砌参数，侧重呈现产品物理属性带来的直观感受。；必须生成完整的正文小节，而不是一两句话",
+          "fact_ids": [
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ],
+          "depends_on": []
+        },
+        {
+          "id": "B3",
+          "kind": "body",
+          "objective": "撰写第二个正文小节，聚焦‘续航与多设备协同’场景。结合事实描述电池容量、处理器型号以及HarmonyOS系统特性，强调其在长时间课堂学习中的电量保障以及与华为其他设备的连接能力（如星闪、蓝牙）。保持客观陈述，使用‘适合’、‘如果你’等引导性措辞，突出高效学习和无缝流转的体验优势。；必须生成完整的正文小节，而不是一两句话",
+          "fact_ids": [
+            "F1",
+            "F23",
+            "F32",
+            "F29"
+          ],
+          "depends_on": []
+        },
+        {
+          "id": "B4",
+          "kind": "closing",
+          "objective": "生成结尾行动引导（CTA）和话题标签。CTA部分邀请读者在评论区交流选购心得或收藏笔记，可温和引导到店体验，语气像朋友分享建议。提供5-8个相关的小红书话题标签，涵盖产品名、目标人群和使用场景。；必须生成非空行动引导，并按平台要求生成标签；不新增产品参数、功能、效果、权益或承诺",
+          "fact_ids": [],
+          "depends_on": [
+            "B2",
+            "B3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "5 分块队列",
+      "at": "14:47:26",
+      "events": [
+        {
+          "event": "queued_generate",
+          "block": "B1",
+          "version": 1
+        },
+        {
+          "event": "queued_generate",
+          "block": "B2",
+          "version": 1
+        },
+        {
+          "event": "queued_generate",
+          "block": "B3",
+          "version": 1
+        },
+        {
+          "event": "written",
+          "block": "B1",
+          "version": 1,
+          "seconds": 10.249,
+          "wait_seconds": 0.0
+        },
+        {
+          "event": "reviewed",
+          "block": "B1",
+          "version": 1,
+          "seconds": 1.449,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 1
+        },
+        {
+          "event": "written",
+          "block": "B2",
+          "version": 1,
+          "seconds": 25.428,
+          "wait_seconds": 10.239
+        },
+        {
+          "event": "reviewed",
+          "block": "B2",
+          "version": 1,
+          "seconds": 4.385,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 2
+        },
+        {
+          "event": "written",
+          "block": "B3",
+          "version": 1,
+          "seconds": 32.649,
+          "wait_seconds": 35.66
+        },
+        {
+          "event": "reviewed",
+          "block": "B3",
+          "version": 1,
+          "seconds": 23.755,
+          "wait_seconds": 0.0,
+          "errors": 1,
+          "warnings": 2
+        },
+        {
+          "event": "queued_rewrite",
+          "block": "B3",
+          "version": 2,
+          "errors": 1
+        },
+        {
+          "event": "written",
+          "block": "B3",
+          "version": 2,
+          "seconds": 36.632,
+          "wait_seconds": 0.0
+        },
+        {
+          "event": "reviewed",
+          "block": "B3",
+          "version": 2,
+          "seconds": 25.258,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 2
+        },
+        {
+          "event": "queued_generate",
+          "block": "B4",
+          "version": 1
+        },
+        {
+          "event": "written",
+          "block": "B4",
+          "version": 1,
+          "seconds": 33.746,
+          "wait_seconds": 0.0
+        },
+        {
+          "event": "reviewed",
+          "block": "B4",
+          "version": 1,
+          "seconds": 22.116,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 1
+        }
+      ],
+      "metrics": {
+        "first_block_passed_seconds": 11.7,
+        "total_seconds": 209.859,
+        "writer_processing_seconds": 138.704,
+        "reviewer_processing_seconds": 76.962,
+        "writer_queue_wait_seconds": 45.899,
+        "reviewer_queue_wait_seconds": 0.0,
+        "generated_versions": 5,
+        "reviewed_versions": 5,
+        "rewrites": 1,
+        "rewrite_rate": 0.2
+      },
+      "result": "passed"
+    },
+    {
+      "stage": "6 整文连贯性编辑",
+      "at": "14:47:52",
+      "applied": true,
+      "notes": []
+    },
+    {
+      "stage": "7 全文终审",
+      "at": "14:47:59",
+      "errors": 0,
+      "warns": 2,
+      "coherence_notes": []
+    },
+    {
+      "stage": "页面结果",
+      "at": "14:47:59",
+      "status": "review"
+    },
+    {
+      "stage": "7 修改意图",
+      "at": "14:51:47",
+      "action": "change_product",
+      "value": "华为擎云 L540z",
+      "note": "用户通过创作设置更换产品"
+    },
+    {
+      "stage": "1.5 规范任务说明",
+      "at": "14:51:47",
+      "canonical_brief": "产品：华为擎云 L540z；目标受众：大学新生；使用场景：开学季；发布平台：小红书；创作目标：种草。"
+    },
+    {
+      "stage": "1 结构化需求(重来)",
+      "at": "14:51:50",
+      "brief": {
+        "product": "华为擎云 L540z",
+        "product_type": "",
+        "audience": "大学新生",
+        "scene": "开学季",
+        "platform": "小红书",
+        "goal": "种草",
+        "stage": "",
+        "main_problem": "",
+        "extra": "",
+        "llm_notes": "用户最新一轮明确指定产品为华为擎云 L540z，覆盖之前的 HUAWEI MateBook 14；其他字段（受众、场景、平台、目标）沿用已确定信息。未提供具体痛点或购买阶段，留空。"
+      },
+      "questions": []
+    },
+    {
+      "stage": "1.5 规范任务说明",
+      "at": "14:51:50",
+      "canonical_brief": "产品：华为擎云 L540z；目标受众：大学新生；使用场景：开学季；发布平台：小红书；创作目标：种草。"
+    },
+    {
+      "stage": "2 资料匹配",
+      "at": "14:51:50",
+      "facts": 38,
+      "images": 8,
+      "sources": [
+        "01-产品事实/华为擎云 L540z/产品事实.md"
+      ],
+      "dropped": [],
+      "conflicts": [],
+      "similar_models": [
+        "华为擎云 L420",
+        "华为擎云 L420x",
+        "华为擎云 L420z",
+        "华为擎云 L540x",
+        "华为擎云 L540x 优享版",
+        "华为擎云 L540z 优享版"
+      ],
+      "usage_review": {
+        "excluded": 0,
+        "catalog_signature": "dc8e09c09bb0a05ec320b1329c10608125c148c96b0de0d6e7573bb682dfa3c4",
+        "source_hashes": {
+          "04-营销表达/小红书图文模板.md": "1e2f9c003843d67bc5e635e8dce49e20c4746fcc693df9a53498a5aa0b035e7f",
+          "03-人群场景/37-学生学习/学生学习场景卡.md": "b32700860ab942d87860f43e8380ac11f90776e7f2aa6ec9fc7bfa371f5722af",
+          "01-产品事实/华为擎云 L540z/产品事实.md": "878538ad1058f13edfd90bef73aeaee152e41ad593acbe52d0871665f005c478",
+          "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_主视觉_01_736276ec.jpg": "736276ecbdc08e7a9e6dca75961ea0367f24dd307f0c9e92fe36835478b0e32a",
+          "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播1_02_df337d98.jpg": "df337d986dfedeb5559520fd5307a6b0bd736e0456403588c0640a03db082fb8",
+          "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播2_03_8b6056ff.jpg": "8b6056ffd9444920e3550c6f723723a02aac48da8ced73dbfad846f459ed92f9",
+          "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播3_04_f95045d3.jpg": "f95045d3c363a59a3af51aa13ee8942cd8717f2ff76638bfc3c3d2558b81b56f",
+          "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_亮点轮播5_06_5d5150d5.jpg": "5d5150d527ddf3bfe3d7595a541e6408828a124cd9378b770afa0f1a0e61f2de",
+          "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_生产力亮点_08_5894d779.jpg": "5894d7792508e477d073e64e872cc93e6bf1e75cdcf9c7acb90af86ca17e8966",
+          "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_超长续航_09_33bc05ff.jpg": "33bc05ff17ebdb9c5c420e2c7931102fd0bd8648340e0e62442d2a32eca80a43",
+          "05-图片素材/华为擎云 L540z/hwpc_qingyun-l540z_屏幕性能_10_ce776285.jpg": "ce77628582beb3746455980fdb5f923ab980e726a2d09f0011ea845e5278a19c",
+          "01-产品事实/华为擎云 L540z/卖点与限制.md": "83085c9f904796db55cd3c3b48f2d4895ab69675ca05ddb599ec451ab7bafc60"
+        }
+      }
+    },
+    {
+      "stage": "3 策略匹配",
+      "at": "14:51:50",
+      "scene": "开学季",
+      "platform": "小红书",
+      "performance_references": 0,
+      "top_reference_weight": null
+    },
+    {
+      "stage": "3.5 统一上下文装配",
+      "at": "14:51:50",
+      "contract": "writing-context-v1",
+      "facts": 38,
+      "images": 8,
+      "expression_references": 3,
+      "performance_references": 0,
+      "preferences": []
+    },
+    {
+      "stage": "4 文章分块规划",
+      "at": "14:51:59",
+      "blocks": [
+        {
+          "id": "B1",
+          "kind": "opening",
+          "objective": "生成口语化标题（20字以内，含场景/人群及1个emoji）和开头导语。导语需点出大学新生开学季选购笔记本的痛点或场景，语气亲切轻松，为后文介绍产品特性做铺垫，不直接罗列参数。；必须同时生成非空标题和非空导语；只写规范需求中的受众、场景与关注问题，不写产品参数、功能或效果",
+          "fact_ids": [],
+          "depends_on": []
+        },
+        {
+          "id": "B2",
+          "kind": "body",
+          "objective": "撰写第一个正文小节，聚焦“便携与屏幕体验”。结合华为擎云 L540z 的重量、尺寸数据以及屏幕规格，描述其适合携带至教室或图书馆的物理形态，并客观陈述屏幕显示参数带来的视觉基础。每段不超过3行，避免推导具体学习效率，仅陈述事实支持的使用场景适配性。；必须生成完整的正文小节，而不是一两句话",
+          "fact_ids": [
+            "F6",
+            "F7",
+            "F9",
+            "F10"
+          ],
+          "depends_on": []
+        },
+        {
+          "id": "B3",
+          "kind": "body",
+          "objective": "撰写第二个正文小节，聚焦“续航与连接稳定性”。基于电池容量和无线连接标准，说明该设备在长时间使用下的电力保障能力以及在校园网络环境中的连接表现。同时提及接口配置以展示扩展便利性。保持段落简短，语气像朋友分享，不使用第一人称伪造经历。；必须生成完整的正文小节，而不是一两句话",
+          "fact_ids": [
+            "F22",
+            "F17",
+            "F24",
+            "F25"
+          ],
+          "depends_on": []
+        },
+        {
+          "id": "B4",
+          "kind": "closing",
+          "objective": "生成结尾行动引导（CTA）和话题标签。总结前文提到的便携、续航等核心卖点，给出针对大学新生的选购建议或邀请评论区交流/收藏，可引导到店体验。提供5-8个相关话题标签。；必须生成非空行动引导，并按平台要求生成标签；不新增产品参数、功能、效果、权益或承诺",
+          "fact_ids": [],
+          "depends_on": [
+            "B2",
+            "B3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "5 分块队列",
+      "at": "14:54:06",
+      "events": [
+        {
+          "event": "queued_generate",
+          "block": "B1",
+          "version": 1
+        },
+        {
+          "event": "queued_generate",
+          "block": "B2",
+          "version": 1
+        },
+        {
+          "event": "queued_generate",
+          "block": "B3",
+          "version": 1
+        },
+        {
+          "event": "written",
+          "block": "B1",
+          "version": 1,
+          "seconds": 14.705,
+          "wait_seconds": 0.0
+        },
+        {
+          "event": "reviewed",
+          "block": "B1",
+          "version": 1,
+          "seconds": 0.629,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 1
+        },
+        {
+          "event": "written",
+          "block": "B2",
+          "version": 1,
+          "seconds": 30.585,
+          "wait_seconds": 14.696
+        },
+        {
+          "event": "reviewed",
+          "block": "B2",
+          "version": 1,
+          "seconds": 0.88,
+          "wait_seconds": 0.0,
+          "errors": 1,
+          "warnings": 1
+        },
+        {
+          "event": "queued_rewrite",
+          "block": "B2",
+          "version": 2,
+          "errors": 1
+        },
+        {
+          "event": "written",
+          "block": "B3",
+          "version": 1,
+          "seconds": 21.503,
+          "wait_seconds": 45.272
+        },
+        {
+          "event": "reviewed",
+          "block": "B3",
+          "version": 1,
+          "seconds": 3.484,
+          "wait_seconds": 0.0,
+          "errors": 1,
+          "warnings": 2
+        },
+        {
+          "event": "queued_rewrite",
+          "block": "B3",
+          "version": 2,
+          "errors": 1
+        },
+        {
+          "event": "written",
+          "block": "B2",
+          "version": 2,
+          "seconds": 22.941,
+          "wait_seconds": 20.622
+        },
+        {
+          "event": "reviewed",
+          "block": "B2",
+          "version": 2,
+          "seconds": 6.677,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 4
+        },
+        {
+          "event": "written",
+          "block": "B3",
+          "version": 2,
+          "seconds": 10.121,
+          "wait_seconds": 19.455
+        },
+        {
+          "event": "reviewed",
+          "block": "B3",
+          "version": 2,
+          "seconds": 2.448,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 2
+        },
+        {
+          "event": "queued_generate",
+          "block": "B4",
+          "version": 1
+        },
+        {
+          "event": "written",
+          "block": "B4",
+          "version": 1,
+          "seconds": 24.098,
+          "wait_seconds": 0.0
+        },
+        {
+          "event": "reviewed",
+          "block": "B4",
+          "version": 1,
+          "seconds": 0.798,
+          "wait_seconds": 0.0,
+          "errors": 0,
+          "warnings": 1
+        }
+      ],
+      "metrics": {
+        "first_block_passed_seconds": 15.337,
+        "total_seconds": 127.227,
+        "writer_processing_seconds": 123.953,
+        "reviewer_processing_seconds": 14.917,
+        "writer_queue_wait_seconds": 100.047,
+        "reviewer_queue_wait_seconds": 0.001,
+        "generated_versions": 6,
+        "reviewed_versions": 6,
+        "rewrites": 2,
+        "rewrite_rate": 0.3333
+      },
+      "result": "passed"
+    },
+    {
+      "stage": "6 整文连贯性编辑",
+      "at": "14:54:31",
+      "applied": false,
+      "notes": [
+        "数字或规格标记发生变化"
+      ]
+    },
+    {
+      "stage": "7 全文终审",
+      "at": "14:54:36",
+      "errors": 0,
+      "warns": 1,
+      "coherence_notes": [
+        "数字或规格标记发生变化"
+      ]
+    },
+    {
+      "stage": "页面结果",
+      "at": "14:54:36",
+      "status": "review"
+    }
+  ]
+}

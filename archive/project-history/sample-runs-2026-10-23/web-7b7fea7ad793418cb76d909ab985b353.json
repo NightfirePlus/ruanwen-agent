@@ -1,0 +1,48 @@
+{
+  "brief": {
+    "product": "HUAWEI MateBook Fold 非凡大师",
+    "product_type": "折叠屏笔记本",
+    "audience": "大学新生",
+    "scene": "开学季",
+    "platform": "小红书",
+    "goal": "种草",
+    "stage": "",
+    "main_problem": "",
+    "extra": "",
+    "llm_notes": "stage、main_problem 未提供；product_type 根据产品名推断为折叠屏笔记本"
+  },
+  "evidence": null,
+  "strategy": null,
+  "draft": null,
+  "review": null,
+  "history": [
+    {
+      "role": "用户",
+      "content": "请按以下设置创作营销图文。\n\n本次创作设置：产品：HUAWEI MateBook Fold 非凡大师；受众：大学新生；场景：开学季；平台：小红书；目标：种草"
+    }
+  ],
+  "trace": [
+    {
+      "stage": "1 结构化需求",
+      "at": "22:27:54",
+      "brief": {
+        "product": "HUAWEI MateBook Fold 非凡大师",
+        "product_type": "折叠屏笔记本",
+        "audience": "大学新生",
+        "scene": "开学季",
+        "platform": "小红书",
+        "goal": "种草",
+        "stage": "",
+        "main_problem": "",
+        "extra": "",
+        "llm_notes": "stage、main_problem 未提供；product_type 根据产品名推断为折叠屏笔记本"
+      },
+      "questions": []
+    },
+    {
+      "stage": "页面结果",
+      "at": "22:34:00",
+      "status": "error"
+    }
+  ]
+}

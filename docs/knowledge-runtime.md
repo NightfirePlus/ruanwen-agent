@@ -84,4 +84,4 @@ python tools/knowledge_verify.py --candidates    # 查看待人工批准的知�
 
 `python tools/validate_knowledge_base.py` 校验当前库的文件、索引、生命周期元数据、来源位置与内部链接，无需旧库，不调用模型。`python tools/review_capability_cards.py` 可重复核验25份生态能力卡的228条官网引文；自动结果只标为 `source_verified`，不替代人工事实批准。
 
-当前库 `knowledge_base/current` 随仓库发布，令牌和运行时审核数据库不提交。`archive/` 仅保存必要的项目发展记录，不进入部署与检索。部署时让 `00-规范与索引/` 可写且持久化，并备份两个 SQLite 索引。模型或提示词调整后重启应用。
+当前库 `knowledge_base/current` 随仓库发布，令牌和运行时审核数据库不提交。`archive/` 仅保存必要的项目发展记录，不进入部署与检索。部署时让 `00-规范与索引/` 与 `data/` 可写且持久化。模型或提示词调整后重启应用。
